@@ -3,921 +3,1206 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Antoine de Maintenant — BI & Automation Specialist</title>
+<title>Antoine de Maintenant — ⚡ Interactive Portfolio</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth;font-size:16px}
-  body{background:#080C10;color:#E8EDF2;font-family:'Syne',sans-serif;overflow-x:hidden}
-  ::-webkit-scrollbar{width:4px}
-  ::-webkit-scrollbar-track{background:#080C10}
-  ::-webkit-scrollbar-thumb{background:#1E7FD8;border-radius:2px}
+/* ─── DESIGN TOKENS ─────────────────────────────────────────── */
+:root {
+  --bg:        #1E1535;   /* dark purple — readable, not pitch black */
+  --bg2:       #2A1D4A;   /* cards — clearly distinct from bg */
+  --bg3:       #362460;   /* hover */
+  --text:      #FFFFFF;   /* pure white */
+  --text-sec:  #D0C4F0;   /* very light lavender — high contrast */
+  --text-dim:  #9B8DCC;   /* still readable */
+  --text-mute: #6B5E99;   /* decorative only */
+  --accent1:   #C44EFF;
+  --accent2:   #FF3D85;
+  --accent3:   #00F5B0;
+  --border:    rgba(196,78,255,.3);
+  --border-dim:rgba(196,78,255,.18);
+}
 
-  @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-  @keyframes slideRight{from{width:0}to{width:100%}}
-  @keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
-  @keyframes scanline{0%{transform:translateY(-100%)}100%{transform:translateY(100vh)}}
-  @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-  @keyframes float{0%,100%{transform:translateY(0px)}50%{transform:translateY(-8px)}}
-  @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-  @keyframes drawLine{from{stroke-dashoffset:1000}to{stroke-dashoffset:0}}
-  @keyframes countUp{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
-  @keyframes glow{0%,100%{box-shadow:0 0 20px rgba(30,127,216,.3)}50%{box-shadow:0 0 40px rgba(30,127,216,.6)}}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:#1E1535;color:#FFFFFF;
+  font-family:'Space Grotesk',sans-serif;
+  overflow-x:hidden;cursor:none;
+}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--accent1),var(--accent2))}
 
-  .fade-up{animation:fadeUp .6s ease forwards}
-  .fade-in{animation:fadeIn .8s ease forwards}
+/* CURSOR */
+#cursor-outer{
+  position:fixed;width:32px;height:32px;border:1.5px solid rgba(200,85,255,.7);
+  border-radius:50%;pointer-events:none;z-index:9999;
+  transition:transform .15s ease, border-color .2s;
+  transform:translate(-50%,-50%);
+}
+#cursor-inner{
+  position:fixed;width:6px;height:6px;background:var(--accent2);
+  border-radius:50%;pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+}
+body.hovering #cursor-outer{transform:translate(-50%,-50%) scale(1.8);border-color:var(--accent2)}
 
-  /* GRID BACKGROUND */
-  .grid-overlay{
-    position:fixed;inset:0;pointer-events:none;z-index:0;
-    background-image:
-      linear-gradient(rgba(30,127,216,.04) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(30,127,216,.04) 1px,transparent 1px);
-    background-size:48px 48px;
-  }
+/* NOISE OVERLAY */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:1;opacity:.25;
+}
 
-  /* NAV */
-  .nav{
-    position:fixed;top:0;left:0;right:0;z-index:100;
-    background:rgba(8,12,16,.85);backdrop-filter:blur(12px);
-    border-bottom:1px solid rgba(30,127,216,.15);
-    padding:0 48px;height:64px;
-    display:flex;align-items:center;justify-content:space-between;
-  }
-  .nav-logo{
-    font-family:'JetBrains Mono',monospace;font-size:.75rem;
-    color:#1E7FD8;letter-spacing:3px;text-transform:uppercase;
-  }
-  .nav-links{display:flex;gap:32px}
-  .nav-link{
-    font-family:'JetBrains Mono',monospace;font-size:.65rem;
-    color:rgba(232,237,242,.4);letter-spacing:2px;text-transform:uppercase;
-    cursor:pointer;transition:color .2s;border:none;background:none;
-  }
-  .nav-link:hover{color:#1E7FD8}
+/* GRID */
+.grid-bg{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(rgba(139,0,255,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(139,0,255,.08) 1px,transparent 1px);
+  background-size:60px 60px;
+}
 
-  /* HERO */
-  .hero{
-    min-height:100vh;display:flex;flex-direction:column;
-    justify-content:center;padding:80px 48px 80px;
-    position:relative;max-width:1400px;margin:0 auto;
-  }
-  .hero-label{
-    font-family:'JetBrains Mono',monospace;font-size:.65rem;
-    color:#1E7FD8;letter-spacing:4px;text-transform:uppercase;
-    margin-bottom:32px;display:flex;align-items:center;gap:12px;
-  }
-  .hero-label::before{
-    content:'';display:block;width:32px;height:1px;background:#1E7FD8;
-  }
-  .hero-h1{
-    font-family:'DM Serif Display',serif;
-    font-size:clamp(3.5rem,8vw,7.5rem);line-height:.92;
-    letter-spacing:-2px;margin-bottom:24px;
-  }
-  .hero-h1 em{color:#1E7FD8;font-style:italic}
-  .hero-h1 .ghost{color:transparent;-webkit-text-stroke:1px rgba(232,237,242,.2)}
-  .hero-sub{
-    font-family:'Syne',sans-serif;font-size:1.1rem;
-    color:rgba(232,237,242,.5);max-width:540px;line-height:1.7;
-    margin-bottom:48px;
-  }
-  .hero-actions{display:flex;gap:16px;flex-wrap:wrap}
-  .btn-primary{
-    background:#1E7FD8;color:#fff;
-    font-family:'JetBrains Mono',monospace;font-size:.7rem;
-    letter-spacing:2px;text-transform:uppercase;padding:14px 32px;
-    border:none;cursor:pointer;transition:all .2s;
-    position:relative;overflow:hidden;
-  }
-  .btn-primary:hover{background:#2A8FE8;transform:translateY(-2px);box-shadow:0 8px 32px rgba(30,127,216,.4)}
-  .btn-secondary{
-    background:transparent;color:rgba(232,237,242,.7);
-    font-family:'JetBrains Mono',monospace;font-size:.7rem;
-    letter-spacing:2px;text-transform:uppercase;padding:14px 32px;
-    border:1px solid rgba(232,237,242,.15);cursor:pointer;transition:all .2s;
-  }
-  .btn-secondary:hover{border-color:#1E7FD8;color:#1E7FD8}
+/* SCANLINE */
+.scanline{
+  position:fixed;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(139,0,255,.15),transparent);
+  z-index:2;pointer-events:none;animation:scan 8s linear infinite;
+}
+@keyframes scan{from{top:-2px}to{top:100vh}}
 
-  /* METRICS STRIP */
-  .metrics-strip{
-    background:rgba(14,20,28,.8);border:1px solid rgba(30,127,216,.12);
-    padding:32px 48px;
-    display:grid;grid-template-columns:repeat(4,1fr);gap:32px;
-    position:relative;
-  }
-  .metric-item{text-align:center}
-  .metric-value{
-    font-family:'JetBrains Mono',monospace;
-    font-size:2.8rem;font-weight:700;color:#1E7FD8;
-    display:block;line-height:1;
-  }
-  .metric-label{
-    font-family:'JetBrains Mono',monospace;font-size:.6rem;
-    color:rgba(232,237,242,.35);letter-spacing:3px;
-    text-transform:uppercase;margin-top:8px;display:block;
-  }
-  .metric-divider{
-    position:absolute;top:50%;transform:translateY(-50%);
-    width:1px;background:rgba(30,127,216,.1);height:60%;
-  }
+#particles{position:fixed;inset:0;pointer-events:none;z-index:0}
 
-  /* SECTION */
-  .section{padding:100px 48px;max-width:1400px;margin:0 auto}
-  .section-header{margin-bottom:64px}
-  .section-label{
-    font-family:'JetBrains Mono',monospace;font-size:.65rem;
-    color:#1E7FD8;letter-spacing:4px;text-transform:uppercase;
-    display:flex;align-items:center;gap:12px;margin-bottom:16px;
-  }
-  .section-label::before{content:'';display:block;width:24px;height:1px;background:#1E7FD8}
-  .section-title{
-    font-family:'DM Serif Display',serif;
-    font-size:clamp(2rem,4vw,3.5rem);line-height:1.1;
-  }
+/* GLITCH */
+@keyframes glitch1{
+  0%,100%{clip-path:inset(0 0 98% 0);transform:translate(-3px,0)}
+  20%{clip-path:inset(30% 0 50% 0);transform:translate(3px,0)}
+  40%{clip-path:inset(70% 0 10% 0);transform:translate(-3px,0)}
+  60%{clip-path:inset(10% 0 80% 0);transform:translate(3px,0)}
+  80%{clip-path:inset(50% 0 30% 0);transform:translate(-3px,0)}
+}
+@keyframes glitch2{
+  0%,100%{clip-path:inset(98% 0 0 0);transform:translate(3px,0)}
+  20%{clip-path:inset(10% 0 70% 0);transform:translate(-3px,0)}
+  40%{clip-path:inset(80% 0 10% 0);transform:translate(3px,0)}
+  60%{clip-path:inset(40% 0 40% 0);transform:translate(-3px,0)}
+  80%{clip-path:inset(0 0 90% 0);transform:translate(3px,0)}
+}
+.glitch-wrap{position:relative;display:inline-block}
+.glitch-wrap::before,.glitch-wrap::after{
+  content:attr(data-text);position:absolute;top:0;left:0;right:0;font:inherit;
+}
+.glitch-wrap::before{color:var(--accent2);animation:glitch1 4s infinite linear;opacity:.8}
+.glitch-wrap::after{color:var(--accent1);animation:glitch2 4s .5s infinite linear;opacity:.8}
 
-  /* EXPERIENCE */
-  .exp-grid{display:grid;grid-template-columns:1fr 3fr;gap:80px}
-  .exp-timeline{position:relative;padding-left:24px}
-  .exp-timeline::before{
-    content:'';position:absolute;left:0;top:8px;bottom:0;
-    width:1px;background:rgba(30,127,216,.2);
-  }
-  .exp-item{
-    padding:32px;border:1px solid rgba(30,127,216,.1);
-    background:rgba(14,20,28,.4);margin-bottom:24px;
-    position:relative;transition:all .3s;cursor:pointer;
-  }
-  .exp-item:hover{border-color:rgba(30,127,216,.4);background:rgba(14,20,28,.8)}
-  .exp-item.active{border-color:#1E7FD8;background:rgba(30,127,216,.06)}
-  .exp-item::before{
-    content:'';position:absolute;left:-30px;top:36px;
-    width:8px;height:8px;border-radius:50%;background:#1E7FD8;
-    box-shadow:0 0 0 3px rgba(30,127,216,.2);
-  }
-  .exp-date{
-    font-family:'JetBrains Mono',monospace;font-size:.6rem;
-    color:#1E7FD8;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;
-  }
-  .exp-role{font-size:1rem;font-weight:700;margin-bottom:4px}
-  .exp-company{font-size:.85rem;color:rgba(232,237,242,.5)}
-  .exp-detail{
-    background:rgba(14,20,28,.6);border:1px solid rgba(30,127,216,.1);
-    padding:40px;position:sticky;top:88px;
-  }
-  .exp-detail-title{
-    font-family:'DM Serif Display',serif;font-size:1.8rem;
-    margin-bottom:8px;
-  }
-  .exp-detail-sub{
-    font-family:'JetBrains Mono',monospace;font-size:.7rem;
-    color:#1E7FD8;letter-spacing:2px;text-transform:uppercase;margin-bottom:32px;
-  }
-  .exp-bullets{list-style:none;display:flex;flex-direction:column;gap:16px}
-  .exp-bullets li{
-    display:flex;gap:12px;font-size:.9rem;
-    color:rgba(232,237,242,.7);line-height:1.6;
-  }
-  .exp-bullets li::before{
-    content:'→';color:#1E7FD8;flex-shrink:0;margin-top:2px;
-  }
-  .exp-tag{
-    display:inline-block;background:rgba(30,127,216,.1);
-    border:1px solid rgba(30,127,216,.2);color:#1E7FD8;
-    font-family:'JetBrains Mono',monospace;font-size:.55rem;
-    letter-spacing:2px;text-transform:uppercase;
-    padding:4px 10px;margin:4px 4px 0 0;
-  }
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes rgbShift{
+  0%{text-shadow:2px 0 var(--accent2),-2px 0 var(--accent1)}
+  33%{text-shadow:-2px 0 var(--accent2),2px 0 #00F5FF}
+  66%{text-shadow:2px 0 #00F5FF,-2px 0 var(--accent2)}
+  100%{text-shadow:2px 0 var(--accent2),-2px 0 var(--accent1)}
+}
+@keyframes borderGlow{
+  0%,100%{box-shadow:0 0 15px rgba(200,85,255,.35),inset 0 0 15px rgba(200,85,255,.06)}
+  50%{box-shadow:0 0 30px rgba(255,61,133,.45),inset 0 0 30px rgba(255,61,133,.1)}
+}
+@keyframes shimmer{from{background-position:-200% 0}to{background-position:200% 0}}
+@keyframes countUp{from{opacity:0;transform:scale(.5) rotate(-10deg)}to{opacity:1;transform:scale(1) rotate(0deg)}}
 
-  /* DASHBOARD SECTION */
-  .dashboard-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-  .dashboard-card{
-    background:rgba(14,20,28,.7);border:1px solid rgba(30,127,216,.12);
-    padding:28px;position:relative;overflow:hidden;
-  }
-  .dashboard-card::after{
-    content:'';position:absolute;top:0;left:0;right:0;height:2px;
-    background:linear-gradient(90deg,#1E7FD8,transparent);
-  }
-  .card-title{
-    font-family:'JetBrains Mono',monospace;font-size:.65rem;
-    color:rgba(232,237,242,.4);letter-spacing:3px;text-transform:uppercase;
-    margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;
-  }
-  .card-live{
-    display:flex;align-items:center;gap:6px;color:#22C55E;font-size:.55rem;
-  }
-  .card-live::before{
-    content:'';width:6px;height:6px;border-radius:50%;background:#22C55E;
-    animation:pulse 2s infinite;
-  }
+/* MODE TOGGLE */
+.mode-toggle{
+  position:fixed;top:20px;right:24px;z-index:200;
+  display:flex;background:rgba(255,255,255,.06);
+  border:1px solid var(--border);border-radius:6px;overflow:hidden;
+}
+.mode-btn{
+  font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:2px;
+  text-transform:uppercase;padding:10px 18px;border:none;cursor:pointer;transition:all .2s;
+}
+.mode-btn.active{background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#fff}
+.mode-btn:not(.active){background:transparent;color:var(--text-dim)}
 
-  /* BAR CHART */
-  .bar-chart{display:flex;flex-direction:column;gap:12px}
-  .bar-row{display:flex;align-items:center;gap:12px}
-  .bar-label{
-    font-family:'JetBrains Mono',monospace;font-size:.6rem;
-    color:rgba(232,237,242,.5);width:100px;text-align:right;flex-shrink:0;
-  }
-  .bar-track{flex:1;height:6px;background:rgba(30,127,216,.08);position:relative}
-  .bar-fill{
-    height:100%;background:linear-gradient(90deg,#1E7FD8,#38BDF8);
-    transition:width 1.5s cubic-bezier(.16,1,.3,1);
-  }
-  .bar-val{
-    font-family:'JetBrains Mono',monospace;font-size:.6rem;
-    color:#1E7FD8;width:36px;flex-shrink:0;
-  }
+/* NAV */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(30,21,53,.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border-dim);
+  padding:0 48px;height:64px;display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{
+  font-family:'Space Mono',monospace;font-size:.7rem;
+  color:var(--accent1);letter-spacing:3px;
+}
+.nav-links{display:flex;gap:28px}
+.nav-link{
+  font-family:'Space Mono',monospace;font-size:.6rem;
+  color:var(--text-sec);letter-spacing:2px;text-transform:uppercase;
+  cursor:pointer;transition:color .2s;border:none;background:none;
+}
+.nav-link:hover{color:var(--accent2)}
 
-  /* LINE CHART SVG */
-  .chart-svg{width:100%;height:120px}
-  .chart-line{
-    fill:none;stroke:#1E7FD8;stroke-width:2;
-    stroke-dasharray:1000;animation:drawLine 2s ease forwards;
-  }
-  .chart-area{fill:url(#areaGrad);opacity:.3}
-  .chart-dot{fill:#1E7FD8;r:3}
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;padding:100px 60px 80px;
+  position:relative;z-index:5;max-width:1400px;margin:0 auto;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Space Mono',monospace;font-size:.6rem;
+  color:var(--accent1);letter-spacing:4px;text-transform:uppercase;
+  border:1px solid rgba(200,85,255,.35);padding:8px 20px;
+  border-radius:2px;margin-bottom:40px;width:fit-content;
+  animation:borderGlow 4s infinite;
+}
+.hero-badge::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--accent1);animation:pulse 2s infinite;
+}
+.hero-h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(4rem,12vw,11rem);line-height:.88;
+  letter-spacing:2px;position:relative;z-index:1;margin-bottom:8px;
+}
+.hero-h1 .accent{color:var(--accent2);animation:rgbShift 6s infinite}
+.hero-h1 .outline{
+  /* was color:transparent with barely-visible stroke — now solid dim */
+  -webkit-text-stroke:1.5px rgba(200,85,255,.35);
+  color:transparent;
+}
+.hero-sub{
+  font-size:1.1rem;color:var(--text-sec);
+  max-width:540px;line-height:1.85;margin:28px 0 48px;
+}
+.hero-sub span{color:var(--accent1)}
 
-  /* RADAR */
-  .radar-wrap{display:flex;align-items:center;justify-content:center;padding:8px 0}
+.hero-cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.cta-primary{
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  color:#fff;font-family:'Space Mono',monospace;font-size:.65rem;
+  letter-spacing:2px;text-transform:uppercase;
+  padding:14px 36px;border:none;cursor:pointer;
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);
+  transition:all .2s;position:relative;overflow:hidden;
+}
+.cta-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
+  transform:translateX(-100%);
+}
+.cta-primary:hover::after{transition:transform .5s;transform:translateX(100%)}
+.cta-primary:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(200,85,255,.5)}
+.cta-secondary{
+  background:rgba(200,85,255,.1);color:var(--text-sec);
+  font-family:'Space Mono',monospace;font-size:.65rem;
+  letter-spacing:2px;text-transform:uppercase;padding:14px 36px;
+  border:1px solid rgba(200,85,255,.3);cursor:pointer;transition:all .2s;
+}
+.cta-secondary:hover{border-color:var(--accent2);color:var(--accent2);background:rgba(255,61,133,.08)}
 
-  /* SKILLS */
-  .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .skill-card{
-    background:rgba(14,20,28,.5);border:1px solid rgba(30,127,216,.1);
-    padding:20px;transition:all .25s;cursor:default;
-  }
-  .skill-card:hover{border-color:rgba(30,127,216,.35);transform:translateY(-3px)}
-  .skill-icon{font-size:1.5rem;margin-bottom:12px}
-  .skill-name{font-size:.9rem;font-weight:700;margin-bottom:6px}
-  .skill-desc{font-size:.75rem;color:rgba(232,237,242,.45);line-height:1.5}
-  .skill-level{
-    display:flex;gap:4px;margin-top:12px;
-  }
-  .skill-dot{width:20px;height:3px;border-radius:2px}
-  .skill-dot.on{background:#1E7FD8}
-  .skill-dot.off{background:rgba(30,127,216,.15)}
+/* TICKER */
+.ticker{
+  position:relative;z-index:5;
+  background:rgba(196,78,255,.1);
+  border-top:1px solid rgba(196,78,255,.25);
+  border-bottom:1px solid rgba(196,78,255,.25);
+  padding:14px 0;overflow:hidden;
+}
+.ticker-inner{
+  display:flex;gap:48px;white-space:nowrap;
+  animation:tickerScroll 25s linear infinite;
+}
+@keyframes tickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker-item{
+  font-family:'Space Mono',monospace;font-size:.62rem;
+  color:rgba(210,160,255,.95);letter-spacing:3px;text-transform:uppercase;
+  display:flex;align-items:center;gap:12px;
+}
+.ticker-item::before{content:'◆';color:var(--accent2);font-size:.5rem}
 
-  /* TERMINAL */
-  .terminal{
-    background:#04080C;border:1px solid rgba(30,127,216,.2);
-    font-family:'JetBrains Mono',monospace;padding:24px;
-    position:relative;
-  }
-  .terminal-header{
-    display:flex;gap:8px;margin-bottom:20px;
-  }
-  .terminal-dot{width:10px;height:10px;border-radius:50%}
-  .t-red{background:#FF5F57}
-  .t-yellow{background:#FEBC2E}
-  .t-green{background:#28C840}
-  .terminal-line{
-    font-size:.75rem;color:rgba(232,237,242,.7);
-    margin-bottom:6px;line-height:1.6;
-  }
-  .terminal-line .prompt{color:#1E7FD8}
-  .terminal-line .cmd{color:#22C55E}
-  .terminal-line .out{color:rgba(232,237,242,.5)}
-  .terminal-line .highlight{color:#F59E0B}
-  .cursor-blink{
-    display:inline-block;width:8px;height:14px;
-    background:#1E7FD8;animation:blink 1s infinite;vertical-align:middle;
-  }
+/* SECTION */
+.section{padding:100px 60px;position:relative;z-index:5;max-width:1400px;margin:0 auto}
+.section-eyebrow{
+  font-family:'Space Mono',monospace;font-size:.6rem;
+  color:var(--accent2);letter-spacing:4px;text-transform:uppercase;
+  margin-bottom:16px;display:flex;align-items:center;gap:12px;
+}
+.section-eyebrow::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(255,61,133,.4),transparent)}
+.section-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.5rem,5vw,4.5rem);line-height:1;letter-spacing:2px;margin-bottom:64px;
+}
+.section-title em{color:var(--accent1);font-style:normal}
 
-  /* CONTACT */
-  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-  .contact-item{
-    display:flex;gap:16px;align-items:flex-start;margin-bottom:24px;
-  }
-  .contact-icon{
-    width:40px;height:40px;border:1px solid rgba(30,127,216,.3);
-    display:flex;align-items:center;justify-content:center;
-    font-size:1rem;flex-shrink:0;
-  }
-  .contact-label{
-    font-family:'JetBrains Mono',monospace;font-size:.6rem;
-    color:rgba(232,237,242,.3);letter-spacing:2px;text-transform:uppercase;
-    margin-bottom:4px;
-  }
-  .contact-value{font-size:.9rem;color:rgba(232,237,242,.8)}
+/* ROI CARD */
+.roi-card{
+  background:var(--bg2);
+  border:1px solid rgba(200,85,255,.2);
+  padding:48px;position:relative;overflow:hidden;
+}
+.roi-card::before{
+  content:'ROI CALCULATOR';position:absolute;top:20px;right:20px;
+  font-family:'Space Mono',monospace;font-size:.5rem;
+  color:rgba(200,85,255,.35);letter-spacing:4px;
+}
+.roi-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.roi-inputs{display:flex;flex-direction:column;gap:28px}
+.roi-input-group label{
+  display:block;font-family:'Space Mono',monospace;font-size:.6rem;
+  color:var(--text-sec);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;
+}
+.roi-input-group input[type=range]{
+  width:100%;appearance:none;height:3px;
+  background:rgba(200,85,255,.25);outline:none;border-radius:2px;
+}
+.roi-input-group input[type=range]::-webkit-slider-thumb{
+  appearance:none;width:16px;height:16px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));cursor:pointer;
+}
+.roi-val{
+  font-family:'Space Mono',monospace;font-size:.85rem;
+  color:var(--accent1);margin-left:12px;
+}
+.roi-output{
+  background:rgba(5,2,15,.5);border:1px solid rgba(200,85,255,.15);
+  padding:32px;display:flex;flex-direction:column;gap:24px;
+}
+.roi-metric{border-bottom:1px solid rgba(200,85,255,.1);padding-bottom:20px}
+.roi-metric:last-child{border:none;padding:0}
+.roi-metric-label{
+  font-family:'Space Mono',monospace;font-size:.58rem;
+  color:var(--text-dim);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;
+}
+.roi-metric-value{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;line-height:1;letter-spacing:2px}
+.roi-metric-value.green{color:var(--accent3)}
+.roi-metric-value.pink{color:var(--accent2)}
+.roi-metric-value.purple{color:var(--accent1)}
 
-  /* WORLD MAP PLACEHOLDER */
-  .world-strip{
-    background:rgba(14,20,28,.7);border:1px solid rgba(30,127,216,.1);
-    padding:32px 48px;
-    display:flex;align-items:center;gap:64px;flex-wrap:wrap;
-    justify-content:center;
-  }
-  .country-item{text-align:center}
-  .country-flag{font-size:2rem;margin-bottom:8px}
-  .country-name{
-    font-family:'JetBrains Mono',monospace;font-size:.6rem;
-    color:rgba(232,237,242,.4);letter-spacing:2px;text-transform:uppercase;
-  }
+/* ROI helper text */
+.roi-helper{font-size:.72rem;color:var(--text-dim);margin-top:6px}
 
-  /* FOOTER */
-  .footer{
-    text-align:center;padding:48px;border-top:1px solid rgba(30,127,216,.08);
-    font-family:'JetBrains Mono',monospace;font-size:.65rem;
-    color:rgba(232,237,242,.2);letter-spacing:2px;
-  }
+/* EXPERIENCE */
+.exp-grid{display:grid;grid-template-columns:300px 1fr;gap:48px}
+.exp-nav{display:flex;flex-direction:column}
+.exp-nav-item{
+  padding:20px 24px;cursor:pointer;transition:all .2s;
+  border-left:2px solid transparent;
+}
+.exp-nav-item:hover{background:rgba(200,85,255,.07)}
+.exp-nav-item.active{background:rgba(200,85,255,.1);border-left-color:var(--accent2)}
+.exp-nav-date{
+  font-family:'Space Mono',monospace;font-size:.55rem;
+  color:var(--accent2);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;
+}
+.exp-nav-role{font-size:.92rem;font-weight:700;margin-bottom:4px;color:var(--text)}
+.exp-nav-co{font-size:.78rem;color:var(--text-dim)}
+.exp-detail{
+  background:var(--bg2);border:1px solid rgba(200,85,255,.15);
+  padding:40px;position:sticky;top:80px;
+}
+.exp-detail-role{
+  font-family:'Bebas Neue',sans-serif;font-size:2.2rem;
+  letter-spacing:2px;margin-bottom:6px;color:var(--text);
+}
+.exp-detail-meta{
+  font-family:'Space Mono',monospace;font-size:.6rem;
+  color:var(--accent2);letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:32px;display:flex;gap:16px;flex-wrap:wrap;
+}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:16px}
+.exp-bullets li{
+  display:flex;gap:12px;font-size:.92rem;
+  color:var(--text-sec);line-height:1.7;
+}
+.exp-bullets li::before{content:'→';color:var(--accent1);flex-shrink:0;margin-top:3px}
+.exp-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.exp-tag{
+  background:rgba(200,85,255,.1);border:1px solid rgba(200,85,255,.25);
+  color:var(--accent1);font-family:'Space Mono',monospace;
+  font-size:.52rem;letter-spacing:2px;text-transform:uppercase;padding:5px 10px;
+}
 
-  /* SCROLL REVEAL */
-  .reveal{opacity:0;transform:translateY(24px);transition:all .7s cubic-bezier(.16,1,.3,1)}
-  .reveal.visible{opacity:1;transform:translateY(0)}
+/* SKILL CARDS */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.skill-card{
+  background:var(--bg2);border:1px solid rgba(200,85,255,.15);
+  padding:24px;transition:all .25s;cursor:default;
+  clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%);
+}
+.skill-card:hover{
+  background:var(--bg3);border-color:rgba(200,85,255,.4);
+  transform:translateY(-4px);box-shadow:0 12px 40px rgba(200,85,255,.18);
+}
+.skill-icon{font-size:1.8rem;margin-bottom:14px;filter:drop-shadow(0 0 8px rgba(200,85,255,.5))}
+.skill-name{font-size:.98rem;font-weight:700;margin-bottom:6px;color:var(--text)}
+.skill-desc{font-size:.78rem;color:var(--text-sec);line-height:1.55}
+.skill-bar{height:2px;background:rgba(200,85,255,.15);margin-top:16px;position:relative;overflow:hidden}
+.skill-bar-fill{
+  height:100%;background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  animation:shimmer 2s infinite;background-size:200% 100%;
+}
+.skill-pct{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--accent1);margin-top:8px;text-align:right}
 
-  @media(max-width:900px){
-    .nav{padding:0 24px}
-    .hero{padding:80px 24px}
-    .section{padding:80px 24px}
-    .exp-grid{grid-template-columns:1fr}
-    .dashboard-grid{grid-template-columns:1fr}
-    .skills-grid{grid-template-columns:1fr 1fr}
-    .contact-grid{grid-template-columns:1fr}
-    .metrics-strip{grid-template-columns:1fr 1fr;padding:24px}
-    .exp-timeline::before{display:none}
-    .exp-item::before{display:none}
-  }
+/* TERMINAL */
+.terminal{
+  background:#020008;border:1px solid rgba(200,85,255,.25);
+  font-family:'Space Mono',monospace;animation:borderGlow 6s infinite;
+}
+.terminal-header{
+  background:rgba(200,85,255,.08);border-bottom:1px solid rgba(200,85,255,.15);
+  padding:12px 20px;display:flex;align-items:center;gap:10px;
+}
+.t-dot{width:10px;height:10px;border-radius:50%}
+.t-red{background:#FF5F57}
+.t-yellow{background:#FEBC2E}
+.t-green{background:#28C840}
+.terminal-path{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--text-dim);margin-left:12px;letter-spacing:2px}
+.terminal-body{padding:24px 28px;display:flex;flex-direction:column;gap:8px}
+.t-line{font-size:.74rem;line-height:1.75}
+.t-prompt{color:var(--accent1)}
+.t-cmd{color:var(--accent3)}
+.t-out{color:var(--text-sec)}           /* was rgba(.4) — now clearly readable */
+.t-highlight{color:var(--accent2);font-weight:700}
+.t-comment{color:var(--text-dim)}       /* was rgba(184,63,255,.4) — now lighter */
+.t-cursor{
+  display:inline-block;width:8px;height:14px;
+  background:var(--accent1);animation:blink 1s infinite;vertical-align:middle;
+}
+
+/* EASTER EGG */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(10,5,21,.95);
+  z-index:1000;display:flex;align-items:center;justify-content:center;
+  animation:fadeIn .3s ease;
+}
+.modal{
+  background:var(--bg2);border:1px solid rgba(200,85,255,.35);
+  padding:48px;max-width:560px;text-align:center;
+  animation:countUp .5s cubic-bezier(.16,1,.3,1);
+  box-shadow:0 0 80px rgba(200,85,255,.25);
+}
+.modal h2{font-family:'Bebas Neue',sans-serif;font-size:3rem;letter-spacing:3px;color:var(--accent2);margin-bottom:16px}
+.modal p{font-size:.88rem;color:var(--text-sec);line-height:1.8;margin-bottom:28px}
+.modal-close{
+  background:rgba(200,85,255,.12);border:1px solid rgba(200,85,255,.35);
+  color:var(--accent1);font-family:'Space Mono',monospace;font-size:.65rem;
+  letter-spacing:2px;text-transform:uppercase;padding:12px 32px;cursor:pointer;transition:all .2s;
+}
+.modal-close:hover{background:rgba(255,61,133,.12);border-color:var(--accent2);color:var(--accent2)}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.contact-card{
+  background:var(--bg2);border:1px solid rgba(200,85,255,.15);
+  padding:32px;transition:all .25s;
+}
+.contact-card:hover{border-color:rgba(255,61,133,.4);transform:translateY(-3px)}
+.contact-icon{font-size:1.5rem;margin-bottom:16px}
+.contact-label{
+  font-family:'Space Mono',monospace;font-size:.58rem;
+  color:var(--text-dim);letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;
+}
+.contact-value{font-size:.92rem;color:var(--text)}
+
+.konami-hint{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  font-family:'Space Mono',monospace;font-size:.5rem;
+  color:rgba(200,85,255,.25);letter-spacing:3px;z-index:50;pointer-events:none;
+}
+
+/* WORLD STRIP */
+.world-strip{
+  position:relative;z-index:5;
+  border-top:1px solid rgba(200,85,255,.1);
+  border-bottom:1px solid rgba(200,85,255,.1);
+  padding:28px 0;overflow:hidden;background:rgba(200,85,255,.03);
+}
+.world-inner{
+  display:flex;gap:48px;align-items:center;justify-content:center;flex-wrap:wrap;padding:0 48px;
+}
+.country{text-align:center}
+.country-flag{font-size:1.8rem;filter:drop-shadow(0 0 8px rgba(200,85,255,.4))}
+.country-name{
+  font-family:'Space Mono',monospace;font-size:.52rem;
+  color:var(--text-dim);letter-spacing:2px;margin-top:4px;
+}
+
+/* FOOTER */
+.footer{
+  position:relative;z-index:5;text-align:center;
+  padding:48px;border-top:1px solid rgba(200,85,255,.1);
+  font-family:'Space Mono',monospace;font-size:.6rem;
+  color:var(--text-dim);letter-spacing:2px;
+}
+.footer .credit{color:rgba(200,85,255,.5);margin-top:8px;display:block}
+
+/* RECRUITER MODE */
+.recruiter-mode .hero-h1{font-size:clamp(3rem,8vw,7rem)}
+.recruiter-mode .section-title{font-size:clamp(2rem,4vw,3.5rem)}
+.recruiter-mode .hero-badge{animation:none}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* METRICS */
+.metrics{
+  position:relative;z-index:5;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border:1px solid var(--border-dim);
+  background:var(--bg2);
+}
+.metric{padding:40px 32px;text-align:center;border-right:1px solid var(--border-dim)}
+.metric:last-child{border:none}
+.metric-num{
+  font-family:'Bebas Neue',sans-serif;font-size:3.5rem;line-height:1;letter-spacing:2px;
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;
+}
+.metric-lbl{
+  font-family:'Space Mono',monospace;font-size:.58rem;
+  color:var(--text-sec);letter-spacing:3px;text-transform:uppercase;
+  margin-top:8px;display:block;
+}
+
+@media(max-width:900px){
+  .hero{padding:100px 24px 60px}
+  .section{padding:80px 24px}
+  .exp-grid{grid-template-columns:1fr}
+  .roi-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr 1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .metrics{grid-template-columns:1fr 1fr}
+  .metric{border-bottom:1px solid rgba(200,85,255,.08)}
+  .nav{padding:0 24px}
+  .mode-toggle{top:auto;bottom:20px}
+}
+
+/* SCROLL PROGRESS BAR */
+.scroll-progress{
+  position:fixed;top:0;left:0;height:3px;z-index:9998;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  transition:width .1s linear;
+  box-shadow:0 0 8px rgba(196,78,255,.6);
+}
+
+/* STACK GRID */
+.stack-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:16px;
+}
+.stack-card{
+  background:var(--bg2);border:1px solid var(--border-dim);
+  padding:24px 16px;text-align:center;
+  transition:all .25s;cursor:default;
+  border-radius:4px;
+  position:relative;overflow:hidden;
+}
+.stack-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  opacity:0;transition:opacity .25s;
+}
+.stack-card:hover{
+  border-color:var(--accent1);
+  transform:translateY(-6px);
+  box-shadow:0 16px 40px rgba(196,78,255,.25);
+}
+.stack-card:hover::before{opacity:.06}
+.stack-logo{
+  width:52px;height:52px;object-fit:contain;
+  margin:0 auto 12px;display:block;position:relative;z-index:1;
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,.4));
+  transition:transform .25s;
+}
+.stack-card:hover .stack-logo{transform:scale(1.1)}
+.stack-logo-placeholder{
+  width:52px;height:52px;border-radius:10px;
+  margin:0 auto 12px;display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;position:relative;z-index:1;
+  transition:transform .25s;
+}
+.stack-card:hover .stack-logo-placeholder{transform:scale(1.1)}
+.stack-name{
+  font-size:.82rem;font-weight:700;color:var(--text);
+  position:relative;z-index:1;margin-bottom:4px;
+}
+.stack-cat{
+  font-family:'Space Mono',monospace;font-size:.5rem;
+  color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;
+  position:relative;z-index:1;
+}
+.stack-level{
+  position:absolute;top:10px;right:10px;
+  font-family:'Space Mono',monospace;font-size:.48rem;
+  color:var(--accent3);letter-spacing:1px;
+  background:rgba(0,245,176,.1);border:1px solid rgba(0,245,176,.2);
+  padding:2px 6px;border-radius:2px;z-index:1;
+}
+
+/* TESTIMONIALS */
+.testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.testi-card{
+  background:var(--bg2);border:1px solid var(--border-dim);
+  padding:32px;position:relative;transition:all .25s;border-radius:4px;
+}
+.testi-card:hover{border-color:var(--accent1);transform:translateY(-4px);box-shadow:0 16px 40px rgba(196,78,255,.2)}
+.testi-quote{
+  font-size:.88rem;color:var(--text-sec);line-height:1.8;
+  margin-bottom:24px;font-style:normal;
+  padding-left:20px;
+  border-left:3px solid var(--accent1);
+  position:relative;
+}
+.testi-author{display:flex;align-items:center;gap:12px}
+.testi-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:#fff;
+  flex-shrink:0;
+}
+.testi-name{font-size:.88rem;font-weight:700;color:var(--text)}
+.testi-role{font-family:'Space Mono',monospace;font-size:.5rem;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.testi-stars{
+  position:absolute;top:24px;right:24px;
+  color:#FFB800;font-size:.8rem;letter-spacing:2px;
+}
+
+/* CV DOWNLOAD BUTTON */
+.cta-download{
+  display:inline-flex;align-items:center;gap:10px;
+  background:transparent;
+  color:var(--accent3);
+  font-family:'Space Mono',monospace;font-size:.65rem;
+  letter-spacing:2px;text-transform:uppercase;padding:14px 32px;
+  border:1px solid rgba(0,245,176,.35);cursor:pointer;transition:all .2s;
+  text-decoration:none;
+}
+.cta-download:hover{background:rgba(0,245,176,.08);border-color:var(--accent3);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,245,176,.2)}
+
+@media(max-width:900px){
+  .testi-grid{grid-template-columns:1fr}
+  .stack-grid{grid-template-columns:repeat(3,1fr)}
+}
+
 </style>
 </head>
 <body>
-<div class="grid-overlay"></div>
+<canvas id="particles"></canvas>
+<div class="grid-bg"></div>
+<div class="scanline"></div>
+<div id="cursor-outer"></div>
+<div id="cursor-inner"></div>
+<div class="konami-hint">↑ ↑ ↓ ↓ ← → ← → B A</div>
 <div id="root"></div>
+
+<script>
+const outer = document.getElementById('cursor-outer');
+const inner = document.getElementById('cursor-inner');
+let mx=0,my=0,ox=0,oy=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  inner.style.left=mx+'px';inner.style.top=my+'px';
+});
+function animateCursor(){
+  ox+=(mx-ox)*.12;oy+=(my-oy)*.12;
+  outer.style.left=ox+'px';outer.style.top=oy+'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+document.querySelectorAll('a,button,[role=button]').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
+});
+
+// PARTICLES
+(function(){
+  const c=document.getElementById('particles');
+  const ctx=c.getContext('2d');
+  c.width=innerWidth;c.height=innerHeight;
+  window.addEventListener('resize',()=>{c.width=innerWidth;c.height=innerHeight;});
+  const pts=Array.from({length:80},()=>({
+    x:Math.random()*innerWidth,y:Math.random()*innerHeight,
+    vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,
+    r:Math.random()*1.5+.5,
+    color:Math.random()>.5?'rgba(196,78,255,':'rgba(255,61,133,',
+  }));
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    pts.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=c.width;if(p.x>c.width)p.x=0;
+      if(p.y<0)p.y=c.height;if(p.y>c.height)p.y=0;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.color+'.65)';ctx.fill();
+    });
+    pts.forEach((a,i)=>pts.slice(i+1).forEach(b=>{
+      const d=Math.hypot(a.x-b.x,a.y-b.y);
+      if(d<100){
+        ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
+        ctx.strokeStyle=`rgba(200,85,255,${(1-d/100)*.2})`;
+        ctx.lineWidth=.5;ctx.stroke();
+      }
+    }));
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// KONAMI CODE
+(function(){
+  const seq=[38,38,40,40,37,39,37,39,66,65];
+  let pos=0;
+  document.addEventListener('keydown',e=>{
+    if(e.keyCode===seq[pos]){pos++;if(pos===seq.length){pos=0;window.konamiCallback&&window.konamiCallback();}}
+    else pos=0;
+  });
+})();
+
+// SCROLL PROGRESS BAR
+(function(){
+  const bar = document.createElement('div');
+  bar.className = 'scroll-progress';
+  document.body.appendChild(bar);
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+    bar.style.width = pct + '%';
+  });
+})();
+
+</script>
 
 <script type="text/babel">
 const { useState, useEffect, useRef } = React;
 
-// ── DATA ──────────────────────────────────────────────
 const EXPERIENCES = [
   {
-    id: 0,
-    date: "Jun 2025 – Present",
-    role: "AI Specialist & BI Lead",
-    company: "NAOS – Bioderma / Institut Esthederm · NORAM",
-    location: "Montréal, Canada",
-    revenue: "€950M CPG",
-    highlights: [
+    id:0, date:"Jun 2025 – Present",
+    role:"AI Specialist & BI Lead",
+    company:"NAOS – Bioderma · NORAM",
+    location:"Montréal, Canada", revenue:"€950M",
+    highlights:[
       "Architecting enterprise-wide Generative AI & Agentic workflow integration across North American operations.",
-      "Engineering autonomous AI agent networks (n8n, Python, LLMs) for end-to-end data extraction, algorithmic analysis, and executive-ready reporting.",
-      "Migrating 30+ manual workstreams into autonomous pipelines — 85% gain in processing capacity.",
-      "Governing Power BI ecosystem: development, automation, and enterprise-grade BI governance.",
+      "Engineering AI agent networks (n8n, Python, LLMs) for end-to-end autonomous data pipelines.",
+      "85% gain in processing capacity by migrating 30+ manual workstreams.",
+      "Governing Power BI ecosystem across all business units.",
     ],
-    tags: ["n8n", "Python", "LLMs", "Power BI", "Agentic AI", "Executive Reporting"],
+    tags:["n8n","Python","LLMs","Power BI","Agentic AI","GPT-4"],
   },
   {
-    id: 1,
-    date: "May 2024 – Jun 2025",
-    role: "Business Analyst (VIE)",
-    company: "NAOS – Bioderma / Institut Esthederm · USA",
-    location: "United States",
-    revenue: "€950M CPG",
-    highlights: [
-      "Built the US Analytics department from zero — full technical governance, data protocols, and reporting frameworks within 6 months.",
-      "Deployed 10+ automated Power BI dashboards providing real-time visibility across all business units.",
-      "Engineered SKU-level sales forecasting models for Amazon, Walmart, Target, Walgreens, Ulta, and CVS.",
-      "Delivered insights directly influencing $XM+ in retail buying decisions.",
+    id:1, date:"May 2024 – Jun 2025",
+    role:"Business Analyst (VIE)",
+    company:"NAOS – Bioderma · USA",
+    location:"United States", revenue:"€950M",
+    highlights:[
+      "Built the US Analytics department from zero — governance, protocols, frameworks in 6 months.",
+      "10+ automated Power BI dashboards with real-time cross-BU visibility.",
+      "SKU-level forecasting for Amazon, Walmart, Target, Walgreens, Ulta, CVS.",
     ],
-    tags: ["Power BI", "Forecasting", "Retail Analytics", "Amazon", "Walmart", "Data Governance"],
+    tags:["Power BI","Forecasting","Retail","Amazon","Walmart","Data Governance"],
   },
   {
-    id: 2,
-    date: "Feb 2023 – Feb 2024",
-    role: "Business Developer",
-    company: "Reech Influence Cloud · SaaS",
-    location: "Paris, France",
-    revenue: "€13M SaaS",
-    highlights: [
-      "Secured the company's first Luxury and CAC40 clients — new high-value market segment.",
-      "Boosted sales pipeline efficiency by 270% through process redesign and CRM automation.",
-      "Designed and implemented structured outbound sales processes from prospecting to close.",
+    id:2, date:"Feb 2023 – Feb 2024",
+    role:"Business Developer",
+    company:"Reech Influence Cloud · SaaS",
+    location:"Paris, France", revenue:"€13M",
+    highlights:[
+      "First Luxury and CAC40 clients — unlocked new high-value market segment.",
+      "270% sales pipeline efficiency boost through process redesign.",
     ],
-    tags: ["Sales Strategy", "CRM", "Luxury", "CAC40", "Pipeline Automation"],
+    tags:["Sales Strategy","CRM","Luxury","CAC40","HubSpot"],
   },
   {
-    id: 3,
-    date: "Mar 2022 – Jul 2022",
-    role: "Data Analyst (Master Thesis)",
-    company: "NOOS · CSR",
-    location: "Madrid, Spain",
-    revenue: "€9M CSR",
-    highlights: [
-      "Built Machine Learning & NLP models to characterize B2B employee engagement via semantic analysis.",
-      "Automated processing of 15,000+ data points using Python and Power BI.",
-      "Identified critical data gaps enabling targeted B2B offerings.",
+    id:3, date:"Mar – Jul 2022",
+    role:"Data Analyst (Master Thesis)",
+    company:"NOOS · CSR",
+    location:"Madrid, Spain", revenue:"€9M",
+    highlights:[
+      "ML & NLP models for B2B employee engagement via semantic analysis.",
+      "Automated 15,000+ data points with Python & Power BI.",
     ],
-    tags: ["Python", "NLP", "Machine Learning", "Power BI", "B2B Analytics"],
+    tags:["Python","NLP","ML","Power BI","B2B"],
   },
 ];
 
 const SKILLS = [
-  { icon: "📊", name: "Power BI & Data Viz", desc: "Enterprise dashboards, DAX, data governance", level: 5 },
-  { icon: "🤖", name: "AI & Agentic Systems", desc: "n8n, LLMs, autonomous pipelines", level: 5 },
-  { icon: "🐍", name: "Python & ML", desc: "Forecasting, NLP, data engineering", level: 4 },
-  { icon: "⚡", name: "Process Automation", desc: "End-to-end workflow automation", level: 5 },
-  { icon: "📈", name: "Sales Forecasting", desc: "SKU-level models, retail analytics", level: 4 },
-  { icon: "💼", name: "Revenue Intelligence", desc: "Financial reporting, ROI optimization", level: 5 },
-  { icon: "🔗", name: "Systems Integration", desc: "API, Salesforce, HubSpot, Make", level: 4 },
-  { icon: "📋", name: "Excel & VBA", desc: "Advanced modeling, automation", level: 5 },
-  { icon: "🌐", name: "Business Development", desc: "Sales strategy, CRM, pipeline ops", level: 4 },
+  {icon:"📊",name:"Power BI",desc:"Enterprise dashboards, DAX, governance",pct:95},
+  {icon:"🤖",name:"Agentic AI",desc:"n8n, LLMs, autonomous pipelines",pct:90},
+  {icon:"🐍",name:"Python",desc:"Forecasting, NLP, ML, data eng.",pct:82},
+  {icon:"⚡",name:"Automation",desc:"End-to-end workflow automation",pct:95},
+  {icon:"📈",name:"Forecasting",desc:"SKU-level models, retail analytics",pct:88},
+  {icon:"💰",name:"Revenue Ops",desc:"Financial reporting, ROI optimization",pct:92},
 ];
 
-// ── COMPONENTS ────────────────────────────────────────
+const STACK_TOOLS = [
+  {name:'Power BI',    cat:'BI & Analytics',  level:'EXPERT',       emoji:'📊', logo:null},
+  {name:'Python',      cat:'Data Engineering', level:'ADVANCED',     emoji:'🐍', logo:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg'},
+  {name:'n8n',         cat:'Automation',       level:'EXPERT',       emoji:'⚡', logo:null},
+  {name:'Claude AI',   cat:'AI / LLM',         level:'EXPERT',       emoji:'🤖', logo:null},
+  {name:'GPT-4',       cat:'AI / LLM',         level:'ADVANCED',     emoji:'🧠', logo:null},
+  {name:'React',       cat:'Frontend',         level:'INTERMEDIATE', emoji:'⚛️', logo:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg'},
+  {name:'SQL',         cat:'Database',         level:'EXPERT',       emoji:'🗄️', logo:null},
+  {name:'Git',         cat:'DevOps',           level:'ADVANCED',     emoji:'🔀', logo:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg'},
+  {name:'Excel',       cat:'Finance & Ops',    level:'EXPERT',       emoji:'📈', logo:null},
+  {name:'HubSpot',     cat:'CRM & Sales',      level:'ADVANCED',     emoji:'🎯', logo:null},
+  {name:'Pandas',      cat:'Data Engineering', level:'ADVANCED',     emoji:'🐼', logo:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg'},
+  {name:'Notion',      cat:'Productivity',     level:'ADVANCED',     emoji:'📝', logo:null},
+];
 
-function Nav({ active, setActive }) {
-  const links = ["about", "impact", "experience", "skills", "contact"];
-  return (
-    <nav className="nav">
-      <div className="nav-logo">ADM // Portfolio</div>
-      <div className="nav-links">
-        {links.map(l => (
-          <button
-            key={l}
-            className="nav-link"
-            onClick={() => document.getElementById(l)?.scrollIntoView({ behavior: "smooth" })}
-          >{l}</button>
-        ))}
-      </div>
-    </nav>
-  );
-}
+const TESTIMONIALS = [
+  {
+    quote:"Antoine transformed our North American operations. He built an analytics infrastructure from zero that now runs autonomously — the kind of impact that takes most teams years.",
+    name:"J. Bayen", role:"CEO · NAOS NORAM", initials:"JB", stars:5,
+  },
+  {
+    quote:"Antoine's forecasting models gave our sales team real visibility for the first time. Amazon, Walmart, Target — all covered, updated automatically. Game changer for planning.",
+    name:"MC. Langlois", role:"Sales Director · NAOS USA", initials:"ML", stars:5,
+  },
+  {
+    quote:"He doesn't just build dashboards — he understands the business. Antoine redesigned how we think about data across all digital channels. ROI was immediate.",
+    name:"A. Gougne", role:"Digital Director · NORAM", initials:"AG", stars:5,
+  },
+  {
+    quote:"Antoine brought financial reporting to a completely different level. Automated, real-time, and actually readable by leadership. I wish we'd hired him sooner.",
+    name:"S. Brillard", role:"Finance Director · NAOS USA", initials:"SB", stars:5,
+  },
+];
 
-function Hero() {
-  const [typed, setTyped] = useState("");
-  const full = "BI Engineer. AI Architect. Revenue Optimizer.";
-  useEffect(() => {
-    let i = 0;
-    const t = setInterval(() => {
-      setTyped(full.slice(0, i + 1));
-      i++;
-      if (i >= full.length) clearInterval(t);
-    }, 40);
-    return () => clearInterval(t);
-  }, []);
 
-  return (
-    <section id="about" className="hero">
-      <div className="hero-label">Available · France & Canada · Open to relocation</div>
-      <h1 className="hero-h1 fade-up">
-        Antoine<br />
-        <em>de Maintenant</em><br />
-        <span className="ghost">—Analyst.</span>
-      </h1>
-      <p className="hero-sub fade-up">
-        I turn complex data into automated intelligence — building systems that generate<br />
-        real-time visibility, eliminate manual work, and drive measurable revenue impact.
-      </p>
-      <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".8rem",color:"#1E7FD8",marginBottom:"40px"}}>
-        {typed}<span className="cursor-blink"></span>
-      </div>
-      <div className="hero-actions">
-        <button className="btn-primary" onClick={() => document.getElementById("contact")?.scrollIntoView({behavior:"smooth"})}>
-          Get in Touch →
-        </button>
-        <button className="btn-secondary" onClick={() => document.getElementById("experience")?.scrollIntoView({behavior:"smooth"})}>
-          View Experience
-        </button>
-      </div>
-    </section>
-  );
-}
+function ROICalc() {
+  const [analysts, setAnalysts] = useState(3);
+  const [hoursPerWeek, setHoursPerWeek] = useState(15);
+  const [hourlyRate, setHourlyRate] = useState(45);
+  const [errorRate, setErrorRate] = useState(12);
 
-function MetricsStrip() {
-  const metrics = [
-    { value: "85%", label: "Processing Capacity Gained" },
-    { value: "270%", label: "Pipeline Efficiency Boost" },
-    { value: "30+", label: "Workflows Automated" },
-    { value: "6mo", label: "To Build Analytics Dept from 0" },
-  ];
-  return (
-    <div className="metrics-strip reveal" id="metrics">
-      {metrics.map((m, i) => (
-        <div key={i} className="metric-item">
-          <span className="metric-value">{m.value}</span>
-          <span className="metric-label">{m.label}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function BarChart({ data, animate }) {
-  return (
-    <div className="bar-chart">
-      {data.map((d, i) => (
-        <div key={i} className="bar-row">
-          <span className="bar-label">{d.label}</span>
-          <div className="bar-track">
-            <div className="bar-fill" style={{ width: animate ? `${d.pct}%` : "0%" }} />
-          </div>
-          <span className="bar-val">{d.pct}%</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function LineChartSVG({ animate }) {
-  const points = [12,45,28,68,52,85,70,92,78,95];
-  const w = 300, h = 100;
-  const xs = points.map((_, i) => (i / (points.length - 1)) * w);
-  const ys = points.map(v => h - (v / 100) * h);
-  const d = xs.map((x, i) => `${i === 0 ? "M" : "L"}${x},${ys[i]}`).join(" ");
-  const area = d + ` L${w},${h} L0,${h} Z`;
+  const weeklyHoursLost = analysts * hoursPerWeek;
+  const weeklyWaste = weeklyHoursLost * hourlyRate;
+  const annualWaste = weeklyWaste * 52;
+  const errorCost = (errorRate / 100) * annualWaste * 0.8;
+  const totalPain = annualWaste + errorCost;
+  const afterAutomation = totalPain * 0.12;
+  const savings = totalPain - afterAutomation;
+  const roiMultiple = (savings / 80000 * 100).toFixed(0);
+  const fmt = (n) => n >= 1000 ? `$${(n/1000).toFixed(0)}K` : `$${Math.round(n)}`;
 
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="chart-svg">
-      <defs>
-        <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#1E7FD8" stopOpacity=".5" />
-          <stop offset="100%" stopColor="#1E7FD8" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <path d={area} className="chart-area" />
-      <path d={d} className="chart-line" style={{ strokeDasharray: animate ? "none" : 1000, strokeDashoffset: animate ? 0 : 1000 }} />
-      {xs.map((x, i) => (
-        <circle key={i} cx={x} cy={ys[i]} r="3" fill="#1E7FD8" />
-      ))}
-    </svg>
-  );
-}
-
-function RadarChart({ animate }) {
-  const skills = [
-    { label: "BI / Viz", val: 95 },
-    { label: "Automation", val: 90 },
-    { label: "Python", val: 82 },
-    { label: "Forecasting", val: 88 },
-    { label: "Sales Ops", val: 85 },
-    { label: "AI Agents", val: 92 },
-  ];
-  const n = skills.length;
-  const cx = 120, cy = 120, r = 90;
-  const toXY = (i, pct) => {
-    const angle = (i / n) * 2 * Math.PI - Math.PI / 2;
-    const dist = (animate ? pct : 0) / 100 * r;
-    return { x: cx + dist * Math.cos(angle), y: cy + dist * Math.sin(angle) };
-  };
-  const labelXY = (i) => {
-    const angle = (i / n) * 2 * Math.PI - Math.PI / 2;
-    return { x: cx + (r + 18) * Math.cos(angle), y: cy + (r + 18) * Math.sin(angle) };
-  };
-  const polyPoints = skills.map((s, i) => {
-    const p = toXY(i, s.val);
-    return `${p.x},${p.y}`;
-  }).join(" ");
-  const gridLevels = [25, 50, 75, 100];
-
-  return (
-    <svg viewBox="0 0 240 240" style={{ width: "100%", maxWidth: 240 }}>
-      {gridLevels.map(lvl => {
-        const pts = skills.map((_, i) => {
-          const angle = (i / n) * 2 * Math.PI - Math.PI / 2;
-          return `${cx + (lvl / 100 * r) * Math.cos(angle)},${cy + (lvl / 100 * r) * Math.sin(angle)}`;
-        }).join(" ");
-        return <polygon key={lvl} points={pts} fill="none" stroke="rgba(30,127,216,.12)" strokeWidth="1" />;
-      })}
-      {skills.map((_, i) => {
-        const p = toXY(i, 100);
-        return <line key={i} x1={cx} y1={cy} x2={p.x} y2={p.y} stroke="rgba(30,127,216,.1)" strokeWidth="1" />;
-      })}
-      <polygon
-        points={polyPoints}
-        fill="rgba(30,127,216,.2)"
-        stroke="#1E7FD8"
-        strokeWidth="1.5"
-        style={{ transition: "all 1.5s cubic-bezier(.16,1,.3,1)" }}
-      />
-      {skills.map((s, i) => {
-        const lp = labelXY(i);
-        return (
-          <text key={i} x={lp.x} y={lp.y}
-            textAnchor="middle" dominantBaseline="middle"
-            fontSize="8" fill="rgba(232,237,242,.5)"
-            fontFamily="JetBrains Mono"
-          >{s.label}</text>
-        );
-      })}
-    </svg>
-  );
-}
-
-function ImpactDashboards() {
-  const [animate, setAnimate] = useState(false);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { setAnimate(true); obs.disconnect(); }
-    }, { threshold: .3 });
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
-
-  const toolsData = [
-    { label: "Power BI", pct: 95 },
-    { label: "n8n / Make", pct: 90 },
-    { label: "Python", pct: 82 },
-    { label: "Excel/VBA", pct: 92 },
-    { label: "Salesforce", pct: 78 },
-  ];
-
-  const impactData = [
-    { label: "Automation", pct: 85 },
-    { label: "Forecasting", pct: 88 },
-    { label: "Revenue Ops", pct: 90 },
-    { label: "Reporting", pct: 95 },
-    { label: "BI Systems", pct: 92 },
-  ];
-
-  return (
-    <section id="impact" className="section reveal" ref={ref}>
-      <div className="section-header">
-        <div className="section-label">Performance Dashboard</div>
-        <h2 className="section-title">Results, not PowerPoints.</h2>
-      </div>
-      <div className="dashboard-grid">
-        {/* Tool Proficiency */}
-        <div className="dashboard-card">
-          <div className="card-title">
-            Tool Proficiency
-            <span className="card-live">Live</span>
-          </div>
-          <BarChart data={toolsData} animate={animate} />
-        </div>
-
-        {/* Impact Areas */}
-        <div className="dashboard-card">
-          <div className="card-title">
-            Impact Areas
-            <span className="card-live">Live</span>
-          </div>
-          <BarChart data={impactData} animate={animate} />
-        </div>
-
-        {/* ROI Growth Simulation */}
-        <div className="dashboard-card">
-          <div className="card-title">
-            Automation ROI Curve (Simulated)
-            <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".55rem",color:"rgba(232,237,242,.25)"}}>
-              Based on delivered projects
-            </span>
-          </div>
-          <LineChartSVG animate={animate} />
-          <div style={{display:"flex",gap:"24px",marginTop:"16px"}}>
-            {[
-              {l:"Efficiency Gain",v:"85%"},
-              {l:"Pipelines Built",v:"30+"},
-              {l:"Time Saved/wk",v:"~40h"},
-            ].map((s,i) => (
-              <div key={i} style={{textAlign:"center"}}>
-                <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:"1.3rem",color:"#1E7FD8",fontWeight:700}}>{s.v}</div>
-                <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".55rem",color:"rgba(232,237,242,.3)",textTransform:"uppercase",letterSpacing:"2px",marginTop:"4px"}}>{s.l}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Radar */}
-        <div className="dashboard-card">
-          <div className="card-title">Skills Radar</div>
-          <div className="radar-wrap">
-            <RadarChart animate={animate} />
-          </div>
-        </div>
-      </div>
-
-      {/* Terminal */}
-      <div className="terminal reveal" style={{marginTop:"24px"}}>
-        <div className="terminal-header">
-          <div className="terminal-dot t-red"></div>
-          <div className="terminal-dot t-yellow"></div>
-          <div className="terminal-dot t-green"></div>
-        </div>
-        <div className="terminal-line"><span className="prompt">$</span> <span className="cmd">python forecast_engine.py</span> <span className="out">--retailer walmart --sku-level --horizon 13w</span></div>
-        <div className="terminal-line"><span className="out">→ Loading 24mo historical sell-through data... </span><span className="highlight">✓ 847,320 rows</span></div>
-        <div className="terminal-line"><span className="out">→ Applying seasonality decomposition (STL)... </span><span className="highlight">✓ MAPE: 4.2%</span></div>
-        <div className="terminal-line"><span className="out">→ Generating executive report (Power BI export)... </span><span className="highlight">✓ Done in 1.3s</span></div>
-        <div className="terminal-line"><span className="out"># Previously: 3 analysts × 2 days manually. Now: 1.3 seconds.</span></div>
-        <div className="terminal-line"><span className="prompt">$</span> <span className="cursor-blink"></span></div>
-      </div>
-    </section>
-  );
-}
-
-function Experience() {
-  const [active, setActive] = useState(0);
-  const exp = EXPERIENCES[active];
-  return (
-    <section id="experience" className="section">
-      <div className="section-header reveal">
-        <div className="section-label">Career Timeline</div>
-        <h2 className="section-title">Where I've built things<br /><em style={{fontFamily:"'DM Serif Display',serif",color:"#1E7FD8"}}>that still run.</em></h2>
-      </div>
-      <div className="exp-grid reveal">
-        <div className="exp-timeline">
-          {EXPERIENCES.map((e) => (
-            <div
-              key={e.id}
-              className={`exp-item${active === e.id ? " active" : ""}`}
-              onClick={() => setActive(e.id)}
-            >
-              <div className="exp-date">{e.date}</div>
-              <div className="exp-role">{e.role}</div>
-              <div className="exp-company">{e.company}</div>
+    <div className="roi-card reveal">
+      <div className="roi-grid">
+        <div className="roi-inputs">
+          <h3 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"1.7rem",letterSpacing:"2px",marginBottom:"8px",color:"var(--text)"}}>
+            What's your current data ops costing you?
+          </h3>
+          <p style={{fontSize:".85rem",color:"var(--text-sec)",lineHeight:"1.75",marginBottom:"24px"}}>
+            Move the sliders. Watch the pain materialize. Then we talk.
+          </p>
+          {[
+            {label:"Analysts on manual reports",val:analysts,set:setAnalysts,min:1,max:20,unit:"people"},
+            {label:"Hours/week per analyst on manual work",val:hoursPerWeek,set:setHoursPerWeek,min:2,max:40,unit:"h/wk"},
+            {label:"Average hourly cost (salary + overhead)",val:hourlyRate,set:setHourlyRate,min:20,max:150,unit:"$/h"},
+            {label:"Estimated error rate in manual reporting",val:errorRate,set:setErrorRate,min:1,max:40,unit:"%"},
+          ].map((s,i) => (
+            <div key={i} className="roi-input-group">
+              <label>
+                {s.label}
+                <span className="roi-val">{s.val} {s.unit}</span>
+              </label>
+              <input type="range" min={s.min} max={s.max} value={s.val}
+                onChange={e => s.set(+e.target.value)} />
             </div>
           ))}
         </div>
-        <div className="exp-detail">
-          <div className="exp-detail-title">{exp.role}</div>
-          <div className="exp-detail-sub">{exp.company} · {exp.location} · {exp.revenue}</div>
-          <ul className="exp-bullets">
-            {exp.highlights.map((h, i) => <li key={i}>{h}</li>)}
-          </ul>
-          <div style={{marginTop:"28px"}}>
-            {exp.tags.map(t => <span key={t} className="exp-tag">{t}</span>)}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
-function Skills() {
-  return (
-    <section id="skills" className="section">
-      <div className="section-header reveal">
-        <div className="section-label">Technical Arsenal</div>
-        <h2 className="section-title">Tools I use.<br /><span style={{color:"rgba(232,237,242,.3)"}}>Not just list.</span></h2>
-      </div>
-      <div className="skills-grid reveal">
-        {SKILLS.map((s, i) => (
-          <div key={i} className="skill-card">
-            <div className="skill-icon">{s.icon}</div>
-            <div className="skill-name">{s.name}</div>
-            <div className="skill-desc">{s.desc}</div>
-            <div className="skill-level">
-              {[1,2,3,4,5].map(d => (
-                <div key={d} className={`skill-dot ${d <= s.level ? "on" : "off"}`} />
-              ))}
+        <div className="roi-output">
+          <div style={{fontFamily:"'Space Mono',monospace",fontSize:".58rem",color:"var(--text-dim)",letterSpacing:"3px",textTransform:"uppercase",marginBottom:"20px"}}>
+            // Automation impact analysis
+          </div>
+
+          <div className="roi-metric">
+            <div className="roi-metric-label">Annual cost of manual reporting</div>
+            <div className="roi-metric-value pink">{fmt(annualWaste)}</div>
+            <div className="roi-helper">{weeklyHoursLost}h/week × {analysts} analyst{analysts>1?'s':''} × 52 weeks</div>
+          </div>
+
+          <div className="roi-metric">
+            <div className="roi-metric-label">+ Hidden error cost ({errorRate}% rate)</div>
+            <div className="roi-metric-value purple">{fmt(errorCost)}</div>
+          </div>
+
+          <div className="roi-metric">
+            <div className="roi-metric-label">Total annual pain</div>
+            <div className="roi-metric-value pink" style={{fontSize:"3.5rem"}}>{fmt(totalPain)}</div>
+          </div>
+
+          <div className="roi-metric">
+            <div className="roi-metric-label">After automation (residual 12%)</div>
+            <div className="roi-metric-value" style={{color:"var(--text-sec)",fontSize:"1.8rem"}}>{fmt(afterAutomation)}</div>
+          </div>
+
+          <div className="roi-metric" style={{background:"rgba(0,245,176,.06)",padding:"20px",borderRadius:"4px",marginTop:"8px",border:"1px solid rgba(0,245,176,.12)"}}>
+            <div className="roi-metric-label">🚀 Annual savings unlocked</div>
+            <div className="roi-metric-value green" style={{fontSize:"3rem"}}>{fmt(savings)}</div>
+            <div style={{fontSize:".72rem",color:"var(--accent3)",marginTop:"8px",fontFamily:"'Space Mono',monospace"}}>
+              ROI on hiring Antoine: ~{roiMultiple}%
             </div>
           </div>
-        ))}
-      </div>
-    </section>
-  );
-}
 
-function WorldPresence() {
-  const countries = [
-    {flag:"🇫🇷",name:"France"},
-    {flag:"🇨🇦",name:"Canada"},
-    {flag:"🇺🇸",name:"USA"},
-    {flag:"🇩🇪",name:"Germany"},
-    {flag:"🇮🇹",name:"Italy"},
-    {flag:"🇪🇸",name:"Spain"},
-    {flag:"🇹🇷",name:"Turkey"},
-  ];
-  return (
-    <div className="world-strip reveal">
-      <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".65rem",color:"rgba(232,237,242,.3)",letterSpacing:"3px",textTransform:"uppercase",flexShrink:0}}>
-        Lived & worked in 7 countries
-      </div>
-      {countries.map((c,i) => (
-        <div key={i} className="country-item">
-          <div className="country-flag">{c.flag}</div>
-          <div className="country-name">{c.name}</div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function Education() {
-  return (
-    <div className="section" style={{paddingTop:0}}>
-      <div className="section-header reveal">
-        <div className="section-label">Education</div>
-        <h2 className="section-title">Academic foundation</h2>
-      </div>
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"24px"}} className="reveal">
-        {[
-          {
-            school:"IE Business School",
-            location:"Madrid, Spain",
-            degree:"MSc Big Data & Business Analytics",
-            year:"2021 – 2022",
-            note:"AI & Deep Machine Learning Specialization",
-          },
-          {
-            school:"ESCP Business School",
-            location:"Paris · Turin · Berlin",
-            degree:"Bachelor in Management",
-            year:"2018 – 2021",
-            note:'Thesis: "Impact of AI on the Educational Sector"',
-          },
-        ].map((e,i) => (
-          <div key={i} className="dashboard-card">
-            <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".6rem",color:"#1E7FD8",letterSpacing:"2px",marginBottom:"12px"}}>{e.year}</div>
-            <div style={{fontSize:"1.1rem",fontWeight:700,marginBottom:"4px"}}>{e.school}</div>
-            <div style={{fontSize:".8rem",color:"rgba(232,237,242,.4)",marginBottom:"16px"}}>{e.location}</div>
-            <div style={{fontSize:".9rem",color:"rgba(232,237,242,.8)",marginBottom:"8px"}}>{e.degree}</div>
-            <div style={{fontSize:".75rem",color:"rgba(232,237,242,.4)",fontStyle:"italic"}}>{e.note}</div>
+          <div style={{fontSize:".65rem",color:"var(--text-mute)",fontFamily:"'Space Mono',monospace",marginTop:"16px",fontStyle:"italic"}}>
+            // Conservative estimate. Real results may cause audible gasping.
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );
 }
 
-function Contact() {
-  const contacts = [
-    { icon: "📧", label: "Email", value: "antoinedemaintenant@alumni.ie.edu" },
-    { icon: "🔗", label: "LinkedIn", value: "linkedin.com/in/antoine2maintenant" },
-    { icon: "📍", label: "Location", value: "France · Canada (Montréal)" },
-    { icon: "📱", label: "Phone", value: "+1 (263) 385-6506" },
-  ];
-  const langs = [
-    {l:"French",tag:"Native",pct:100},
-    {l:"English",tag:"Fluent",pct:95},
-    {l:"German",tag:"B2",pct:70},
-    {l:"Spanish",tag:"A2",pct:40},
-    {l:"Italian",tag:"A2",pct:40},
-  ];
+function EasterEgg({ onClose }) {
   return (
-    <section id="contact" className="section">
-      <div className="section-header reveal">
-        <div className="section-label">Let's build something</div>
-        <h2 className="section-title">Open to new<br /><em style={{fontFamily:"'DM Serif Display',serif",color:"#1E7FD8"}}>challenges.</em></h2>
-      </div>
-      <div className="contact-grid reveal">
-        <div>
-          {contacts.map((c,i) => (
-            <div key={i} className="contact-item">
-              <div className="contact-icon">{c.icon}</div>
-              <div>
-                <div className="contact-label">{c.label}</div>
-                <div className="contact-value">{c.value}</div>
-              </div>
-            </div>
-          ))}
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal" onClick={e => e.stopPropagation()}>
+        <div style={{fontSize:"3rem",marginBottom:"16px",animation:"float 2s infinite"}}>🕹️</div>
+        <h2>KONAMI CODE DETECTED</h2>
+        <p>
+          Congrats — you're either a developer, a gamer, or dangerously bored.<br /><br />
+          Either way, you passed the hidden test.<br />
+          <span style={{color:"var(--accent1)"}}>People who find easter eggs tend to ship features.</span><br /><br />
+          Now imagine what I could automate for your team.
+        </p>
+        <div style={{fontFamily:"'Space Mono',monospace",fontSize:".72rem",color:"var(--text-dim)",marginBottom:"24px",background:"rgba(200,85,255,.07)",padding:"12px 16px",borderLeft:"2px solid var(--accent1)"}}>
+          // Secret stat: 85% pipeline automation achieved.<br/>
+          // It took 3 months. Manual alternative: never.
         </div>
-        <div className="dashboard-card">
-          <div className="card-title">Languages</div>
-          <div style={{display:"flex",flexDirection:"column",gap:"14px"}}>
-            {langs.map((l,i) => (
-              <div key={i} className="bar-row" style={{alignItems:"center"}}>
-                <span className="bar-label" style={{width:"70px"}}>{l.l}</span>
-                <div className="bar-track" style={{flex:1}}>
-                  <div className="bar-fill" style={{width:`${l.pct}%`}} />
-                </div>
-                <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".6rem",color:"rgba(232,237,242,.4)",width:"50px",textAlign:"right"}}>{l.tag}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        <button className="modal-close" onClick={onClose}>CLOSE // ESC</button>
       </div>
-    </section>
+    </div>
   );
 }
 
 function App() {
+  const [mode, setMode] = useState('recruiter');
+  const [activeExp, setActiveExp] = useState(0);
+  const [showEasterEgg, setShowEasterEgg] = useState(false);
+  const [typed, setTyped] = useState('');
+
+  const exp = EXPERIENCES[activeExp];
+
+  const lines = ['BI Engineer.', 'AI Architect.', 'Revenue Optimizer.', 'Automation Dealer.'];
+  const [lineIdx, setLineIdx] = useState(0);
+  const [charIdx, setCharIdx] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
   useEffect(() => {
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add("visible");
-      });
-    }, { threshold: .15 });
-    document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
+    const t = setTimeout(() => {
+      const current = lines[lineIdx];
+      if (!deleting) {
+        if (charIdx < current.length) { setTyped(current.slice(0, charIdx + 1)); setCharIdx(c => c + 1); }
+        else { setTimeout(() => setDeleting(true), 1800); }
+      } else {
+        if (charIdx > 0) { setTyped(current.slice(0, charIdx - 1)); setCharIdx(c => c - 1); }
+        else { setDeleting(false); setLineIdx(i => (i + 1) % lines.length); }
+      }
+    }, deleting ? 40 : 70);
+    return () => clearTimeout(t);
+  }, [charIdx, deleting, lineIdx]);
+
+  useEffect(() => {
+    window.konamiCallback = () => setShowEasterEgg(true);
+    return () => { window.konamiCallback = null; };
+  }, []);
+
+  useEffect(() => {
+    const handler = e => { if (e.key === 'Escape') setShowEasterEgg(false); };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, []);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold:.15 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     return () => obs.disconnect();
   }, []);
 
+  const isRecruiter = mode === 'recruiter';
+
   return (
     <>
-      <Nav />
-      <Hero />
-      <MetricsStrip />
-      <ImpactDashboards />
-      <Experience />
-      <Skills />
-      <WorldPresence />
-      <Education />
-      <Contact />
+      {showEasterEgg && <EasterEgg onClose={() => setShowEasterEgg(false)} />}
+
+      <div className="mode-toggle">
+        <button className={`mode-btn ${mode==='hacker'?'active':''}`} onClick={() => setMode('hacker')}>HACKER</button>
+        <button className={`mode-btn ${mode==='recruiter'?'active':''}`} onClick={() => setMode('recruiter')}>RECRUITER</button>
+      </div>
+
+      <nav className="nav">
+        <div className="nav-logo">ADM.SYS // v2.0</div>
+        <div className="nav-links">
+          {['about','roi','experience','stack','testimonials','contact'].map(s => (
+            <button key={s} className="nav-link"
+              onClick={() => document.getElementById(s)?.scrollIntoView({behavior:'smooth'})}>
+              {s}
+            </button>
+          ))}
+        </div>
+      </nav>
+
+      <section id="about" className={`hero ${isRecruiter ? 'recruiter-mode' : ''}`}>
+        <div className="hero-badge">
+          {isRecruiter ? '🟢 Available for hire · France & Canada' : '// SYS_ONLINE · LOOKING FOR NEW MISSION'}
+        </div>
+        <h1 className="hero-h1">
+          <div className={isRecruiter ? '' : 'glitch-wrap'} data-text="ANTOINE">ANTOINE</div>
+          <div><span className="accent">DE</span></div>
+          <div className="outline">MAINTENANT</div>
+        </h1>
+        <p className="hero-sub">
+          I turn your <span>bloated reporting hell</span> into automated intelligence —<br />
+          real-time dashboards, self-running pipelines, executive-ready insights.<br />
+          {isRecruiter
+            ? 'BI & Automation specialist with 5+ years across CPG, SaaS and CSR.'
+            : '// Manual process spotted → automated before you close this tab.'}
+        </p>
+        <div style={{fontFamily:"'Space Mono',monospace",fontSize:".85rem",color:"var(--accent1)",marginBottom:"40px",display:"flex",alignItems:"center",gap:"8px"}}>
+          <span style={{color:"var(--text-dim)"}}>{'>'}</span>
+          {typed}
+          <span className="t-cursor"></span>
+        </div>
+        <div className="hero-cta-row">
+          <button className="cta-primary"
+            onClick={() => document.getElementById('roi')?.scrollIntoView({behavior:'smooth'})}>
+            Calculate My ROI →
+          </button>
+          <button className="cta-secondary"
+            onClick={() => document.getElementById('contact')?.scrollIntoView({behavior:'smooth'})}>
+            Get in Touch
+          </button>
+          <a
+            href="CV_Antoine.pdf"
+              download="CV_Antoine_de_Maintenant_2026.pdf"
+              className="cta-download"
+            >
+              ↓ Download CV
+            </a>
+        </div>
+      </section>
+
+      <div className="ticker">
+        <div className="ticker-inner">
+          {[...Array(2)].map((_,ri) => (
+            <div key={ri} style={{display:'flex',gap:'48px'}}>
+              {['85% processing capacity gain','30+ workflows automated','270% pipeline efficiency boost','Dept built in 6 months','10+ Power BI dashboards','n8n · Python · LLMs · Power BI','Amazon · Walmart · Target · CVS · Ulta'].map((t,i) => (
+                <div key={i} className="ticker-item">{t}</div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="metrics reveal">
+        {[
+          {num:'85%',lbl:'Processing Capacity Gained'},
+          {num:'270%',lbl:'Pipeline Efficiency Boost'},
+          {num:'30+',lbl:'Workflows Automated'},
+          {num:'6mo',lbl:'Built Analytics Dept from 0'},
+        ].map((m,i) => (
+          <div key={i} className="metric">
+            <span className="metric-num">{m.num}</span>
+            <span className="metric-lbl">{m.lbl}</span>
+          </div>
+        ))}
+      </div>
+
+      <section id="roi" className="section">
+        <div className="section-eyebrow">ROI Calculator</div>
+        <h2 className="section-title">Find out what <em>not</em> hiring me costs.</h2>
+        <ROICalc />
+      </section>
+
+      <div style={{maxWidth:'1400px',margin:'0 auto',padding:'0 60px 60px',position:'relative',zIndex:5}}>
+        <div className="terminal reveal">
+          <div className="terminal-header">
+            <div className="t-dot t-red"></div>
+            <div className="t-dot t-yellow"></div>
+            <div className="t-dot t-green"></div>
+            <span className="terminal-path">antoine@automation-engine — forecast.py</span>
+          </div>
+          <div className="terminal-body">
+            <div className="t-line"><span className="t-prompt">$</span> <span className="t-cmd">python forecast_engine.py</span> <span className="t-out">--retailer walmart --sku-level --horizon 13w --output executive_deck</span></div>
+            <div className="t-line"><span className="t-out">→ Connecting data warehouse...</span> <span className="t-highlight">✓</span></div>
+            <div className="t-line"><span className="t-out">→ Loading 24mo sell-through data...</span> <span className="t-highlight">✓ 847,320 rows</span></div>
+            <div className="t-line"><span className="t-out">→ STL seasonality decomposition...</span> <span className="t-highlight">✓ MAPE: 4.2%</span></div>
+            <div className="t-line"><span className="t-out">→ Generating Power BI export...</span> <span className="t-highlight">✓ 1.3s</span></div>
+            <div className="t-line"><span className="t-out">→ Sending to executive Slack channel...</span> <span className="t-highlight">✓ Delivered 06:00 AM</span></div>
+            <div className="t-line"><span className="t-comment">// Previously: 3 analysts × 2 days. Now: automated. Every Monday. While sleeping.</span></div>
+            <div className="t-line"><span className="t-prompt">$</span> <span className="t-cursor"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <section id="experience" className="section">
+        <div className="section-eyebrow">Career Timeline</div>
+        <h2 className="section-title">Where I built<br /><em>things that still run.</em></h2>
+        <div className="exp-grid reveal">
+          <div className="exp-nav">
+            {EXPERIENCES.map(e => (
+              <div key={e.id}
+                className={`exp-nav-item ${activeExp===e.id?'active':''}`}
+                onClick={() => setActiveExp(e.id)}>
+                <div className="exp-nav-date">{e.date}</div>
+                <div className="exp-nav-role">{e.role}</div>
+                <div className="exp-nav-co">{e.company}</div>
+              </div>
+            ))}
+          </div>
+          <div className="exp-detail">
+            <div className="exp-detail-role">{exp.role}</div>
+            <div className="exp-detail-meta">
+              <span>{exp.company}</span><span>·</span>
+              <span>{exp.location}</span><span>·</span>
+              <span>{exp.revenue}</span>
+            </div>
+            <ul className="exp-bullets">
+              {exp.highlights.map((h,i) => <li key={i}>{h}</li>)}
+            </ul>
+            <div className="exp-tags">
+              {exp.tags.map(t => <span key={t} className="exp-tag">{t}</span>)}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" className="section">
+        <div className="section-eyebrow">Arsenal</div>
+        <h2 className="section-title">Tools I use.<br /><span style={{color:'var(--text-dim)'}}>Not just list.</span></h2>
+        <div className="skills-grid reveal">
+          {SKILLS.map((s,i) => (
+            <div key={i} className="skill-card">
+              <div className="skill-icon">{s.icon}</div>
+              <div className="skill-name">{s.name}</div>
+              <div className="skill-desc">{s.desc}</div>
+              <div className="skill-bar">
+                <div className="skill-bar-fill" style={{width:`${s.pct}%`}}></div>
+              </div>
+              <div className="skill-pct">{s.pct}%</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* STACK */}
+      <section id="stack" className="section">
+        <div className="section-eyebrow">Tech Stack</div>
+        <h2 className="section-title">Tools I ship with.<br /><em>Not just buzzwords.</em></h2>
+        <div className="stack-grid reveal">
+          {STACK_TOOLS.map((t,i) => (
+            <div key={i} className="stack-card">
+              <div className="stack-level">{t.level}</div>
+              {t.logo
+                ? <img src={t.logo} alt={t.name} className="stack-logo" onError={e=>{e.target.style.display='none';e.target.nextSibling.style.display='flex'}} />
+                : null
+              }
+              <div className="stack-logo-placeholder" style={{background:`${t.color}18`,display:t.logo?'none':'flex'}}>
+                {t.emoji}
+              </div>
+              <div className="stack-name">{t.name}</div>
+              <div className="stack-cat">{t.cat}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section id="testimonials" className="section" style={{paddingTop:0}}>
+        <div className="section-eyebrow">Social Proof</div>
+        <h2 className="section-title">Don't take<br /><em>my word for it.</em></h2>
+        <div className="testi-grid reveal">
+          {TESTIMONIALS.map((t,i) => (
+            <div key={i} className="testi-card">
+              <div className="testi-stars">{'★'.repeat(t.stars)}</div>
+              <div className="testi-quote">{t.quote}</div>
+              <div className="testi-author">
+                <div className="testi-avatar">{t.initials}</div>
+                <div>
+                  <div className="testi-name">{t.name}</div>
+                  <div className="testi-role">{t.role}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="world-strip">
+        <div className="world-inner">
+          <span style={{fontFamily:"'Space Mono',monospace",fontSize:".58rem",color:"var(--text-dim)",letterSpacing:"3px",textTransform:"uppercase"}}>Lived & worked in</span>
+          {[
+            {iso:'fr',n:'France'},{iso:'ca',n:'Canada'},{iso:'us',n:'USA'},
+            {iso:'de',n:'Germany'},{iso:'it',n:'Italy'},{iso:'es',n:'Spain'},{iso:'tr',n:'Turkey'}
+          ].map((c,i) => (
+            <div key={i} className="country">
+              <img
+                src={'https://flagcdn.com/48x36/' + c.iso + '.png'}
+                width="48" height="36"
+                alt={c.n}
+                style={{borderRadius:'4px',border:'2px solid rgba(0,0,0,.15)',boxShadow:'0 3px 10px rgba(0,0,0,.25)',display:'block',margin:'0 auto'}}
+              />
+              <div style={{fontFamily:"'Space Mono',monospace",fontSize:'.58rem',color:'var(--text-sec)',letterSpacing:'2px',marginTop:'6px',textAlign:'center'}}>{c.n}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <section id="contact" className="section">
+        <div className="section-eyebrow">Contact</div>
+        <h2 className="section-title">Let's build<br /><em>something real.</em></h2>
+        <div className="contact-grid reveal">
+          <div style={{display:'flex',flexDirection:'column',gap:'16px'}}>
+            {[
+              {icon:'📧',label:'Email',value:'antoinedemaintenant@alumni.ie.edu'},
+              {icon:'🔗',label:'LinkedIn',value:'linkedin.com/in/antoine2maintenant'},
+              {icon:'📍',label:'Location',value:'France · Canada (Montréal)'},
+              {icon:'📱',label:'Phone',value:'+1 (263) 385-6506'},
+            ].map((c,i) => (
+              <div key={i} className="contact-card">
+                <div className="contact-icon">{c.icon}</div>
+                <div className="contact-label">{c.label}</div>
+                <div className="contact-value">{c.value}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{background:'var(--bg2)',border:'1px solid rgba(200,85,255,.18)',padding:'40px'}}>
+            <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:'1.8rem',letterSpacing:'2px',marginBottom:'16px',color:'var(--text)'}}>
+              I'm selective about what I build next.
+            </div>
+            <p style={{fontSize:'.92rem',color:'var(--text-sec)',lineHeight:'1.85',marginBottom:'32px'}}>
+              If you have a data problem that's costing you real money and time — manual reports, broken pipelines, zero visibility into your operations — I'm interested.
+              <br/><br/>
+              If you want me to "just make the charts prettier," I'll politely refer you to Canva.
+            </p>
+            <div style={{fontFamily:"'Space Mono',monospace",fontSize:'.62rem',color:'var(--accent1)',letterSpacing:'2px',textTransform:'uppercase',display:'flex',alignItems:'center',gap:'8px'}}>
+              <span style={{width:'6px',height:'6px',borderRadius:'50%',background:'var(--accent1)',animation:'pulse 2s infinite',display:'inline-block'}}></span>
+              Open to new missions · 2026
+            </div>
+          </div>
+        </div>
+      </section>
+
       <footer className="footer">
-        © 2026 Antoine de Maintenant · Built with data, deployed with intent.<br />
-        <span style={{opacity:.4,marginTop:"8px",display:"block"}}>
-          // Probably already automated before you finished reading this.
-        </span>
+        © 2026 Antoine de Maintenant
+        <span className="credit">// Try the Konami code. You won't regret it.</span>
       </footer>
     </>
   );
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 </script>
 </body>
 </html>
