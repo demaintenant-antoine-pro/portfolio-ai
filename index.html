@@ -112,6 +112,11 @@ body.hovering #cur-o{width:44px;height:44px;border-color:var(--accent2);opacity:
 /* ═══════════════════ HERO ═══════════════════ */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 80px 80px;position:relative;z-index:5;max-width:1500px;margin:0 auto}
 .hero-badge{display:inline-flex;align-items:center;gap:10px;font-family:'Space Mono',monospace;font-size:.55rem;color:var(--accent1);letter-spacing:4px;text-transform:uppercase;border:1px solid var(--border);padding:7px 18px;border-radius:2px;margin-bottom:36px;width:fit-content}
+.hero-badge-wrap{display:inline-flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:36px}
+.hero-badge-dot{width:8px;height:8px;border-radius:50%;background:var(--accent3);animation:pulse 2s infinite;flex-shrink:0}
+.hero-badge-status{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--accent3);letter-spacing:3px;text-transform:uppercase}
+.hero-city-pill{font-family:'Space Mono',monospace;font-size:.48rem;color:var(--accent1);letter-spacing:2px;text-transform:uppercase;border:1px solid var(--border-dim);padding:4px 10px;border-radius:20px;background:rgba(191,58,255,.06);transition:all .2s;cursor:default}
+.hero-city-pill:hover{border-color:var(--accent1);background:rgba(191,58,255,.15);transform:translateY(-1px);box-shadow:0 0 10px var(--glow1)}
 .hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent3);animation:pulse 2s infinite}
 .hero-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,12vw,11rem);line-height:.85;letter-spacing:2px;margin-bottom:6px;will-change:transform;transition:transform .05s linear}
 .hero-h1 .accent{color:var(--accent2)}
@@ -480,6 +485,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:14px;height:14px;b
 .book-call-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:rgba(0,240,168,.08);border:1px solid var(--accent3);color:var(--accent3);font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:2px;text-transform:uppercase;border-radius:8px;cursor:pointer;transition:all .25s;margin-top:12px}
 .book-call-btn:hover{background:rgba(0,240,168,.18);box-shadow:0 0 20px var(--glow3);transform:translateY(-2px)}
 
+</style>
 </head>
 <body data-theme="light">
 
@@ -1370,6 +1376,7 @@ function App(){
         </div>
       </div>
     )}
+    {showRecruiter&&<RecruiterModal lang={lang} onClose={()=>setShowRecruiter(false)}/>}
     {showCalendly&&<CalendlyModal lang={lang} onClose={()=>setShowCalendly(false)}/>}
     {activeCountry&&<CountryModal country={activeCountry} onClose={()=>setActiveCountry(null)} lang={lang}/>}
     <ScrollToTop lang={lang}/>
@@ -1384,6 +1391,7 @@ function App(){
           {soundOn?'🔊':'🔇'}
         </button>
         <button className={`recruiter-btn${showRecruiter?' active':''}`} onClick={()=>{setShowRecruiter(true);SFX.click()}}>{t.recruiterBtn} ⚡</button>
+        <div style={{display:'flex',gap:'1px'}}>
           {[['en','🇬🇧'],['fr','🇫🇷']].map(([l,f])=>(<button key={l} className={`theme-btn${lang===l?' active':''}`} onClick={()=>setLang(l)}>{f} {l.toUpperCase()}</button>))}
         </div>
         <div className="nav-themes">
@@ -1405,7 +1413,13 @@ function App(){
 
     {/* HERO */}
     <section id="about" className="hero">
-      <div className="hero-badge">{t.badge}</div>
+      <div className="hero-badge-wrap">
+        <span className="hero-badge-dot"></span>
+        <span className="hero-badge-status">{lang==="fr"?"Disponible":"Available"}</span>
+        {['France','Dubai','Canada','Singapore','Remote'].map((city,i)=>(
+          <span key={i} className="hero-city-pill">{city}</span>
+        ))}
+      </div>
       <h1 className="hero-h1">
         <div className="glitch-wrap" data-text="ANTOINE">ANTOINE</div>
         <div><span className="accent">DE</span></div>
