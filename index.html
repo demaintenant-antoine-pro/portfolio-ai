@@ -10,87 +10,38 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════════
-   DESIGN TOKENS — all themes use CSS vars
-   ═══════════════════════════════════════════ */
 :root {
-  --bg:         #1E1535;
-  --bg2:        #2A1D4A;
-  --bg3:        #362460;
-  --bg-card:    rgba(42,29,74,0.95);
-  --text:       #FFFFFF;
-  --text-sec:   #D0C4F0;
-  --text-dim:   #9B8DCC;
-  --text-mute:  #6B5E99;
-  --accent1:    #C44EFF;
-  --accent2:    #FF3D85;
-  --accent3:    #00F5B0;
-  --border:     rgba(196,78,255,.35);
-  --border-dim: rgba(196,78,255,.18);
-  --nav-bg:     rgba(20,13,42,.96);
-  --roi-out-bg: rgba(5,2,20,.7);
-  --terminal-bg:#020008;
-  --log-bg:     #010006;
-  --glow1:      rgba(196,78,255,.3);
-  --glow2:      rgba(255,61,133,.3);
-  --glow3:      rgba(0,245,176,.3);
+  --bg:#1E1535;--bg2:#2A1D4A;--bg3:#362460;--bg-card:rgba(42,29,74,0.95);
+  --text:#FFFFFF;--text-sec:#D0C4F0;--text-dim:#9B8DCC;--text-mute:#6B5E99;
+  --accent1:#C44EFF;--accent2:#FF3D85;--accent3:#00F5B0;
+  --border:rgba(196,78,255,.35);--border-dim:rgba(196,78,255,.18);
+  --nav-bg:rgba(20,13,42,.96);--roi-out-bg:rgba(5,2,20,.7);
+  --terminal-bg:#020008;--log-bg:#010006;
+  --glow1:rgba(196,78,255,.3);--glow2:rgba(255,61,133,.3);--glow3:rgba(0,245,176,.3);
 }
-[data-theme=hacker] {
-  --bg:#020C08;--bg2:#041A0E;--bg3:#031208;
-  --bg-card:rgba(4,26,14,.95);
-  --accent1:#00FF88;--accent2:#00FFFF;--accent3:#FFFF00;
-  --text:#CCFFE8;--text-sec:#88DDBB;--text-dim:#55AA77;--text-mute:#337755;
-  --border:rgba(0,255,136,.3);--border-dim:rgba(0,255,136,.12);
-  --nav-bg:rgba(1,8,4,.96);
-  --roi-out-bg:rgba(0,10,5,.8);
-  --terminal-bg:#010A04;--log-bg:#000802;
-  --glow1:rgba(0,255,136,.25);--glow2:rgba(0,255,255,.2);--glow3:rgba(255,255,0,.2);
-}
-[data-theme=light] {
-  --bg:#F4F0FC;--bg2:#E8E0F5;--bg3:#DDD4F0;
-  --bg-card:rgba(255,255,255,.97);
-  --accent1:#7B0FE0;--accent2:#D4005A;--accent3:#007A55;
-  --text:#1A0A2E;--text-sec:#3D2B60;--text-dim:#6B5E99;--text-mute:#9B8DCC;
-  --border:rgba(123,15,224,.3);--border-dim:rgba(123,15,224,.15);
-  --nav-bg:rgba(244,240,252,.97);
-  --roi-out-bg:rgba(232,224,245,.9);
-  --terminal-bg:#1A0A2E;--log-bg:#0F0620;
-  --glow1:rgba(123,15,224,.15);--glow2:rgba(212,0,90,.12);--glow3:rgba(0,122,85,.12);
-}
+[data-theme=hacker]{--bg:#020C08;--bg2:#041A0E;--bg3:#031208;--bg-card:rgba(4,26,14,.95);--accent1:#00FF88;--accent2:#00FFFF;--accent3:#FFFF00;--text:#CCFFE8;--text-sec:#88DDBB;--text-dim:#55AA77;--text-mute:#337755;--border:rgba(0,255,136,.3);--border-dim:rgba(0,255,136,.12);--nav-bg:rgba(1,8,4,.96);--roi-out-bg:rgba(0,10,5,.8);--terminal-bg:#010A04;--log-bg:#000802;--glow1:rgba(0,255,136,.25);--glow2:rgba(0,255,255,.2);--glow3:rgba(255,255,0,.2);}
+[data-theme=light]{--bg:#F4F0FC;--bg2:#E8E0F5;--bg3:#DDD4F0;--bg-card:rgba(255,255,255,.97);--accent1:#7B0FE0;--accent2:#D4005A;--accent3:#007A55;--text:#1A0A2E;--text-sec:#3D2B60;--text-dim:#6B5E99;--text-mute:#9B8DCC;--border:rgba(123,15,224,.3);--border-dim:rgba(123,15,224,.15);--nav-bg:rgba(244,240,252,.97);--roi-out-bg:rgba(232,224,245,.9);--terminal-bg:#1A0A2E;--log-bg:#0F0620;--glow1:rgba(123,15,224,.15);--glow2:rgba(212,0,90,.12);--glow3:rgba(0,122,85,.12);}
 
-/* ═══ BASE ═══════════════════════════════ */
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;cursor:none;transition:background .35s,color .35s}
 ::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-thumb{background:linear-gradient(var(--accent1),var(--accent2))}
 
-/* ═══ CURSOR ════════════════════════════ */
 #cur-o{position:fixed;width:32px;height:32px;border:1.5px solid var(--accent1);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s,border-color .2s,width .2s,height .2s;opacity:.7}
 #cur-i{position:fixed;width:6px;height:6px;background:var(--accent2);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
 body.hovering #cur-o{transform:translate(-50%,-50%) scale(1.8);border-color:var(--accent2)}
 
-/* ═══ BACKGROUND FX ═════════════════════ */
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1;opacity:.2}
 .grid-bg{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(139,0,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(139,0,255,.07) 1px,transparent 1px);background-size:60px 60px}
 [data-theme=light] .grid-bg{background-image:linear-gradient(rgba(123,15,224,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(123,15,224,.06) 1px,transparent 1px)}
 .scanline{position:fixed;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(139,0,255,.12),transparent);z-index:2;pointer-events:none;animation:scan 8s linear infinite}
 @keyframes scan{from{top:-2px}to{top:100vh}}
 #particles{position:fixed;inset:0;pointer-events:none;z-index:0}
-
-/* ═══ SCROLL PROGRESS ═══════════════════ */
 .scroll-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3));z-index:9998;box-shadow:0 0 8px var(--glow1)}
 
-/* ═══ NAV ════════════════════════════════
-   Single bar: logo | links | theme toggle
-   ════════════════════════════════════════ */
-.nav{
-  position:fixed;top:0;left:0;right:0;z-index:500;
-  background:var(--nav-bg);backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--border-dim);
-  height:60px;display:flex;align-items:center;
-  padding:0 32px;gap:32px;
-}
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:500;background:var(--nav-bg);backdrop-filter:blur(18px);border-bottom:1px solid var(--border-dim);height:60px;display:flex;align-items:center;padding:0 32px;gap:32px;}
 .nav-logo{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--accent1);letter-spacing:3px;white-space:nowrap;flex-shrink:0}
 .nav-links{display:flex;gap:4px;flex:1;justify-content:center;flex-wrap:nowrap;overflow:hidden}
 .nav-link{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--text-dim);letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:color .2s,background .2s;border:none;background:none;padding:6px 8px;border-radius:4px;white-space:nowrap}
@@ -101,7 +52,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .theme-btn:not(.active){background:transparent;color:var(--text-dim)}
 .theme-btn:not(.active):hover{background:rgba(255,255,255,.07);color:var(--text)}
 
-/* ═══ TICKER ════════════════════════════ */
+/* TICKER */
 .ticker{position:relative;z-index:5;background:rgba(196,78,255,.1);border-top:1px solid rgba(196,78,255,.2);border-bottom:1px solid rgba(196,78,255,.2);padding:13px 0;overflow:hidden}
 [data-theme=light] .ticker{background:rgba(123,15,224,.08)}
 .ticker-inner{display:flex;gap:48px;white-space:nowrap;animation:tickerScroll 28s linear infinite}
@@ -109,11 +60,11 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .ticker-item{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--accent1);letter-spacing:3px;text-transform:uppercase;display:flex;align-items:center;gap:12px}
 .ticker-item::before{content:'◆';color:var(--accent2);font-size:.45rem}
 
-/* ═══ HERO ═══════════════════════════════ */
+/* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:100px 60px 80px;position:relative;z-index:5;max-width:1400px;margin:0 auto}
 .hero-badge{display:inline-flex;align-items:center;gap:10px;font-family:'Space Mono',monospace;font-size:.58rem;color:var(--accent1);letter-spacing:4px;text-transform:uppercase;border:1px solid var(--border);padding:8px 20px;border-radius:2px;margin-bottom:40px;width:fit-content;animation:borderGlow 4s infinite}
 .hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent3);animation:pulse 2s infinite}
-.hero-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,11vw,10.5rem);line-height:.88;letter-spacing:2px;margin-bottom:8px}
+.hero-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,11vw,10.5rem);line-height:.88;letter-spacing:2px;margin-bottom:8px;will-change:transform}
 .hero-h1 .accent{color:var(--accent2);animation:rgbShift 6s infinite}
 .hero-h1 .outline{-webkit-text-stroke:1.5px var(--border);color:transparent}
 .hero-sub{font-size:1.05rem;color:var(--text-sec);max-width:540px;line-height:1.85;margin:28px 0 40px}
@@ -128,14 +79,14 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .btn-secondary:hover{border-color:var(--accent2);color:var(--accent2);background:rgba(255,61,133,.08)}
 [data-theme=light] .btn-secondary{background:rgba(123,15,224,.08)}
 
-/* ═══ METRICS BAR ════════════════════════ */
+/* METRICS */
 .metrics{position:relative;z-index:5;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border-dim);background:var(--bg2)}
 .metric{padding:36px 28px;text-align:center;border-right:1px solid var(--border-dim)}
 .metric:last-child{border-right:none}
 .metric-num{font-family:'Bebas Neue',sans-serif;font-size:3.2rem;line-height:1;background:linear-gradient(135deg,var(--accent1),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block}
 .metric-lbl{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--text-sec);letter-spacing:2px;text-transform:uppercase;margin-top:6px;display:block}
 
-/* ═══ SECTIONS ═══════════════════════════ */
+/* SECTIONS */
 .section{padding:90px 60px;position:relative;z-index:5;max-width:1400px;margin:0 auto}
 .section-full{padding:90px 0;position:relative;z-index:5;background:var(--bg2)}
 .section-full-inner{max-width:1400px;margin:0 auto;padding:0 60px}
@@ -144,7 +95,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,5vw,4.2rem);line-height:1;letter-spacing:2px;margin-bottom:56px;color:var(--text)}
 .section-title em{color:var(--accent1);font-style:normal}
 
-/* ═══ DASHBOARD ══════════════════════════ */
+/* DASHBOARD */
 .dashboard-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
 .kpi-box{padding:20px;border:1px solid var(--border-dim);border-radius:10px;background:var(--bg-card);backdrop-filter:blur(10px);transition:all .25s}
 .kpi-box:hover{border-color:var(--accent1);transform:translateY(-3px);box-shadow:0 8px 30px var(--glow1)}
@@ -156,12 +107,16 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .chart-title{font-size:11px;font-weight:600;color:var(--text-dim);margin-bottom:14px;letter-spacing:2px;text-transform:uppercase;font-family:'Space Mono',monospace}
 .chart-wrap{position:relative;height:200px}
 
-/* ═══ PIPELINE ═══════════════════════════ */
+/* PIPELINE */
 .pipeline-wrap{background:var(--bg-card);border:1px solid var(--border-dim);border-radius:12px;padding:36px}
 .pipeline-stages{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:28px;gap:0}
-.p-node{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 16px;border-radius:10px;border:2px solid var(--border-dim);background:var(--bg);transition:all .4s;min-width:100px;text-align:center}
+.p-node{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 16px;border-radius:10px;border:2px solid var(--border-dim);background:var(--bg);transition:all .4s;min-width:100px;text-align:center;cursor:grab;user-select:none}
+.p-node:active{cursor:grabbing}
 .p-node.running{border-color:var(--accent1);box-shadow:0 0 20px var(--glow1);background:rgba(196,78,255,.08)}
 .p-node.done{border-color:var(--accent3);box-shadow:0 0 15px var(--glow3)}
+.p-node.dragging{opacity:.4;transform:scale(.95)}
+.p-node.drag-over{border-color:var(--accent2);box-shadow:0 0 20px var(--glow2);transform:scale(1.05)}
+.p-node.wrong-order{border-color:#ff4444;box-shadow:0 0 20px rgba(255,68,68,.4);animation:shake .4s ease}
 .p-node-icon{font-size:24px}
 .p-node-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-dim)}
 .p-node-detail{font-size:9px;color:var(--text-mute);font-family:'Space Mono',monospace}
@@ -172,8 +127,10 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .run-btn{display:block;margin:0 auto;padding:13px 44px;background:linear-gradient(135deg,var(--accent1),var(--accent2));border:none;border-radius:8px;color:#fff;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:2px;transition:all .3s}
 .run-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 28px var(--glow1)}
 .run-btn:disabled{opacity:.5;cursor:not-allowed}
+.drag-hint{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--text-mute);letter-spacing:2px;text-align:center;margin-bottom:14px}
+.wrong-order-msg{background:rgba(255,68,68,.1);border:1px solid rgba(255,68,68,.3);border-radius:8px;padding:12px 18px;font-family:'Space Mono',monospace;font-size:.62rem;color:#ff6666;text-align:center;margin-bottom:14px;animation:fadeIn .3s ease}
 
-/* ═══ EXPERIENCE ═════════════════════════ */
+/* EXPERIENCE */
 .exp-filter-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
 .filter-btn{padding:5px 14px;border-radius:20px;border:1px solid var(--border-dim);background:transparent;color:var(--text-dim);font-size:11px;font-family:'Space Mono',monospace;cursor:pointer;transition:all .2s;letter-spacing:1px}
 .filter-btn.active,.filter-btn:hover{background:var(--accent1);color:#fff;border-color:var(--accent1)}
@@ -195,7 +152,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .exp-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:24px}
 .exp-tag{background:rgba(196,78,255,.1);border:1px solid var(--border-dim);color:var(--accent1);font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:2px;text-transform:uppercase;padding:4px 9px;border-radius:2px}
 
-/* ═══ SKILLS ═════════════════════════════ */
+/* SKILLS & RADAR */
 .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .skill-card{background:var(--bg-card);border:1px solid var(--border-dim);padding:22px;transition:all .25s;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%)}
 .skill-card:hover{border-color:var(--accent1);transform:translateY(-4px);box-shadow:0 12px 36px var(--glow1)}
@@ -205,8 +162,19 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .skill-bar{height:2px;background:var(--border-dim);margin-top:14px;overflow:hidden}
 .skill-fill{height:100%;background:linear-gradient(90deg,var(--accent1),var(--accent2))}
 .skill-pct{font-family:'Space Mono',monospace;font-size:.56rem;color:var(--accent1);margin-top:6px;text-align:right}
+.radar-section{margin-top:48px}
+.radar-title{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--accent2);letter-spacing:4px;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.radar-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--accent2),transparent);opacity:.4}
+.radar-wrap{background:var(--bg-card);border:1px solid var(--border-dim);border-radius:12px;padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+.radar-chart-wrap{position:relative;height:320px;max-width:380px;margin:0 auto;width:100%}
+.radar-legend{display:flex;flex-direction:column;gap:16px}
+.radar-legend-item{display:flex;align-items:center;gap:12px}
+.radar-legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.radar-legend-label{font-size:.86rem;font-weight:600;color:var(--text)}
+.radar-legend-sub{font-size:.72rem;color:var(--text-dim);margin-top:2px}
+.radar-legend-pct{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--accent1);margin-left:auto}
 
-/* ═══ STACK ══════════════════════════════ */
+/* STACK */
 .stack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
 .stack-card{background:var(--bg-card);border:1px solid var(--border-dim);padding:20px 14px;text-align:center;transition:all .25s;border-radius:6px;position:relative;overflow:hidden}
 .stack-card:hover{border-color:var(--accent1);transform:translateY(-5px);box-shadow:0 14px 36px var(--glow1)}
@@ -216,7 +184,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .stack-cat{font-family:'Space Mono',monospace;font-size:.46rem;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase}
 .stack-level{position:absolute;top:8px;right:8px;font-family:'Space Mono',monospace;font-size:.44rem;color:var(--accent3);background:rgba(0,245,176,.1);border:1px solid rgba(0,245,176,.2);padding:2px 5px;border-radius:2px}
 
-/* ═══ ROI CALCULATOR ═════════════════════ */
+/* ROI */
 .roi-wrap{background:var(--bg-card);border:1px solid var(--border-dim);padding:40px;border-radius:8px;position:relative;overflow:hidden}
 .roi-wrap::before{content:'// ROI CALCULATOR';position:absolute;top:16px;right:20px;font-family:'Space Mono',monospace;font-size:.46rem;color:var(--text-mute);letter-spacing:3px}
 .roi-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
@@ -225,7 +193,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .roi-val-badge{font-family:'Space Mono',monospace;font-size:.78rem;color:var(--accent1);margin-left:10px}
 input[type=range]{width:100%;appearance:none;height:3px;background:var(--border-dim);outline:none;border-radius:2px;margin-top:4px}
 input[type=range]::-webkit-slider-thumb{appearance:none;width:15px;height:15px;border-radius:50%;background:linear-gradient(135deg,var(--accent1),var(--accent2));cursor:pointer}
-/* ROI output box — always readable in all themes */
 .roi-out{background:var(--roi-out-bg);border:1px solid var(--border-dim);padding:28px;display:flex;flex-direction:column;gap:20px;border-radius:6px}
 .roi-metric{border-bottom:1px solid var(--border-dim);padding-bottom:16px}
 .roi-metric:last-child{border:none;padding:0}
@@ -237,7 +204,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:15px;height:15px;b
 .roi-helper{font-size:.68rem;color:var(--text-dim);margin-top:4px}
 .roi-savings-box{background:rgba(0,245,176,.07);border:1px solid rgba(0,245,176,.18);padding:18px;border-radius:6px}
 
-/* ═══ TERMINAL ═══════════════════════════ */
+/* TERMINAL CHATBOT */
 .terminal{background:var(--terminal-bg);border:1px solid var(--border-dim);border-radius:8px;animation:borderGlow 6s infinite;overflow:hidden}
 .terminal-bar{background:rgba(196,78,255,.07);border-bottom:1px solid var(--border-dim);padding:10px 18px;display:flex;align-items:center;gap:8px}
 .t-dot{width:10px;height:10px;border-radius:50%}
@@ -247,7 +214,23 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:15px;height:15px;b
 .t-line{font-family:'Space Mono',monospace;font-size:.7rem;line-height:1.75;color:var(--text-sec)}
 .t-prompt{color:var(--accent1)}.t-cmd{color:var(--accent3)}.t-hl{color:var(--accent2);font-weight:700}.t-dim{color:var(--text-mute)}
 
-/* ═══ TESTIMONIALS ═══════════════════════ */
+/* TERMINAL CHATBOT SECTION */
+.terminal-chat{background:var(--terminal-bg);border:1px solid var(--border-dim);border-radius:8px;overflow:hidden;max-width:700px;margin:0 auto}
+.terminal-chat-title{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--accent2);letter-spacing:4px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.terminal-chat-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--accent2),transparent);opacity:.4}
+.chat-bar{background:rgba(196,78,255,.07);border-bottom:1px solid var(--border-dim);padding:10px 18px;display:flex;align-items:center;gap:8px}
+.chat-output{padding:20px 24px;font-family:'Space Mono',monospace;font-size:.72rem;line-height:1.8;height:320px;overflow-y:auto;display:flex;flex-direction:column;gap:4px}
+.chat-line-user{color:var(--accent1)}
+.chat-line-sys{color:var(--accent3)}
+.chat-line-err{color:#ff6666}
+.chat-line-dim{color:var(--text-mute)}
+.chat-line-info{color:var(--text-sec)}
+.chat-input-row{display:flex;align-items:center;padding:12px 20px;border-top:1px solid var(--border-dim);gap:8px}
+.chat-prompt-label{color:var(--accent1);font-family:'Space Mono',monospace;font-size:.75rem;white-space:nowrap}
+.chat-input{background:transparent;border:none;outline:none;font-family:'Space Mono',monospace;font-size:.75rem;color:var(--text);flex:1;caret-color:var(--accent1)}
+.chat-hint{font-family:'Space Mono',monospace;font-size:.5rem;color:var(--text-mute);letter-spacing:2px;text-align:center;padding:8px;border-top:1px solid var(--border-dim)}
+
+/* TESTIMONIALS */
 .testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
 .testi-card{background:var(--bg-card);border:1px solid var(--border-dim);padding:28px;position:relative;transition:all .25s;border-radius:6px}
 .testi-card:hover{border-color:var(--accent1);transform:translateY(-4px);box-shadow:0 14px 36px var(--glow1)}
@@ -258,12 +241,12 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:15px;height:15px;b
 .testi-name{font-size:.86rem;font-weight:700;color:var(--text)}
 .testi-role{font-family:'Space Mono',monospace;font-size:.46rem;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
 
-/* ═══ WORLD STRIP ════════════════════════ */
+/* WORLD STRIP */
 .world-strip{position:relative;z-index:5;border-top:1px solid var(--border-dim);border-bottom:1px solid var(--border-dim);padding:24px 0;background:var(--bg2)}
 .world-inner{display:flex;gap:40px;align-items:center;justify-content:center;flex-wrap:wrap;padding:0 48px}
 .world-label{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--text-dim);letter-spacing:3px;text-transform:uppercase}
 
-/* ═══ CONTACT ════════════════════════════ */
+/* CONTACT */
 .contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
 .contact-cards{display:flex;flex-direction:column;gap:12px}
 .contact-card{background:var(--bg-card);border:1px solid var(--border-dim);padding:20px 24px;transition:all .25s;border-radius:6px;display:flex;align-items:center;gap:16px;text-decoration:none;color:var(--text)}
@@ -276,11 +259,9 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:15px;height:15px;b
 .contact-cta p{font-size:.88rem;color:var(--text-sec);line-height:1.85;margin-bottom:28px}
 .status-dot{width:7px;height:7px;border-radius:50%;background:var(--accent3);animation:pulse 2s infinite;display:inline-block;margin-right:8px}
 
-/* ═══ VISITOR BADGE ══════════════════════ */
+/* VISITOR / BADGE / MISC */
 .visitor-badge{position:fixed;bottom:24px;right:24px;z-index:400;background:var(--bg-card);border:1px solid var(--border-dim);border-radius:24px;padding:10px 18px;display:flex;align-items:center;gap:8px;backdrop-filter:blur(12px);font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim);box-shadow:0 4px 20px rgba(0,0,0,.3)}
 .vb-dot{width:7px;height:7px;background:var(--accent3);border-radius:50%;animation:pulse 2s infinite;flex-shrink:0}
-
-/* ═══ EASTER EGG ═════════════════════════ */
 .modal-overlay{position:fixed;inset:0;background:rgba(10,5,21,.96);z-index:1000;display:flex;align-items:center;justify-content:center;animation:fadeIn .3s ease}
 .modal{background:var(--bg2);border:1px solid var(--border);padding:44px;max-width:540px;text-align:center;animation:popIn .5s cubic-bezier(.16,1,.3,1);box-shadow:0 0 80px var(--glow1);border-radius:6px}
 .modal h2{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:3px;color:var(--accent2);margin-bottom:14px}
@@ -288,8 +269,6 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:15px;height:15px;b
 .modal-code{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--text-dim);margin-bottom:22px;background:rgba(196,78,255,.07);padding:12px 16px;border-left:2px solid var(--accent1);text-align:left;border-radius:0 4px 4px 0;line-height:1.8}
 .modal-close{background:rgba(196,78,255,.12);border:1px solid var(--border);color:var(--accent1);font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;padding:11px 28px;cursor:pointer;transition:all .2s;border-radius:4px}
 .modal-close:hover{background:rgba(255,61,133,.12);border-color:var(--accent2);color:var(--accent2)}
-
-/* ═══ PROJECTS ═══════════════════════════ */
 .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
 .project-card{background:var(--bg-card);border:1px solid var(--border-dim);border-radius:10px;padding:28px;transition:all .3s;position:relative;overflow:hidden}
 .project-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--glow1),transparent);opacity:0;transition:opacity .3s}
@@ -304,20 +283,12 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:15px;height:15px;b
 .project-stat{background:rgba(196,78,255,.08);border:1px solid var(--border-dim);padding:5px 12px;border-radius:4px;font-family:'Space Mono',monospace;font-size:.52rem;color:var(--accent1);letter-spacing:1px}
 .project-tags{display:flex;flex-wrap:wrap;gap:6px}
 .project-tag{font-family:'Space Mono',monospace;font-size:.46rem;color:var(--text-dim);border:1px solid var(--border-dim);padding:3px 8px;border-radius:2px;letter-spacing:1px}
-
-/* ═══ SCROLL TO TOP ══════════════════════ */
 .scroll-top{position:fixed;bottom:80px;right:24px;z-index:400;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--accent1),var(--accent2));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;color:#fff;box-shadow:0 4px 20px var(--glow1);opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none}
 .scroll-top.visible{opacity:1;transform:translateY(0);pointer-events:all}
 .scroll-top:hover{transform:translateY(-3px) !important;box-shadow:0 8px 28px var(--glow1)}
-
-/* ═══ XP COUNTER ════════════════════════ */
 .xp-badge{display:inline-flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:.72rem;color:var(--accent3);background:rgba(0,245,176,.08);border:1px solid rgba(0,245,176,.25);padding:6px 14px;border-radius:20px;margin-top:12px}
-
-/* ═══ COPY EMAIL ════════════════════════ */
 .copy-toast{position:fixed;bottom:140px;right:24px;z-index:800;background:var(--accent3);color:#1A0A2E;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:2px;padding:10px 18px;border-radius:20px;opacity:0;transform:translateY(6px);transition:all .3s;pointer-events:none;font-weight:700}
 .copy-toast.show{opacity:1;transform:translateY(0)}
-
-/* ═══ COUNTRY MODAL ══════════════════════ */
 .country-modal-overlay{position:fixed;inset:0;background:rgba(10,5,21,.88);z-index:900;display:flex;align-items:center;justify-content:center;animation:fadeIn .25s ease;padding:20px}
 .country-modal{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:0;max-width:520px;width:100%;animation:popIn .35s cubic-bezier(.16,1,.3,1);overflow:hidden;box-shadow:0 0 60px var(--glow1)}
 .country-modal-header{padding:28px 32px 20px;border-bottom:1px solid var(--border-dim);display:flex;align-items:center;gap:16px}
@@ -335,8 +306,6 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:15px;height:15px;b
 .country-flag-btn img{border-radius:4px;border:2px solid var(--border-dim);box-shadow:0 2px 8px rgba(0,0,0,.25);transition:border-color .2s;display:block}
 .country-flag-btn:hover img{border-color:var(--accent2)}
 .country-flag-label{font-family:'Space Mono',monospace;font-size:.5rem;color:var(--text-sec);letter-spacing:2px}
-
-/* ═══ BLOG ═══════════════════════════════ */
 .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .blog-card{background:var(--bg-card);border:1px solid var(--border-dim);border-radius:10px;padding:24px;transition:all .3s;cursor:pointer;position:relative;overflow:hidden}
 .blog-card:hover{border-color:var(--accent1);transform:translateY(-4px);box-shadow:0 12px 36px var(--glow1)}
@@ -356,13 +325,11 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:15px;height:15px;b
 .blog-modal-body strong{color:var(--accent1)}
 .blog-modal-close{display:block;margin:28px auto 0;background:rgba(196,78,255,.1);border:1px solid var(--border-dim);color:var(--text-dim);font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:2px;text-transform:uppercase;padding:10px 24px;cursor:pointer;border-radius:4px;transition:all .2s}
 .blog-modal-close:hover{border-color:var(--accent2);color:var(--accent2)}
-
-/* ═══ FOOTER ════════════════════════════ */
 .footer{position:relative;z-index:5;text-align:center;padding:40px;border-top:1px solid var(--border-dim);font-family:'Space Mono',monospace;font-size:.56rem;color:var(--text-mute);letter-spacing:2px}
 .footer span{color:var(--text-dim);display:block;margin-top:6px}
 .konami-hint{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);font-family:'Space Mono',monospace;font-size:.46rem;color:var(--text-mute);letter-spacing:3px;z-index:50;pointer-events:none;opacity:.4}
 
-/* ═══ ANIMATIONS ═════════════════════════ */
+/* ANIMATIONS */
 @keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
@@ -370,34 +337,18 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:15px;height:15px;b
 @keyframes borderGlow{0%,100%{box-shadow:0 0 12px var(--glow1)}50%{box-shadow:0 0 24px var(--glow2)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes popIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
 @keyframes glitch1{0%,100%{clip-path:inset(0 0 98% 0);transform:translate(-3px,0)}20%{clip-path:inset(30% 0 50% 0);transform:translate(3px,0)}60%{clip-path:inset(10% 0 80% 0);transform:translate(3px,0)}}
 @keyframes glitch2{0%,100%{clip-path:inset(98% 0 0 0);transform:translate(3px,0)}20%{clip-path:inset(10% 0 70% 0);transform:translate(-3px,0)}60%{clip-path:inset(40% 0 40% 0);transform:translate(-3px,0)}}
 .glitch-wrap{position:relative;display:inline-block}
 .glitch-wrap::before,.glitch-wrap::after{content:attr(data-text);position:absolute;top:0;left:0;right:0;font:inherit}
 .glitch-wrap::before{color:var(--accent2);animation:glitch1 4s infinite linear;opacity:.75}
 .glitch-wrap::after{color:var(--accent1);animation:glitch2 4s .5s infinite linear;opacity:.75}
-
-/* ═══ REVEAL ═════════════════════════════ */
 .reveal{opacity:0;transform:translateY(22px);transition:all .7s cubic-bezier(.16,1,.3,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
-/* ═══ RESPONSIVE ════════════════════════ */
-@media(max-width:1100px){
-  .nav-links{display:none}
-}
-@media(max-width:900px){
-  .hero{padding:90px 24px 60px}.section{padding:70px 24px}
-  .section-full-inner{padding:0 24px}
-  .exp-layout,.roi-grid,.contact-layout{grid-template-columns:1fr}
-  .skills-grid,.testi-grid{grid-template-columns:1fr 1fr}
-  .metrics{grid-template-columns:1fr 1fr}
-  .metric{border-bottom:1px solid var(--border-dim)}
-  .chart-grid{grid-template-columns:1fr}
-  .dashboard-grid{grid-template-columns:repeat(2,1fr)}
-  .p-connector{width:18px}.p-node{min-width:75px;padding:10px}
-  .nav{padding:0 20px;gap:16px}
-  .konami-hint{display:none}
-}
+@media(max-width:1100px){.nav-links{display:none}}
+@media(max-width:900px){.hero{padding:90px 24px 60px}.section{padding:70px 24px}.section-full-inner{padding:0 24px}.exp-layout,.roi-grid,.contact-layout{grid-template-columns:1fr}.skills-grid,.testi-grid{grid-template-columns:1fr 1fr}.metrics{grid-template-columns:1fr 1fr}.metric{border-bottom:1px solid var(--border-dim)}.chart-grid{grid-template-columns:1fr}.dashboard-grid{grid-template-columns:repeat(2,1fr)}.p-connector{width:18px}.p-node{min-width:75px;padding:10px}.nav{padding:0 20px;gap:16px}.konami-hint{display:none}.radar-wrap{grid-template-columns:1fr}.radar-chart-wrap{height:260px}}
 </style>
 </head>
 <body data-theme="light">
@@ -436,61 +387,69 @@ document.addEventListener('mouseover',e=>{if(e.target.closest('a,button,[role=bu
 // SCROLL PROGRESS
 window.addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('sbar').style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+'%'});
 
+// PARALLAX HERO — mousemove on hero h1
+document.addEventListener('mousemove',e=>{
+  const h1=document.querySelector('.hero-h1');
+  if(!h1)return;
+  const cx=window.innerWidth/2,cy=window.innerHeight/2;
+  const dx=(e.clientX-cx)/cx,dy=(e.clientY-cy)/cy;
+  h1.style.transform=`translate(${dx*14}px,${dy*8}px)`;
+});
+
 // KONAMI
 (function(){const s=[38,38,40,40,37,39,37,39,66,65];let p=0;document.addEventListener('keydown',e=>{e.keyCode===s[p]?p++:p=0;if(p===s.length){p=0;window.konamiCb&&window.konamiCb()}})})();
 </script>
 
 <script type="text/babel">
 const {useState,useEffect,useRef,useCallback,createContext,useContext}=React;
-
-/* ══════════════════════════════════════
-   i18n CONTEXT
-══════════════════════════════════════ */
 const LangCtx=createContext('en');
 const useLang=()=>useContext(LangCtx);
 
-/* ══════════════════════════════════════
-   TRANSLATIONS
-══════════════════════════════════════ */
 const T={
   en:{
-    nav:['about','dashboard','pipeline','experience','projects','stack','roi','testimonials','blog','contact'],
-    navLabels:{about:'About',dashboard:'Dashboard',pipeline:'Pipeline',experience:'Experience',projects:'Projects',stack:'Stack',roi:'ROI',testimonials:'Reviews',blog:'Blog',contact:'Contact'},
+    nav:['about','dashboard','pipeline','experience','projects','stack','roi','terminal','testimonials','blog','contact'],
+    navLabels:{about:'About',dashboard:'Dashboard',pipeline:'Pipeline',experience:'Experience',projects:'Projects',stack:'Stack',roi:'ROI',terminal:'Terminal',testimonials:'Reviews',blog:'Blog',contact:'Contact'},
     badge:'🟢 Available for hire · France & Canada',
     heroSub1:"I turn your",heroSub1b:"bloated reporting hell",heroSub2:"into automated intelligence —",heroSub3:"real-time dashboards, self-running pipelines, executive-ready insights.",heroSub4:"BI & Automation specialist with 5+ years across CPG, SaaS and CSR.",
     xp:"yrs of XP in data & automation",
     ctaRoi:"Calculate My ROI →",ctaContact:"Get in Touch",ctaCV:"↓ Download CV",
-    metrics:[{n:'85%',l:'Processing Capacity Gained'},{n:'270%',l:'Pipeline Efficiency Boost'},{n:'30+',l:'Workflows Automated'},{n:'6mo',l:'Built Analytics Dept from 0'}],
+    metrics:[{n:'85',s:'%',l:'Processing Capacity Gained'},{n:'270',s:'%',l:'Pipeline Efficiency Boost'},{n:'30',s:'+',l:'Workflows Automated'},{n:'6',s:'mo',l:'Built Analytics Dept from 0'}],
     dashEyebrow:'Live Demo',dashTitle:'Executive',dashTitleEm:'Dashboard',
     dashDesc:"Replica of a live executive dashboard — real-time revenue tracking, ML forecasting, zero manual intervention.",
     dashKpis:[['$2.4M','YTD Revenue','↑ +18% vs LY'],['85%','Reporting Time Saved','30+ workflows'],['4.2%','Forecast MAPE','↓ from 8.1%'],['10+','Power BI Dashboards','All BUs covered'],['30+','Channels Tracked','Daily, automated'],['06:00','Auto-Report','Every morning, 0 manual']],
     dashChart1:'Revenue Trend + Forecast · Enterprise Client',dashChart2:'Revenue by Channel',
     pipeEyebrow:'Interactive Demo',pipeTitle:'Automation',pipeTitleEm:'Pipeline',
-    pipeDesc:"A live retail forecasting pipeline — raw POS data to stakeholder reports in under 6 minutes, every morning at 6AM.",
+    pipeDesc:"A live retail forecasting pipeline — raw POS data to stakeholder reports in under 6 minutes. Try dragging the stages to reorder them!",
     pipeReady:'Pipeline idle. Press RUN to execute.',pipeRun:'▶ RUN PIPELINE',pipeRunning:'⟳ RUNNING...',
+    pipeDragHint:'💡 Try dragging the stages to reorder them',
+    pipeWrongMsgs:[
+      "❌ ERROR: You put Forecast before Clean — Prophet is not a garbage collector.",
+      "❌ FATAL: Notification before Power BI? Who are you emailing? Null?",
+      "❌ CRITICAL: Ingestion after Forecast? You're predicting data that doesn't exist yet.",
+      "❌ 500: Clean before Ingestion? You can't mop a floor that hasn't been installed.",
+      "❌ ERROR: Notify before Forecast? Bold strategy. Let me know how that goes.",
+    ],
     expEyebrow:'Career Timeline',expTitle:'Where I built',expTitleEm:'things that still run.',
     expFilterAll:'All',
     skillsEyebrow:'Arsenal',skillsTitle:'Tools I use.',skillsTitleDim:'Not just listed.',
+    radarTitle:'Competency Radar',
     projectsEyebrow:'Signature Projects',projectsTitle:'What I actually',projectsTitleEm:'built.',
     projectsDesc:'Production systems still running today. No names, no logos — but real impact, real code, real results.',
     stackEyebrow:'Tech Stack',stackTitle:'Tools I ship with.',stackTitleEm:'Not just buzzwords.',
     roiEyebrow:'ROI Calculator',roiTitle:'Find out what',roiTitleEm:'not',roiTitle2:'hiring me costs.',
     roiH3:"What's your data ops costing you?",roiP:"Move the sliders. Watch the pain materialize. Then we talk.",
-    roiSliders:[
-      {label:"Analysts on manual reports",unit:"people"},
-      {label:"Hours / week per analyst",unit:"h/wk"},
-      {label:"Avg hourly cost (salary + overhead)",unit:"$/h"},
-      {label:"Error rate in manual reporting",unit:"%"},
-    ],
+    roiSliders:[{label:"Analysts on manual reports",unit:"people"},{label:"Hours / week per analyst",unit:"h/wk"},{label:"Avg hourly cost (salary + overhead)",unit:"$/h"},{label:"Error rate in manual reporting",unit:"%"}],
     roiComment:'// Automation impact analysis',
     roiLbl1:'Annual cost of manual reporting',roiLbl2:'+ Hidden error cost',roiLbl3:'Total annual pain',
     roiLbl4:'After automation (12% residual)',roiLbl5:'🚀 Annual savings unlocked',
     roiSuffix1:'analyst',roiSuffix2:'analysts',roiWks:'wks',
     roiRoi:'ROI on hiring Antoine: ~',roiDisclaimer:'// Conservative estimate. Real results may cause audible gasping.',
+    terminalEyebrow:'Interactive Terminal',terminalTitle:'Ask me',terminalTitleEm:'anything.',
+    terminalDesc:"Type commands to explore my profile. Try: whoami, skills, projects, contact, ./hire_antoine.sh",
+    terminalHint:"Type a command and press Enter — try 'help' to start",
     testiEyebrow:'Social Proof',testiTitle:"Don't take",testiTitleEm:"my word for it.",
     testiBlur:'Anonymous · NDA',testiSoon:'COMING SOON',
-    worldLabel:'Click a country →',
-    countryClose:'CLOSE // ESC',
+    worldLabel:'Click a country →',countryClose:'CLOSE // ESC',
     blogEyebrow:'Notes & Thoughts',blogTitle:'What I think',blogTitleEm:'out loud.',
     blogDesc:"Thoughts on AI, automation and data — without unnecessary jargon.",
     blogRead:'Read article →',blogReadTime:'min read',blogClose:'CLOSE // ESC',
@@ -511,43 +470,49 @@ const T={
     scrollTop:'Back to top',
   },
   fr:{
-    nav:['about','dashboard','pipeline','experience','projects','stack','roi','testimonials','blog','contact'],
-    navLabels:{about:'Profil',dashboard:'Dashboard',pipeline:'Pipeline',experience:'Expérience',projects:'Projets',stack:'Stack',roi:'ROI',testimonials:'Avis',blog:'Blog',contact:'Contact'},
+    nav:['about','dashboard','pipeline','experience','projects','stack','roi','terminal','testimonials','blog','contact'],
+    navLabels:{about:'Profil',dashboard:'Dashboard',pipeline:'Pipeline',experience:'Expérience',projects:'Projets',stack:'Stack',roi:'ROI',terminal:'Terminal',testimonials:'Avis',blog:'Blog',contact:'Contact'},
     badge:'🟢 Disponible · France & Canada',
     heroSub1:"Je transforme votre",heroSub1b:"enfer de reporting manuel",heroSub2:"en intelligence automatisée —",heroSub3:"dashboards temps réel, pipelines autonomes, insights prêts pour le CODIR.",heroSub4:"Spécialiste BI & Automatisation, 5+ ans en CPG, SaaS et RSE.",
     xp:"ans d'XP en data & automatisation",
     ctaRoi:"Calculer mon ROI →",ctaContact:"Me contacter",ctaCV:"↓ Télécharger CV",
-    metrics:[{n:'85%',l:'Gain en capacité de traitement'},{n:'270%',l:'Efficacité pipeline boostée'},{n:'30+',l:'Workflows automatisés'},{n:'6mois',l:'Dept Analytics créé from scratch'}],
+    metrics:[{n:'85',s:'%',l:'Gain en capacité de traitement'},{n:'270',s:'%',l:'Efficacité pipeline boostée'},{n:'30',s:'+',l:'Workflows automatisés'},{n:'6',s:'mois',l:'Dept Analytics créé from scratch'}],
     dashEyebrow:'Démo Live',dashTitle:'Dashboard',dashTitleEm:'Exécutif',
     dashDesc:"Réplique d'un dashboard exécutif réel — suivi de revenus temps réel, prévisions ML, zéro intervention manuelle.",
     dashKpis:[['2,4M€','CA YTD','↑ +18% vs N-1'],['85%','Temps reporting économisé','30+ workflows'],['4,2%','MAPE Prévisions','↓ depuis 8,1%'],['10+','Dashboards Power BI','Toutes BUs'],['30+','Canaux suivis','Daily, automatisé'],['06:00','Rapport Auto','Chaque matin, 0 manuel']],
     dashChart1:'Tendance CA + Prévision · Client Entreprise',dashChart2:'CA par Canal',
     pipeEyebrow:'Démo Interactive',pipeTitle:'Pipeline',pipeTitleEm:"d'Automatisation",
-    pipeDesc:"Un vrai pipeline de prévisions retail — des données brutes POS au rapport exécutif en moins de 6 minutes, chaque matin à 6h.",
+    pipeDesc:"Un vrai pipeline de prévisions retail — des données brutes POS au rapport exécutif en moins de 6 minutes. Essayez de glisser les étapes pour les réordonner !",
     pipeReady:'Pipeline inactif. Appuyez sur RUN pour exécuter.',pipeRun:'▶ LANCER LE PIPELINE',pipeRunning:'⟳ EN COURS...',
+    pipeDragHint:'💡 Essayez de glisser les étapes pour les réordonner',
+    pipeWrongMsgs:[
+      "❌ ERREUR : Vous avez mis Prévision avant Nettoyage — Prophet n'est pas un ramasse-miettes.",
+      "❌ FATAL : Notification avant Power BI ? Vous envoyez un email à Null ?",
+      "❌ CRITIQUE : Ingestion après Prévision ? Vous prédisez des données qui n'existent pas encore.",
+      "❌ 500 : Nettoyage avant Ingestion ? On ne nettoie pas un sol qui n'a pas encore été posé.",
+      "❌ ERREUR : Notifier avant Prévoir ? Stratégie audacieuse. Tenez-moi au courant.",
+    ],
     expEyebrow:'Parcours',expTitle:"Là où j'ai construit",expTitleEm:'des choses qui tournent encore.',
     expFilterAll:'Tous',
     skillsEyebrow:'Arsenal',skillsTitle:'Mes outils.',skillsTitleDim:'Pas juste une liste.',
+    radarTitle:'Radar de Compétences',
     projectsEyebrow:'Projets Signature',projectsTitle:'Ce que j\'ai vraiment',projectsTitleEm:'construit.',
     projectsDesc:'Des systèmes en production qui tournent encore aujourd\'hui. Pas de noms, pas de logos — mais un impact réel, du vrai code, de vrais résultats.',
     stackEyebrow:'Stack Technique',stackTitle:'Ce avec quoi je livre.',stackTitleEm:'Pas des buzzwords.',
     roiEyebrow:'Calculateur ROI',roiTitle:'Découvrez ce que',roiTitleEm:'ne pas',roiTitle2:'me recruter vous coûte.',
     roiH3:"Combien vous coûte votre data ops actuelle ?",roiP:"Bougez les curseurs. Regardez la douleur se matérialiser. On en parle.",
-    roiSliders:[
-      {label:"Analystes sur des rapports manuels",unit:"personnes"},
-      {label:"Heures / semaine par analyste",unit:"h/sem"},
-      {label:"Coût horaire moyen (salaire + charges)",unit:"€/h"},
-      {label:"Taux d'erreur dans les rapports manuels",unit:"%"},
-    ],
+    roiSliders:[{label:"Analystes sur des rapports manuels",unit:"personnes"},{label:"Heures / semaine par analyste",unit:"h/sem"},{label:"Coût horaire moyen (salaire + charges)",unit:"€/h"},{label:"Taux d'erreur dans les rapports manuels",unit:"%"}],
     roiComment:'// Analyse d\'impact de l\'automatisation',
     roiLbl1:'Coût annuel du reporting manuel',roiLbl2:'+ Coût caché des erreurs',roiLbl3:'Douleur annuelle totale',
     roiLbl4:'Après automatisation (12% résiduel)',roiLbl5:'🚀 Économies annuelles débloquées',
     roiSuffix1:'analyste',roiSuffix2:'analystes',roiWks:'sem',
     roiRoi:'ROI sur le recrutement d\'Antoine : ~',roiDisclaimer:'// Estimation conservatrice. Les vrais résultats peuvent provoquer des gasps audibles.',
+    terminalEyebrow:'Terminal Interactif',terminalTitle:'Posez-moi',terminalTitleEm:'vos questions.',
+    terminalDesc:"Tapez des commandes pour explorer mon profil. Essayez : whoami, skills, projects, contact, ./hire_antoine.sh",
+    terminalHint:"Tapez une commande et appuyez sur Entrée — essayez 'help' pour commencer",
     testiEyebrow:'Preuves Sociales',testiTitle:"Ne prenez pas",testiTitleEm:"ma parole pour argent comptant.",
     testiBlur:'Anonyme · NDA',testiSoon:'BIENTÔT DISPONIBLE',
-    worldLabel:'Cliquez sur un pays →',
-    countryClose:'FERMER // ESC',
+    worldLabel:'Cliquez sur un pays →',countryClose:'FERMER // ESC',
     blogEyebrow:'Notes & Réflexions',blogTitle:'Ce que je pense',blogTitleEm:'tout haut.',
     blogDesc:"Quelques réflexions sur l'IA, l'automatisation et la data — sans jargon inutile.",
     blogRead:"Lire l'article →",blogReadTime:'min de lecture',blogClose:'FERMER // ESC',
@@ -569,9 +534,7 @@ const T={
   }
 };
 
-/* ══════════════════════════════════════
-   BILINGUAL DATA
-══════════════════════════════════════ */
+// ── EXPERIENCES ──────────────────────────────────────────────────────────────
 const EXPERIENCES={
   en:[
     {id:0,date:"Jun 2025 – Present",role:"AI Specialist & BI Lead",company:"NAOS – Bioderma · NORAM",location:"Montréal, Canada",revenue:"€950M",
@@ -589,7 +552,7 @@ const EXPERIENCES={
   ],
   fr:[
     {id:0,date:"Juin 2025 – Présent",role:"Spécialiste IA & BI Lead",company:"NAOS – Bioderma · NORAM",location:"Montréal, Canada",revenue:"950M€",
-     highlights:["Architecture de l'intégration IA Générative & workflows Agentiques à l'échelle de l'entreprise en Amérique du Nord.","Ingénierie de réseaux d'agents IA (n8n, Python, LLMs) pour des pipelines de données autonomes de bout en bout.","Construction d'un scraper de veille concurrentielle quotidien couvrant 40+ concurrents sur 1 300 SKUs — promos, ruptures, nouveaux produits, évolutions prix, sentiment avis — avec dashboards Power BI auto-générés chaque matin.","Construction d'une automatisation master des ventes : fusionne tous les extraits des commerciaux en un fichier maître propre, détecte erreurs & données manquantes, scan OOS, répartit le sell-out par rep, génère dashboards & alertes — entièrement autonome.","85% de gain en capacité de traitement en migrant 30+ workstreams manuels.","Gouvernance de l'écosystème Power BI sur toutes les BUs."],
+     highlights:["Architecture de l'intégration IA Générative & workflows Agentiques à l'échelle de l'entreprise en Amérique du Nord.","Ingénierie de réseaux d'agents IA (n8n, Python, LLMs) pour des pipelines de données autonomes de bout en bout.","Construction d'un scraper de veille concurrentielle quotidien couvrant 40+ concurrents sur 1 300 SKUs — promos, ruptures, nouveaux produits, évolutions prix et sentiment des avis — avec dashboards Power BI auto-générés chaque matin.","Construction d'une automatisation master des ventes : fusionne tous les extraits des commerciaux en un fichier maître propre, détecte automatiquement erreurs et données manquantes, flag les ruptures, répartit le sell-out par rep, génère dashboards & alertes — entièrement autonome.","85% de gain en capacité de traitement en migrant 30+ workstreams manuels.","Gouvernance de l'écosystème Power BI sur toutes les BUs."],
      tags:["n8n","Python","LLMs","Power BI","IA Agentique","Web Scraping","NLP","Prévision Stock"]},
     {id:1,date:"Mai 2024 – Juin 2025",role:"Business Analyst (VIE)",company:"NAOS – Bioderma · USA",location:"États-Unis",revenue:"950M€",
      highlights:["Construction du département Analytics US de zéro — gouvernance, protocoles, frameworks en 6 mois.","10+ dashboards Power BI automatisés avec visibilité cross-BU en temps réel.","Prévisions sell-through SKU-level pour les grands partenaires retail (chaînes nationales, parapharmacies, spécialistes beauté).","Modèle de prévision de stock réduisant les ruptures et le risque surstock sur 5 canaux retail.","Pipeline NLP analysant 10 000+ avis clients mensuels — tendances sentiment auto-intégrées aux rapports équipe produit."],
@@ -622,6 +585,33 @@ const SKILLS={
   ]
 };
 
+const RADAR_DATA={
+  en:{
+    labels:['BI & Analytics','AI / Automation','Supply & Ops','Data Engineering','Sales / Finance','Communication'],
+    data:[95,90,80,78,85,82],
+    details:[
+      {label:'BI & Analytics',pct:95,sub:'Power BI · DAX · KPI design'},
+      {label:'AI / Automation',pct:90,sub:'n8n · LLMs · Agentic pipelines'},
+      {label:'Supply & Ops',pct:80,sub:'Forecasting · Demand planning'},
+      {label:'Data Engineering',pct:78,sub:'Python · SQL · ETL'},
+      {label:'Sales / Finance',pct:85,sub:'Revenue ops · ROI modelling'},
+      {label:'Communication',pct:82,sub:'Executive reporting · Storytelling'},
+    ]
+  },
+  fr:{
+    labels:['BI & Analytics','IA / Automation','Supply & Ops','Data Engineering','Ventes / Finance','Communication'],
+    data:[95,90,80,78,85,82],
+    details:[
+      {label:'BI & Analytics',pct:95,sub:'Power BI · DAX · Design KPI'},
+      {label:'IA / Automation',pct:90,sub:'n8n · LLMs · Pipelines agentiques'},
+      {label:'Supply & Ops',pct:80,sub:'Prévision · Demand planning'},
+      {label:'Data Engineering',pct:78,sub:'Python · SQL · ETL'},
+      {label:'Ventes / Finance',pct:85,sub:'Revenue ops · Modélisation ROI'},
+      {label:'Communication',pct:82,sub:'Reporting exécutif · Storytelling'},
+    ]
+  }
+};
+
 const STACK=[
   {name:'Power BI',cat:'BI & Analytics',level:'EXPERT',e:'📊'},
   {name:'Python',cat:'Data Engineering',level:'ADVANCED',e:'🐍'},
@@ -644,10 +634,11 @@ const TESTIMONIALS=[
   {q:{en:"Brought financial reporting to a completely different level. Automated, real-time, and actually readable by leadership. I wish we'd hired him sooner.",fr:"A amené le reporting financier à un niveau complètement différent. Automatisé, temps réel, et enfin lisible par le leadership. J'aurais aimé le recruter plus tôt."},role:"Finance Director · CPG Group",stars:5},
 ];
 
-const PIPELINE_STAGES={
-  en:[{icon:'🗄️',label:'Data Source',detail:'Retail API'},{icon:'⬇️',label:'Ingestion',detail:'Python ETL'},{icon:'🧹',label:'Clean',detail:'Pandas'},{icon:'🤖',label:'Forecast',detail:'Prophet'},{icon:'📊',label:'Power BI',detail:'Embed'},{icon:'📬',label:'Notify',detail:'Slack+Mail'}],
-  fr:[{icon:'🗄️',label:'Source',detail:'API Retail'},{icon:'⬇️',label:'Ingestion',detail:'Python ETL'},{icon:'🧹',label:'Nettoyage',detail:'Pandas'},{icon:'🤖',label:'Prévision',detail:'Prophet'},{icon:'📊',label:'Power BI',detail:'Embed'},{icon:'📬',label:'Notifier',detail:'Slack+Mail'}],
+const PIPELINE_STAGES_DEF={
+  en:[{id:'src',icon:'🗄️',label:'Data Source',detail:'Retail API'},{id:'ing',icon:'⬇️',label:'Ingestion',detail:'Python ETL'},{id:'cln',icon:'🧹',label:'Clean',detail:'Pandas'},{id:'mdl',icon:'🤖',label:'Forecast',detail:'Prophet'},{id:'bi',icon:'📊',label:'Power BI',detail:'Embed'},{id:'ntf',icon:'📬',label:'Notify',detail:'Slack+Mail'}],
+  fr:[{id:'src',icon:'🗄️',label:'Source',detail:'API Retail'},{id:'ing',icon:'⬇️',label:'Ingestion',detail:'Python ETL'},{id:'cln',icon:'🧹',label:'Nettoyage',detail:'Pandas'},{id:'mdl',icon:'🤖',label:'Prévision',detail:'Prophet'},{id:'bi',icon:'📊',label:'Power BI',detail:'Embed'},{id:'ntf',icon:'📬',label:'Notifier',detail:'Slack+Mail'}],
 };
+const CORRECT_ORDER=['src','ing','cln','mdl','bi','ntf'];
 
 const PROJECTS={
   en:[
@@ -667,52 +658,213 @@ const PROJECTS={
 const COUNTRIES={
   en:[
     {iso:'fr',n:'France',emoji:'🥐',sub:'Homeland · Versailles · Brittany',tags:['Birthplace','Versailles (not the castle 😄)','15 years of piano','Rugby · Football · Sailing','Brittany forever'],text:"Born and raised in France, I grew up in Versailles — the city, not the castle, even if the neighbours are famous. That's where I developed my passion for music through 15 years of classical piano, while also playing rugby, football and sailing. An unusual combination, perhaps — but that mix of discipline and creativity is what defines me. And Brittany — its wild coastlines, salty air, and salted-butter crêpes — remains my favourite place in the world to recharge."},
-    {iso:'ca',n:'Canada',emoji:'🍁',sub:'VIE · Montréal · AI & Automation',tags:['VIE NAOS','Montréal','AI & Data','Personal growth','−30°C (yes, really)'],text:"It's here in Montréal that I truly flourished. My VIE at NAOS Bioderma let me build an Analytics department from scratch, but above all gave me the space to deeply explore my passion for artificial intelligence and Business Intelligence automation. Between Python pipelines and NORAM team meetings, I learned to appreciate Canadian winters — the kind of cold that wakes you up, literally and figuratively. Montréal is a city that pulses with creativity and ambition, and it transformed me professionally and personally."},
-    {iso:'us',n:'USA',emoji:'🦅',sub:'Retail Analytics · US Market',tags:['Business Analyst','Retail Forecasting','CPG Market','Multi-state'],text:"My US experience immersed me in the full complexity of the American retail market — from national chains to beauty specialists and drugstores. Working on SKU-level forecasts for major retail accounts taught me the rigour of the American market: numbers must be perfect, deadlines non-negotiable, and data must tell a compelling story. A formative experience for understanding the scale and demands of a global market."},
-    {iso:'de',n:'Germany',emoji:'🍺',sub:'1 year of studies · Full immersion',tags:['Studies','German Rigour','Engineering & Business','Berlin · Munich'],text:"A year studying in Germany exposed me to German rigour in all its glory — impeccable processes, a deep work culture, and an engineering approach to every problem. Beyond the academic framework, discovering German culture across its legendary breweries, avant-garde music scene and varied landscapes was an essential opening experience. Germany taught me that precision doesn't exclude creativity — it amplifies it."},
-    {iso:'it',n:'Italy',emoji:'🍕',sub:'1 year of studies · Turin',tags:['Studying in Turin','Gastronomy','Dolce vita','Fiat & Design'],text:"Turin — the understated capital of Northern Italy, too often overlooked in favour of Rome or Milan, but infinitely more authentic. A year of studies there let me explore a country whose beauty is almost unfair: baroque architecture, world-class gastronomy on every corner (risotto al Barolo, tajarin with truffle butter...), and that uniquely Italian ability to find elegance in the everyday. Italy reminded me that quality of execution — whether pasta or dashboards — is always noticed."},
-    {iso:'es',n:'Spain',emoji:'🌞',sub:'IE Business School · NooS · Madrid',tags:['IE Business School','NooS CSR','Madrid — my favourite','Tapas & terrace'],text:"Absolute love at first sight. Madrid is probably the city that marked me the most — its energy, its warmth, its light. I completed my Master's at IE Business School, one of Europe's top business schools, while also supporting NooS in its data and CSR engagement challenges. Working in a city where meetings end at 10pm and real life begins after midnight changes your perspective on balance. Madrid doesn't leave you — it shapes you."},
-    {iso:'tr',n:'Turkey',emoji:'🌙',sub:'First internship · Foundational experience',tags:['First Internship','Professional immersion','Istanbul','Foundational experience'],text:"My very first internship — and what an entry into the professional world. Turkey threw me into the deep end with an intensity few countries can match. Istanbul, between Europe and Asia, between modernity and tradition, is a city that never leaves you indifferent. This first contact with international professional life taught me adaptability, the management of ambiguity, and that the best experiences are often those that unsettle you at first. An unforgettable experience that laid the foundation for everything that followed."},
+    {iso:'ca',n:'Canada',emoji:'🍁',sub:'VIE · Montréal · AI & Automation',tags:['VIE NAOS','Montréal','AI & Data','Personal growth','−30°C (yes, really)'],text:"It's here in Montréal that I truly flourished. My VIE at NAOS Bioderma let me build an Analytics department from scratch, but above all gave me the space to deeply explore my passion for artificial intelligence and Business Intelligence automation. Between Python pipelines and NORAM team meetings, I learned to appreciate Canadian winters — the kind of cold that wakes you up, literally and figuratively."},
+    {iso:'us',n:'USA',emoji:'🦅',sub:'Retail Analytics · US Market',tags:['Business Analyst','Retail Forecasting','CPG Market','Multi-state'],text:"My US experience immersed me in the full complexity of the American retail market — from national chains to beauty specialists and drugstores. Working on SKU-level forecasts for major retail accounts taught me the rigour of the American market: numbers must be perfect, deadlines non-negotiable, and data must tell a compelling story."},
+    {iso:'de',n:'Germany',emoji:'🍺',sub:'1 year of studies · Full immersion',tags:['Studies','German Rigour','Engineering & Business','Berlin · Munich'],text:"A year studying in Germany exposed me to German rigour in all its glory — impeccable processes, a deep work culture, and an engineering approach to every problem. Germany taught me that precision doesn't exclude creativity — it amplifies it."},
+    {iso:'it',n:'Italy',emoji:'🍕',sub:'1 year of studies · Turin',tags:['Studying in Turin','Gastronomy','Dolce vita','Fiat & Design'],text:"Turin — the understated capital of Northern Italy, too often overlooked in favour of Rome or Milan, but infinitely more authentic. Italy reminded me that quality of execution — whether pasta or dashboards — is always noticed."},
+    {iso:'es',n:'Spain',emoji:'🌞',sub:'IE Business School · NooS · Madrid',tags:['IE Business School','NooS CSR','Madrid — my favourite','Tapas & terrace'],text:"Absolute love at first sight. Madrid is probably the city that marked me the most — its energy, its warmth, its light. I completed my Master's at IE Business School, one of Europe's top business schools, while also supporting NooS in its data and CSR engagement challenges."},
+    {iso:'tr',n:'Turkey',emoji:'🌙',sub:'First internship · Foundational experience',tags:['First Internship','Professional immersion','Istanbul','Foundational experience'],text:"My very first internship — and what an entry into the professional world. Turkey threw me into the deep end with an intensity few countries can match. Istanbul, between Europe and Asia, between modernity and tradition, is a city that never leaves you indifferent."},
   ],
   fr:[
-    {iso:'fr',n:'France',emoji:'🥐',sub:'Patrie · Versailles · Bretagne',tags:['Lieu de naissance','Versailles (pas au château 😄)','15 ans de piano','Rugby · Football · Voile','La Bretagne forever'],text:"Né et grandi en France, j'ai passé mon enfance et mon lycée à Versailles — dans la ville, pas au château, même si les voisins sont célèbres. C'est là que j'ai développé ma passion pour la musique avec 15 ans de piano classique, et que j'ai pratiqué rugby, football et voile en parallèle. Un profil atypique, peut-être, mais c'est cette combinaison de rigueur et de créativité qui me définit. Et la Bretagne — ses côtes sauvages, son iode, ses crêpes au beurre salé — reste mon endroit préféré au monde pour me ressourcer."},
-    {iso:'ca',n:'Canada',emoji:'🍁',sub:'VIE · Montréal · IA & Automatisation',tags:['VIE NAOS','Montréal','IA & Data','Développement perso','−30°C (oui vraiment)'],text:"C'est ici, à Montréal, que je me suis vraiment épanoui. Mon VIE chez NAOS Bioderma m'a permis de construire un département Analytics de zéro, mais surtout d'investiguer à fond ma passion pour l'intelligence artificielle et l'automatisation Business Intelligence. Entre deux pipelines Python et une réunion avec les équipes NORAM, j'ai appris à apprécier les hivers canadiens — le genre de froid qui te réveille, au sens propre comme au figuré. Montréal est une ville qui pulse, créative et ambitieuse, et elle m'a transformé professionnellement et personnellement."},
-    {iso:'us',n:'USA',emoji:'🦅',sub:'Retail Analytics · Marché US',tags:['Business Analyst','Forecasting retail','Marché CPG','Multi-states'],text:"Mon expérience aux États-Unis m'a immergé dans le marché retail américain dans toute sa complexité — des chaînes nationales aux spécialistes beauté, en passant par les drugstores. Travailler sur des prévisions SKU-level pour des enseignes majeures m'a appris la rigueur du marché américain : ici, les chiffres doivent être parfaits, les délais non négociables, et la data doit raconter une histoire convaincante. Une expérience formatrice pour comprendre l'échelle et les exigences d'un marché global."},
-    {iso:'de',n:'Allemagne',emoji:'🍺',sub:"1 an d'études · Immersion totale",tags:['Études','Rigueur germanique','Ingénierie & Business','Berlin · Munich'],text:"Une année d'études en Allemagne m'a exposé à la rigueur germanique dans toute sa splendeur — des process impeccables, une culture du travail profonde et une approche engineering de chaque problème. Au-delà du cadre académique, découvrir la culture allemande entre ses brasseries légendaires, sa scène musicale avant-gardiste et ses paysages variés a été une expérience d'ouverture essentielle. L'Allemagne m'a appris que la précision n'exclut pas la créativité — elle la renforce."},
-    {iso:'it',n:'Italie',emoji:'🍕',sub:"1 an d'études · Turin",tags:['Études à Turin','Gastronomie','Dolce vita','Fiat & Design'],text:"Turin — la capitale discrète de l'Italie du Nord, trop souvent oubliée au profit de Rome ou Milan, mais infiniment plus authentique. Une année d'études là-bas m'a permis d'explorer un pays dont la beauté est presque injuste : l'architecture baroque, la gastronomie à chaque coin de rue (le risotto au Barolo, les tajarin au beurre de truffe...), et cette capacité italienne unique à trouver l'élégance dans le quotidien. L'Italie m'a rappelé que la qualité d'exécution — qu'on parle de pasta ou de dashboards — est toujours remarquée."},
-    {iso:'es',n:'Espagne',emoji:'🌞',sub:'IE Business School · NooS · Madrid',tags:['IE Business School','NooS RSE','Madrid — coup de cœur','Tapas & terrasse'],text:"Coup de cœur absolu. Madrid est sans doute la ville qui m'a le plus marqué — son énergie, sa chaleur humaine, sa lumière. J'y ai poursuivi mon Master à l'IE Business School, l'une des meilleures business schools d'Europe, tout en accompagnant l'entreprise NooS dans ses problématiques data et engagement RSE. Travailler dans une ville où les réunions finissent à 22h et où la vie commence vraiment après minuit change ta perspective sur l'équilibre. Madrid ne s'oublie pas — elle te façonne."},
-    {iso:'tr',n:'Turquie',emoji:'🌙',sub:'Premier stage · Expérience fondatrice',tags:['Premier stage','Immersion professionnelle','Istanbul','Expérience fondatrice'],text:"Mon tout premier stage — et quelle entrée en matière. La Turquie m'a jeté dans le grand bain professionnel avec une intensité que peu de pays savent offrir. Istanbul, entre Europe et Asie, entre modernité et tradition, est une ville qui ne te laisse jamais indifférent. Ce premier contact avec le monde du travail à l'international m'a appris l'adaptabilité, la gestion de l'ambiguïté, et que les meilleures expériences sont souvent celles qui te déstabilisent au départ. Une expérience inoubliable qui a posé les bases de tout ce qui a suivi."},
+    {iso:'fr',n:'France',emoji:'🥐',sub:'Patrie · Versailles · Bretagne',tags:['Lieu de naissance','Versailles (pas au château 😄)','15 ans de piano','Rugby · Football · Voile','La Bretagne forever'],text:"Né et grandi en France, j'ai passé mon enfance et mon lycée à Versailles — dans la ville, pas au château, même si les voisins sont célèbres. C'est là que j'ai développé ma passion pour la musique avec 15 ans de piano classique, et que j'ai pratiqué rugby, football et voile en parallèle."},
+    {iso:'ca',n:'Canada',emoji:'🍁',sub:'VIE · Montréal · IA & Automatisation',tags:['VIE NAOS','Montréal','IA & Data','Développement perso','−30°C (oui vraiment)'],text:"C'est ici, à Montréal, que je me suis vraiment épanoui. Mon VIE chez NAOS Bioderma m'a permis de construire un département Analytics de zéro, mais surtout d'investiguer à fond ma passion pour l'intelligence artificielle et l'automatisation Business Intelligence."},
+    {iso:'us',n:'USA',emoji:'🦅',sub:'Retail Analytics · Marché US',tags:['Business Analyst','Forecasting retail','Marché CPG','Multi-states'],text:"Mon expérience aux États-Unis m'a immergé dans le marché retail américain dans toute sa complexité — des chaînes nationales aux spécialistes beauté, en passant par les drugstores."},
+    {iso:'de',n:'Allemagne',emoji:'🍺',sub:"1 an d'études · Immersion totale",tags:['Études','Rigueur germanique','Ingénierie & Business','Berlin · Munich'],text:"Une année d'études en Allemagne m'a exposé à la rigueur germanique dans toute sa splendeur — des process impeccables, une culture du travail profonde et une approche engineering de chaque problème."},
+    {iso:'it',n:'Italie',emoji:'🍕',sub:"1 an d'études · Turin",tags:['Études à Turin','Gastronomie','Dolce vita','Fiat & Design'],text:"Turin — la capitale discrète de l'Italie du Nord, trop souvent oubliée au profit de Rome ou Milan, mais infiniment plus authentique. L'Italie m'a rappelé que la qualité d'exécution — qu'on parle de pasta ou de dashboards — est toujours remarquée."},
+    {iso:'es',n:'Espagne',emoji:'🌞',sub:'IE Business School · NooS · Madrid',tags:['IE Business School','NooS RSE','Madrid — coup de cœur','Tapas & terrasse'],text:"Coup de cœur absolu. Madrid est sans doute la ville qui m'a le plus marqué — son énergie, sa chaleur humaine, sa lumière. J'y ai poursuivi mon Master à l'IE Business School, l'une des meilleures business schools d'Europe."},
+    {iso:'tr',n:'Turquie',emoji:'🌙',sub:'Premier stage · Expérience fondatrice',tags:['Premier stage','Immersion professionnelle','Istanbul','Expérience fondatrice'],text:"Mon tout premier stage — et quelle entrée en matière. La Turquie m'a jeté dans le grand bain professionnel avec une intensité que peu de pays savent offrir. Istanbul, entre Europe et Asie, est une ville qui ne te laisse jamais indifférent."},
   ]
 };
 
 const BLOG_POSTS={
   en:[
-    {tag:'AI & AUTOMATION',title:'Why your data teams still waste 60% of their time',date:'Feb 2026',readTime:'4',
-     excerpt:"Most data teams I encounter spend more time preparing data than analysing it. Here's why — and how to flip it.",
-     body:`<p>I've spent the last 18 months building automation systems for commercial teams, and I always observe the same pattern: <strong>between 50 and 70% of analytical time is spent on preparation tasks</strong> — extracting files, merging them, cleaning them, correcting errors, reformatting columns.</p><p>That's high-value human time being burned on tasks that Python handles in 12 seconds.</p><p>The problem isn't technical. It's that nobody has ever taken 2 weeks to <strong>automate what takes 2 days every week</strong>. The urgency of daily work always crushes structural investment.</p><p>The solution I apply consistently: map all repetitive tasks, identify those that follow a fixed pattern, and automate them in priority order by time-saved / technical-complexity ratio. In 80% of cases, the biggest gains come from the simplest tasks.</p><p><strong>Typical result:</strong> a team of 3 analysts recovers the equivalent of one full headcount on high-value-added tasks.</p>`},
-    {tag:'COMPETITIVE INTELLIGENCE',title:'40 competitors, 1,300 SKUs, zero analyst — how?',date:'Jan 2026',readTime:'5',
-     excerpt:"How I built a system that monitors 40 competitors across 1,300 product references every morning, without human intervention.",
-     body:`<p>Manual competitive intelligence is one of the most underestimated cost centres in product marketing. Hours every week checking prices, promotions, stock-outs, new launches — across dozens of different sites.</p><p>I built an alternative: <strong>a Python scraper that runs every night</strong>, covers 40+ competitors across 1,300 SKUs, and automatically generates a Power BI fed with fresh morning data.</p><p>Teams open their laptops and immediately see: who launched a promo last night, which competitor is out of stock on which reference, which new products appeared.</p><p>What previously took <strong>2 days of manual analysis per week</strong> became a 10-minute morning read. The marketing team could redirect that time toward real strategy rather than data collection.</p><p><strong>Stack:</strong> Python (Scrapy + Selenium for dynamic sites), n8n for orchestration, Power BI for visualisation, Slack alerts for critical events.</p>`},
-    {tag:'PERSPECTIVE',title:'AI doesn\'t replace data analysts — it changes what they do',date:'Mar 2026',readTime:'3',
-     excerpt:"The 'AI vs human' debate is badly framed. The real question: what should a data analyst actually spend their time on in 2026?",
-     body:`<p>In 18 months integrating AI tools into analytical workflows, I regularly hear the same fear: "will it replace analysts?"</p><p>Short answer: no. Long answer: <strong>it will make obsolete those who refuse to evolve</strong>.</p><p>What AI does better than humans: processing massive data volumes, identifying patterns in unstructured text (reviews, comments), generating first-draft reports, automating repetitive rule-based tasks.</p><p>What AI doesn't do: <strong>understand the business context</strong>, ask the right questions, arbitrate between conflicting KPIs, convince a board to change strategy.</p><p>The data analysts who will thrive in 2026 are those who use AI to eliminate mechanical work and focus their energy on the real added value: interpretation, storytelling, strategic recommendation.</p>`},
+    {tag:'AI & AUTOMATION',title:'Why your data teams still waste 60% of their time',date:'Feb 2026',readTime:'4',excerpt:"Most data teams I encounter spend more time preparing data than analysing it. Here's why — and how to flip it.",body:`<p>I've spent the last 18 months building automation systems for commercial teams, and I always observe the same pattern: <strong>between 50 and 70% of analytical time is spent on preparation tasks</strong> — extracting files, merging them, cleaning them, correcting errors, reformatting columns.</p><p>That's high-value human time being burned on tasks that Python handles in 12 seconds.</p><p>The problem isn't technical. It's that nobody has ever taken 2 weeks to <strong>automate what takes 2 days every week</strong>. The urgency of daily work always crushes structural investment.</p><p><strong>Typical result:</strong> a team of 3 analysts recovers the equivalent of one full headcount on high-value-added tasks.</p>`},
+    {tag:'COMPETITIVE INTELLIGENCE',title:'40 competitors, 1,300 SKUs, zero analyst — how?',date:'Jan 2026',readTime:'5',excerpt:"How I built a system that monitors 40 competitors across 1,300 product references every morning, without human intervention.",body:`<p>Manual competitive intelligence is one of the most underestimated cost centres in product marketing. Hours every week checking prices, promotions, stock-outs, new launches — across dozens of different sites.</p><p>I built an alternative: <strong>a Python scraper that runs every night</strong>, covers 40+ competitors across 1,300 SKUs, and automatically generates a Power BI fed with fresh morning data.</p><p><strong>Stack:</strong> Python (Scrapy + Selenium for dynamic sites), n8n for orchestration, Power BI for visualisation, Slack alerts for critical events.</p>`},
+    {tag:'PERSPECTIVE',title:'AI doesn\'t replace data analysts — it changes what they do',date:'Mar 2026',readTime:'3',excerpt:"The 'AI vs human' debate is badly framed. The real question: what should a data analyst actually spend their time on in 2026?",body:`<p>In 18 months integrating AI tools into analytical workflows, I regularly hear the same fear: "will it replace analysts?"</p><p>Short answer: no. Long answer: <strong>it will make obsolete those who refuse to evolve</strong>.</p><p>The data analysts who will thrive in 2026 are those who use AI to eliminate mechanical work and focus their energy on the real added value: interpretation, storytelling, strategic recommendation.</p>`},
   ],
   fr:[
-    {tag:'IA & AUTOMATISATION',title:"Pourquoi vos équipes data perdent encore 60% de leur temps",date:'Fév 2026',readTime:'4',
-     excerpt:"La plupart des équipes data que je rencontre passent plus de temps à préparer les données qu'à les analyser. Voici pourquoi — et comment inverser ça.",
-     body:`<p>J'ai passé les 18 derniers mois à construire des systèmes d'automatisation pour des équipes commerciales, et j'observe toujours le même pattern : <strong>entre 50 et 70% du temps analytique est consacré à des tâches de préparation</strong> — extraire des fichiers, les merger, les nettoyer, corriger des erreurs, reformater des colonnes.</p><p>C'est du temps humain de haute valeur brûlé sur des tâches que Python fait en 12 secondes.</p><p>Le problème n'est pas technique. C'est que personne n'a jamais pris 2 semaines pour <strong>automatiser ce qui prend 2 jours chaque semaine</strong>. L'urgence du quotidien écrase toujours l'investissement structurel.</p><p>La solution que j'applique systématiquement : cartographier toutes les tâches répétitives, identifier celles qui suivent un pattern fixe, et les automatiser en priorité selon le ratio temps-gagné / complexité-technique. Dans 80% des cas, les gains les plus importants sont sur les tâches les plus simples.</p><p><strong>Résultat type :</strong> une équipe de 3 analystes récupère l'équivalent d'un ETP complet sur des tâches à valeur ajoutée.</p>`},
-    {tag:'INTELLIGENCE COMPÉTITIVE',title:'40 concurrents, 1300 SKUs, zéro analyste — comment ?',date:'Janv 2026',readTime:'5',
-     excerpt:"Comment j'ai construit un système qui monitore 40 concurrents sur 1300 références produits chaque matin, sans intervention humaine.",
-     body:`<p>La veille concurrentielle manuelle, c'est l'un des postes de coût les plus sous-estimés en marketing produit. Des heures chaque semaine pour aller vérifier les prix, les promotions, les ruptures de stock, les nouveautés — sur des dizaines de sites différents.</p><p>J'ai construit une alternative : <strong>un scraper Python qui tourne chaque nuit</strong>, couvre 40+ concurrents sur 1 300 SKUs, et génère automatiquement un Power BI alimenté avec les données fraîches du matin.</p><p>Les équipes ouvrent leur ordinateur et voient directement : qui a lancé une promo hier soir, quel concurrent est en rupture sur quelle référence, quels nouveaux produits sont apparus.</p><p>Ce qui prenait <strong>2 jours d'analyse manuelle par semaine</strong> est devenu une lecture de 10 minutes chaque matin.</p><p><strong>Stack :</strong> Python (Scrapy + Selenium), n8n pour l'orchestration, Power BI, alertes Slack.</p>`},
-    {tag:'RÉFLEXION',title:"L'IA ne remplace pas les data analysts — elle change ce qu'ils font",date:'Mars 2026',readTime:'3',
-     excerpt:"Le débat 'IA vs humain' est mal posé. La vraie question : à quoi un data analyst devrait-il consacrer son temps en 2026 ?",
-     body:`<p>Depuis 18 mois que j'intègre des outils IA dans des workflows analytiques, j'entends régulièrement la même peur : "est-ce que ça va remplacer les analystes ?"</p><p>La réponse courte : non. La réponse longue : <strong>ça va rendre obsolètes ceux qui refusent d'évoluer</strong>.</p><p>Ce que l'IA fait mieux qu'un humain : traiter des volumes massifs de données, identifier des patterns dans du texte non structuré, générer des premiers drafts de rapports, automatiser des tâches répétitives à règles fixes.</p><p>Ce que l'IA ne fait pas : <strong>comprendre le contexte business</strong>, poser les bonnes questions, arbitrer entre des KPIs contradictoires, convaincre un CODIR de changer de stratégie.</p><p>Les data analysts qui prospèrent en 2026 sont ceux qui utilisent l'IA pour éliminer le travail mécanique et concentrent leur énergie sur la vraie valeur ajoutée : l'interprétation, la narration, la recommandation stratégique.</p>`},
+    {tag:'IA & AUTOMATISATION',title:"Pourquoi vos équipes data perdent encore 60% de leur temps",date:'Fév 2026',readTime:'4',excerpt:"La plupart des équipes data que je rencontre passent plus de temps à préparer les données qu'à les analyser. Voici pourquoi — et comment inverser ça.",body:`<p>J'ai passé les 18 derniers mois à construire des systèmes d'automatisation pour des équipes commerciales, et j'observe toujours le même pattern : <strong>entre 50 et 70% du temps analytique est consacré à des tâches de préparation</strong> — extraire des fichiers, les merger, les nettoyer, corriger des erreurs, reformater des colonnes.</p><p><strong>Résultat type :</strong> une équipe de 3 analystes récupère l'équivalent d'un ETP complet sur des tâches à valeur ajoutée.</p>`},
+    {tag:'INTELLIGENCE COMPÉTITIVE',title:'40 concurrents, 1300 SKUs, zéro analyste — comment ?',date:'Janv 2026',readTime:'5',excerpt:"Comment j'ai construit un système qui monitore 40 concurrents sur 1300 références produits chaque matin, sans intervention humaine.",body:`<p>La veille concurrentielle manuelle, c'est l'un des postes de coût les plus sous-estimés en marketing produit.</p><p>J'ai construit une alternative : <strong>un scraper Python qui tourne chaque nuit</strong>, couvre 40+ concurrents sur 1 300 SKUs, et génère automatiquement un Power BI alimenté avec les données fraîches du matin.</p><p><strong>Stack :</strong> Python (Scrapy + Selenium), n8n pour l'orchestration, Power BI, alertes Slack.</p>`},
+    {tag:'RÉFLEXION',title:"L'IA ne remplace pas les data analysts — elle change ce qu'ils font",date:'Mars 2026',readTime:'3',excerpt:"Le débat 'IA vs humain' est mal posé. La vraie question : à quoi un data analyst devrait-il consacrer son temps en 2026 ?",body:`<p>Depuis 18 mois que j'intègre des outils IA dans des workflows analytiques, j'entends régulièrement la même peur : "est-ce que ça va remplacer les analystes ?"</p><p>La réponse courte : non. La réponse longue : <strong>ça va rendre obsolètes ceux qui refusent d'évoluer</strong>.</p><p>Les data analysts qui prospèrent en 2026 sont ceux qui utilisent l'IA pour éliminer le travail mécanique.</p>`},
   ]
 };
 
-/* ══════════════════════════════════════
-   DASHBOARD COMPONENT
-══════════════════════════════════════ */
+// ── TERMINAL COMMANDS ────────────────────────────────────────────────────────
+const TERMINAL_CMDS={
+  en:{
+    help:{output:[
+      {t:'sys',m:'Available commands:'},
+      {t:'cmd',m:'  whoami          → About Antoine'},
+      {t:'cmd',m:'  skills          → Technical skills & stack'},
+      {t:'cmd',m:'  experience      → Career timeline'},
+      {t:'cmd',m:'  projects        → Signature projects'},
+      {t:'cmd',m:'  contact         → How to reach me'},
+      {t:'cmd',m:'  availability    → Current status'},
+      {t:'cmd',m:'  ./hire_antoine.sh  → The important one'},
+      {t:'dim',m:'  clear           → Clear terminal'},
+    ]},
+    whoami:{output:[
+      {t:'sys',m:'Antoine de Maintenant'},
+      {t:'info',m:'Role    : AI Specialist & BI Lead @ NAOS Bioderma NORAM'},
+      {t:'info',m:'Base    : Montréal, Canada (open to relocate)'},
+      {t:'info',m:'Focus   : Turning manual chaos into autonomous systems'},
+      {t:'info',m:'Stack   : n8n · Python · Power BI · LLMs'},
+      {t:'info',m:'Built   : Analytics dept from scratch in 6 months'},
+      {t:'info',m:'Saved   : 85% of reporting workload via automation'},
+    ]},
+    skills:{output:[
+      {t:'sys',m:'Technical competencies:'},
+      {t:'info',m:'████████████████████ Power BI       95%'},
+      {t:'info',m:'██████████████████░░ Agentic AI     90%'},
+      {t:'info',m:'█████████████████░░░ Revenue Ops    85%'},
+      {t:'info',m:'████████████████░░░░ Forecasting    80%'},
+      {t:'info',m:'████████████████░░░░ Python         80%'},
+      {t:'info',m:'████████████████░░░░ Data Eng.      78%'},
+    ]},
+    experience:{output:[
+      {t:'sys',m:'Career timeline:'},
+      {t:'info',m:'2025–now  AI Specialist & BI Lead · NAOS NORAM · Montréal'},
+      {t:'info',m:'2024–2025 Business Analyst (VIE) · NAOS USA · United States'},
+      {t:'info',m:'2023–2024 Business Developer · Reech SaaS · Paris'},
+      {t:'info',m:'2022      Data Analyst Thesis · NOOS CSR · Madrid'},
+    ]},
+    projects:{output:[
+      {t:'sys',m:'Signature projects (under NDA):'},
+      {t:'info',m:'🔍 Competitor scraper  — 40 brands · 1,300 SKUs · daily'},
+      {t:'info',m:'⚙️  Sales master auto   — multi-rep merge · zero touch'},
+      {t:'info',m:'📦 Stock forecasting   — 13wk horizon · MAPE 4.2%'},
+      {t:'info',m:'💬 Review NLP pipeline — 10k+ reviews/mo · auto-report'},
+    ]},
+    contact:{output:[
+      {t:'sys',m:'How to reach me:'},
+      {t:'info',m:'📧 antoinedemaintenant@alumni.ie.edu'},
+      {t:'info',m:'🔗 linkedin.com/in/antoine2maintenant'},
+      {t:'info',m:'🐙 github.com/demaintenant-antoine-pro'},
+      {t:'info',m:'📍 Montréal, Canada · France'},
+      {t:'info',m:'📱 +1 (263) 385-6506'},
+    ]},
+    availability:{output:[
+      {t:'sys',m:'Current availability:'},
+      {t:'acc3',m:'✅ STATUS: OPEN TO NEW MISSIONS · 2026'},
+      {t:'info',m:'Looking for: Data/AI leadership, automation architecture'},
+      {t:'info',m:'Locations: France · Canada · Remote (EU/NA timezone)'},
+      {t:'info',m:'Notice: Negotiable'},
+    ]},
+    './hire_antoine.sh':{output:[
+      {t:'sys',m:'Executing hire sequence...'},
+      {t:'info',m:'[============================] 100%'},
+      {t:'acc3',m:'✅ Excellent decision. ROI incoming.'},
+      {t:'info',m:'Next step: antoinedemaintenant@alumni.ie.edu'},
+      {t:'acc2',m:'>> Estimated time to first automation: 2 weeks'},
+      {t:'acc2',m:'>> Estimated time to dashboard: 3 weeks'},
+      {t:'acc2',m:'>> ROI breakeven: ~6 months'},
+    ]},
+  },
+  fr:{
+    help:{output:[
+      {t:'sys',m:'Commandes disponibles :'},
+      {t:'cmd',m:'  whoami          → À propos d\'Antoine'},
+      {t:'cmd',m:'  skills          → Compétences techniques'},
+      {t:'cmd',m:'  experience      → Parcours professionnel'},
+      {t:'cmd',m:'  projects        → Projets signature'},
+      {t:'cmd',m:'  contact         → Comment me joindre'},
+      {t:'cmd',m:'  availability    → Disponibilité actuelle'},
+      {t:'cmd',m:'  ./hire_antoine.sh  → La commande importante'},
+      {t:'dim',m:'  clear           → Vider le terminal'},
+    ]},
+    whoami:{output:[
+      {t:'sys',m:'Antoine de Maintenant'},
+      {t:'info',m:'Rôle    : Spécialiste IA & BI Lead @ NAOS Bioderma NORAM'},
+      {t:'info',m:'Base    : Montréal, Canada (ouvert à déménager)'},
+      {t:'info',m:'Focus   : Transformer le chaos manuel en systèmes autonomes'},
+      {t:'info',m:'Stack   : n8n · Python · Power BI · LLMs'},
+      {t:'info',m:'Construit : Dept analytics de zéro en 6 mois'},
+      {t:'info',m:'Économisé : 85% de la charge de reporting via automatisation'},
+    ]},
+    skills:{output:[
+      {t:'sys',m:'Compétences techniques :'},
+      {t:'info',m:'████████████████████ Power BI       95%'},
+      {t:'info',m:'██████████████████░░ IA Agentique   90%'},
+      {t:'info',m:'█████████████████░░░ Revenue Ops    85%'},
+      {t:'info',m:'████████████████░░░░ Prévision      80%'},
+      {t:'info',m:'████████████████░░░░ Python         80%'},
+      {t:'info',m:'████████████████░░░░ Data Eng.      78%'},
+    ]},
+    experience:{output:[
+      {t:'sys',m:'Parcours professionnel :'},
+      {t:'info',m:'2025–now  Spécialiste IA & BI Lead · NAOS NORAM · Montréal'},
+      {t:'info',m:'2024–2025 Business Analyst (VIE) · NAOS USA · États-Unis'},
+      {t:'info',m:'2023–2024 Business Developer · Reech SaaS · Paris'},
+      {t:'info',m:'2022      Data Analyst Mémoire · NOOS RSE · Madrid'},
+    ]},
+    projects:{output:[
+      {t:'sys',m:'Projets signature (sous NDA) :'},
+      {t:'info',m:'🔍 Scraper concurrentiel — 40 marques · 1 300 SKUs · daily'},
+      {t:'info',m:'⚙️  Auto master ventes    — fusion multi-reps · zéro touche'},
+      {t:'info',m:'📦 Prévision stock       — horizon 13sem · MAPE 4,2%'},
+      {t:'info',m:'💬 Pipeline NLP avis     — 10k+ avis/mois · rapport auto'},
+    ]},
+    contact:{output:[
+      {t:'sys',m:'Comment me joindre :'},
+      {t:'info',m:'📧 antoinedemaintenant@alumni.ie.edu'},
+      {t:'info',m:'🔗 linkedin.com/in/antoine2maintenant'},
+      {t:'info',m:'🐙 github.com/demaintenant-antoine-pro'},
+      {t:'info',m:'📍 Montréal, Canada · France'},
+      {t:'info',m:'📱 +1 (263) 385-6506'},
+    ]},
+    availability:{output:[
+      {t:'sys',m:'Disponibilité actuelle :'},
+      {t:'acc3',m:'✅ STATUT : DISPONIBLE POUR NOUVELLES MISSIONS · 2026'},
+      {t:'info',m:'Recherche : Leadership data/IA, architecture automation'},
+      {t:'info',m:'Lieux : France · Canada · Remote (timezone EU/NA)'},
+      {t:'info',m:'Préavis : Négociable'},
+    ]},
+    './hire_antoine.sh':{output:[
+      {t:'sys',m:'Exécution de la séquence de recrutement...'},
+      {t:'info',m:'[============================] 100%'},
+      {t:'acc3',m:'✅ Excellente décision. ROI en approche.'},
+      {t:'info',m:'Prochaine étape : antoinedemaintenant@alumni.ie.edu'},
+      {t:'acc2',m:'>> Délai première automatisation : 2 semaines'},
+      {t:'acc2',m:'>> Délai premier dashboard : 3 semaines'},
+      {t:'acc2',m:'>> ROI breakeven : ~6 mois'},
+    ]},
+  }
+};
+
+// ── ANIMATED METRIC COUNTER ──────────────────────────────────────────────────
+function AnimatedMetric({n,s,l}){
+  const [val,setVal]=useState(0);
+  const [started,setStarted]=useState(false);
+  const ref=useRef();
+  useEffect(()=>{
+    const obs=new IntersectionObserver(entries=>{
+      if(entries[0].isIntersecting&&!started){setStarted(true)}
+    },{threshold:.5});
+    if(ref.current)obs.observe(ref.current);
+    return()=>obs.disconnect();
+  },[started]);
+  useEffect(()=>{
+    if(!started)return;
+    const target=parseInt(n,10);
+    const duration=1800;
+    const start=performance.now();
+    function tick(now){
+      const p=Math.min((now-start)/duration,1);
+      const eased=1-Math.pow(1-p,3);
+      setVal(Math.round(eased*target));
+      if(p<1)requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  },[started,n]);
+  return(
+    <div className="metric" ref={ref}>
+      <span className="metric-num">{val}{s}</span>
+      <span className="metric-lbl">{l}</span>
+    </div>
+  );
+}
+
+// ── DASHBOARD ────────────────────────────────────────────────────────────────
 function Dashboard({lang}){
   const t=T[lang];
   const lRef=useRef(),bRef=useRef(),lC=useRef(),bC=useRef();
@@ -742,23 +894,44 @@ function Dashboard({lang}){
   );
 }
 
-/* ══════════════════════════════════════
-   PIPELINE COMPONENT
-══════════════════════════════════════ */
+// ── DRAG & DROP PIPELINE ─────────────────────────────────────────────────────
 function Pipeline({lang}){
   const t=T[lang];
-  const stages=PIPELINE_STAGES[lang];
+  const defaultStages=PIPELINE_STAGES_DEF[lang];
+  const [stages,setStages]=useState(()=>PIPELINE_STAGES_DEF[lang].map((s,i)=>({...s,origIdx:i})));
   const [stage,setStage]=useState(-1);
   const [fills,setFills]=useState([0,0,0,0,0]);
   const [logs,setLogs]=useState(null);
   const [running,setRunning]=useState(false);
+  const [dragIdx,setDragIdx]=useState(null);
+  const [overIdx,setOverIdx]=useState(null);
+  const [wrongMsg,setWrongMsg]=useState('');
+  const [wrongIdx,setWrongIdx]=useState(-1);
   const logRef=useRef();
-  useEffect(()=>{setLogs([{t:'READY',m:t.pipeReady}])},[lang]);
-  const MSGS=lang==='fr'
-    ?[['INIT',"Connexion à l'API Retail Partner..."],['FETCH','Téléchargement de 847 lignes de données POS...'],['CLEAN','Suppression des nulls, normalisation de 32 SKUs...'],['MODEL','Prévision Prophet (30j) | MAPE : 4,2%'],['EMBED','Rafraîchissement Power BI · 12 rapports mis à jour'],['DONE','✓ Livré à 12 parties prenantes | 00:05:23']]
-    :[['INIT','Connecting to Retail Partner API...'],['FETCH','Downloading 847 rows of POS data...'],['CLEAN','Removing nulls, normalizing 32 SKUs...'],['MODEL','Running Prophet forecast (30d) | MAPE: 4.2%'],['EMBED','Refreshing Power BI · 12 reports updated'],['DONE','✓ Delivered to 12 stakeholders | 00:05:23']];
+
+  useEffect(()=>{
+    setLogs([{t:'READY',m:t.pipeReady}]);
+    setStages(PIPELINE_STAGES_DEF[lang].map((s,i)=>({...s,origIdx:i})));
+    setStage(-1);setFills([0,0,0,0,0]);setWrongMsg('');
+  },[lang]);
+
+  function isCorrectOrder(){return stages.map(s=>s.id).join(',')===CORRECT_ORDER.join(',');}
+
   async function run(){
-    if(running)return;setRunning(true);setStage(-1);setFills([0,0,0,0,0]);setLogs([]);
+    if(running)return;
+    if(!isCorrectOrder()){
+      const idx=stages.findIndex((s,i)=>s.id!==CORRECT_ORDER[i]);
+      setWrongIdx(idx);
+      const msgs=t.pipeWrongMsgs;
+      setWrongMsg(msgs[Math.floor(Math.random()*msgs.length)]);
+      setTimeout(()=>setWrongIdx(-1),1200);
+      return;
+    }
+    setWrongMsg('');
+    setRunning(true);setStage(-1);setFills([0,0,0,0,0]);setLogs([]);
+    const MSGS=lang==='fr'
+      ?[['INIT',"Connexion à l'API Retail Partner..."],['FETCH','Téléchargement de 847 lignes de données POS...'],['CLEAN','Suppression des nulls, normalisation de 32 SKUs...'],['MODEL','Prévision Prophet (30j) | MAPE : 4,2%'],['EMBED','Rafraîchissement Power BI · 12 rapports mis à jour'],['DONE','✓ Livré à 12 parties prenantes | 00:05:23']]
+      :[['INIT','Connecting to Retail Partner API...'],['FETCH','Downloading 847 rows of POS data...'],['CLEAN','Removing nulls, normalizing 32 SKUs...'],['MODEL','Running Prophet forecast (30d) | MAPE: 4.2%'],['EMBED','Refreshing Power BI · 12 reports updated'],['DONE','✓ Delivered to 12 stakeholders | 00:05:23']];
     for(let i=0;i<6;i++){
       await new Promise(r=>setTimeout(r,900));
       setStage(i);setLogs(l=>[...l,{t:MSGS[i][0],m:MSGS[i][1]}]);
@@ -767,21 +940,57 @@ function Pipeline({lang}){
     }
     setRunning(false);
   }
+
+  function onDragStart(i){setDragIdx(i);}
+  function onDragOver(e,i){e.preventDefault();setOverIdx(i);}
+  function onDrop(e,i){
+    e.preventDefault();
+    if(dragIdx===null||dragIdx===i)return;
+    const newStages=[...stages];
+    const moved=newStages.splice(dragIdx,1)[0];
+    newStages.splice(i,0,moved);
+    setStages(newStages);
+    setDragIdx(null);setOverIdx(null);
+    setWrongMsg('');setStage(-1);setFills([0,0,0,0,0]);
+    setLogs([{t:'RESET',m:t.pipeReady}]);
+  }
+  function onDragEnd(){setDragIdx(null);setOverIdx(null);}
+
   if(!logs)return null;
   return(
     <div className="pipeline-wrap reveal">
+      <div className="drag-hint">{t.pipeDragHint}</div>
       <div className="pipeline-stages">
-        {stages.map((s,i)=>(
-          <React.Fragment key={i}>
-            <div className={`p-node${stage===i?' running':stage>i?' done':''}`}>
-              <span className="p-node-icon">{stage>i?'✅':s.icon}</span>
-              <span className="p-node-label">{s.label}</span>
-              <span className="p-node-detail">{s.detail}</span>
-            </div>
-            {i<5&&<div className="p-connector"><div className="p-connector-fill" style={{width:fills[i]+'%'}}/></div>}
-          </React.Fragment>
-        ))}
+        {stages.map((s,i)=>{
+          const nodeClass=`p-node${stage===stages.findIndex(x=>x.id===CORRECT_ORDER[stage])&&stages[i].id===CORRECT_ORDER[stage]?' running':''
+            }${stage>stages.findIndex(x=>x.id===CORRECT_ORDER[stage-1])&&stage>0?' done':''
+            }${dragIdx===i?' dragging':''
+            }${overIdx===i&&dragIdx!==i?' drag-over':''
+            }${wrongIdx===i?' wrong-order':''}`;
+          return(
+            <React.Fragment key={s.id}>
+              <div
+                className={`p-node${running?' running':''
+                }${dragIdx===i?' dragging':''
+                }${overIdx===i&&dragIdx!==i?' drag-over':''
+                }${wrongIdx===i?' wrong-order':''}`}
+                draggable={!running}
+                onDragStart={()=>onDragStart(i)}
+                onDragOver={e=>onDragOver(e,i)}
+                onDrop={e=>onDrop(e,i)}
+                onDragEnd={onDragEnd}
+                title="Drag to reorder"
+              >
+                <span className="p-node-icon">{s.icon}</span>
+                <span className="p-node-label">{s.label}</span>
+                <span className="p-node-detail">{s.detail}</span>
+              </div>
+              {i<stages.length-1&&<div className="p-connector"><div className="p-connector-fill" style={{width:fills[i]+'%'}}/></div>}
+            </React.Fragment>
+          );
+        })}
       </div>
+      {wrongMsg&&<div className="wrong-order-msg">{wrongMsg}</div>}
       <div className="pipeline-log" ref={logRef}>
         {logs.map((l,i)=><div key={i} className="log-line"><span style={{color:'var(--text-dim)'}}>[{l.t}]</span> {l.m}</div>)}
       </div>
@@ -790,9 +999,7 @@ function Pipeline({lang}){
   );
 }
 
-/* ══════════════════════════════════════
-   ROI CALCULATOR
-══════════════════════════════════════ */
+// ── ROI CALCULATOR ───────────────────────────────────────────────────────────
 function ROICalc({lang}){
   const t=T[lang];
   const [analysts,setA]=useState(3);
@@ -823,23 +1030,10 @@ function ROICalc({lang}){
         </div>
         <div className="roi-out">
           <div style={{fontFamily:"'Space Mono',monospace",fontSize:".52rem",color:"var(--text-dim)",letterSpacing:"3px",textTransform:"uppercase",marginBottom:"8px"}}>{t.roiComment}</div>
-          <div className="roi-metric">
-            <div className="roi-metric-lbl">{t.roiLbl1}</div>
-            <div className="roi-metric-val pink">{fmt(waste)}</div>
-            <div className="roi-helper">{wkH}h/{lang==='fr'?'sem':'week'} × {analysts} {analysts>1?t.roiSuffix2:t.roiSuffix1} × 52{t.roiWks}</div>
-          </div>
-          <div className="roi-metric">
-            <div className="roi-metric-lbl">{t.roiLbl2} ({err}%)</div>
-            <div className="roi-metric-val purple">{fmt(errCost)}</div>
-          </div>
-          <div className="roi-metric">
-            <div className="roi-metric-lbl">{t.roiLbl3}</div>
-            <div className="roi-metric-val pink" style={{fontSize:"3.2rem"}}>{fmt(total)}</div>
-          </div>
-          <div className="roi-metric">
-            <div className="roi-metric-lbl">{t.roiLbl4}</div>
-            <div className="roi-metric-val" style={{color:"var(--text-sec)",fontSize:"1.7rem"}}>{fmt(after)}</div>
-          </div>
+          <div className="roi-metric"><div className="roi-metric-lbl">{t.roiLbl1}</div><div className="roi-metric-val pink">{fmt(waste)}</div><div className="roi-helper">{wkH}h/{lang==='fr'?'sem':'week'} × {analysts} {analysts>1?t.roiSuffix2:t.roiSuffix1} × 52{t.roiWks}</div></div>
+          <div className="roi-metric"><div className="roi-metric-lbl">{t.roiLbl2} ({err}%)</div><div className="roi-metric-val purple">{fmt(errCost)}</div></div>
+          <div className="roi-metric"><div className="roi-metric-lbl">{t.roiLbl3}</div><div className="roi-metric-val pink" style={{fontSize:"3.2rem"}}>{fmt(total)}</div></div>
+          <div className="roi-metric"><div className="roi-metric-lbl">{t.roiLbl4}</div><div className="roi-metric-val" style={{color:"var(--text-sec)",fontSize:"1.7rem"}}>{fmt(after)}</div></div>
           <div className="roi-savings-box">
             <div className="roi-metric-lbl">{t.roiLbl5}</div>
             <div className="roi-metric-val green" style={{fontSize:"2.8rem"}}>{fmt(savings)}</div>
@@ -852,31 +1046,185 @@ function ROICalc({lang}){
   );
 }
 
-/* ══════════════════════════════════════
-   PROJECTS COMPONENT
-══════════════════════════════════════ */
+// ── RADAR CHART ──────────────────────────────────────────────────────────────
+function RadarChart({lang}){
+  const t=T[lang];
+  const canvasRef=useRef();
+  const chartRef=useRef();
+  const data=RADAR_DATA[lang];
+  const COLORS=['#C44EFF','#FF3D85','#00F5B0','#FFB800','#00C8FF','#FF8C42'];
+
+  useEffect(()=>{
+    if(!canvasRef.current)return;
+    chartRef.current?.destroy();
+    const th=document.body.getAttribute('data-theme');
+    const gridColor=th==='light'?'rgba(123,15,224,.12)':'rgba(196,78,255,.15)';
+    const tickColor=th==='light'?'#6B5E99':'#9B8DCC';
+    chartRef.current=new Chart(canvasRef.current,{
+      type:'radar',
+      data:{
+        labels:data.labels,
+        datasets:[{
+          label:lang==='fr'?'Niveau':'Level',
+          data:data.data,
+          fill:true,
+          backgroundColor:'rgba(196,78,255,.18)',
+          borderColor:'#C44EFF',
+          borderWidth:2,
+          pointBackgroundColor:COLORS,
+          pointBorderColor:'#fff',
+          pointBorderWidth:2,
+          pointRadius:6,
+          pointHoverRadius:8,
+        }]
+      },
+      options:{
+        responsive:true,maintainAspectRatio:false,
+        animation:{duration:1200,easing:'easeOutQuart'},
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`  ${ctx.raw}%`}}},
+        scales:{r:{
+          min:0,max:100,
+          ticks:{stepSize:25,color:tickColor,backdropColor:'transparent',font:{family:'Space Mono',size:9}},
+          grid:{color:gridColor},
+          pointLabels:{color:tickColor,font:{family:'Space Mono',size:10,weight:'600'}},
+          angleLines:{color:gridColor},
+        }}
+      }
+    });
+    return()=>chartRef.current?.destroy();
+  },[lang]);
+
+  return(
+    <div className="radar-section">
+      <div className="radar-title">{t.radarTitle}</div>
+      <div className="radar-wrap reveal">
+        <div className="radar-chart-wrap"><canvas ref={canvasRef}/></div>
+        <div className="radar-legend">
+          {data.details.map((d,i)=>(
+            <div key={i} className="radar-legend-item">
+              <div className="radar-legend-dot" style={{background:COLORS[i]}}/>
+              <div style={{flex:1}}>
+                <div className="radar-legend-label">{d.label}</div>
+                <div className="radar-legend-sub">{d.sub}</div>
+              </div>
+              <div className="radar-legend-pct">{d.pct}%</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── TERMINAL CHATBOT ─────────────────────────────────────────────────────────
+function TerminalChatbot({lang}){
+  const t=T[lang];
+  const cmds=TERMINAL_CMDS[lang];
+  const [history,setHistory]=useState([
+    {t:'sys',m:lang==='fr'?"Bienvenue — antoine@portfolio:~$":"Welcome — antoine@portfolio:~$"},
+    {t:'dim',m:lang==='fr'?"Tapez 'help' pour voir les commandes disponibles.":"Type 'help' to see available commands."},
+  ]);
+  const [input,setInput]=useState('');
+  const [cmdHistory,setCmdHistory]=useState([]);
+  const [histIdx,setHistIdx]=useState(-1);
+  const [typing,setTyping]=useState(false);
+  const outputRef=useRef();
+  const inputRef=useRef();
+
+  useEffect(()=>{
+    setHistory([
+      {t:'sys',m:lang==='fr'?"Bienvenue — antoine@portfolio:~$":"Welcome — antoine@portfolio:~$"},
+      {t:'dim',m:lang==='fr'?"Tapez 'help' pour voir les commandes disponibles.":"Type 'help' to see available commands."},
+    ]);
+  },[lang]);
+
+  useEffect(()=>{if(outputRef.current)outputRef.current.scrollTop=outputRef.current.scrollHeight;},[history,typing]);
+
+  const colorClass={sys:'chat-line-sys',info:'chat-line-info',cmd:'chat-line-info',dim:'chat-line-dim',acc2:'chat-line-user',acc3:'chat-line-sys',err:'chat-line-err'};
+
+  async function runCmd(raw){
+    const cmd=raw.trim().toLowerCase();
+    if(!cmd)return;
+    setCmdHistory(h=>[raw,...h]);setHistIdx(-1);
+    setHistory(h=>[...h,{t:'user',m:`> ${raw}`}]);
+    if(cmd==='clear'){setTimeout(()=>setHistory([]),100);return;}
+    const def=cmds[cmd]||cmds[raw.trim()];
+    if(!def){
+      setHistory(h=>[...h,{t:'err',m:lang==='fr'?`Commande introuvable : '${cmd}'. Tapez 'help'.`:`Command not found: '${cmd}'. Type 'help'.`}]);
+      return;
+    }
+    setTyping(true);
+    for(let i=0;i<def.output.length;i++){
+      await new Promise(r=>setTimeout(r,i===0?200:80));
+      setHistory(h=>[...h,def.output[i]]);
+    }
+    setTyping(false);
+  }
+
+  function handleKey(e){
+    if(e.key==='Enter'){runCmd(input);setInput('');}
+    else if(e.key==='ArrowUp'){
+      const ni=Math.min(histIdx+1,cmdHistory.length-1);
+      setHistIdx(ni);setInput(cmdHistory[ni]||'');
+    }else if(e.key==='ArrowDown'){
+      const ni=Math.max(histIdx-1,-1);
+      setHistIdx(ni);setInput(ni===-1?'':cmdHistory[ni]||'');
+    }else if(e.key==='Tab'){
+      e.preventDefault();
+      const keys=Object.keys(cmds);
+      const match=keys.find(k=>k.startsWith(input));
+      if(match)setInput(match);
+    }
+  }
+
+  return(
+    <div className="terminal-chat reveal">
+      <div className="chat-bar">
+        <div className="t-dot t-red"/><div className="t-dot t-yellow"/><div className="t-dot t-green"/>
+        <span className="terminal-path">antoine@portfolio:~$</span>
+      </div>
+      <div className="chat-output" ref={outputRef} onClick={()=>inputRef.current?.focus()}>
+        {history.map((l,i)=>(
+          <div key={i} className={l.t==='user'?'chat-line-user':colorClass[l.t]||'chat-line-info'}>{l.m}</div>
+        ))}
+        {typing&&<div className="chat-line-dim">▊</div>}
+      </div>
+      <div className="chat-input-row">
+        <span className="chat-prompt-label">$</span>
+        <input
+          ref={inputRef}
+          className="chat-input"
+          value={input}
+          onChange={e=>setInput(e.target.value)}
+          onKeyDown={handleKey}
+          autoComplete="off"
+          spellCheck="false"
+          placeholder={t.terminalHint}
+        />
+      </div>
+      <div className="chat-hint">TAB to autocomplete · ↑↓ history · try: help, whoami, ./hire_antoine.sh</div>
+    </div>
+  );
+}
+
+// ── PROJECTS ─────────────────────────────────────────────────────────────────
 function Projects({lang}){
   return(
     <div className="projects-grid">
       {PROJECTS[lang].map((p,i)=>(
         <div key={i} className="project-card reveal">
-          <div className="project-header">
-            <span className="project-icon">{p.icon}</span>
-            <span className="project-badge">{p.badge}</span>
-          </div>
+          <div className="project-header"><span className="project-icon">{p.icon}</span><span className="project-badge">{p.badge}</span></div>
           <div className="project-title">{p.title}</div>
           <div className="project-desc">{p.desc}</div>
           <div className="project-stats">{p.stats.map((s,j)=><span key={j} className="project-stat">{s}</span>)}</div>
-          <div className="project-tags">{p.tags.map((t,j)=><span key={j} className="project-tag">{t}</span>)}</div>
+          <div className="project-tags">{p.tags.map((tg,j)=><span key={j} className="project-tag">{tg}</span>)}</div>
         </div>
       ))}
     </div>
   );
 }
 
-/* ══════════════════════════════════════
-   EASTER EGG
-══════════════════════════════════════ */
+// ── EASTER EGG ───────────────────────────────────────────────────────────────
 function EasterEgg({onClose,lang}){
   const t=T[lang];
   return(
@@ -892,41 +1240,22 @@ function EasterEgg({onClose,lang}){
   );
 }
 
-/* ══════════════════════════════════════
-   VISITOR BADGE
-══════════════════════════════════════ */
 function VisitorBadge({lang}){
   const t=T[lang];
   const [count,setCount]=useState(2847);
-  useEffect(()=>{
-    const start=Date.now();
-    const iv=setInterval(()=>setCount(2847+Math.floor((Date.now()-start)/55000)),30000);
-    return()=>clearInterval(iv);
-  },[]);
-  return(
-    <div className="visitor-badge">
-      <div className="vb-dot"/>
-      <span style={{color:"var(--text)"}}>{count.toLocaleString()}</span>
-      <span>{t.visitors}</span>
-    </div>
-  );
+  useEffect(()=>{const iv=setInterval(()=>setCount(c=>c+Math.floor(Math.random()*2)),55000);return()=>clearInterval(iv);},[]);
+  return(<div className="visitor-badge"><div className="vb-dot"/><span style={{color:"var(--text)"}}>{count.toLocaleString()}</span><span>{t.visitors}</span></div>);
 }
 
-/* ══════════════════════════════════════
-   COUNTRY MODAL
-══════════════════════════════════════ */
 function CountryModal({country,onClose,lang}){
   const t=T[lang];
-  if(!country) return null;
+  if(!country)return null;
   return(
     <div className="country-modal-overlay" onClick={onClose}>
       <div className="country-modal" onClick={e=>e.stopPropagation()}>
         <div className="country-modal-header">
           <img className="country-modal-flag" src={`https://flagcdn.com/80x60/${country.iso}.png`} alt={country.n}/>
-          <div>
-            <div className="country-modal-title">{country.emoji} {country.n}</div>
-            <div className="country-modal-sub">{country.sub}</div>
-          </div>
+          <div><div className="country-modal-title">{country.emoji} {country.n}</div><div className="country-modal-sub">{country.sub}</div></div>
         </div>
         <div className="country-modal-body">
           <div className="country-modal-tags">{country.tags.map((tag,i)=><span key={i} className="country-modal-tag">{tag}</span>)}</div>
@@ -938,93 +1267,45 @@ function CountryModal({country,onClose,lang}){
   );
 }
 
-/* ══════════════════════════════════════
-   BLOG
-══════════════════════════════════════ */
 function Blog({lang}){
   const t=T[lang];
   const [openPost,setOpenPost]=useState(null);
   const posts=BLOG_POSTS[lang];
   return(<>
-    {openPost&&(
-      <div className="blog-modal-overlay" onClick={()=>setOpenPost(null)}>
-        <div className="blog-modal" onClick={e=>e.stopPropagation()}>
-          <div className="blog-modal-inner">
-            <div className="blog-modal-tag">{openPost.tag}</div>
-            <div className="blog-modal-title">{openPost.title}</div>
-            <div className="blog-modal-meta">{openPost.date} · {openPost.readTime} {t.blogReadTime}</div>
-            <div className="blog-modal-body" dangerouslySetInnerHTML={{__html:openPost.body}}/>
-            <button className="blog-modal-close" onClick={()=>setOpenPost(null)}>{t.blogClose}</button>
-          </div>
-        </div>
-      </div>
-    )}
+    {openPost&&(<div className="blog-modal-overlay" onClick={()=>setOpenPost(null)}><div className="blog-modal" onClick={e=>e.stopPropagation()}><div className="blog-modal-inner"><div className="blog-modal-tag">{openPost.tag}</div><div className="blog-modal-title">{openPost.title}</div><div className="blog-modal-meta">{openPost.date} · {openPost.readTime} {t.blogReadTime}</div><div className="blog-modal-body" dangerouslySetInnerHTML={{__html:openPost.body}}/><button className="blog-modal-close" onClick={()=>setOpenPost(null)}>{t.blogClose}</button></div></div></div>)}
     <div className="blog-grid">
-      {posts.map((p,i)=>(
-        <div key={i} className="blog-card reveal" onClick={()=>setOpenPost(p)}>
-          <div className="blog-tag">{p.tag}</div>
-          <div className="blog-title">{p.title}</div>
-          <div className="blog-excerpt">{p.excerpt}</div>
-          <div className="blog-meta"><span>{p.date}</span><span>·</span><span>{p.readTime} {t.blogReadTime}</span></div>
-          <div className="blog-read-more">{t.blogRead}</div>
-        </div>
-      ))}
+      {posts.map((p,i)=>(<div key={i} className="blog-card reveal" onClick={()=>setOpenPost(p)}><div className="blog-tag">{p.tag}</div><div className="blog-title">{p.title}</div><div className="blog-excerpt">{p.excerpt}</div><div className="blog-meta"><span>{p.date}</span><span>·</span><span>{p.readTime} {t.blogReadTime}</span></div><div className="blog-read-more">{t.blogRead}</div></div>))}
     </div>
   </>);
 }
 
-/* ══════════════════════════════════════
-   SCROLL TO TOP
-══════════════════════════════════════ */
 function ScrollToTop({lang}){
   const t=T[lang];
   const [show,setShow]=useState(false);
-  useEffect(()=>{
-    const h=()=>setShow(window.scrollY>400);
-    window.addEventListener('scroll',h);return()=>window.removeEventListener('scroll',h);
-  },[]);
-  return(
-    <button className={`scroll-top${show?' visible':''}`} onClick={()=>window.scrollTo({top:0,behavior:'smooth'})} title={t.scrollTop}>↑</button>
-  );
+  useEffect(()=>{const h=()=>setShow(window.scrollY>400);window.addEventListener('scroll',h);return()=>window.removeEventListener('scroll',h);},[]);
+  return(<button className={`scroll-top${show?' visible':''}`} onClick={()=>window.scrollTo({top:0,behavior:'smooth'})} title={t.scrollTop}>↑</button>);
 }
 
-/* ══════════════════════════════════════
-   XP COUNTER
-══════════════════════════════════════ */
 function XPCounter({lang}){
   const t=T[lang];
   const years=((new Date()-new Date('2022-03-01'))/(1000*60*60*24*365.25));
-  return(
-    <span className="xp-badge">⚡ {years.toFixed(1)} {t.xp}</span>
-  );
+  return(<span className="xp-badge">⚡ {years.toFixed(1)} {t.xp}</span>);
 }
 
-/* ══════════════════════════════════════
-   COPY EMAIL BUTTON
-══════════════════════════════════════ */
 function CopyEmailButton({lang}){
   const t=T[lang];
   const [copied,setCopied]=useState(false);
-  function copy(){
-    navigator.clipboard.writeText('antoinedemaintenant@alumni.ie.edu').then(()=>{
-      setCopied(true);setTimeout(()=>setCopied(false),2200);
-    });
-  }
+  function copy(){navigator.clipboard.writeText('antoinedemaintenant@alumni.ie.edu').then(()=>{setCopied(true);setTimeout(()=>setCopied(false),2200);});}
   return(<>
     <div className={`copy-toast${copied?' show':''}`}>{t.contactCopied}</div>
     <a href="mailto:antoinedemaintenant@alumni.ie.edu" className="contact-card" onClick={e=>{e.preventDefault();copy();}}>
       <span className="contact-icon">📧</span>
-      <div>
-        <div className="contact-lbl">Email <span style={{color:'var(--accent3)',fontSize:'.42rem',marginLeft:'6px',fontFamily:"'Space Mono',monospace"}}>{t.contactCopyHint}</span></div>
-        <div className="contact-val">antoinedemaintenant@alumni.ie.edu</div>
-      </div>
+      <div><div className="contact-lbl">Email <span style={{color:'var(--accent3)',fontSize:'.42rem',marginLeft:'6px',fontFamily:"'Space Mono',monospace"}}>{t.contactCopyHint}</span></div><div className="contact-val">antoinedemaintenant@alumni.ie.edu</div></div>
     </a>
   </>);
 }
 
-/* ══════════════════════════════════════
-   APP
-══════════════════════════════════════ */
+// ── APP ───────────────────────────────────────────────────────────────────────
 function App(){
   const [theme,setTheme]=useState('light');
   const [lang,setLang]=useState('en');
@@ -1045,22 +1326,14 @@ function App(){
 
   const LINES={en:['BI Engineer.','AI Architect.','Revenue Optimizer.','Automation Dealer.'],fr:['Ingénieur BI.','Architecte IA.','Optimiseur de Revenus.','Dealer d\'Automatisation.']};
 
-  // Reset active exp when lang changes
   useEffect(()=>setActiveExp(0),[lang]);
   useEffect(()=>setTagFilter(t.expFilterAll),[lang]);
 
-  // Typewriter
   useEffect(()=>{
-    const lines=LINES[lang];
-    const cur=lines[lineIdx%lines.length];
+    const lines=LINES[lang];const cur=lines[lineIdx%lines.length];
     const tm=setTimeout(()=>{
-      if(!deleting){
-        if(charIdx<cur.length){setTyped(cur.slice(0,charIdx+1));setCharIdx(c=>c+1)}
-        else setTimeout(()=>setDeleting(true),1800);
-      }else{
-        if(charIdx>0){setTyped(cur.slice(0,charIdx-1));setCharIdx(c=>c-1)}
-        else{setDeleting(false);setLineIdx(i=>(i+1)%lines.length)}
-      }
+      if(!deleting){if(charIdx<cur.length){setTyped(cur.slice(0,charIdx+1));setCharIdx(c=>c+1)}else setTimeout(()=>setDeleting(true),1800);}
+      else{if(charIdx>0){setTyped(cur.slice(0,charIdx-1));setCharIdx(c=>c-1)}else{setDeleting(false);setLineIdx(i=>(i+1)%lines.length)}}
     },deleting?38:68);
     return()=>clearTimeout(tm);
   },[charIdx,deleting,lineIdx,lang]);
@@ -1083,47 +1356,35 @@ function App(){
     <ScrollToTop lang={lang}/>
     <VisitorBadge lang={lang}/>
 
-    {/* ── NAV ── */}
+    {/* NAV */}
     <nav className="nav">
-      <div className="nav-logo">ADM.SYS // v4.0</div>
+      <div className="nav-logo">ADM.SYS // v4.1</div>
       <div className="nav-links">
-        {t.nav.map(s=>(
-          <button key={s} className="nav-link" onClick={()=>scrollTo(s)}>{t.navLabels[s]}</button>
-        ))}
+        {t.nav.map(s=>(<button key={s} className="nav-link" onClick={()=>scrollTo(s)}>{t.navLabels[s]}</button>))}
       </div>
       <div style={{display:'flex',gap:'8px',alignItems:'center',flexShrink:0}}>
-        {/* Language toggle */}
         <div className="nav-themes" style={{marginRight:'4px'}}>
-          {[['en','🇬🇧'],['fr','🇫🇷']].map(([l,flag])=>(
-            <button key={l} className={`theme-btn${lang===l?' active':''}`} onClick={()=>setLang(l)}>{flag} {l.toUpperCase()}</button>
-          ))}
+          {[['en','🇬🇧'],['fr','🇫🇷']].map(([l,flag])=>(<button key={l} className={`theme-btn${lang===l?' active':''}`} onClick={()=>setLang(l)}>{flag} {l.toUpperCase()}</button>))}
         </div>
-        {/* Theme toggle */}
         <div className="nav-themes">
-          {[['dark','🌙'],['hacker','💻'],['light','☀️']].map(([th,icon])=>(
-            <button key={th} className={`theme-btn${theme===th?' active':''}`} onClick={()=>setTheme(th)}>{icon}</button>
-          ))}
+          {[['dark','🌙'],['hacker','💻'],['light','☀️']].map(([th,icon])=>(<button key={th} className={`theme-btn${theme===th?' active':''}`} onClick={()=>setTheme(th)}>{icon}</button>))}
         </div>
       </div>
     </nav>
 
-    {/* ── TICKER ── */}
+    {/* TICKER */}
     <div className="ticker" style={{marginTop:'60px'}}>
       <div className="ticker-inner">
-        {[0,1].map(ri=>(
-          <div key={ri} style={{display:'flex',gap:'48px'}}>
-            {(lang==='fr'
-              ?['85% de gain en capacité de traitement','30+ workflows automatisés','270% boost efficacité pipeline','Dept Analytics créé en 6 mois','10+ dashboards Power BI','n8n · Python · LLMs · Power BI','40+ concurrents · 1300 SKUs · Daily']
-              :['85% processing capacity gain','30+ workflows automated','270% pipeline efficiency boost','Analytics dept built in 6 months','10+ Power BI dashboards','n8n · Python · LLMs · Power BI','40+ competitors monitored · 1,300 SKUs daily']
-            ).map((item,i)=>(
-              <div key={i} className="ticker-item">{item}</div>
-            ))}
-          </div>
-        ))}
+        {[0,1].map(ri=>(<div key={ri} style={{display:'flex',gap:'48px'}}>
+          {(lang==='fr'
+            ?['85% de gain en capacité de traitement','30+ workflows automatisés','270% boost efficacité pipeline','Dept Analytics créé en 6 mois','10+ dashboards Power BI','n8n · Python · LLMs · Power BI','40+ concurrents · 1300 SKUs · Daily']
+            :['85% processing capacity gain','30+ workflows automated','270% pipeline efficiency boost','Analytics dept built in 6 months','10+ Power BI dashboards','n8n · Python · LLMs · Power BI','40+ competitors monitored · 1,300 SKUs daily']
+          ).map((item,i)=>(<div key={i} className="ticker-item">{item}</div>))}
+        </div>))}
       </div>
     </div>
 
-    {/* ── HERO ── */}
+    {/* HERO */}
     <section id="about" className="hero">
       <div className="hero-badge">{t.badge}</div>
       <h1 className="hero-h1">
@@ -1131,16 +1392,9 @@ function App(){
         <div><span className="accent">DE</span></div>
         <div className="outline">MAINTENANT</div>
       </h1>
-      <p className="hero-sub">
-        {t.heroSub1} <span>{t.heroSub1b}</span> {t.heroSub2}<br/>
-        {t.heroSub3}<br/>
-        {t.heroSub4}
-      </p>
+      <p className="hero-sub">{t.heroSub1} <span>{t.heroSub1b}</span> {t.heroSub2}<br/>{t.heroSub3}<br/>{t.heroSub4}</p>
       <XPCounter lang={lang}/>
-      <div className="typewriter-row" style={{marginTop:'16px'}}>
-        <span className="prompt">{'>'}</span>
-        {typed}<span className="t-cursor"/>
-      </div>
+      <div className="typewriter-row" style={{marginTop:'16px'}}><span className="prompt">{'>'}</span>{typed}<span className="t-cursor"/></div>
       <div className="hero-ctas">
         <button className="btn-primary" onClick={()=>scrollTo('roi')}>{t.ctaRoi}</button>
         <button className="btn-secondary" onClick={()=>scrollTo('contact')}>{t.ctaContact}</button>
@@ -1148,14 +1402,12 @@ function App(){
       </div>
     </section>
 
-    {/* ── METRICS ── */}
-    <div className="metrics reveal">
-      {t.metrics.map((m,i)=>(
-        <div key={i} className="metric"><span className="metric-num">{m.n}</span><span className="metric-lbl">{m.l}</span></div>
-      ))}
+    {/* METRICS — animated counters */}
+    <div className="metrics">
+      {t.metrics.map((m,i)=><AnimatedMetric key={i} n={m.n} s={m.s} l={m.l}/>)}
     </div>
 
-    {/* ── DASHBOARD ── */}
+    {/* DASHBOARD */}
     <div id="dashboard" className="section-full">
       <div className="section-full-inner" style={{paddingTop:'90px',paddingBottom:'90px'}}>
         <div className="section-eyebrow">{t.dashEyebrow}</div>
@@ -1165,17 +1417,14 @@ function App(){
       </div>
     </div>
 
-    {/* ── PIPELINE ── */}
+    {/* PIPELINE — drag & drop */}
     <section id="pipeline" className="section">
       <div className="section-eyebrow">{t.pipeEyebrow}</div>
       <h2 className="section-title">{t.pipeTitle} <em>{t.pipeTitleEm}</em></h2>
       <p style={{fontSize:'.88rem',color:'var(--text-sec)',maxWidth:'580px',marginBottom:'36px',lineHeight:'1.75'}}>{t.pipeDesc}</p>
       <Pipeline lang={lang}/>
       <div style={{marginTop:'28px'}} className="terminal reveal">
-        <div className="terminal-bar">
-          <div className="t-dot t-red"/><div className="t-dot t-yellow"/><div className="t-dot t-green"/>
-          <span className="terminal-path">antoine@automation-engine — forecast.py</span>
-        </div>
+        <div className="terminal-bar"><div className="t-dot t-red"/><div className="t-dot t-yellow"/><div className="t-dot t-green"/><span className="terminal-path">antoine@automation-engine — forecast.py</span></div>
         <div className="terminal-body">
           <div className="t-line"><span className="t-prompt">$</span> <span className="t-cmd">python forecast_engine.py</span> <span className="t-dim">--client enterprise --sku-level --horizon 13w</span></div>
           {(lang==='fr'
@@ -1190,35 +1439,21 @@ function App(){
       </div>
     </section>
 
-    {/* ── EXPERIENCE ── */}
+    {/* EXPERIENCE */}
     <section id="experience" className="section" style={{background:'var(--bg2)'}}>
       <div style={{maxWidth:'1400px',margin:'0 auto'}}>
         <div className="section-eyebrow">{t.expEyebrow}</div>
         <h2 className="section-title">{t.expTitle} <em>{t.expTitleEm}</em></h2>
         <div className="exp-filter-bar">
-          {allTags.map(tag=>(
-            <button key={tag} className={`filter-btn${tagFilter===tag?' active':''}`} onClick={()=>{setTagFilter(tag);if(tag!==t.expFilterAll){const m=exps.findIndex(e=>e.tags.includes(tag));if(m>=0)setActiveExp(m)}else setActiveExp(0)}}>{tag}</button>
-          ))}
+          {allTags.map(tag=>(<button key={tag} className={`filter-btn${tagFilter===tag?' active':''}`} onClick={()=>{setTagFilter(tag);if(tag!==t.expFilterAll){const m=exps.findIndex(e=>e.tags.includes(tag));if(m>=0)setActiveExp(m)}else setActiveExp(0)}}>{tag}</button>))}
         </div>
         <div className="exp-layout reveal">
           <div className="exp-nav">
-            {exps.map(e=>{
-              const hidden=tagFilter!==t.expFilterAll&&!e.tags.includes(tagFilter);
-              if(hidden)return null;
-              return(
-                <div key={e.id} className={`exp-nav-item${activeExp===e.id?' active':''}`} onClick={()=>setActiveExp(e.id)}>
-                  <div className="exp-nav-date">{e.date}</div>
-                  <div className="exp-nav-role">{e.role}</div>
-                  <div className="exp-nav-co">{e.company}</div>
-                </div>
-              );
-            })}
+            {exps.map(e=>{const hidden=tagFilter!==t.expFilterAll&&!e.tags.includes(tagFilter);if(hidden)return null;return(<div key={e.id} className={`exp-nav-item${activeExp===e.id?' active':''}`} onClick={()=>setActiveExp(e.id)}><div className="exp-nav-date">{e.date}</div><div className="exp-nav-role">{e.role}</div><div className="exp-nav-co">{e.company}</div></div>);})}
           </div>
           <div className="exp-detail">
             <div className="exp-detail-role">{exp.role}</div>
-            <div className="exp-detail-meta">
-              <span>{exp.company}</span><span>·</span><span>{exp.location}</span><span>·</span><span>{exp.revenue}</span>
-            </div>
+            <div className="exp-detail-meta"><span>{exp.company}</span><span>·</span><span>{exp.location}</span><span>·</span><span>{exp.revenue}</span></div>
             <ul className="exp-bullets">{exp.highlights.map((h,i)=><li key={i}>{h}</li>)}</ul>
             <div className="exp-tags">{exp.tags.map(tag=><span key={tag} className="exp-tag">{tag}</span>)}</div>
           </div>
@@ -1226,7 +1461,7 @@ function App(){
       </div>
     </section>
 
-    {/* ── SKILLS ── */}
+    {/* SKILLS + RADAR */}
     <section id="skills" className="section">
       <div className="section-eyebrow">{t.skillsEyebrow}</div>
       <h2 className="section-title">{t.skillsTitle} <span style={{color:'var(--text-dim)'}}>{t.skillsTitleDim}</span></h2>
@@ -1236,14 +1471,15 @@ function App(){
             <div className="skill-icon">{s.icon}</div>
             <div className="skill-name">{s.name}</div>
             <div className="skill-desc">{s.desc}</div>
-            <div className="skill-bar"><div className="skill-fill" style={{'--pct':`${s.pct}%`}}/></div>
+            <div className="skill-bar"><div className="skill-fill" style={{width:`${s.pct}%`}}/></div>
             <div className="skill-pct">{s.pct}%</div>
           </div>
         ))}
       </div>
+      <RadarChart lang={lang}/>
     </section>
 
-    {/* ── PROJECTS ── */}
+    {/* PROJECTS */}
     <section id="projects" className="section" style={{background:'var(--bg2)'}}>
       <div style={{maxWidth:'1400px',margin:'0 auto'}}>
         <div className="section-eyebrow">{t.projectsEyebrow}</div>
@@ -1253,25 +1489,18 @@ function App(){
       </div>
     </section>
 
-    {/* ── STACK ── */}
+    {/* STACK */}
     <section id="stack" className="section">
       <div style={{maxWidth:'1400px',margin:'0 auto'}}>
         <div className="section-eyebrow">{t.stackEyebrow}</div>
         <h2 className="section-title">{t.stackTitle} <em>{t.stackTitleEm}</em></h2>
         <div className="stack-grid reveal">
-          {STACK.map((s,i)=>(
-            <div key={i} className="stack-card">
-              <div className="stack-level">{s.level}</div>
-              <span className="stack-emoji">{s.e}</span>
-              <div className="stack-name">{s.name}</div>
-              <div className="stack-cat">{s.cat}</div>
-            </div>
-          ))}
+          {STACK.map((s,i)=>(<div key={i} className="stack-card"><div className="stack-level">{s.level}</div><span className="stack-emoji">{s.e}</span><div className="stack-name">{s.name}</div><div className="stack-cat">{s.cat}</div></div>))}
         </div>
       </div>
     </section>
 
-    {/* ── ROI ── */}
+    {/* ROI */}
     <section id="roi" className="section" style={{background:'var(--bg2)'}}>
       <div style={{maxWidth:'1400px',margin:'0 auto'}}>
         <div className="section-eyebrow">{t.roiEyebrow}</div>
@@ -1280,8 +1509,18 @@ function App(){
       </div>
     </section>
 
-    {/* ── TESTIMONIALS ── */}
-    <section id="testimonials" className="section">
+    {/* TERMINAL CHATBOT */}
+    <section id="terminal" className="section">
+      <div style={{maxWidth:'1400px',margin:'0 auto'}}>
+        <div className="section-eyebrow">{t.terminalEyebrow}</div>
+        <h2 className="section-title">{t.terminalTitle} <em>{t.terminalTitleEm}</em></h2>
+        <p style={{fontSize:'.88rem',color:'var(--text-sec)',maxWidth:'580px',marginBottom:'36px',lineHeight:'1.75'}}>{t.terminalDesc}</p>
+        <TerminalChatbot lang={lang}/>
+      </div>
+    </section>
+
+    {/* TESTIMONIALS */}
+    <section id="testimonials" className="section" style={{background:'var(--bg2)'}}>
       <div style={{maxWidth:'1400px',margin:'0 auto'}}>
         <div className="section-eyebrow">{t.testiEyebrow}</div>
         <h2 className="section-title">{t.testiTitle} <em>{t.testiTitleEm}</em></h2>
@@ -1295,9 +1534,7 @@ function App(){
                 <div>
                   <div className="testi-name" style={{filter:'blur(4px)',userSelect:'none',color:'var(--text-dim)',fontSize:'.78rem',letterSpacing:'1px'}}>{t.testiBlur}</div>
                   <div className="testi-role">{item.role}</div>
-                  <div style={{fontFamily:"'Space Mono',monospace",fontSize:'.44rem',color:'var(--accent3)',letterSpacing:'2px',marginTop:'4px',display:'flex',alignItems:'center',gap:'5px'}}>
-                    <span style={{width:'5px',height:'5px',borderRadius:'50%',background:'var(--accent3)',display:'inline-block'}}/>{t.testiSoon}
-                  </div>
+                  <div style={{fontFamily:"'Space Mono',monospace",fontSize:'.44rem',color:'var(--accent3)',letterSpacing:'2px',marginTop:'4px',display:'flex',alignItems:'center',gap:'5px'}}><span style={{width:'5px',height:'5px',borderRadius:'50%',background:'var(--accent3)',display:'inline-block'}}/>{t.testiSoon}</div>
                 </div>
               </div>
             </div>
@@ -1306,20 +1543,15 @@ function App(){
       </div>
     </section>
 
-    {/* ── WORLD STRIP ── */}
+    {/* WORLD STRIP */}
     <div className="world-strip">
       <div className="world-inner">
         <span className="world-label">{t.worldLabel}</span>
-        {countries.map((c,i)=>(
-          <button key={i} className="country-flag-btn" onClick={()=>setActiveCountry(c)} title={c.n}>
-            <img src={`https://flagcdn.com/48x36/${c.iso}.png`} width="48" height="36" alt={c.n}/>
-            <span className="country-flag-label">{c.n}</span>
-          </button>
-        ))}
+        {countries.map((c,i)=>(<button key={i} className="country-flag-btn" onClick={()=>setActiveCountry(c)} title={c.n}><img src={`https://flagcdn.com/48x36/${c.iso}.png`} width="48" height="36" alt={c.n}/><span className="country-flag-label">{c.n}</span></button>))}
       </div>
     </div>
 
-    {/* ── BLOG ── */}
+    {/* BLOG */}
     <section id="blog" className="section" style={{background:'var(--bg2)'}}>
       <div style={{maxWidth:'1400px',margin:'0 auto'}}>
         <div className="section-eyebrow">{t.blogEyebrow}</div>
@@ -1329,36 +1561,22 @@ function App(){
       </div>
     </section>
 
-    {/* ── CONTACT ── */}
+    {/* CONTACT */}
     <section id="contact" className="section">
       <div className="section-eyebrow">{t.contactEyebrow}</div>
       <h2 className="section-title">{t.contactTitle} <em>{t.contactTitleEm}</em></h2>
       <div className="contact-layout reveal">
         <div className="contact-cards">
           <CopyEmailButton lang={lang}/>
-          <a href="https://www.linkedin.com/in/antoine2maintenant/" target="_blank" rel="noopener noreferrer" className="contact-card">
-            <span className="contact-icon">🔗</span>
-            <div><div className="contact-lbl">LinkedIn</div><div className="contact-val">linkedin.com/in/antoine2maintenant</div></div>
-          </a>
-          <a href="https://github.com/demaintenant-antoine-pro" target="_blank" rel="noopener noreferrer" className="contact-card">
-            <span className="contact-icon">🐙</span>
-            <div><div className="contact-lbl">GitHub</div><div className="contact-val">github.com/demaintenant-antoine-pro</div></div>
-          </a>
-          <div className="contact-card" style={{cursor:'default'}}>
-            <span className="contact-icon">📍</span>
-            <div><div className="contact-lbl">{t.contactLocation}</div><div className="contact-val">France · Canada (Montréal)</div></div>
-          </div>
-          <div className="contact-card" style={{cursor:'default'}}>
-            <span className="contact-icon">📱</span>
-            <div><div className="contact-lbl">{t.contactPhone}</div><div className="contact-val">+1 (263) 385-6506</div></div>
-          </div>
+          <a href="https://www.linkedin.com/in/antoine2maintenant/" target="_blank" rel="noopener noreferrer" className="contact-card"><span className="contact-icon">🔗</span><div><div className="contact-lbl">LinkedIn</div><div className="contact-val">linkedin.com/in/antoine2maintenant</div></div></a>
+          <a href="https://github.com/demaintenant-antoine-pro" target="_blank" rel="noopener noreferrer" className="contact-card"><span className="contact-icon">🐙</span><div><div className="contact-lbl">GitHub</div><div className="contact-val">github.com/demaintenant-antoine-pro</div></div></a>
+          <div className="contact-card" style={{cursor:'default'}}><span className="contact-icon">📍</span><div><div className="contact-lbl">{t.contactLocation}</div><div className="contact-val">France · Canada (Montréal)</div></div></div>
+          <div className="contact-card" style={{cursor:'default'}}><span className="contact-icon">📱</span><div><div className="contact-lbl">{t.contactPhone}</div><div className="contact-val">+1 (263) 385-6506</div></div></div>
         </div>
         <div className="contact-cta reveal">
           <h3>{t.contactH3}</h3>
           <p dangerouslySetInnerHTML={{__html:t.contactP}}/>
-          <div style={{fontFamily:"'Space Mono',monospace",fontSize:'.6rem',color:'var(--accent1)',letterSpacing:'2px',textTransform:'uppercase',display:'flex',alignItems:'center'}}>
-            <span className="status-dot"/>{t.contactStatus}
-          </div>
+          <div style={{fontFamily:"'Space Mono',monospace",fontSize:'.6rem',color:'var(--accent1)',letterSpacing:'2px',textTransform:'uppercase',display:'flex',alignItems:'center'}}><span className="status-dot"/>{t.contactStatus}</div>
         </div>
       </div>
     </section>
