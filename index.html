@@ -441,53 +441,186 @@ window.addEventListener('scroll',()=>{const d=document.documentElement;document.
 </script>
 
 <script type="text/babel">
-const {useState,useEffect,useRef,useCallback}=React;
+const {useState,useEffect,useRef,useCallback,createContext,useContext}=React;
 
 /* ══════════════════════════════════════
-   DATA
+   i18n CONTEXT
 ══════════════════════════════════════ */
-const EXPERIENCES=[
-  {id:0,date:"Jun 2025 – Present",role:"AI Specialist & BI Lead",company:"NAOS – Bioderma · NORAM",location:"Montréal, Canada",revenue:"€950M",
-   highlights:[
-     "Architecting enterprise-wide Generative AI & Agentic workflow integration across North American operations.",
-     "Engineering AI agent networks (n8n, Python, LLMs) for end-to-end autonomous data pipelines.",
-     "Built a daily competitive intelligence scraper monitoring 40+ competitors across 1,300 SKUs — promos, OOS, new launches, pricing shifts, review sentiment — with auto-generated Power BI dashboards every morning.",
-     "Built a master sales automation: merges all rep extracts into a clean master file, flags errors & missing data, detects OOS, splits sell-out by rep, generates dashboards & alerts — fully hands-free.",
-     "85% gain in processing capacity by migrating 30+ manual workstreams.",
-     "Governing Power BI ecosystem across all business units.",
-   ],
-   tags:["n8n","Python","LLMs","Power BI","Agentic AI","Web Scraping","NLP","Stock Forecasting"]},
-  {id:1,date:"May 2024 – Jun 2025",role:"Business Analyst (VIE)",company:"NAOS – Bioderma · USA",location:"United States",revenue:"€950M",
-   highlights:[
-     "Built the US Analytics department from zero — governance, protocols, frameworks in 6 months.",
-     "10+ automated Power BI dashboards with real-time cross-BU visibility.",
-     "SKU-level sell-through forecasting for major retail partners (national chains, drug stores, beauty specialty).",
-     "Stock forecasting model reducing OOS events and overstock risk across 5 retail channels.",
-     "NLP pipeline analyzing 10,000+ customer reviews monthly — sentiment trends auto-fed into product team reports.",
-   ],
-   tags:["Power BI","Forecasting","Retail","Stock Planning","NLP","Data Governance"]},
-  {id:2,date:"Feb 2023 – Feb 2024",role:"Business Developer",company:"Reech Influence Cloud · SaaS",location:"Paris, France",revenue:"€13M",
-   highlights:[
-     "First Luxury and CAC40 clients — unlocked new high-value market segment.",
-     "270% sales pipeline efficiency boost through CRM process redesign.",
-   ],
-   tags:["Sales Strategy","CRM","Luxury","CAC40","HubSpot"]},
-  {id:3,date:"Mar – Jul 2022",role:"Data Analyst (Master Thesis)",company:"NOOS · CSR",location:"Madrid, Spain",revenue:"€9M",
-   highlights:[
-     "ML & NLP models for B2B employee engagement via semantic analysis.",
-     "Automated 15,000+ data points with Python & Power BI.",
-   ],
-   tags:["Python","NLP","ML","Power BI","B2B"]},
-];
+const LangCtx=createContext('en');
+const useLang=()=>useContext(LangCtx);
 
-const SKILLS=[
-  {icon:"📊",name:"Power BI",desc:"Enterprise dashboards, DAX, governance",pct:95},
-  {icon:"🤖",name:"Agentic AI",desc:"n8n, LLMs, autonomous pipelines",pct:90},
-  {icon:"🐍",name:"Python",desc:"Forecasting, NLP, ML, data eng.",pct:82},
-  {icon:"⚡",name:"Automation",desc:"End-to-end workflow automation",pct:95},
-  {icon:"📈",name:"Forecasting",desc:"SKU-level models, retail analytics",pct:88},
-  {icon:"💰",name:"Revenue Ops",desc:"Financial reporting, ROI optimization",pct:92},
-];
+/* ══════════════════════════════════════
+   TRANSLATIONS
+══════════════════════════════════════ */
+const T={
+  en:{
+    nav:['about','dashboard','pipeline','experience','projects','stack','roi','testimonials','blog','contact'],
+    navLabels:{about:'About',dashboard:'Dashboard',pipeline:'Pipeline',experience:'Experience',projects:'Projects',stack:'Stack',roi:'ROI',testimonials:'Reviews',blog:'Blog',contact:'Contact'},
+    badge:'🟢 Available for hire · France & Canada',
+    heroSub1:"I turn your",heroSub1b:"bloated reporting hell",heroSub2:"into automated intelligence —",heroSub3:"real-time dashboards, self-running pipelines, executive-ready insights.",heroSub4:"BI & Automation specialist with 5+ years across CPG, SaaS and CSR.",
+    xp:"yrs of XP in data & automation",
+    ctaRoi:"Calculate My ROI →",ctaContact:"Get in Touch",ctaCV:"↓ Download CV",
+    metrics:[{n:'85%',l:'Processing Capacity Gained'},{n:'270%',l:'Pipeline Efficiency Boost'},{n:'30+',l:'Workflows Automated'},{n:'6mo',l:'Built Analytics Dept from 0'}],
+    dashEyebrow:'Live Demo',dashTitle:'Executive',dashTitleEm:'Dashboard',
+    dashDesc:"Replica of a live executive dashboard — real-time revenue tracking, ML forecasting, zero manual intervention.",
+    dashKpis:[['$2.4M','YTD Revenue','↑ +18% vs LY'],['85%','Reporting Time Saved','30+ workflows'],['4.2%','Forecast MAPE','↓ from 8.1%'],['10+','Power BI Dashboards','All BUs covered'],['30+','Channels Tracked','Daily, automated'],['06:00','Auto-Report','Every morning, 0 manual']],
+    dashChart1:'Revenue Trend + Forecast · Enterprise Client',dashChart2:'Revenue by Channel',
+    pipeEyebrow:'Interactive Demo',pipeTitle:'Automation',pipeTitleEm:'Pipeline',
+    pipeDesc:"A live retail forecasting pipeline — raw POS data to stakeholder reports in under 6 minutes, every morning at 6AM.",
+    pipeReady:'Pipeline idle. Press RUN to execute.',pipeRun:'▶ RUN PIPELINE',pipeRunning:'⟳ RUNNING...',
+    expEyebrow:'Career Timeline',expTitle:'Where I built',expTitleEm:'things that still run.',
+    expFilterAll:'All',
+    skillsEyebrow:'Arsenal',skillsTitle:'Tools I use.',skillsTitleDim:'Not just listed.',
+    projectsEyebrow:'Signature Projects',projectsTitle:'What I actually',projectsTitleEm:'built.',
+    projectsDesc:'Production systems still running today. No names, no logos — but real impact, real code, real results.',
+    stackEyebrow:'Tech Stack',stackTitle:'Tools I ship with.',stackTitleEm:'Not just buzzwords.',
+    roiEyebrow:'ROI Calculator',roiTitle:'Find out what',roiTitleEm:'not',roiTitle2:'hiring me costs.',
+    roiH3:"What's your data ops costing you?",roiP:"Move the sliders. Watch the pain materialize. Then we talk.",
+    roiSliders:[
+      {label:"Analysts on manual reports",unit:"people"},
+      {label:"Hours / week per analyst",unit:"h/wk"},
+      {label:"Avg hourly cost (salary + overhead)",unit:"$/h"},
+      {label:"Error rate in manual reporting",unit:"%"},
+    ],
+    roiComment:'// Automation impact analysis',
+    roiLbl1:'Annual cost of manual reporting',roiLbl2:'+ Hidden error cost',roiLbl3:'Total annual pain',
+    roiLbl4:'After automation (12% residual)',roiLbl5:'🚀 Annual savings unlocked',
+    roiSuffix1:'analyst',roiSuffix2:'analysts',roiWks:'wks',
+    roiRoi:'ROI on hiring Antoine: ~',roiDisclaimer:'// Conservative estimate. Real results may cause audible gasping.',
+    testiEyebrow:'Social Proof',testiTitle:"Don't take",testiTitleEm:"my word for it.",
+    testiBlur:'Anonymous · NDA',testiSoon:'COMING SOON',
+    worldLabel:'Click a country →',
+    countryClose:'CLOSE // ESC',
+    blogEyebrow:'Notes & Thoughts',blogTitle:'What I think',blogTitleEm:'out loud.',
+    blogDesc:"Thoughts on AI, automation and data — without unnecessary jargon.",
+    blogRead:'Read article →',blogReadTime:'min read',blogClose:'CLOSE // ESC',
+    contactEyebrow:'Contact',contactTitle:"Let's build",contactTitleEm:"something real.",
+    contactCopyHint:'CLICK TO COPY',contactCopied:'✓ Email copied!',
+    contactLocation:'Location',contactPhone:'Phone',
+    contactH3:"I'm selective about what I build next.",
+    contactP:"If you have a data problem that's costing you real money and time — manual reports, broken pipelines, zero visibility into your operations — I'm interested.<br/><br/>If you want me to \"just make the charts prettier,\" I'll politely refer you to Canva.",
+    contactStatus:'Open to new missions · 2026',
+    visitors:'visitors',
+    footerKonami:'// Try the Konami code ↑↑↓↓←→←→BA — you won\'t regret it.',
+    eggTitle:'KONAMI CODE DETECTED',
+    eggP1:"Congrats — you're either a developer, a gamer, or dangerously bored.",
+    eggP2:"Either way, you passed the hidden test.",
+    eggP3:"People who find easter eggs tend to ship features.",
+    eggCode:"// Secret stat: 85% pipeline automation achieved.\n// Time to implement: 3 months.\n// Manual alternative: never.",
+    eggClose:'CLOSE // ESC',
+    scrollTop:'Back to top',
+  },
+  fr:{
+    nav:['about','dashboard','pipeline','experience','projects','stack','roi','testimonials','blog','contact'],
+    navLabels:{about:'Profil',dashboard:'Dashboard',pipeline:'Pipeline',experience:'Expérience',projects:'Projets',stack:'Stack',roi:'ROI',testimonials:'Avis',blog:'Blog',contact:'Contact'},
+    badge:'🟢 Disponible · France & Canada',
+    heroSub1:"Je transforme votre",heroSub1b:"enfer de reporting manuel",heroSub2:"en intelligence automatisée —",heroSub3:"dashboards temps réel, pipelines autonomes, insights prêts pour le CODIR.",heroSub4:"Spécialiste BI & Automatisation, 5+ ans en CPG, SaaS et RSE.",
+    xp:"ans d'XP en data & automatisation",
+    ctaRoi:"Calculer mon ROI →",ctaContact:"Me contacter",ctaCV:"↓ Télécharger CV",
+    metrics:[{n:'85%',l:'Gain en capacité de traitement'},{n:'270%',l:'Efficacité pipeline boostée'},{n:'30+',l:'Workflows automatisés'},{n:'6mois',l:'Dept Analytics créé from scratch'}],
+    dashEyebrow:'Démo Live',dashTitle:'Dashboard',dashTitleEm:'Exécutif',
+    dashDesc:"Réplique d'un dashboard exécutif réel — suivi de revenus temps réel, prévisions ML, zéro intervention manuelle.",
+    dashKpis:[['2,4M€','CA YTD','↑ +18% vs N-1'],['85%','Temps reporting économisé','30+ workflows'],['4,2%','MAPE Prévisions','↓ depuis 8,1%'],['10+','Dashboards Power BI','Toutes BUs'],['30+','Canaux suivis','Daily, automatisé'],['06:00','Rapport Auto','Chaque matin, 0 manuel']],
+    dashChart1:'Tendance CA + Prévision · Client Entreprise',dashChart2:'CA par Canal',
+    pipeEyebrow:'Démo Interactive',pipeTitle:'Pipeline',pipeTitleEm:"d'Automatisation",
+    pipeDesc:"Un vrai pipeline de prévisions retail — des données brutes POS au rapport exécutif en moins de 6 minutes, chaque matin à 6h.",
+    pipeReady:'Pipeline inactif. Appuyez sur RUN pour exécuter.',pipeRun:'▶ LANCER LE PIPELINE',pipeRunning:'⟳ EN COURS...',
+    expEyebrow:'Parcours',expTitle:"Là où j'ai construit",expTitleEm:'des choses qui tournent encore.',
+    expFilterAll:'Tous',
+    skillsEyebrow:'Arsenal',skillsTitle:'Mes outils.',skillsTitleDim:'Pas juste une liste.',
+    projectsEyebrow:'Projets Signature',projectsTitle:'Ce que j\'ai vraiment',projectsTitleEm:'construit.',
+    projectsDesc:'Des systèmes en production qui tournent encore aujourd\'hui. Pas de noms, pas de logos — mais un impact réel, du vrai code, de vrais résultats.',
+    stackEyebrow:'Stack Technique',stackTitle:'Ce avec quoi je livre.',stackTitleEm:'Pas des buzzwords.',
+    roiEyebrow:'Calculateur ROI',roiTitle:'Découvrez ce que',roiTitleEm:'ne pas',roiTitle2:'me recruter vous coûte.',
+    roiH3:"Combien vous coûte votre data ops actuelle ?",roiP:"Bougez les curseurs. Regardez la douleur se matérialiser. On en parle.",
+    roiSliders:[
+      {label:"Analystes sur des rapports manuels",unit:"personnes"},
+      {label:"Heures / semaine par analyste",unit:"h/sem"},
+      {label:"Coût horaire moyen (salaire + charges)",unit:"€/h"},
+      {label:"Taux d'erreur dans les rapports manuels",unit:"%"},
+    ],
+    roiComment:'// Analyse d\'impact de l\'automatisation',
+    roiLbl1:'Coût annuel du reporting manuel',roiLbl2:'+ Coût caché des erreurs',roiLbl3:'Douleur annuelle totale',
+    roiLbl4:'Après automatisation (12% résiduel)',roiLbl5:'🚀 Économies annuelles débloquées',
+    roiSuffix1:'analyste',roiSuffix2:'analystes',roiWks:'sem',
+    roiRoi:'ROI sur le recrutement d\'Antoine : ~',roiDisclaimer:'// Estimation conservatrice. Les vrais résultats peuvent provoquer des gasps audibles.',
+    testiEyebrow:'Preuves Sociales',testiTitle:"Ne prenez pas",testiTitleEm:"ma parole pour argent comptant.",
+    testiBlur:'Anonyme · NDA',testiSoon:'BIENTÔT DISPONIBLE',
+    worldLabel:'Cliquez sur un pays →',
+    countryClose:'FERMER // ESC',
+    blogEyebrow:'Notes & Réflexions',blogTitle:'Ce que je pense',blogTitleEm:'tout haut.',
+    blogDesc:"Quelques réflexions sur l'IA, l'automatisation et la data — sans jargon inutile.",
+    blogRead:"Lire l'article →",blogReadTime:'min de lecture',blogClose:'FERMER // ESC',
+    contactEyebrow:'Contact',contactTitle:"Construisons",contactTitleEm:"quelque chose de réel.",
+    contactCopyHint:'CLIQUER POUR COPIER',contactCopied:'✓ Email copié !',
+    contactLocation:'Localisation',contactPhone:'Téléphone',
+    contactH3:"Je suis sélectif sur ce que je construis ensuite.",
+    contactP:"Si vous avez un problème data qui vous coûte vraiment du temps et de l'argent — rapports manuels, pipelines cassés, zéro visibilité sur vos opérations — je suis intéressé.<br/><br/>Si vous voulez juste que les graphiques soient \"plus jolis\", je vous orienterai poliment vers Canva.",
+    contactStatus:'Disponible pour de nouvelles missions · 2026',
+    visitors:'visiteurs',
+    footerKonami:'// Essayez le code Konami ↑↑↓↓←→←→BA — vous ne le regretterez pas.',
+    eggTitle:'CODE KONAMI DÉTECTÉ',
+    eggP1:"Félicitations — vous êtes soit un développeur, soit un gamer, soit dangereusement ennuyé.",
+    eggP2:"Dans tous les cas, vous avez passé le test caché.",
+    eggP3:"Les gens qui trouvent les easter eggs ont tendance à livrer des features.",
+    eggCode:"// Stat secrète : 85% d'automatisation pipeline atteinte.\n// Temps d'implémentation : 3 mois.\n// Alternative manuelle : jamais.",
+    eggClose:'FERMER // ESC',
+    scrollTop:'Haut de page',
+  }
+};
+
+/* ══════════════════════════════════════
+   BILINGUAL DATA
+══════════════════════════════════════ */
+const EXPERIENCES={
+  en:[
+    {id:0,date:"Jun 2025 – Present",role:"AI Specialist & BI Lead",company:"NAOS – Bioderma · NORAM",location:"Montréal, Canada",revenue:"€950M",
+     highlights:["Architecting enterprise-wide Generative AI & Agentic workflow integration across North American operations.","Engineering AI agent networks (n8n, Python, LLMs) for end-to-end autonomous data pipelines.","Built a daily competitive intelligence scraper monitoring 40+ competitors across 1,300 SKUs — promos, OOS, new launches, pricing shifts, review sentiment — with auto-generated Power BI dashboards every morning.","Built a master sales automation: merges all rep extracts into a clean master file, flags errors & missing data, detects OOS, splits sell-out by rep, generates dashboards & alerts — fully hands-free.","85% gain in processing capacity by migrating 30+ manual workstreams.","Governing Power BI ecosystem across all business units."],
+     tags:["n8n","Python","LLMs","Power BI","Agentic AI","Web Scraping","NLP","Stock Forecasting"]},
+    {id:1,date:"May 2024 – Jun 2025",role:"Business Analyst (VIE)",company:"NAOS – Bioderma · USA",location:"United States",revenue:"€950M",
+     highlights:["Built the US Analytics department from zero — governance, protocols, frameworks in 6 months.","10+ automated Power BI dashboards with real-time cross-BU visibility.","SKU-level sell-through forecasting for major retail partners (national chains, drug stores, beauty specialty).","Stock forecasting model reducing OOS events and overstock risk across 5 retail channels.","NLP pipeline analyzing 10,000+ customer reviews monthly — sentiment trends auto-fed into product team reports."],
+     tags:["Power BI","Forecasting","Retail","Stock Planning","NLP","Data Governance"]},
+    {id:2,date:"Feb 2023 – Feb 2024",role:"Business Developer",company:"Reech Influence Cloud · SaaS",location:"Paris, France",revenue:"€13M",
+     highlights:["First Luxury and CAC40 clients — unlocked new high-value market segment.","270% sales pipeline efficiency boost through CRM process redesign."],
+     tags:["Sales Strategy","CRM","Luxury","CAC40","HubSpot"]},
+    {id:3,date:"Mar – Jul 2022",role:"Data Analyst (Master Thesis)",company:"NOOS · CSR",location:"Madrid, Spain",revenue:"€9M",
+     highlights:["ML & NLP models for B2B employee engagement via semantic analysis.","Automated 15,000+ data points with Python & Power BI."],
+     tags:["Python","NLP","ML","Power BI","B2B"]},
+  ],
+  fr:[
+    {id:0,date:"Juin 2025 – Présent",role:"Spécialiste IA & BI Lead",company:"NAOS – Bioderma · NORAM",location:"Montréal, Canada",revenue:"950M€",
+     highlights:["Architecture de l'intégration IA Générative & workflows Agentiques à l'échelle de l'entreprise en Amérique du Nord.","Ingénierie de réseaux d'agents IA (n8n, Python, LLMs) pour des pipelines de données autonomes de bout en bout.","Construction d'un scraper de veille concurrentielle quotidien couvrant 40+ concurrents sur 1 300 SKUs — promos, ruptures, nouveaux produits, évolutions prix, sentiment avis — avec dashboards Power BI auto-générés chaque matin.","Construction d'une automatisation master des ventes : fusionne tous les extraits des commerciaux en un fichier maître propre, détecte erreurs & données manquantes, scan OOS, répartit le sell-out par rep, génère dashboards & alertes — entièrement autonome.","85% de gain en capacité de traitement en migrant 30+ workstreams manuels.","Gouvernance de l'écosystème Power BI sur toutes les BUs."],
+     tags:["n8n","Python","LLMs","Power BI","IA Agentique","Web Scraping","NLP","Prévision Stock"]},
+    {id:1,date:"Mai 2024 – Juin 2025",role:"Business Analyst (VIE)",company:"NAOS – Bioderma · USA",location:"États-Unis",revenue:"950M€",
+     highlights:["Construction du département Analytics US de zéro — gouvernance, protocoles, frameworks en 6 mois.","10+ dashboards Power BI automatisés avec visibilité cross-BU en temps réel.","Prévisions sell-through SKU-level pour les grands partenaires retail (chaînes nationales, parapharmacies, spécialistes beauté).","Modèle de prévision de stock réduisant les ruptures et le risque surstock sur 5 canaux retail.","Pipeline NLP analysant 10 000+ avis clients mensuels — tendances sentiment auto-intégrées aux rapports équipe produit."],
+     tags:["Power BI","Prévision","Retail","Stock Planning","NLP","Gouvernance Data"]},
+    {id:2,date:"Fév 2023 – Fév 2024",role:"Business Developer",company:"Reech Influence Cloud · SaaS",location:"Paris, France",revenue:"13M€",
+     highlights:["Premiers clients Luxe et CAC40 — ouverture d'un nouveau segment à haute valeur.","Boost de 270% de l'efficacité du pipeline commercial via refonte CRM."],
+     tags:["Stratégie Commerciale","CRM","Luxe","CAC40","HubSpot"]},
+    {id:3,date:"Mars – Juil 2022",role:"Data Analyst (Mémoire Master)",company:"NOOS · RSE",location:"Madrid, Espagne",revenue:"9M€",
+     highlights:["Modèles ML & NLP pour l'engagement employé B2B via analyse sémantique.","Automatisation de 15 000+ points de données avec Python & Power BI."],
+     tags:["Python","NLP","ML","Power BI","B2B"]},
+  ]
+};
+
+const SKILLS={
+  en:[
+    {icon:"📊",name:"Power BI",desc:"Enterprise dashboards, DAX, governance",pct:95},
+    {icon:"🤖",name:"Agentic AI",desc:"n8n, LLMs, autonomous pipelines",pct:90},
+    {icon:"🐍",name:"Python",desc:"Forecasting, NLP, ML, data eng.",pct:82},
+    {icon:"⚡",name:"Automation",desc:"End-to-end workflow automation",pct:95},
+    {icon:"📈",name:"Forecasting",desc:"SKU-level models, retail analytics",pct:88},
+    {icon:"💰",name:"Revenue Ops",desc:"Financial reporting, ROI optimization",pct:92},
+  ],
+  fr:[
+    {icon:"📊",name:"Power BI",desc:"Dashboards entreprise, DAX, gouvernance",pct:95},
+    {icon:"🤖",name:"IA Agentique",desc:"n8n, LLMs, pipelines autonomes",pct:90},
+    {icon:"🐍",name:"Python",desc:"Prévision, NLP, ML, data engineering",pct:82},
+    {icon:"⚡",name:"Automatisation",desc:"Workflows de bout en bout",pct:95},
+    {icon:"📈",name:"Prévision",desc:"Modèles SKU-level, analytics retail",pct:88},
+    {icon:"💰",name:"Revenue Ops",desc:"Reporting financier, optimisation ROI",pct:92},
+  ]
+};
 
 const STACK=[
   {name:'Power BI',cat:'BI & Analytics',level:'EXPERT',e:'📊'},
@@ -505,133 +638,105 @@ const STACK=[
 ];
 
 const TESTIMONIALS=[
-  {q:"He built an analytics infrastructure from zero that now runs autonomously — the kind of impact that takes most teams years.",name:"Coming Soon",role:"C-Suite · Enterprise Client",ini:"★",stars:5,blur:true},
-  {q:"The forecasting models gave our sales team real visibility for the first time. Every retailer covered, updated automatically. Game changer for planning.",name:"Coming Soon",role:"Sales Director · Retail Group",ini:"★",stars:5,blur:true},
-  {q:"He doesn't just build dashboards — he understands the business. Redesigned how we think about data across all digital channels. ROI was immediate.",name:"Coming Soon",role:"Digital Director · FMCG",ini:"★",stars:5,blur:true},
-  {q:"Brought financial reporting to a completely different level. Automated, real-time, and actually readable by leadership. I wish we'd hired him sooner.",name:"Coming Soon",role:"Finance Director · CPG Group",ini:"★",stars:5,blur:true},
+  {q:{en:"He built an analytics infrastructure from zero that now runs autonomously — the kind of impact that takes most teams years.",fr:"Il a construit une infrastructure analytique de zéro qui tourne maintenant de façon autonome — le genre d'impact que la plupart des équipes mettent des années à atteindre."},role:"C-Suite · Enterprise Client",stars:5},
+  {q:{en:"The forecasting models gave our sales team real visibility for the first time. Every retailer covered, updated automatically. Game changer for planning.",fr:"Les modèles de prévision ont donné à notre équipe commerciale une vraie visibilité pour la première fois. Tous les retailers couverts, mis à jour automatiquement. Un game changer pour la planification."},role:"Sales Director · Retail Group",stars:5},
+  {q:{en:"He doesn't just build dashboards — he understands the business. Redesigned how we think about data across all digital channels. ROI was immediate.",fr:"Il ne fait pas que construire des dashboards — il comprend le business. A repensé notre façon d'aborder la data sur tous les canaux digitaux. Le ROI a été immédiat."},role:"Digital Director · FMCG",stars:5},
+  {q:{en:"Brought financial reporting to a completely different level. Automated, real-time, and actually readable by leadership. I wish we'd hired him sooner.",fr:"A amené le reporting financier à un niveau complètement différent. Automatisé, temps réel, et enfin lisible par le leadership. J'aurais aimé le recruter plus tôt."},role:"Finance Director · CPG Group",stars:5},
 ];
 
-const PIPELINE_STAGES=[
-  {icon:'🗄️',label:'Data Source',detail:'Retail API'},
-  {icon:'⬇️',label:'Ingestion',detail:'Python ETL'},
-  {icon:'🧹',label:'Clean',detail:'Pandas'},
-  {icon:'🤖',label:'Forecast',detail:'Prophet'},
-  {icon:'📊',label:'Power BI',detail:'Embed'},
-  {icon:'📬',label:'Notify',detail:'Slack+Mail'},
-];
+const PIPELINE_STAGES={
+  en:[{icon:'🗄️',label:'Data Source',detail:'Retail API'},{icon:'⬇️',label:'Ingestion',detail:'Python ETL'},{icon:'🧹',label:'Clean',detail:'Pandas'},{icon:'🤖',label:'Forecast',detail:'Prophet'},{icon:'📊',label:'Power BI',detail:'Embed'},{icon:'📬',label:'Notify',detail:'Slack+Mail'}],
+  fr:[{icon:'🗄️',label:'Source',detail:'API Retail'},{icon:'⬇️',label:'Ingestion',detail:'Python ETL'},{icon:'🧹',label:'Nettoyage',detail:'Pandas'},{icon:'🤖',label:'Prévision',detail:'Prophet'},{icon:'📊',label:'Power BI',detail:'Embed'},{icon:'📬',label:'Notifier',detail:'Slack+Mail'}],
+};
 
-const PROJECTS=[
-  {
-    icon:'🔍',
-    badge:'COMPETITIVE INTELLIGENCE',
-    title:'Competitor Monitoring Engine',
-    desc:'Daily scraper covering 40+ competitors and 1,300 SKUs across all major retail websites. Automatically detects promotions, out-of-stock events, new product launches, pricing changes, and review sentiment shifts — then generates a full Power BI dashboard every morning before anyone gets to the office.',
-    stats:['40+ Competitors','1,300 SKUs','Daily Automated','Review NLP','Price Tracking','OOS Alerts'],
-    tags:['Python','Scrapy','n8n','Power BI','NLP','Selenium'],
-  },
-  {
-    icon:'⚙️',
-    badge:'SALES AUTOMATION',
-    title:'Master Sales File Automation',
-    desc:'Full pipeline that ingests all sales rep extracts, merges them into a single clean master file, auto-detects data errors and missing entries, flags OOS products, redistributes sell-out by rep, generates dashboards and sends alerts — zero manual handling from raw extract to executive report.',
-    stats:['Multi-Rep Merge','Error Detection','OOS Scanning','Rep Sell-Out Split','Auto Dashboards','Instant Alerts'],
-    tags:['Python','Pandas','Power BI','Excel','n8n','Email Automation'],
-  },
-  {
-    icon:'📦',
-    badge:'DEMAND PLANNING',
-    title:'SKU-Level Stock Forecasting',
-    desc:'ML forecasting model (Prophet + seasonality decomposition) predicting 13-week sell-through at SKU × retailer level. Reduces OOS events and overstock risk across multiple retail channels. Forecast auto-refreshes weekly and feeds directly into replenishment recommendations.',
-    stats:['13-Week Horizon','MAPE: 4.2%','5+ Retailers','Weekly Auto-Refresh','Replenishment Recs'],
-    tags:['Python','Prophet','SQL','Power BI','Statistical Modeling'],
-  },
-  {
-    icon:'💬',
-    badge:'NLP & SENTIMENT',
-    title:'Review & Comment Analysis Pipeline',
-    desc:'Automated NLP pipeline ingesting 10,000+ customer reviews monthly from retail platforms. Classifies sentiment by product, detects emerging issues before they escalate, extracts feature-level feedback, and delivers auto-generated trend reports to the product and marketing teams.',
-    stats:['10,000+ Reviews/mo','Multi-Platform','Feature-Level NLP','Trend Detection','Auto Reports'],
-    tags:['Python','NLP','Transformers','n8n','Power BI'],
-  },
-];
+const PROJECTS={
+  en:[
+    {icon:'🔍',badge:'COMPETITIVE INTELLIGENCE',title:'Competitor Monitoring Engine',desc:'Daily scraper covering 40+ competitors and 1,300 SKUs across all major retail websites. Automatically detects promotions, OOS events, new product launches, pricing changes, and review sentiment — then generates a full Power BI dashboard every morning before anyone gets to the office.',stats:['40+ Competitors','1,300 SKUs','Daily Automated','Review NLP','Price Tracking','OOS Alerts'],tags:['Python','Scrapy','n8n','Power BI','NLP','Selenium']},
+    {icon:'⚙️',badge:'SALES AUTOMATION',title:'Master Sales File Automation',desc:'Full pipeline ingesting all sales rep extracts, merging them into a single clean master file, auto-detecting errors and missing entries, flagging OOS products, redistributing sell-out by rep, generating dashboards and sending alerts — zero manual handling from raw extract to executive report.',stats:['Multi-Rep Merge','Error Detection','OOS Scanning','Rep Sell-Out Split','Auto Dashboards','Instant Alerts'],tags:['Python','Pandas','Power BI','Excel','n8n','Email Automation']},
+    {icon:'📦',badge:'DEMAND PLANNING',title:'SKU-Level Stock Forecasting',desc:'ML forecasting model (Prophet + seasonality decomposition) predicting 13-week sell-through at SKU × retailer level. Reduces OOS events and overstock risk across multiple retail channels. Forecast auto-refreshes weekly and feeds directly into replenishment recommendations.',stats:['13-Week Horizon','MAPE: 4.2%','5+ Retailers','Weekly Auto-Refresh','Replenishment Recs'],tags:['Python','Prophet','SQL','Power BI','Statistical Modeling']},
+    {icon:'💬',badge:'NLP & SENTIMENT',title:'Review & Comment Analysis Pipeline',desc:'Automated NLP pipeline ingesting 10,000+ customer reviews monthly from retail platforms. Classifies sentiment by product, detects emerging issues before they escalate, extracts feature-level feedback, and delivers auto-generated trend reports to product and marketing teams.',stats:['10,000+ Reviews/mo','Multi-Platform','Feature-Level NLP','Trend Detection','Auto Reports'],tags:['Python','NLP','Transformers','n8n','Power BI']},
+  ],
+  fr:[
+    {icon:'🔍',badge:'VEILLE CONCURRENTIELLE',title:'Moteur de Monitoring Concurrentiel',desc:"Scraper quotidien couvrant 40+ concurrents et 1 300 SKUs sur tous les grands sites retail. Détecte automatiquement promotions, ruptures, nouveaux produits, évolutions prix et sentiment des avis — puis génère un dashboard Power BI complet chaque matin avant que les équipes arrivent.",stats:['40+ Concurrents','1 300 SKUs','Automatisé Daily','NLP Avis','Suivi Prix','Alertes OOS'],tags:['Python','Scrapy','n8n','Power BI','NLP','Selenium']},
+    {icon:'⚙️',badge:'AUTOMATISATION VENTES',title:"Automatisation du Fichier Master Ventes",desc:"Pipeline complet qui ingère tous les extraits commerciaux, les fusionne en un fichier maître propre, détecte automatiquement erreurs et données manquantes, flag les ruptures, répartit le sell-out par commercial, génère des dashboards et envoie des alertes — zéro manipulation manuelle.",stats:['Fusion Multi-Reps','Détection Erreurs','Scan OOS','Répartition Reps','Dashboards Auto','Alertes Instantanées'],tags:['Python','Pandas','Power BI','Excel','n8n','Email Automation']},
+    {icon:'📦',badge:'DEMAND PLANNING',title:'Prévision Stock SKU-Level',desc:"Modèle ML (Prophet + décomposition saisonnière) prédisant le sell-through sur 13 semaines au niveau SKU × retailer. Réduit les ruptures et le risque surstock sur plusieurs canaux retail. Rafraîchissement auto hebdomadaire, alimentant directement les recommandations de réapprovisionnement.",stats:['Horizon 13 Semaines','MAPE : 4,2%','5+ Retailers','Auto-refresh Hebdo','Reco Réappro'],tags:['Python','Prophet','SQL','Power BI','Modélisation Statistique']},
+    {icon:'💬',badge:'NLP & SENTIMENT',title:"Pipeline d'Analyse Avis & Commentaires",desc:"Pipeline NLP automatisé ingérant 10 000+ avis clients mensuels depuis les plateformes retail. Classifie le sentiment par produit, détecte les problèmes émergents, extrait les retours feature-level, et livre des rapports de tendances auto-générés aux équipes produit et marketing.",stats:['10 000+ Avis/mois','Multi-Plateforme','NLP Feature-Level','Détection Tendances','Rapports Auto'],tags:['Python','NLP','Transformers','n8n','Power BI']},
+  ]
+};
 
-const COUNTRIES=[
-  {iso:'fr',n:'France',emoji:'🥐',sub:'Homeland · Versailles · Bretagne',
-   tags:['Birthplace','Versailles (sans le château 😄)','15 ans de piano','Rugby · Football · Voile','La Bretagne forever'],
-   text:"Né et grandi en France, j'ai passé mon enfance et mon lycée à Versailles — dans la ville, pas au château, même si les voisins sont célèbres. C'est là que j'ai développé ma passion pour la musique avec 15 ans de piano classique, et que j'ai pratiqué rugby, football et voile en parallèle. Un profil atypique, peut-être, mais c'est cette combinaison de rigueur et de créativité qui me définit. Et la Bretagne — ses côtes sauvages, son iode, ses crêpes au beurre salé — reste mon endroit préféré au monde pour me ressourcer."},
-  {iso:'ca',n:'Canada',emoji:'🍁',sub:'VIE · Montréal · IA & Automatisation',
-   tags:['VIE NAOS','Montréal','IA & Data','Développement perso','−30°C (oui vraiment)'],
-   text:"C'est ici, à Montréal, que je me suis vraiment épanoui. Mon VIE chez NAOS Bioderma m'a permis de construire un département Analytics de zéro, mais surtout d'investiguer à fond ma passion pour l'intelligence artificielle et l'automatisation Business Intelligence. Entre deux pipelines Python et une réunion avec les équipes NORAM, j'ai appris à apprécier les hivers canadiens — le genre de froid qui te réveille, au sens propre comme au figuré. Montréal est une ville qui pulse, créative et ambitieuse, et elle m'a transformé professionnellement et personnellement."},
-  {iso:'us',n:'USA',emoji:'🦅',sub:'Retail Analytics · Marché US',
-   tags:['Business Analyst','Forecasting retail','Marché CPG','Multi-states'],
-   text:"Mon expérience aux États-Unis m'a immergé dans le marché retail américain dans toute sa complexité — des chaînes nationales aux spécialistes beauté, en passant par les drugstores. Travailler sur des prévisions SKU-level pour des enseignes majeures m'a appris la rigueur du marché américain : ici, les chiffres doivent être parfaits, les délais non négociables, et la data doit raconter une histoire convaincante. Une expérience formatrice pour comprendre l'échelle et les exigences d'un marché global."},
-  {iso:'de',n:'Germany',emoji:'🍺',sub:'1 an d\'études · Immersion totale',
-   tags:['Études','Rigueur germanique','Ingénierie & Business','Berlin · Munich'],
-   text:"Une année d'études en Allemagne m'a exposé à la rigueur germanique dans toute sa splendeur — des process impeccables, une culture du travail profonde et une approche engineering de chaque problème. Au-delà du cadre académique, découvrir la culture allemande entre ses brasseries légendaires, sa scène musicale avant-gardiste et ses paysages variés a été une expérience d'ouverture essentielle. L'Allemagne m'a appris que la précision n'exclut pas la créativité — elle la renforce."},
-  {iso:'it',n:'Italy',emoji:'🍕',sub:'1 an d\'études · Turin',
-   tags:['Études à Turin','Gastronomie','Dolce vita','Fiat & Design'],
-   text:"Turin — la capitale discrète de l'Italie du Nord, trop souvent oubliée au profit de Rome ou Milan, mais infiniment plus authentique. Une année d'études là-bas m'a permis d'explorer un pays dont la beauté est presque injuste : l'architecture baroque, la gastronomie à chaque coin de rue (le risotto au Barolo, les tajarin au beurre de truffe...), et cette capacité italienne unique à trouver l'élégance dans le quotidien. L'Italie m'a rappelé que la qualité d'exécution — qu'on parle de pasta ou de dashboards — est toujours remarquée."},
-  {iso:'es',n:'Spain',emoji:'🌞',sub:'IE Business School · NOOS · Madrid',
-   tags:['IE Business School','NooS CSR','Madrid coup de cœur','Tapas & terrasse'],
-   text:"Coup de cœur absolu. Madrid est sans doute la ville qui m'a le plus marqué — son énergie, sa chaleur humaine, sa lumière. J'y ai poursuivi mon Master à l'IE Business School, l'une des meilleures business schools d'Europe, tout en accompagnant l'entreprise NooS dans ses problématiques data et engagement CSR. Travailler dans une ville où les réunions finissent à 22h et où la vie commence vraiment après minuit change ta perspective sur l'équilibre. Madrid ne s'oublie pas — elle te façonne."},
-  {iso:'tr',n:'Turkey',emoji:'🌙',sub:'Premier stage · Expérience fondatrice',
-   tags:['Premier stage','Immersion professionnelle','Istanbul','Expérience fondatrice'],
-   text:"Mon tout premier stage — et quelle entrée en matière. La Turquie m'a jeté dans le grand bain professionnel avec une intensité que peu de pays savent offrir. Istanbul, entre Europe et Asie, entre modernité et tradition, est une ville qui ne te laisse jamais indifférent. Ce premier contact avec le monde du travail à l'international m'a appris l'adaptabilité, la gestion de l'ambiguïté, et que les meilleures expériences sont souvent celles qui te déstabilisent au départ. Une expérience inoubliable qui a posé les bases de tout ce qui a suivi."},
-];
+const COUNTRIES={
+  en:[
+    {iso:'fr',n:'France',emoji:'🥐',sub:'Homeland · Versailles · Brittany',tags:['Birthplace','Versailles (not the castle 😄)','15 years of piano','Rugby · Football · Sailing','Brittany forever'],text:"Born and raised in France, I grew up in Versailles — the city, not the castle, even if the neighbours are famous. That's where I developed my passion for music through 15 years of classical piano, while also playing rugby, football and sailing. An unusual combination, perhaps — but that mix of discipline and creativity is what defines me. And Brittany — its wild coastlines, salty air, and salted-butter crêpes — remains my favourite place in the world to recharge."},
+    {iso:'ca',n:'Canada',emoji:'🍁',sub:'VIE · Montréal · AI & Automation',tags:['VIE NAOS','Montréal','AI & Data','Personal growth','−30°C (yes, really)'],text:"It's here in Montréal that I truly flourished. My VIE at NAOS Bioderma let me build an Analytics department from scratch, but above all gave me the space to deeply explore my passion for artificial intelligence and Business Intelligence automation. Between Python pipelines and NORAM team meetings, I learned to appreciate Canadian winters — the kind of cold that wakes you up, literally and figuratively. Montréal is a city that pulses with creativity and ambition, and it transformed me professionally and personally."},
+    {iso:'us',n:'USA',emoji:'🦅',sub:'Retail Analytics · US Market',tags:['Business Analyst','Retail Forecasting','CPG Market','Multi-state'],text:"My US experience immersed me in the full complexity of the American retail market — from national chains to beauty specialists and drugstores. Working on SKU-level forecasts for major retail accounts taught me the rigour of the American market: numbers must be perfect, deadlines non-negotiable, and data must tell a compelling story. A formative experience for understanding the scale and demands of a global market."},
+    {iso:'de',n:'Germany',emoji:'🍺',sub:'1 year of studies · Full immersion',tags:['Studies','German Rigour','Engineering & Business','Berlin · Munich'],text:"A year studying in Germany exposed me to German rigour in all its glory — impeccable processes, a deep work culture, and an engineering approach to every problem. Beyond the academic framework, discovering German culture across its legendary breweries, avant-garde music scene and varied landscapes was an essential opening experience. Germany taught me that precision doesn't exclude creativity — it amplifies it."},
+    {iso:'it',n:'Italy',emoji:'🍕',sub:'1 year of studies · Turin',tags:['Studying in Turin','Gastronomy','Dolce vita','Fiat & Design'],text:"Turin — the understated capital of Northern Italy, too often overlooked in favour of Rome or Milan, but infinitely more authentic. A year of studies there let me explore a country whose beauty is almost unfair: baroque architecture, world-class gastronomy on every corner (risotto al Barolo, tajarin with truffle butter...), and that uniquely Italian ability to find elegance in the everyday. Italy reminded me that quality of execution — whether pasta or dashboards — is always noticed."},
+    {iso:'es',n:'Spain',emoji:'🌞',sub:'IE Business School · NooS · Madrid',tags:['IE Business School','NooS CSR','Madrid — my favourite','Tapas & terrace'],text:"Absolute love at first sight. Madrid is probably the city that marked me the most — its energy, its warmth, its light. I completed my Master's at IE Business School, one of Europe's top business schools, while also supporting NooS in its data and CSR engagement challenges. Working in a city where meetings end at 10pm and real life begins after midnight changes your perspective on balance. Madrid doesn't leave you — it shapes you."},
+    {iso:'tr',n:'Turkey',emoji:'🌙',sub:'First internship · Foundational experience',tags:['First Internship','Professional immersion','Istanbul','Foundational experience'],text:"My very first internship — and what an entry into the professional world. Turkey threw me into the deep end with an intensity few countries can match. Istanbul, between Europe and Asia, between modernity and tradition, is a city that never leaves you indifferent. This first contact with international professional life taught me adaptability, the management of ambiguity, and that the best experiences are often those that unsettle you at first. An unforgettable experience that laid the foundation for everything that followed."},
+  ],
+  fr:[
+    {iso:'fr',n:'France',emoji:'🥐',sub:'Patrie · Versailles · Bretagne',tags:['Lieu de naissance','Versailles (pas au château 😄)','15 ans de piano','Rugby · Football · Voile','La Bretagne forever'],text:"Né et grandi en France, j'ai passé mon enfance et mon lycée à Versailles — dans la ville, pas au château, même si les voisins sont célèbres. C'est là que j'ai développé ma passion pour la musique avec 15 ans de piano classique, et que j'ai pratiqué rugby, football et voile en parallèle. Un profil atypique, peut-être, mais c'est cette combinaison de rigueur et de créativité qui me définit. Et la Bretagne — ses côtes sauvages, son iode, ses crêpes au beurre salé — reste mon endroit préféré au monde pour me ressourcer."},
+    {iso:'ca',n:'Canada',emoji:'🍁',sub:'VIE · Montréal · IA & Automatisation',tags:['VIE NAOS','Montréal','IA & Data','Développement perso','−30°C (oui vraiment)'],text:"C'est ici, à Montréal, que je me suis vraiment épanoui. Mon VIE chez NAOS Bioderma m'a permis de construire un département Analytics de zéro, mais surtout d'investiguer à fond ma passion pour l'intelligence artificielle et l'automatisation Business Intelligence. Entre deux pipelines Python et une réunion avec les équipes NORAM, j'ai appris à apprécier les hivers canadiens — le genre de froid qui te réveille, au sens propre comme au figuré. Montréal est une ville qui pulse, créative et ambitieuse, et elle m'a transformé professionnellement et personnellement."},
+    {iso:'us',n:'USA',emoji:'🦅',sub:'Retail Analytics · Marché US',tags:['Business Analyst','Forecasting retail','Marché CPG','Multi-states'],text:"Mon expérience aux États-Unis m'a immergé dans le marché retail américain dans toute sa complexité — des chaînes nationales aux spécialistes beauté, en passant par les drugstores. Travailler sur des prévisions SKU-level pour des enseignes majeures m'a appris la rigueur du marché américain : ici, les chiffres doivent être parfaits, les délais non négociables, et la data doit raconter une histoire convaincante. Une expérience formatrice pour comprendre l'échelle et les exigences d'un marché global."},
+    {iso:'de',n:'Allemagne',emoji:'🍺',sub:"1 an d'études · Immersion totale",tags:['Études','Rigueur germanique','Ingénierie & Business','Berlin · Munich'],text:"Une année d'études en Allemagne m'a exposé à la rigueur germanique dans toute sa splendeur — des process impeccables, une culture du travail profonde et une approche engineering de chaque problème. Au-delà du cadre académique, découvrir la culture allemande entre ses brasseries légendaires, sa scène musicale avant-gardiste et ses paysages variés a été une expérience d'ouverture essentielle. L'Allemagne m'a appris que la précision n'exclut pas la créativité — elle la renforce."},
+    {iso:'it',n:'Italie',emoji:'🍕',sub:"1 an d'études · Turin",tags:['Études à Turin','Gastronomie','Dolce vita','Fiat & Design'],text:"Turin — la capitale discrète de l'Italie du Nord, trop souvent oubliée au profit de Rome ou Milan, mais infiniment plus authentique. Une année d'études là-bas m'a permis d'explorer un pays dont la beauté est presque injuste : l'architecture baroque, la gastronomie à chaque coin de rue (le risotto au Barolo, les tajarin au beurre de truffe...), et cette capacité italienne unique à trouver l'élégance dans le quotidien. L'Italie m'a rappelé que la qualité d'exécution — qu'on parle de pasta ou de dashboards — est toujours remarquée."},
+    {iso:'es',n:'Espagne',emoji:'🌞',sub:'IE Business School · NooS · Madrid',tags:['IE Business School','NooS RSE','Madrid — coup de cœur','Tapas & terrasse'],text:"Coup de cœur absolu. Madrid est sans doute la ville qui m'a le plus marqué — son énergie, sa chaleur humaine, sa lumière. J'y ai poursuivi mon Master à l'IE Business School, l'une des meilleures business schools d'Europe, tout en accompagnant l'entreprise NooS dans ses problématiques data et engagement RSE. Travailler dans une ville où les réunions finissent à 22h et où la vie commence vraiment après minuit change ta perspective sur l'équilibre. Madrid ne s'oublie pas — elle te façonne."},
+    {iso:'tr',n:'Turquie',emoji:'🌙',sub:'Premier stage · Expérience fondatrice',tags:['Premier stage','Immersion professionnelle','Istanbul','Expérience fondatrice'],text:"Mon tout premier stage — et quelle entrée en matière. La Turquie m'a jeté dans le grand bain professionnel avec une intensité que peu de pays savent offrir. Istanbul, entre Europe et Asie, entre modernité et tradition, est une ville qui ne te laisse jamais indifférent. Ce premier contact avec le monde du travail à l'international m'a appris l'adaptabilité, la gestion de l'ambiguïté, et que les meilleures expériences sont souvent celles qui te déstabilisent au départ. Une expérience inoubliable qui a posé les bases de tout ce qui a suivi."},
+  ]
+};
 
-const BLOG_POSTS=[
-  {tag:'AI & AUTOMATISATION',title:'Pourquoi vos équipes data perdent encore 60% de leur temps',date:'Feb 2026',readTime:'4 min',
-   excerpt:"La plupart des équipes data que je rencontre passent plus de temps à préparer les données qu'à les analyser. Voici pourquoi — et comment inverser ça.",
-   body:`<p>J'ai passé les 18 derniers mois à construire des systèmes d'automatisation pour des équipes commerciales, et j'observe toujours le même pattern : <strong>entre 50 et 70% du temps analytique est consacré à des tâches de préparation</strong> — extraire des fichiers, les merger, les nettoyer, corriger des erreurs, reformater des colonnes.</p>
-   <p>C'est du temps humain de haute valeur brûlé sur des tâches que Python fait en 12 secondes.</p>
-   <p>Le problème n'est pas technique. C'est que personne n'a jamais pris 2 semaines pour <strong>automatiser ce qui prend 2 jours chaque semaine</strong>. L'urgence du quotidien écrase toujours l'investissement structurel.</p>
-   <p>La solution que j'applique systématiquement : cartographier toutes les tâches répétitives, identifier celles qui suivent un pattern fixe, et les automatiser en priorité selon le ratio temps-gagné / complexité-technique. Dans 80% des cas, les gains les plus importants sont sur les tâches les plus simples.</p>
-   <p><strong>Résultat type :</strong> une équipe de 3 analystes récupère l'équivalent d'un ETP complet sur des tâches à valeur ajoutée.</p>`},
-  {tag:'INTELLIGENCE COMPÉTITIVE',title:'40 concurrents, 1300 SKUs, zéro analyste — comment ?',date:'Jan 2026',readTime:'5 min',
-   excerpt:"Comment j'ai construit un système qui monitore 40 concurrents sur 1300 références produits chaque matin, sans intervention humaine.",
-   body:`<p>La veille concurrentielle manuelle, c'est l'un des postes de coût les plus sous-estimés en marketing produit. Des heures chaque semaine pour aller vérifier les prix, les promotions, les ruptures de stock, les nouveautés — sur des dizaines de sites différents.</p>
-   <p>J'ai construit une alternative : <strong>un scraper Python qui tourne chaque nuit</strong>, couvre 40+ concurrents sur 1 300 SKUs, et génère automatiquement un Power BI alimenté avec les données fraîches du matin.</p>
-   <p>Les équipes ouvrent leur ordinateur et voient directement : qui a lancé une promo hier soir, quel concurrent est en rupture sur quelle référence, quels nouveaux produits sont apparus.</p>
-   <p>Ce qui prenait <strong>2 jours d'analyse manuelle par semaine</strong> est devenu une lecture de 10 minutes chaque matin. L'équipe marketing a pu réorienter ce temps vers la stratégie réelle plutôt que la collecte de données.</p>
-   <p><strong>Stack :</strong> Python (Scrapy + Selenium pour les sites dynamiques), n8n pour l'orchestration, Power BI pour la visualisation, alertes Slack pour les événements critiques.</p>`},
-  {tag:'RÉFLEXION',title:'L\'IA ne remplace pas les data analysts — elle change ce qu\'ils font',date:'Mar 2026',readTime:'3 min',
-   excerpt:"Le débat 'IA vs humain' est mal posé. La vraie question : à quoi un data analyst devrait-il consacrer son temps en 2026 ?",
-   body:`<p>Depuis 18 mois que j'intègre des outils IA dans des workflows analytiques, j'entends régulièrement la même peur : "est-ce que ça va remplacer les analystes ?"</p>
-   <p>La réponse courte : non. La réponse longue : <strong>ça va rendre obsolètes ceux qui refusent d'évoluer</strong>.</p>
-   <p>Ce que l'IA fait mieux qu'un humain : traiter des volumes massifs de données, identifier des patterns dans du texte non structuré (avis clients, commentaires), générer des premiers drafts de rapports, automatiser des tâches répétitives à règles fixes.</p>
-   <p>Ce que l'IA ne fait pas : <strong>comprendre le contexte business</strong>, poser les bonnes questions, arbitrer entre des KPIs contradictoires, convaincre un CODIR de changer de stratégie.</p>
-   <p>Les data analysts qui prospèrent en 2026 sont ceux qui utilisent l'IA pour éliminer le travail mécanique et concentrent leur énergie sur la vraie valeur ajoutée : l'interprétation, la narration, la recommandation stratégique.</p>`},
-];
-
-const ALL_TAGS=['All',...new Set(EXPERIENCES.flatMap(e=>e.tags))];
+const BLOG_POSTS={
+  en:[
+    {tag:'AI & AUTOMATION',title:'Why your data teams still waste 60% of their time',date:'Feb 2026',readTime:'4',
+     excerpt:"Most data teams I encounter spend more time preparing data than analysing it. Here's why — and how to flip it.",
+     body:`<p>I've spent the last 18 months building automation systems for commercial teams, and I always observe the same pattern: <strong>between 50 and 70% of analytical time is spent on preparation tasks</strong> — extracting files, merging them, cleaning them, correcting errors, reformatting columns.</p><p>That's high-value human time being burned on tasks that Python handles in 12 seconds.</p><p>The problem isn't technical. It's that nobody has ever taken 2 weeks to <strong>automate what takes 2 days every week</strong>. The urgency of daily work always crushes structural investment.</p><p>The solution I apply consistently: map all repetitive tasks, identify those that follow a fixed pattern, and automate them in priority order by time-saved / technical-complexity ratio. In 80% of cases, the biggest gains come from the simplest tasks.</p><p><strong>Typical result:</strong> a team of 3 analysts recovers the equivalent of one full headcount on high-value-added tasks.</p>`},
+    {tag:'COMPETITIVE INTELLIGENCE',title:'40 competitors, 1,300 SKUs, zero analyst — how?',date:'Jan 2026',readTime:'5',
+     excerpt:"How I built a system that monitors 40 competitors across 1,300 product references every morning, without human intervention.",
+     body:`<p>Manual competitive intelligence is one of the most underestimated cost centres in product marketing. Hours every week checking prices, promotions, stock-outs, new launches — across dozens of different sites.</p><p>I built an alternative: <strong>a Python scraper that runs every night</strong>, covers 40+ competitors across 1,300 SKUs, and automatically generates a Power BI fed with fresh morning data.</p><p>Teams open their laptops and immediately see: who launched a promo last night, which competitor is out of stock on which reference, which new products appeared.</p><p>What previously took <strong>2 days of manual analysis per week</strong> became a 10-minute morning read. The marketing team could redirect that time toward real strategy rather than data collection.</p><p><strong>Stack:</strong> Python (Scrapy + Selenium for dynamic sites), n8n for orchestration, Power BI for visualisation, Slack alerts for critical events.</p>`},
+    {tag:'PERSPECTIVE',title:'AI doesn\'t replace data analysts — it changes what they do',date:'Mar 2026',readTime:'3',
+     excerpt:"The 'AI vs human' debate is badly framed. The real question: what should a data analyst actually spend their time on in 2026?",
+     body:`<p>In 18 months integrating AI tools into analytical workflows, I regularly hear the same fear: "will it replace analysts?"</p><p>Short answer: no. Long answer: <strong>it will make obsolete those who refuse to evolve</strong>.</p><p>What AI does better than humans: processing massive data volumes, identifying patterns in unstructured text (reviews, comments), generating first-draft reports, automating repetitive rule-based tasks.</p><p>What AI doesn't do: <strong>understand the business context</strong>, ask the right questions, arbitrate between conflicting KPIs, convince a board to change strategy.</p><p>The data analysts who will thrive in 2026 are those who use AI to eliminate mechanical work and focus their energy on the real added value: interpretation, storytelling, strategic recommendation.</p>`},
+  ],
+  fr:[
+    {tag:'IA & AUTOMATISATION',title:"Pourquoi vos équipes data perdent encore 60% de leur temps",date:'Fév 2026',readTime:'4',
+     excerpt:"La plupart des équipes data que je rencontre passent plus de temps à préparer les données qu'à les analyser. Voici pourquoi — et comment inverser ça.",
+     body:`<p>J'ai passé les 18 derniers mois à construire des systèmes d'automatisation pour des équipes commerciales, et j'observe toujours le même pattern : <strong>entre 50 et 70% du temps analytique est consacré à des tâches de préparation</strong> — extraire des fichiers, les merger, les nettoyer, corriger des erreurs, reformater des colonnes.</p><p>C'est du temps humain de haute valeur brûlé sur des tâches que Python fait en 12 secondes.</p><p>Le problème n'est pas technique. C'est que personne n'a jamais pris 2 semaines pour <strong>automatiser ce qui prend 2 jours chaque semaine</strong>. L'urgence du quotidien écrase toujours l'investissement structurel.</p><p>La solution que j'applique systématiquement : cartographier toutes les tâches répétitives, identifier celles qui suivent un pattern fixe, et les automatiser en priorité selon le ratio temps-gagné / complexité-technique. Dans 80% des cas, les gains les plus importants sont sur les tâches les plus simples.</p><p><strong>Résultat type :</strong> une équipe de 3 analystes récupère l'équivalent d'un ETP complet sur des tâches à valeur ajoutée.</p>`},
+    {tag:'INTELLIGENCE COMPÉTITIVE',title:'40 concurrents, 1300 SKUs, zéro analyste — comment ?',date:'Janv 2026',readTime:'5',
+     excerpt:"Comment j'ai construit un système qui monitore 40 concurrents sur 1300 références produits chaque matin, sans intervention humaine.",
+     body:`<p>La veille concurrentielle manuelle, c'est l'un des postes de coût les plus sous-estimés en marketing produit. Des heures chaque semaine pour aller vérifier les prix, les promotions, les ruptures de stock, les nouveautés — sur des dizaines de sites différents.</p><p>J'ai construit une alternative : <strong>un scraper Python qui tourne chaque nuit</strong>, couvre 40+ concurrents sur 1 300 SKUs, et génère automatiquement un Power BI alimenté avec les données fraîches du matin.</p><p>Les équipes ouvrent leur ordinateur et voient directement : qui a lancé une promo hier soir, quel concurrent est en rupture sur quelle référence, quels nouveaux produits sont apparus.</p><p>Ce qui prenait <strong>2 jours d'analyse manuelle par semaine</strong> est devenu une lecture de 10 minutes chaque matin.</p><p><strong>Stack :</strong> Python (Scrapy + Selenium), n8n pour l'orchestration, Power BI, alertes Slack.</p>`},
+    {tag:'RÉFLEXION',title:"L'IA ne remplace pas les data analysts — elle change ce qu'ils font",date:'Mars 2026',readTime:'3',
+     excerpt:"Le débat 'IA vs humain' est mal posé. La vraie question : à quoi un data analyst devrait-il consacrer son temps en 2026 ?",
+     body:`<p>Depuis 18 mois que j'intègre des outils IA dans des workflows analytiques, j'entends régulièrement la même peur : "est-ce que ça va remplacer les analystes ?"</p><p>La réponse courte : non. La réponse longue : <strong>ça va rendre obsolètes ceux qui refusent d'évoluer</strong>.</p><p>Ce que l'IA fait mieux qu'un humain : traiter des volumes massifs de données, identifier des patterns dans du texte non structuré, générer des premiers drafts de rapports, automatiser des tâches répétitives à règles fixes.</p><p>Ce que l'IA ne fait pas : <strong>comprendre le contexte business</strong>, poser les bonnes questions, arbitrer entre des KPIs contradictoires, convaincre un CODIR de changer de stratégie.</p><p>Les data analysts qui prospèrent en 2026 sont ceux qui utilisent l'IA pour éliminer le travail mécanique et concentrent leur énergie sur la vraie valeur ajoutée : l'interprétation, la narration, la recommandation stratégique.</p>`},
+  ]
+};
 
 /* ══════════════════════════════════════
    DASHBOARD COMPONENT
 ══════════════════════════════════════ */
-function Dashboard(){
+function Dashboard({lang}){
+  const t=T[lang];
   const lRef=useRef(),bRef=useRef(),lC=useRef(),bC=useRef();
   useEffect(()=>{
     if(!lRef.current||!bRef.current)return;
     const labels=['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun'];
-    const gridColor='rgba(196,78,255,0.08)';
-    const tickColor='#9B8DCC';
+    const gc='rgba(196,78,255,0.08)',tc='#9B8DCC';
     lC.current=new Chart(lRef.current,{type:'line',data:{labels,datasets:[
-      {label:'Actual (k$)',data:[180,210,195,240,225,260,290,310,340,null,null,null,null],borderColor:'#C44EFF',backgroundColor:'rgba(196,78,255,0.1)',tension:.4,pointRadius:4,fill:true},
-      {label:'Forecast',data:[null,null,null,null,null,null,null,null,340,380,420,400,450],borderColor:'#00F5B0',backgroundColor:'rgba(0,245,176,0.05)',tension:.4,pointRadius:4,borderDash:[6,3],fill:true}
-    ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:tickColor,font:{family:'Space Mono',size:10}}}},scales:{x:{ticks:{color:tickColor,font:{size:10}},grid:{color:gridColor}},y:{ticks:{color:tickColor,font:{size:10}},grid:{color:gridColor}}}}});
-    bC.current=new Chart(bRef.current,{type:'bar',data:{labels:['Channel A','Channel B','Channel C','Channel D','Channel E'],datasets:[{label:'k$',data:[820,640,390,310,240],backgroundColor:['rgba(196,78,255,.7)','rgba(255,61,133,.7)','rgba(0,245,176,.7)','rgba(255,165,0,.7)','rgba(0,200,255,.7)'],borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:tickColor,font:{size:10}},grid:{display:false}},y:{ticks:{color:tickColor,font:{size:10}},grid:{color:gridColor}}}}});
+      {label:lang==='fr'?'Réel (k€)':'Actual (k$)',data:[180,210,195,240,225,260,290,310,340,null,null,null,null],borderColor:'#C44EFF',backgroundColor:'rgba(196,78,255,0.1)',tension:.4,pointRadius:4,fill:true},
+      {label:lang==='fr'?'Prévision':'Forecast',data:[null,null,null,null,null,null,null,null,340,380,420,400,450],borderColor:'#00F5B0',backgroundColor:'rgba(0,245,176,0.05)',tension:.4,pointRadius:4,borderDash:[6,3],fill:true}
+    ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:tc,font:{family:'Space Mono',size:10}}}},scales:{x:{ticks:{color:tc,font:{size:10}},grid:{color:gc}},y:{ticks:{color:tc,font:{size:10}},grid:{color:gc}}}}});
+    bC.current=new Chart(bRef.current,{type:'bar',data:{labels:[lang==='fr'?'Canal A':'Channel A',lang==='fr'?'Canal B':'Channel B',lang==='fr'?'Canal C':'Channel C',lang==='fr'?'Canal D':'Channel D',lang==='fr'?'Canal E':'Channel E'],datasets:[{label:lang==='fr'?'k€':'k$',data:[820,640,390,310,240],backgroundColor:['rgba(196,78,255,.7)','rgba(255,61,133,.7)','rgba(0,245,176,.7)','rgba(255,165,0,.7)','rgba(0,200,255,.7)'],borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:tc,font:{size:10}},grid:{display:false}},y:{ticks:{color:tc,font:{size:10}},grid:{color:gc}}}}});
     return()=>{lC.current?.destroy();bC.current?.destroy()};
-  },[]);
+  },[lang]);
   return(
     <div>
       <div className="dashboard-grid">
-        {[['$2.4M','YTD Revenue','↑ +18% vs LY'],['85%','Reporting Time Saved','30+ workflows'],['4.2%','Forecast MAPE','↓ from 8.1%'],['10+','Power BI Dashboards','All BUs covered'],['30+','Channels Tracked','Daily, automated'],['06:00','Auto-Report','Every morning, 0 manual']].map(([v,l,d],i)=>(
+        {t.dashKpis.map(([v,l,d],i)=>(
           <div key={i} className="kpi-box reveal"><div className="kpi-val">{v}</div><div className="kpi-label">{l}</div><div className="kpi-delta">{d}</div></div>
         ))}
       </div>
       <div className="chart-grid">
-        <div className="chart-box reveal"><div className="chart-title">Revenue Trend + Forecast · Enterprise Client</div><div className="chart-wrap"><canvas ref={lRef}/></div></div>
-        <div className="chart-box reveal"><div className="chart-title">Revenue by Channel</div><div className="chart-wrap"><canvas ref={bRef}/></div></div>
+        <div className="chart-box reveal"><div className="chart-title">{t.dashChart1}</div><div className="chart-wrap"><canvas ref={lRef}/></div></div>
+        <div className="chart-box reveal"><div className="chart-title">{t.dashChart2}</div><div className="chart-wrap"><canvas ref={bRef}/></div></div>
       </div>
     </div>
   );
@@ -640,13 +745,18 @@ function Dashboard(){
 /* ══════════════════════════════════════
    PIPELINE COMPONENT
 ══════════════════════════════════════ */
-function Pipeline(){
+function Pipeline({lang}){
+  const t=T[lang];
+  const stages=PIPELINE_STAGES[lang];
   const [stage,setStage]=useState(-1);
   const [fills,setFills]=useState([0,0,0,0,0]);
-  const [logs,setLogs]=useState([{t:'READY',m:'Pipeline idle. Press RUN to execute.'}]);
+  const [logs,setLogs]=useState(null);
   const [running,setRunning]=useState(false);
   const logRef=useRef();
-  const MSGS=[['INIT','Connecting to Retail Partner API...'],['FETCH','Downloading 847 rows of POS data...'],['CLEAN','Removing nulls, normalizing 32 SKUs...'],['MODEL','Running Prophet forecast (30d) | MAPE: 4.2%'],['EMBED','Refreshing Power BI · 12 reports updated'],['DONE','✓ Delivered to 12 stakeholders | 00:05:23']];
+  useEffect(()=>{setLogs([{t:'READY',m:t.pipeReady}])},[lang]);
+  const MSGS=lang==='fr'
+    ?[['INIT',"Connexion à l'API Retail Partner..."],['FETCH','Téléchargement de 847 lignes de données POS...'],['CLEAN','Suppression des nulls, normalisation de 32 SKUs...'],['MODEL','Prévision Prophet (30j) | MAPE : 4,2%'],['EMBED','Rafraîchissement Power BI · 12 rapports mis à jour'],['DONE','✓ Livré à 12 parties prenantes | 00:05:23']]
+    :[['INIT','Connecting to Retail Partner API...'],['FETCH','Downloading 847 rows of POS data...'],['CLEAN','Removing nulls, normalizing 32 SKUs...'],['MODEL','Running Prophet forecast (30d) | MAPE: 4.2%'],['EMBED','Refreshing Power BI · 12 reports updated'],['DONE','✓ Delivered to 12 stakeholders | 00:05:23']];
   async function run(){
     if(running)return;setRunning(true);setStage(-1);setFills([0,0,0,0,0]);setLogs([]);
     for(let i=0;i<6;i++){
@@ -657,10 +767,11 @@ function Pipeline(){
     }
     setRunning(false);
   }
+  if(!logs)return null;
   return(
     <div className="pipeline-wrap reveal">
       <div className="pipeline-stages">
-        {PIPELINE_STAGES.map((s,i)=>(
+        {stages.map((s,i)=>(
           <React.Fragment key={i}>
             <div className={`p-node${stage===i?' running':stage>i?' done':''}`}>
               <span className="p-node-icon">{stage>i?'✅':s.icon}</span>
@@ -674,7 +785,7 @@ function Pipeline(){
       <div className="pipeline-log" ref={logRef}>
         {logs.map((l,i)=><div key={i} className="log-line"><span style={{color:'var(--text-dim)'}}>[{l.t}]</span> {l.m}</div>)}
       </div>
-      <button className="run-btn" onClick={run} disabled={running}>{running?'⟳ RUNNING...':'▶ RUN PIPELINE'}</button>
+      <button className="run-btn" onClick={run} disabled={running}>{running?t.pipeRunning:t.pipeRun}</button>
     </div>
   );
 }
@@ -682,7 +793,8 @@ function Pipeline(){
 /* ══════════════════════════════════════
    ROI CALCULATOR
 ══════════════════════════════════════ */
-function ROICalc(){
+function ROICalc({lang}){
+  const t=T[lang];
   const [analysts,setA]=useState(3);
   const [hours,setH]=useState(15);
   const [rate,setR]=useState(45);
@@ -694,51 +806,46 @@ function ROICalc(){
   const after=total*.12;
   const savings=total-after;
   const roi=(savings/80000*100).toFixed(0);
-  const fmt=n=>n>=1000?`$${(n/1000).toFixed(0)}K`:`$${Math.round(n)}`;
-  const sliders=[
-    {label:"Analysts on manual reports",val:analysts,set:setA,min:1,max:20,unit:"people"},
-    {label:"Hours / week per analyst",val:hours,set:setH,min:2,max:40,unit:"h/wk"},
-    {label:"Avg hourly cost (salary + overhead)",val:rate,set:setR,min:20,max:150,unit:"$/h"},
-    {label:"Error rate in manual reporting",val:err,set:setE,min:1,max:40,unit:"%"},
-  ];
+  const fmt=n=>n>=1000?`${lang==='fr'?'':'$'}${(n/1000).toFixed(0)}K${lang==='fr'?'€':''}`:`${lang==='fr'?'':'$'}${Math.round(n)}${lang==='fr'?'€':''}`;
+  const slidersVals=[{val:analysts,set:setA,min:1,max:20},{val:hours,set:setH,min:2,max:40},{val:rate,set:setR,min:20,max:150},{val:err,set:setE,min:1,max:40}];
   return(
     <div className="roi-wrap reveal">
       <div className="roi-grid">
         <div className="roi-inputs">
-          <h3 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"1.6rem",letterSpacing:"2px",marginBottom:"6px",color:"var(--text)"}}>What's your data ops costing you?</h3>
-          <p style={{fontSize:".82rem",color:"var(--text-sec)",lineHeight:"1.75",marginBottom:"20px"}}>Move the sliders. Watch the pain materialize. Then we talk.</p>
-          {sliders.map((s,i)=>(
+          <h3 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"1.6rem",letterSpacing:"2px",marginBottom:"6px",color:"var(--text)"}}>{t.roiH3}</h3>
+          <p style={{fontSize:".82rem",color:"var(--text-sec)",lineHeight:"1.75",marginBottom:"20px"}}>{t.roiP}</p>
+          {t.roiSliders.map((s,i)=>(
             <div key={i} className="roi-input-group">
-              <label>{s.label} <span className="roi-val-badge">{s.val} {s.unit}</span></label>
-              <input type="range" min={s.min} max={s.max} value={s.val} onChange={e=>s.set(+e.target.value)}/>
+              <label>{s.label} <span className="roi-val-badge">{slidersVals[i].val} {s.unit}</span></label>
+              <input type="range" min={slidersVals[i].min} max={slidersVals[i].max} value={slidersVals[i].val} onChange={e=>slidersVals[i].set(+e.target.value)}/>
             </div>
           ))}
         </div>
         <div className="roi-out">
-          <div style={{fontFamily:"'Space Mono',monospace",fontSize:".52rem",color:"var(--text-dim)",letterSpacing:"3px",textTransform:"uppercase",marginBottom:"8px"}}>// Automation impact analysis</div>
+          <div style={{fontFamily:"'Space Mono',monospace",fontSize:".52rem",color:"var(--text-dim)",letterSpacing:"3px",textTransform:"uppercase",marginBottom:"8px"}}>{t.roiComment}</div>
           <div className="roi-metric">
-            <div className="roi-metric-lbl">Annual cost of manual reporting</div>
+            <div className="roi-metric-lbl">{t.roiLbl1}</div>
             <div className="roi-metric-val pink">{fmt(waste)}</div>
-            <div className="roi-helper">{wkH}h/week × {analysts} analyst{analysts>1?'s':''} × 52wks</div>
+            <div className="roi-helper">{wkH}h/{lang==='fr'?'sem':'week'} × {analysts} {analysts>1?t.roiSuffix2:t.roiSuffix1} × 52{t.roiWks}</div>
           </div>
           <div className="roi-metric">
-            <div className="roi-metric-lbl">+ Hidden error cost ({err}%)</div>
+            <div className="roi-metric-lbl">{t.roiLbl2} ({err}%)</div>
             <div className="roi-metric-val purple">{fmt(errCost)}</div>
           </div>
           <div className="roi-metric">
-            <div className="roi-metric-lbl">Total annual pain</div>
+            <div className="roi-metric-lbl">{t.roiLbl3}</div>
             <div className="roi-metric-val pink" style={{fontSize:"3.2rem"}}>{fmt(total)}</div>
           </div>
           <div className="roi-metric">
-            <div className="roi-metric-lbl">After automation (12% residual)</div>
+            <div className="roi-metric-lbl">{t.roiLbl4}</div>
             <div className="roi-metric-val" style={{color:"var(--text-sec)",fontSize:"1.7rem"}}>{fmt(after)}</div>
           </div>
           <div className="roi-savings-box">
-            <div className="roi-metric-lbl">🚀 Annual savings unlocked</div>
+            <div className="roi-metric-lbl">{t.roiLbl5}</div>
             <div className="roi-metric-val green" style={{fontSize:"2.8rem"}}>{fmt(savings)}</div>
-            <div style={{fontSize:".65rem",color:"var(--accent3)",marginTop:"6px",fontFamily:"'Space Mono',monospace"}}>ROI on hiring Antoine: ~{roi}%</div>
+            <div style={{fontSize:".65rem",color:"var(--accent3)",marginTop:"6px",fontFamily:"'Space Mono',monospace"}}>{t.roiRoi}{roi}%</div>
           </div>
-          <div style={{fontSize:".6rem",color:"var(--text-mute)",fontFamily:"'Space Mono',monospace",fontStyle:"italic"}}>// Conservative estimate. Real results may cause audible gasping.</div>
+          <div style={{fontSize:".6rem",color:"var(--text-mute)",fontFamily:"'Space Mono',monospace",fontStyle:"italic"}}>{t.roiDisclaimer}</div>
         </div>
       </div>
     </div>
@@ -748,10 +855,10 @@ function ROICalc(){
 /* ══════════════════════════════════════
    PROJECTS COMPONENT
 ══════════════════════════════════════ */
-function Projects(){
+function Projects({lang}){
   return(
     <div className="projects-grid">
-      {PROJECTS.map((p,i)=>(
+      {PROJECTS[lang].map((p,i)=>(
         <div key={i} className="project-card reveal">
           <div className="project-header">
             <span className="project-icon">{p.icon}</span>
@@ -759,12 +866,8 @@ function Projects(){
           </div>
           <div className="project-title">{p.title}</div>
           <div className="project-desc">{p.desc}</div>
-          <div className="project-stats">
-            {p.stats.map((s,j)=><span key={j} className="project-stat">{s}</span>)}
-          </div>
-          <div className="project-tags">
-            {p.tags.map((t,j)=><span key={j} className="project-tag">{t}</span>)}
-          </div>
+          <div className="project-stats">{p.stats.map((s,j)=><span key={j} className="project-stat">{s}</span>)}</div>
+          <div className="project-tags">{p.tags.map((t,j)=><span key={j} className="project-tag">{t}</span>)}</div>
         </div>
       ))}
     </div>
@@ -774,15 +877,16 @@ function Projects(){
 /* ══════════════════════════════════════
    EASTER EGG
 ══════════════════════════════════════ */
-function EasterEgg({onClose}){
+function EasterEgg({onClose,lang}){
+  const t=T[lang];
   return(
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={e=>e.stopPropagation()}>
         <div style={{fontSize:"3rem",marginBottom:"14px",animation:"float 2s infinite"}}>🕹️</div>
-        <h2>KONAMI CODE DETECTED</h2>
-        <p>Congrats — you're either a developer, a gamer, or dangerously bored.<br/><br/>Either way, you passed the hidden test.<br/><span style={{color:"var(--accent1)"}}>People who find easter eggs tend to ship features.</span></p>
-        <div className="modal-code">// Secret stat: 85% pipeline automation achieved.<br/>// Time to implement: 3 months.<br/>// Manual alternative: never.</div>
-        <button className="modal-close" onClick={onClose}>CLOSE // ESC</button>
+        <h2>{t.eggTitle}</h2>
+        <p>{t.eggP1}<br/><br/>{t.eggP2}<br/><span style={{color:"var(--accent1)"}}>{t.eggP3}</span></p>
+        <div className="modal-code">{t.eggCode.split('\n').map((l,i)=><div key={i}>{l}</div>)}</div>
+        <button className="modal-close" onClick={onClose}>{t.eggClose}</button>
       </div>
     </div>
   );
@@ -791,7 +895,8 @@ function EasterEgg({onClose}){
 /* ══════════════════════════════════════
    VISITOR BADGE
 ══════════════════════════════════════ */
-function VisitorBadge(){
+function VisitorBadge({lang}){
+  const t=T[lang];
   const [count,setCount]=useState(2847);
   useEffect(()=>{
     const start=Date.now();
@@ -802,7 +907,7 @@ function VisitorBadge(){
     <div className="visitor-badge">
       <div className="vb-dot"/>
       <span style={{color:"var(--text)"}}>{count.toLocaleString()}</span>
-      <span>visitors</span>
+      <span>{t.visitors}</span>
     </div>
   );
 }
@@ -810,7 +915,8 @@ function VisitorBadge(){
 /* ══════════════════════════════════════
    COUNTRY MODAL
 ══════════════════════════════════════ */
-function CountryModal({country, onClose}){
+function CountryModal({country,onClose,lang}){
+  const t=T[lang];
   if(!country) return null;
   return(
     <div className="country-modal-overlay" onClick={onClose}>
@@ -823,11 +929,9 @@ function CountryModal({country, onClose}){
           </div>
         </div>
         <div className="country-modal-body">
-          <div className="country-modal-tags">
-            {country.tags.map((t,i)=><span key={i} className="country-modal-tag">{t}</span>)}
-          </div>
+          <div className="country-modal-tags">{country.tags.map((tag,i)=><span key={i} className="country-modal-tag">{tag}</span>)}</div>
           <div className="country-modal-text">{country.text}</div>
-          <button className="country-modal-close" onClick={onClose}>FERMER // ESC</button>
+          <button className="country-modal-close" onClick={onClose}>{t.countryClose}</button>
         </div>
       </div>
     </div>
@@ -837,8 +941,10 @@ function CountryModal({country, onClose}){
 /* ══════════════════════════════════════
    BLOG
 ══════════════════════════════════════ */
-function Blog(){
-  const [openPost, setOpenPost]=useState(null);
+function Blog({lang}){
+  const t=T[lang];
+  const [openPost,setOpenPost]=useState(null);
+  const posts=BLOG_POSTS[lang];
   return(<>
     {openPost&&(
       <div className="blog-modal-overlay" onClick={()=>setOpenPost(null)}>
@@ -846,21 +952,21 @@ function Blog(){
           <div className="blog-modal-inner">
             <div className="blog-modal-tag">{openPost.tag}</div>
             <div className="blog-modal-title">{openPost.title}</div>
-            <div className="blog-modal-meta">{openPost.date} · {openPost.readTime} de lecture</div>
+            <div className="blog-modal-meta">{openPost.date} · {openPost.readTime} {t.blogReadTime}</div>
             <div className="blog-modal-body" dangerouslySetInnerHTML={{__html:openPost.body}}/>
-            <button className="blog-modal-close" onClick={()=>setOpenPost(null)}>FERMER // ESC</button>
+            <button className="blog-modal-close" onClick={()=>setOpenPost(null)}>{t.blogClose}</button>
           </div>
         </div>
       </div>
     )}
     <div className="blog-grid">
-      {BLOG_POSTS.map((p,i)=>(
+      {posts.map((p,i)=>(
         <div key={i} className="blog-card reveal" onClick={()=>setOpenPost(p)}>
           <div className="blog-tag">{p.tag}</div>
           <div className="blog-title">{p.title}</div>
           <div className="blog-excerpt">{p.excerpt}</div>
-          <div className="blog-meta"><span>{p.date}</span><span>·</span><span>{p.readTime}</span></div>
-          <div className="blog-read-more">Lire l'article →</div>
+          <div className="blog-meta"><span>{p.date}</span><span>·</span><span>{p.readTime} {t.blogReadTime}</span></div>
+          <div className="blog-read-more">{t.blogRead}</div>
         </div>
       ))}
     </div>
@@ -870,33 +976,34 @@ function Blog(){
 /* ══════════════════════════════════════
    SCROLL TO TOP
 ══════════════════════════════════════ */
-function ScrollToTop(){
+function ScrollToTop({lang}){
+  const t=T[lang];
   const [show,setShow]=useState(false);
   useEffect(()=>{
     const h=()=>setShow(window.scrollY>400);
     window.addEventListener('scroll',h);return()=>window.removeEventListener('scroll',h);
   },[]);
   return(
-    <button className={`scroll-top${show?' visible':''}`} onClick={()=>window.scrollTo({top:0,behavior:'smooth'})} title="Back to top">↑</button>
+    <button className={`scroll-top${show?' visible':''}`} onClick={()=>window.scrollTo({top:0,behavior:'smooth'})} title={t.scrollTop}>↑</button>
   );
 }
 
 /* ══════════════════════════════════════
    XP COUNTER
 ══════════════════════════════════════ */
-function XPCounter(){
-  const start=new Date('2022-03-01');
-  const now=new Date();
-  const years=((now-start)/(1000*60*60*24*365.25));
+function XPCounter({lang}){
+  const t=T[lang];
+  const years=((new Date()-new Date('2022-03-01'))/(1000*60*60*24*365.25));
   return(
-    <span className="xp-badge">⚡ {years.toFixed(1)} ans d'XP en data & automation</span>
+    <span className="xp-badge">⚡ {years.toFixed(1)} {t.xp}</span>
   );
 }
 
 /* ══════════════════════════════════════
-   COPY EMAIL TOAST
+   COPY EMAIL BUTTON
 ══════════════════════════════════════ */
-function CopyEmailButton(){
+function CopyEmailButton({lang}){
+  const t=T[lang];
   const [copied,setCopied]=useState(false);
   function copy(){
     navigator.clipboard.writeText('antoinedemaintenant@alumni.ie.edu').then(()=>{
@@ -904,11 +1011,11 @@ function CopyEmailButton(){
     });
   }
   return(<>
-    <div className={`copy-toast${copied?' show':''}`}>✓ Email copié !</div>
+    <div className={`copy-toast${copied?' show':''}`}>{t.contactCopied}</div>
     <a href="mailto:antoinedemaintenant@alumni.ie.edu" className="contact-card" onClick={e=>{e.preventDefault();copy();}}>
       <span className="contact-icon">📧</span>
       <div>
-        <div className="contact-lbl">Email <span style={{color:'var(--accent3)',fontSize:'.42rem',marginLeft:'6px',fontFamily:"'Space Mono',monospace"}}>CLIQUER POUR COPIER</span></div>
+        <div className="contact-lbl">Email <span style={{color:'var(--accent3)',fontSize:'.42rem',marginLeft:'6px',fontFamily:"'Space Mono',monospace"}}>{t.contactCopyHint}</span></div>
         <div className="contact-val">antoinedemaintenant@alumni.ie.edu</div>
       </div>
     </a>
@@ -920,6 +1027,7 @@ function CopyEmailButton(){
 ══════════════════════════════════════ */
 function App(){
   const [theme,setTheme]=useState('light');
+  const [lang,setLang]=useState('en');
   const [activeExp,setActiveExp]=useState(0);
   const [tagFilter,setTagFilter]=useState('All');
   const [showEgg,setShowEgg]=useState(false);
@@ -929,62 +1037,73 @@ function App(){
   const [charIdx,setCharIdx]=useState(0);
   const [deleting,setDeleting]=useState(false);
 
-  const exp=EXPERIENCES[activeExp];
-  const LINES=['BI Engineer.','AI Architect.','Revenue Optimizer.','Automation Dealer.'];
+  const t=T[lang];
+  const exps=EXPERIENCES[lang];
+  const exp=exps[activeExp]||exps[0];
+  const skills=SKILLS[lang];
+  const countries=COUNTRIES[lang];
+
+  const LINES={en:['BI Engineer.','AI Architect.','Revenue Optimizer.','Automation Dealer.'],fr:['Ingénieur BI.','Architecte IA.','Optimiseur de Revenus.','Dealer d\'Automatisation.']};
+
+  // Reset active exp when lang changes
+  useEffect(()=>setActiveExp(0),[lang]);
+  useEffect(()=>setTagFilter(t.expFilterAll),[lang]);
 
   // Typewriter
   useEffect(()=>{
-    const cur=LINES[lineIdx];
-    const t=setTimeout(()=>{
+    const lines=LINES[lang];
+    const cur=lines[lineIdx%lines.length];
+    const tm=setTimeout(()=>{
       if(!deleting){
         if(charIdx<cur.length){setTyped(cur.slice(0,charIdx+1));setCharIdx(c=>c+1)}
         else setTimeout(()=>setDeleting(true),1800);
       }else{
         if(charIdx>0){setTyped(cur.slice(0,charIdx-1));setCharIdx(c=>c-1)}
-        else{setDeleting(false);setLineIdx(i=>(i+1)%LINES.length)}
+        else{setDeleting(false);setLineIdx(i=>(i+1)%lines.length)}
       }
     },deleting?38:68);
-    return()=>clearTimeout(t);
-  },[charIdx,deleting,lineIdx]);
+    return()=>clearTimeout(tm);
+  },[charIdx,deleting,lineIdx,lang]);
 
-  // Theme
   useEffect(()=>{document.body.setAttribute('data-theme',theme)},[theme]);
-
-  // Konami
   useEffect(()=>{window.konamiCb=()=>setShowEgg(true);return()=>{window.konamiCb=null}},[]);
   useEffect(()=>{const h=e=>{if(e.key==='Escape'){setShowEgg(false);setActiveCountry(null)}};window.addEventListener('keydown',h);return()=>window.removeEventListener('keydown',h)},[]);
-
-  // Scroll reveal
   useEffect(()=>{
     const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.12});
-    const els=document.querySelectorAll('.reveal');
-    els.forEach(el=>obs.observe(el));
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     return()=>obs.disconnect();
   });
 
-  // Filtered experiences by tag
-  const filteredExp=EXPERIENCES.filter(e=>tagFilter==='All'||e.tags.includes(tagFilter));
-
   const scrollTo=id=>document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+  const allTags=[t.expFilterAll,...new Set(exps.flatMap(e=>e.tags))];
 
-  return(<>
-    {showEgg&&<EasterEgg onClose={()=>setShowEgg(false)}/>}
-    {activeCountry&&<CountryModal country={activeCountry} onClose={()=>setActiveCountry(null)}/>}
-    <ScrollToTop/>
-    <VisitorBadge/>
+  return(<LangCtx.Provider value={lang}>
+    {showEgg&&<EasterEgg onClose={()=>setShowEgg(false)} lang={lang}/>}
+    {activeCountry&&<CountryModal country={activeCountry} onClose={()=>setActiveCountry(null)} lang={lang}/>}
+    <ScrollToTop lang={lang}/>
+    <VisitorBadge lang={lang}/>
 
-    {/* ── NAV (single bar) ── */}
+    {/* ── NAV ── */}
     <nav className="nav">
-      <div className="nav-logo">ADM.SYS // v3.0</div>
+      <div className="nav-logo">ADM.SYS // v4.0</div>
       <div className="nav-links">
-        {['about','dashboard','pipeline','experience','projects','stack','roi','testimonials','blog','contact'].map(s=>(
-          <button key={s} className="nav-link" onClick={()=>scrollTo(s)}>{s}</button>
+        {t.nav.map(s=>(
+          <button key={s} className="nav-link" onClick={()=>scrollTo(s)}>{t.navLabels[s]}</button>
         ))}
       </div>
-      <div className="nav-themes">
-        {[['dark','🌙'],['hacker','💻'],['light','☀️']].map(([t,icon])=>(
-          <button key={t} className={`theme-btn${theme===t?' active':''}`} onClick={()=>setTheme(t)}>{icon} {t}</button>
-        ))}
+      <div style={{display:'flex',gap:'8px',alignItems:'center',flexShrink:0}}>
+        {/* Language toggle */}
+        <div className="nav-themes" style={{marginRight:'4px'}}>
+          {[['en','🇬🇧'],['fr','🇫🇷']].map(([l,flag])=>(
+            <button key={l} className={`theme-btn${lang===l?' active':''}`} onClick={()=>setLang(l)}>{flag} {l.toUpperCase()}</button>
+          ))}
+        </div>
+        {/* Theme toggle */}
+        <div className="nav-themes">
+          {[['dark','🌙'],['hacker','💻'],['light','☀️']].map(([th,icon])=>(
+            <button key={th} className={`theme-btn${theme===th?' active':''}`} onClick={()=>setTheme(th)}>{icon}</button>
+          ))}
+        </div>
       </div>
     </nav>
 
@@ -993,8 +1112,11 @@ function App(){
       <div className="ticker-inner">
         {[0,1].map(ri=>(
           <div key={ri} style={{display:'flex',gap:'48px'}}>
-            {['85% processing capacity gain','30+ workflows automated','270% pipeline efficiency boost','Dept built in 6 months','10+ Power BI dashboards','n8n · Python · LLMs · Power BI','40+ competitors monitored · 1300 SKUs daily'].map((t,i)=>(
-              <div key={i} className="ticker-item">{t}</div>
+            {(lang==='fr'
+              ?['85% de gain en capacité de traitement','30+ workflows automatisés','270% boost efficacité pipeline','Dept Analytics créé en 6 mois','10+ dashboards Power BI','n8n · Python · LLMs · Power BI','40+ concurrents · 1300 SKUs · Daily']
+              :['85% processing capacity gain','30+ workflows automated','270% pipeline efficiency boost','Analytics dept built in 6 months','10+ Power BI dashboards','n8n · Python · LLMs · Power BI','40+ competitors monitored · 1,300 SKUs daily']
+            ).map((item,i)=>(
+              <div key={i} className="ticker-item">{item}</div>
             ))}
           </div>
         ))}
@@ -1003,32 +1125,32 @@ function App(){
 
     {/* ── HERO ── */}
     <section id="about" className="hero">
-      <div className="hero-badge">🟢 Available for hire · France & Canada</div>
+      <div className="hero-badge">{t.badge}</div>
       <h1 className="hero-h1">
         <div className="glitch-wrap" data-text="ANTOINE">ANTOINE</div>
         <div><span className="accent">DE</span></div>
         <div className="outline">MAINTENANT</div>
       </h1>
       <p className="hero-sub">
-        I turn your <span>bloated reporting hell</span> into automated intelligence —<br/>
-        real-time dashboards, self-running pipelines, executive-ready insights.<br/>
-        BI &amp; Automation specialist with 5+ years across CPG, SaaS and CSR.
+        {t.heroSub1} <span>{t.heroSub1b}</span> {t.heroSub2}<br/>
+        {t.heroSub3}<br/>
+        {t.heroSub4}
       </p>
-      <XPCounter/>
-      <div className="typewriter-row">
+      <XPCounter lang={lang}/>
+      <div className="typewriter-row" style={{marginTop:'16px'}}>
         <span className="prompt">{'>'}</span>
         {typed}<span className="t-cursor"/>
       </div>
       <div className="hero-ctas">
-        <button className="btn-primary" onClick={()=>scrollTo('roi')}>Calculate My ROI →</button>
-        <button className="btn-secondary" onClick={()=>scrollTo('contact')}>Get in Touch</button>
-        <a href="CV_Antoine.pdf" download="CV_Antoine_de_Maintenant_2026.pdf" className="btn-secondary">↓ Download CV</a>
+        <button className="btn-primary" onClick={()=>scrollTo('roi')}>{t.ctaRoi}</button>
+        <button className="btn-secondary" onClick={()=>scrollTo('contact')}>{t.ctaContact}</button>
+        <a href="CV_Antoine.pdf" download="CV_Antoine_de_Maintenant_2026.pdf" className="btn-secondary">{t.ctaCV}</a>
       </div>
     </section>
 
     {/* ── METRICS ── */}
     <div className="metrics reveal">
-      {[{n:'85%',l:'Processing Capacity Gained'},{n:'270%',l:'Pipeline Efficiency Boost'},{n:'30+',l:'Workflows Automated'},{n:'6mo',l:'Built Analytics Dept from 0'}].map((m,i)=>(
+      {t.metrics.map((m,i)=>(
         <div key={i} className="metric"><span className="metric-num">{m.n}</span><span className="metric-lbl">{m.l}</span></div>
       ))}
     </div>
@@ -1036,21 +1158,19 @@ function App(){
     {/* ── DASHBOARD ── */}
     <div id="dashboard" className="section-full">
       <div className="section-full-inner" style={{paddingTop:'90px',paddingBottom:'90px'}}>
-        <div className="section-eyebrow">Live Demo</div>
-        <h2 className="section-title">Executive <em>Dashboard</em></h2>
-        <p style={{fontSize:'.88rem',color:'var(--text-sec)',maxWidth:'580px',marginBottom:'36px',lineHeight:'1.75'}}>Replica of the NAOS NORAM dashboard — real-time revenue tracking, ML forecasting, zero manual intervention.</p>
-        <Dashboard/>
+        <div className="section-eyebrow">{t.dashEyebrow}</div>
+        <h2 className="section-title">{t.dashTitle} <em>{t.dashTitleEm}</em></h2>
+        <p style={{fontSize:'.88rem',color:'var(--text-sec)',maxWidth:'580px',marginBottom:'36px',lineHeight:'1.75'}}>{t.dashDesc}</p>
+        <Dashboard lang={lang}/>
       </div>
     </div>
 
     {/* ── PIPELINE ── */}
     <section id="pipeline" className="section">
-      <div className="section-eyebrow">Interactive Demo</div>
-      <h2 className="section-title">Automation <em>Pipeline</em></h2>
-      <p style={{fontSize:'.88rem',color:'var(--text-sec)',maxWidth:'580px',marginBottom:'36px',lineHeight:'1.75'}}>A live retail forecasting pipeline — raw POS data to stakeholder reports in under 6 minutes, every morning at 6AM.</p>
-      <Pipeline/>
-
-      {/* Terminal */}
+      <div className="section-eyebrow">{t.pipeEyebrow}</div>
+      <h2 className="section-title">{t.pipeTitle} <em>{t.pipeTitleEm}</em></h2>
+      <p style={{fontSize:'.88rem',color:'var(--text-sec)',maxWidth:'580px',marginBottom:'36px',lineHeight:'1.75'}}>{t.pipeDesc}</p>
+      <Pipeline lang={lang}/>
       <div style={{marginTop:'28px'}} className="terminal reveal">
         <div className="terminal-bar">
           <div className="t-dot t-red"/><div className="t-dot t-yellow"/><div className="t-dot t-green"/>
@@ -1058,12 +1178,13 @@ function App(){
         </div>
         <div className="terminal-body">
           <div className="t-line"><span className="t-prompt">$</span> <span className="t-cmd">python forecast_engine.py</span> <span className="t-dim">--client enterprise --sku-level --horizon 13w</span></div>
-          <div className="t-line"><span>→ Connecting data warehouse... </span><span className="t-hl">✓</span></div>
-          <div className="t-line"><span>→ Loading 24mo sell-through data... </span><span className="t-hl">✓ 847,320 rows</span></div>
-          <div className="t-line"><span>→ STL seasonality decomposition... </span><span className="t-hl">✓ MAPE: 4.2%</span></div>
-          <div className="t-line"><span>→ Generating Power BI export... </span><span className="t-hl">✓ 1.3s</span></div>
-          <div className="t-line"><span>→ Sending to executive Slack... </span><span className="t-hl">✓ Delivered 06:00 AM</span></div>
-          <div className="t-line t-dim">// Previously: 3 analysts × 2 days. Now: automated. Every Monday. While sleeping.</div>
+          {(lang==='fr'
+            ?[['→ Connexion entrepôt de données... ','✓'],['→ Chargement 24 mois de données... ','✓ 847 320 lignes'],['→ Décomposition saisonnière STL... ','✓ MAPE : 4,2%'],['→ Génération export Power BI... ','✓ 1,3s'],['→ Envoi au Slack exécutif... ','✓ Livré à 06:00'],null]
+            :[['→ Connecting data warehouse... ','✓'],['→ Loading 24mo sell-through data... ','✓ 847,320 rows'],['→ STL seasonality decomposition... ','✓ MAPE: 4.2%'],['→ Generating Power BI export... ','✓ 1.3s'],['→ Sending to executive Slack... ','✓ Delivered 06:00 AM'],null]
+          ).map((line,i)=>line
+            ?<div key={i} className="t-line"><span>{line[0]}</span><span className="t-hl">{line[1]}</span></div>
+            :<div key={i} className="t-line t-dim">{lang==='fr'?"// Avant : 3 analystes × 2 jours. Maintenant : automatisé. Chaque lundi. Pendant le sommeil.":"// Previously: 3 analysts × 2 days. Now: automated. Every Monday. While sleeping."}</div>
+          )}
           <div className="t-line"><span className="t-prompt">$</span> <span className="t-cursor"/></div>
         </div>
       </div>
@@ -1072,20 +1193,17 @@ function App(){
     {/* ── EXPERIENCE ── */}
     <section id="experience" className="section" style={{background:'var(--bg2)'}}>
       <div style={{maxWidth:'1400px',margin:'0 auto'}}>
-        <div className="section-eyebrow">Career Timeline</div>
-        <h2 className="section-title">Where I built <em>things that still run.</em></h2>
-
-        {/* Tag filter */}
+        <div className="section-eyebrow">{t.expEyebrow}</div>
+        <h2 className="section-title">{t.expTitle} <em>{t.expTitleEm}</em></h2>
         <div className="exp-filter-bar">
-          {ALL_TAGS.map(t=>(
-            <button key={t} className={`filter-btn${tagFilter===t?' active':''}`} onClick={()=>{setTagFilter(t);if(t!=='All'){const match=EXPERIENCES.findIndex(e=>e.tags.includes(t));if(match>=0)setActiveExp(match)}else setActiveExp(0)}}>{t}</button>
+          {allTags.map(tag=>(
+            <button key={tag} className={`filter-btn${tagFilter===tag?' active':''}`} onClick={()=>{setTagFilter(tag);if(tag!==t.expFilterAll){const m=exps.findIndex(e=>e.tags.includes(tag));if(m>=0)setActiveExp(m)}else setActiveExp(0)}}>{tag}</button>
           ))}
         </div>
-
         <div className="exp-layout reveal">
           <div className="exp-nav">
-            {EXPERIENCES.map(e=>{
-              const hidden=tagFilter!=='All'&&!e.tags.includes(tagFilter);
+            {exps.map(e=>{
+              const hidden=tagFilter!==t.expFilterAll&&!e.tags.includes(tagFilter);
               if(hidden)return null;
               return(
                 <div key={e.id} className={`exp-nav-item${activeExp===e.id?' active':''}`} onClick={()=>setActiveExp(e.id)}>
@@ -1102,7 +1220,7 @@ function App(){
               <span>{exp.company}</span><span>·</span><span>{exp.location}</span><span>·</span><span>{exp.revenue}</span>
             </div>
             <ul className="exp-bullets">{exp.highlights.map((h,i)=><li key={i}>{h}</li>)}</ul>
-            <div className="exp-tags">{exp.tags.map(t=><span key={t} className="exp-tag">{t}</span>)}</div>
+            <div className="exp-tags">{exp.tags.map(tag=><span key={tag} className="exp-tag">{tag}</span>)}</div>
           </div>
         </div>
       </div>
@@ -1110,10 +1228,10 @@ function App(){
 
     {/* ── SKILLS ── */}
     <section id="skills" className="section">
-      <div className="section-eyebrow">Arsenal</div>
-      <h2 className="section-title">Tools I use. <span style={{color:'var(--text-dim)'}}>Not just list.</span></h2>
+      <div className="section-eyebrow">{t.skillsEyebrow}</div>
+      <h2 className="section-title">{t.skillsTitle} <span style={{color:'var(--text-dim)'}}>{t.skillsTitleDim}</span></h2>
       <div className="skills-grid">
-        {SKILLS.map((s,i)=>(
+        {skills.map((s,i)=>(
           <div key={i} className="skill-card reveal">
             <div className="skill-icon">{s.icon}</div>
             <div className="skill-name">{s.name}</div>
@@ -1128,25 +1246,25 @@ function App(){
     {/* ── PROJECTS ── */}
     <section id="projects" className="section" style={{background:'var(--bg2)'}}>
       <div style={{maxWidth:'1400px',margin:'0 auto'}}>
-        <div className="section-eyebrow">Signature Projects</div>
-        <h2 className="section-title">What I actually <em>built.</em></h2>
-        <p style={{fontSize:'.88rem',color:'var(--text-sec)',maxWidth:'580px',marginBottom:'40px',lineHeight:'1.75'}}>Production systems still running today. No names, no logos — but real impact, real code, real results.</p>
-        <Projects/>
+        <div className="section-eyebrow">{t.projectsEyebrow}</div>
+        <h2 className="section-title">{t.projectsTitle} <em>{t.projectsTitleEm}</em></h2>
+        <p style={{fontSize:'.88rem',color:'var(--text-sec)',maxWidth:'580px',marginBottom:'40px',lineHeight:'1.75'}}>{t.projectsDesc}</p>
+        <Projects lang={lang}/>
       </div>
     </section>
 
     {/* ── STACK ── */}
-    <section id="stack" className="section" style={{background:'var(--bg2)'}}>
+    <section id="stack" className="section">
       <div style={{maxWidth:'1400px',margin:'0 auto'}}>
-        <div className="section-eyebrow">Tech Stack</div>
-        <h2 className="section-title">Tools I ship with. <em>Not just buzzwords.</em></h2>
+        <div className="section-eyebrow">{t.stackEyebrow}</div>
+        <h2 className="section-title">{t.stackTitle} <em>{t.stackTitleEm}</em></h2>
         <div className="stack-grid reveal">
-          {STACK.map((t,i)=>(
+          {STACK.map((s,i)=>(
             <div key={i} className="stack-card">
-              <div className="stack-level">{t.level}</div>
-              <span className="stack-emoji">{t.e}</span>
-              <div className="stack-name">{t.name}</div>
-              <div className="stack-cat">{t.cat}</div>
+              <div className="stack-level">{s.level}</div>
+              <span className="stack-emoji">{s.e}</span>
+              <div className="stack-name">{s.name}</div>
+              <div className="stack-cat">{s.cat}</div>
             </div>
           ))}
         </div>
@@ -1154,29 +1272,31 @@ function App(){
     </section>
 
     {/* ── ROI ── */}
-    <section id="roi" className="section">
-      <div className="section-eyebrow">ROI Calculator</div>
-      <h2 className="section-title">Find out what <em>not</em> hiring me costs.</h2>
-      <ROICalc/>
+    <section id="roi" className="section" style={{background:'var(--bg2)'}}>
+      <div style={{maxWidth:'1400px',margin:'0 auto'}}>
+        <div className="section-eyebrow">{t.roiEyebrow}</div>
+        <h2 className="section-title">{t.roiTitle} <em>{t.roiTitleEm}</em> {t.roiTitle2}</h2>
+        <ROICalc lang={lang}/>
+      </div>
     </section>
 
     {/* ── TESTIMONIALS ── */}
-    <section id="testimonials" className="section" style={{background:'var(--bg2)'}}>
+    <section id="testimonials" className="section">
       <div style={{maxWidth:'1400px',margin:'0 auto'}}>
-        <div className="section-eyebrow">Social Proof</div>
-        <h2 className="section-title">Don't take <em>my word for it.</em></h2>
+        <div className="section-eyebrow">{t.testiEyebrow}</div>
+        <h2 className="section-title">{t.testiTitle} <em>{t.testiTitleEm}</em></h2>
         <div className="testi-grid reveal">
-          {TESTIMONIALS.map((t,i)=>(
+          {TESTIMONIALS.map((item,i)=>(
             <div key={i} className="testi-card">
-              <div className="testi-stars">{'★'.repeat(t.stars)}</div>
-              <div className="testi-quote">{t.q}</div>
+              <div className="testi-stars">{'★'.repeat(item.stars)}</div>
+              <div className="testi-quote">{item.q[lang]}</div>
               <div className="testi-author">
                 <div className="testi-avatar" style={{background:'rgba(196,78,255,.2)',border:'1px dashed var(--border)',color:'var(--accent1)',fontSize:'.9rem'}}>?</div>
                 <div>
-                  <div className="testi-name" style={{filter:'blur(4px)',userSelect:'none',color:'var(--text-dim)',fontSize:'.78rem',letterSpacing:'1px'}}>Anonymous · NDA</div>
-                  <div className="testi-role">{t.role}</div>
+                  <div className="testi-name" style={{filter:'blur(4px)',userSelect:'none',color:'var(--text-dim)',fontSize:'.78rem',letterSpacing:'1px'}}>{t.testiBlur}</div>
+                  <div className="testi-role">{item.role}</div>
                   <div style={{fontFamily:"'Space Mono',monospace",fontSize:'.44rem',color:'var(--accent3)',letterSpacing:'2px',marginTop:'4px',display:'flex',alignItems:'center',gap:'5px'}}>
-                    <span style={{width:'5px',height:'5px',borderRadius:'50%',background:'var(--accent3)',display:'inline-block'}}/>COMING SOON
+                    <span style={{width:'5px',height:'5px',borderRadius:'50%',background:'var(--accent3)',display:'inline-block'}}/>{t.testiSoon}
                   </div>
                 </div>
               </div>
@@ -1189,8 +1309,8 @@ function App(){
     {/* ── WORLD STRIP ── */}
     <div className="world-strip">
       <div className="world-inner">
-        <span className="world-label">Cliquez sur un pays →</span>
-        {COUNTRIES.map((c,i)=>(
+        <span className="world-label">{t.worldLabel}</span>
+        {countries.map((c,i)=>(
           <button key={i} className="country-flag-btn" onClick={()=>setActiveCountry(c)} title={c.n}>
             <img src={`https://flagcdn.com/48x36/${c.iso}.png`} width="48" height="36" alt={c.n}/>
             <span className="country-flag-label">{c.n}</span>
@@ -1200,20 +1320,22 @@ function App(){
     </div>
 
     {/* ── BLOG ── */}
-    <section id="blog" className="section">
-      <div className="section-eyebrow">Notes & Réflexions</div>
-      <h2 className="section-title">Ce que je pense <em>tout haut.</em></h2>
-      <p style={{fontSize:'.88rem',color:'var(--text-sec)',maxWidth:'580px',marginBottom:'40px',lineHeight:'1.75'}}>Quelques réflexions sur l'IA, l'automatisation et la data — sans jargon inutile.</p>
-      <Blog/>
+    <section id="blog" className="section" style={{background:'var(--bg2)'}}>
+      <div style={{maxWidth:'1400px',margin:'0 auto'}}>
+        <div className="section-eyebrow">{t.blogEyebrow}</div>
+        <h2 className="section-title">{t.blogTitle} <em>{t.blogTitleEm}</em></h2>
+        <p style={{fontSize:'.88rem',color:'var(--text-sec)',maxWidth:'580px',marginBottom:'40px',lineHeight:'1.75'}}>{t.blogDesc}</p>
+        <Blog lang={lang}/>
+      </div>
     </section>
 
     {/* ── CONTACT ── */}
-    <section id="contact" className="section" style={{background:'var(--bg2)'}}>
-      <div className="section-eyebrow">Contact</div>
-      <h2 className="section-title">Let's build <em>something real.</em></h2>
+    <section id="contact" className="section">
+      <div className="section-eyebrow">{t.contactEyebrow}</div>
+      <h2 className="section-title">{t.contactTitle} <em>{t.contactTitleEm}</em></h2>
       <div className="contact-layout reveal">
         <div className="contact-cards">
-          <CopyEmailButton/>
+          <CopyEmailButton lang={lang}/>
           <a href="https://www.linkedin.com/in/antoine2maintenant/" target="_blank" rel="noopener noreferrer" className="contact-card">
             <span className="contact-icon">🔗</span>
             <div><div className="contact-lbl">LinkedIn</div><div className="contact-val">linkedin.com/in/antoine2maintenant</div></div>
@@ -1224,19 +1346,18 @@ function App(){
           </a>
           <div className="contact-card" style={{cursor:'default'}}>
             <span className="contact-icon">📍</span>
-            <div><div className="contact-lbl">Location</div><div className="contact-val">France · Canada (Montréal)</div></div>
+            <div><div className="contact-lbl">{t.contactLocation}</div><div className="contact-val">France · Canada (Montréal)</div></div>
           </div>
           <div className="contact-card" style={{cursor:'default'}}>
             <span className="contact-icon">📱</span>
-            <div><div className="contact-lbl">Phone</div><div className="contact-val">+1 (263) 385-6506</div></div>
+            <div><div className="contact-lbl">{t.contactPhone}</div><div className="contact-val">+1 (263) 385-6506</div></div>
           </div>
         </div>
-
         <div className="contact-cta reveal">
-          <h3>I'm selective about what I build next.</h3>
-          <p>If you have a data problem that's costing you real money and time — manual reports, broken pipelines, zero visibility into your operations — I'm interested.<br/><br/>If you want me to "just make the charts prettier," I'll politely refer you to Canva.</p>
+          <h3>{t.contactH3}</h3>
+          <p dangerouslySetInnerHTML={{__html:t.contactP}}/>
           <div style={{fontFamily:"'Space Mono',monospace",fontSize:'.6rem',color:'var(--accent1)',letterSpacing:'2px',textTransform:'uppercase',display:'flex',alignItems:'center'}}>
-            <span className="status-dot"/>Open to new missions · 2026
+            <span className="status-dot"/>{t.contactStatus}
           </div>
         </div>
       </div>
@@ -1244,9 +1365,9 @@ function App(){
 
     <footer className="footer">
       © 2026 Antoine de Maintenant
-      <span>// Try the Konami code ↑↑↓↓←→←→BA — you won't regret it.</span>
+      <span>{t.footerKonami}</span>
     </footer>
-  </>);
+  </LangCtx.Provider>);
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
