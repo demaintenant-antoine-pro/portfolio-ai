@@ -305,6 +305,58 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:15px;height:15px;b
 .project-tags{display:flex;flex-wrap:wrap;gap:6px}
 .project-tag{font-family:'Space Mono',monospace;font-size:.46rem;color:var(--text-dim);border:1px solid var(--border-dim);padding:3px 8px;border-radius:2px;letter-spacing:1px}
 
+/* ═══ SCROLL TO TOP ══════════════════════ */
+.scroll-top{position:fixed;bottom:80px;right:24px;z-index:400;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--accent1),var(--accent2));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;color:#fff;box-shadow:0 4px 20px var(--glow1);opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none}
+.scroll-top.visible{opacity:1;transform:translateY(0);pointer-events:all}
+.scroll-top:hover{transform:translateY(-3px) !important;box-shadow:0 8px 28px var(--glow1)}
+
+/* ═══ XP COUNTER ════════════════════════ */
+.xp-badge{display:inline-flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:.72rem;color:var(--accent3);background:rgba(0,245,176,.08);border:1px solid rgba(0,245,176,.25);padding:6px 14px;border-radius:20px;margin-top:12px}
+
+/* ═══ COPY EMAIL ════════════════════════ */
+.copy-toast{position:fixed;bottom:140px;right:24px;z-index:800;background:var(--accent3);color:#1A0A2E;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:2px;padding:10px 18px;border-radius:20px;opacity:0;transform:translateY(6px);transition:all .3s;pointer-events:none;font-weight:700}
+.copy-toast.show{opacity:1;transform:translateY(0)}
+
+/* ═══ COUNTRY MODAL ══════════════════════ */
+.country-modal-overlay{position:fixed;inset:0;background:rgba(10,5,21,.88);z-index:900;display:flex;align-items:center;justify-content:center;animation:fadeIn .25s ease;padding:20px}
+.country-modal{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:0;max-width:520px;width:100%;animation:popIn .35s cubic-bezier(.16,1,.3,1);overflow:hidden;box-shadow:0 0 60px var(--glow1)}
+.country-modal-header{padding:28px 32px 20px;border-bottom:1px solid var(--border-dim);display:flex;align-items:center;gap:16px}
+.country-modal-flag{width:56px;height:42px;border-radius:6px;border:2px solid var(--border-dim);object-fit:cover}
+.country-modal-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:2px;color:var(--text)}
+.country-modal-sub{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--accent2);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.country-modal-body{padding:24px 32px 28px;display:flex;flex-direction:column;gap:12px}
+.country-modal-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:4px}
+.country-modal-tag{font-family:'Space Mono',monospace;font-size:.46rem;color:var(--accent1);background:rgba(196,78,255,.08);border:1px solid var(--border-dim);padding:3px 10px;border-radius:20px;letter-spacing:1px}
+.country-modal-text{font-size:.88rem;color:var(--text-sec);line-height:1.85}
+.country-modal-close{display:block;margin:4px auto 0;background:rgba(196,78,255,.1);border:1px solid var(--border-dim);color:var(--text-dim);font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:2px;text-transform:uppercase;padding:10px 24px;cursor:pointer;border-radius:4px;transition:all .2s}
+.country-modal-close:hover{border-color:var(--accent2);color:var(--accent2)}
+.country-flag-btn{cursor:pointer;transition:transform .2s;display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:none;padding:0}
+.country-flag-btn:hover{transform:scale(1.12)}
+.country-flag-btn img{border-radius:4px;border:2px solid var(--border-dim);box-shadow:0 2px 8px rgba(0,0,0,.25);transition:border-color .2s;display:block}
+.country-flag-btn:hover img{border-color:var(--accent2)}
+.country-flag-label{font-family:'Space Mono',monospace;font-size:.5rem;color:var(--text-sec);letter-spacing:2px}
+
+/* ═══ BLOG ═══════════════════════════════ */
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.blog-card{background:var(--bg-card);border:1px solid var(--border-dim);border-radius:10px;padding:24px;transition:all .3s;cursor:pointer;position:relative;overflow:hidden}
+.blog-card:hover{border-color:var(--accent1);transform:translateY(-4px);box-shadow:0 12px 36px var(--glow1)}
+.blog-tag{font-family:'Space Mono',monospace;font-size:.44rem;color:var(--accent2);background:rgba(255,61,133,.08);border:1px solid rgba(255,61,133,.2);padding:3px 10px;border-radius:20px;letter-spacing:2px;text-transform:uppercase;display:inline-block;margin-bottom:12px}
+.blog-title{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:1.5px;margin-bottom:8px;color:var(--text);line-height:1.2}
+.blog-excerpt{font-size:.78rem;color:var(--text-sec);line-height:1.7;margin-bottom:14px}
+.blog-meta{font-family:'Space Mono',monospace;font-size:.46rem;color:var(--text-mute);letter-spacing:1px;display:flex;gap:12px}
+.blog-read-more{font-family:'Space Mono',monospace;font-size:.5rem;color:var(--accent1);letter-spacing:2px;text-transform:uppercase;margin-top:10px;display:flex;align-items:center;gap:5px}
+.blog-modal-overlay{position:fixed;inset:0;background:rgba(10,5,21,.94);z-index:900;display:flex;align-items:center;justify-content:center;animation:fadeIn .25s ease;padding:24px}
+.blog-modal{background:var(--bg2);border:1px solid var(--border);border-radius:12px;max-width:680px;width:100%;max-height:85vh;overflow-y:auto;animation:popIn .35s cubic-bezier(.16,1,.3,1);box-shadow:0 0 60px var(--glow1)}
+.blog-modal-inner{padding:40px}
+.blog-modal-tag{font-family:'Space Mono',monospace;font-size:.46rem;color:var(--accent2);background:rgba(255,61,133,.08);border:1px solid rgba(255,61,133,.2);padding:4px 12px;border-radius:20px;letter-spacing:2px;text-transform:uppercase;display:inline-block;margin-bottom:16px}
+.blog-modal-title{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:2px;margin-bottom:8px;color:var(--text);line-height:1.1}
+.blog-modal-meta{font-family:'Space Mono',monospace;font-size:.5rem;color:var(--text-mute);letter-spacing:1px;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border-dim)}
+.blog-modal-body{font-size:.9rem;color:var(--text-sec);line-height:1.9}
+.blog-modal-body p{margin-bottom:16px}
+.blog-modal-body strong{color:var(--accent1)}
+.blog-modal-close{display:block;margin:28px auto 0;background:rgba(196,78,255,.1);border:1px solid var(--border-dim);color:var(--text-dim);font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:2px;text-transform:uppercase;padding:10px 24px;cursor:pointer;border-radius:4px;transition:all .2s}
+.blog-modal-close:hover{border-color:var(--accent2);color:var(--accent2)}
+
 /* ═══ FOOTER ════════════════════════════ */
 .footer{position:relative;z-index:5;text-align:center;padding:40px;border-top:1px solid var(--border-dim);font-family:'Space Mono',monospace;font-size:.56rem;color:var(--text-mute);letter-spacing:2px}
 .footer span{color:var(--text-dim);display:block;margin-top:6px}
@@ -501,6 +553,54 @@ const PROJECTS=[
     stats:['10,000+ Reviews/mo','Multi-Platform','Feature-Level NLP','Trend Detection','Auto Reports'],
     tags:['Python','NLP','Transformers','n8n','Power BI'],
   },
+];
+
+const COUNTRIES=[
+  {iso:'fr',n:'France',emoji:'🥐',sub:'Homeland · Versailles · Bretagne',
+   tags:['Birthplace','Versailles (sans le château 😄)','15 ans de piano','Rugby · Football · Voile','La Bretagne forever'],
+   text:"Né et grandi en France, j'ai passé mon enfance et mon lycée à Versailles — dans la ville, pas au château, même si les voisins sont célèbres. C'est là que j'ai développé ma passion pour la musique avec 15 ans de piano classique, et que j'ai pratiqué rugby, football et voile en parallèle. Un profil atypique, peut-être, mais c'est cette combinaison de rigueur et de créativité qui me définit. Et la Bretagne — ses côtes sauvages, son iode, ses crêpes au beurre salé — reste mon endroit préféré au monde pour me ressourcer."},
+  {iso:'ca',n:'Canada',emoji:'🍁',sub:'VIE · Montréal · IA & Automatisation',
+   tags:['VIE NAOS','Montréal','IA & Data','Développement perso','−30°C (oui vraiment)'],
+   text:"C'est ici, à Montréal, que je me suis vraiment épanoui. Mon VIE chez NAOS Bioderma m'a permis de construire un département Analytics de zéro, mais surtout d'investiguer à fond ma passion pour l'intelligence artificielle et l'automatisation Business Intelligence. Entre deux pipelines Python et une réunion avec les équipes NORAM, j'ai appris à apprécier les hivers canadiens — le genre de froid qui te réveille, au sens propre comme au figuré. Montréal est une ville qui pulse, créative et ambitieuse, et elle m'a transformé professionnellement et personnellement."},
+  {iso:'us',n:'USA',emoji:'🦅',sub:'Retail Analytics · Marché US',
+   tags:['Business Analyst','Forecasting retail','Marché CPG','Multi-states'],
+   text:"Mon expérience aux États-Unis m'a immergé dans le marché retail américain dans toute sa complexité — des chaînes nationales aux spécialistes beauté, en passant par les drugstores. Travailler sur des prévisions SKU-level pour des enseignes majeures m'a appris la rigueur du marché américain : ici, les chiffres doivent être parfaits, les délais non négociables, et la data doit raconter une histoire convaincante. Une expérience formatrice pour comprendre l'échelle et les exigences d'un marché global."},
+  {iso:'de',n:'Germany',emoji:'🍺',sub:'1 an d\'études · Immersion totale',
+   tags:['Études','Rigueur germanique','Ingénierie & Business','Berlin · Munich'],
+   text:"Une année d'études en Allemagne m'a exposé à la rigueur germanique dans toute sa splendeur — des process impeccables, une culture du travail profonde et une approche engineering de chaque problème. Au-delà du cadre académique, découvrir la culture allemande entre ses brasseries légendaires, sa scène musicale avant-gardiste et ses paysages variés a été une expérience d'ouverture essentielle. L'Allemagne m'a appris que la précision n'exclut pas la créativité — elle la renforce."},
+  {iso:'it',n:'Italy',emoji:'🍕',sub:'1 an d\'études · Turin',
+   tags:['Études à Turin','Gastronomie','Dolce vita','Fiat & Design'],
+   text:"Turin — la capitale discrète de l'Italie du Nord, trop souvent oubliée au profit de Rome ou Milan, mais infiniment plus authentique. Une année d'études là-bas m'a permis d'explorer un pays dont la beauté est presque injuste : l'architecture baroque, la gastronomie à chaque coin de rue (le risotto au Barolo, les tajarin au beurre de truffe...), et cette capacité italienne unique à trouver l'élégance dans le quotidien. L'Italie m'a rappelé que la qualité d'exécution — qu'on parle de pasta ou de dashboards — est toujours remarquée."},
+  {iso:'es',n:'Spain',emoji:'🌞',sub:'IE Business School · NOOS · Madrid',
+   tags:['IE Business School','NooS CSR','Madrid coup de cœur','Tapas & terrasse'],
+   text:"Coup de cœur absolu. Madrid est sans doute la ville qui m'a le plus marqué — son énergie, sa chaleur humaine, sa lumière. J'y ai poursuivi mon Master à l'IE Business School, l'une des meilleures business schools d'Europe, tout en accompagnant l'entreprise NooS dans ses problématiques data et engagement CSR. Travailler dans une ville où les réunions finissent à 22h et où la vie commence vraiment après minuit change ta perspective sur l'équilibre. Madrid ne s'oublie pas — elle te façonne."},
+  {iso:'tr',n:'Turkey',emoji:'🌙',sub:'Premier stage · Expérience fondatrice',
+   tags:['Premier stage','Immersion professionnelle','Istanbul','Expérience fondatrice'],
+   text:"Mon tout premier stage — et quelle entrée en matière. La Turquie m'a jeté dans le grand bain professionnel avec une intensité que peu de pays savent offrir. Istanbul, entre Europe et Asie, entre modernité et tradition, est une ville qui ne te laisse jamais indifférent. Ce premier contact avec le monde du travail à l'international m'a appris l'adaptabilité, la gestion de l'ambiguïté, et que les meilleures expériences sont souvent celles qui te déstabilisent au départ. Une expérience inoubliable qui a posé les bases de tout ce qui a suivi."},
+];
+
+const BLOG_POSTS=[
+  {tag:'AI & AUTOMATISATION',title:'Pourquoi vos équipes data perdent encore 60% de leur temps',date:'Feb 2026',readTime:'4 min',
+   excerpt:"La plupart des équipes data que je rencontre passent plus de temps à préparer les données qu'à les analyser. Voici pourquoi — et comment inverser ça.",
+   body:`<p>J'ai passé les 18 derniers mois à construire des systèmes d'automatisation pour des équipes commerciales, et j'observe toujours le même pattern : <strong>entre 50 et 70% du temps analytique est consacré à des tâches de préparation</strong> — extraire des fichiers, les merger, les nettoyer, corriger des erreurs, reformater des colonnes.</p>
+   <p>C'est du temps humain de haute valeur brûlé sur des tâches que Python fait en 12 secondes.</p>
+   <p>Le problème n'est pas technique. C'est que personne n'a jamais pris 2 semaines pour <strong>automatiser ce qui prend 2 jours chaque semaine</strong>. L'urgence du quotidien écrase toujours l'investissement structurel.</p>
+   <p>La solution que j'applique systématiquement : cartographier toutes les tâches répétitives, identifier celles qui suivent un pattern fixe, et les automatiser en priorité selon le ratio temps-gagné / complexité-technique. Dans 80% des cas, les gains les plus importants sont sur les tâches les plus simples.</p>
+   <p><strong>Résultat type :</strong> une équipe de 3 analystes récupère l'équivalent d'un ETP complet sur des tâches à valeur ajoutée.</p>`},
+  {tag:'INTELLIGENCE COMPÉTITIVE',title:'40 concurrents, 1300 SKUs, zéro analyste — comment ?',date:'Jan 2026',readTime:'5 min',
+   excerpt:"Comment j'ai construit un système qui monitore 40 concurrents sur 1300 références produits chaque matin, sans intervention humaine.",
+   body:`<p>La veille concurrentielle manuelle, c'est l'un des postes de coût les plus sous-estimés en marketing produit. Des heures chaque semaine pour aller vérifier les prix, les promotions, les ruptures de stock, les nouveautés — sur des dizaines de sites différents.</p>
+   <p>J'ai construit une alternative : <strong>un scraper Python qui tourne chaque nuit</strong>, couvre 40+ concurrents sur 1 300 SKUs, et génère automatiquement un Power BI alimenté avec les données fraîches du matin.</p>
+   <p>Les équipes ouvrent leur ordinateur et voient directement : qui a lancé une promo hier soir, quel concurrent est en rupture sur quelle référence, quels nouveaux produits sont apparus.</p>
+   <p>Ce qui prenait <strong>2 jours d'analyse manuelle par semaine</strong> est devenu une lecture de 10 minutes chaque matin. L'équipe marketing a pu réorienter ce temps vers la stratégie réelle plutôt que la collecte de données.</p>
+   <p><strong>Stack :</strong> Python (Scrapy + Selenium pour les sites dynamiques), n8n pour l'orchestration, Power BI pour la visualisation, alertes Slack pour les événements critiques.</p>`},
+  {tag:'RÉFLEXION',title:'L\'IA ne remplace pas les data analysts — elle change ce qu\'ils font',date:'Mar 2026',readTime:'3 min',
+   excerpt:"Le débat 'IA vs humain' est mal posé. La vraie question : à quoi un data analyst devrait-il consacrer son temps en 2026 ?",
+   body:`<p>Depuis 18 mois que j'intègre des outils IA dans des workflows analytiques, j'entends régulièrement la même peur : "est-ce que ça va remplacer les analystes ?"</p>
+   <p>La réponse courte : non. La réponse longue : <strong>ça va rendre obsolètes ceux qui refusent d'évoluer</strong>.</p>
+   <p>Ce que l'IA fait mieux qu'un humain : traiter des volumes massifs de données, identifier des patterns dans du texte non structuré (avis clients, commentaires), générer des premiers drafts de rapports, automatiser des tâches répétitives à règles fixes.</p>
+   <p>Ce que l'IA ne fait pas : <strong>comprendre le contexte business</strong>, poser les bonnes questions, arbitrer entre des KPIs contradictoires, convaincre un CODIR de changer de stratégie.</p>
+   <p>Les data analysts qui prospèrent en 2026 sont ceux qui utilisent l'IA pour éliminer le travail mécanique et concentrent leur énergie sur la vraie valeur ajoutée : l'interprétation, la narration, la recommandation stratégique.</p>`},
 ];
 
 const ALL_TAGS=['All',...new Set(EXPERIENCES.flatMap(e=>e.tags))];
@@ -708,13 +808,122 @@ function VisitorBadge(){
 }
 
 /* ══════════════════════════════════════
-   MAIN APP
+   COUNTRY MODAL
+══════════════════════════════════════ */
+function CountryModal({country, onClose}){
+  if(!country) return null;
+  return(
+    <div className="country-modal-overlay" onClick={onClose}>
+      <div className="country-modal" onClick={e=>e.stopPropagation()}>
+        <div className="country-modal-header">
+          <img className="country-modal-flag" src={`https://flagcdn.com/80x60/${country.iso}.png`} alt={country.n}/>
+          <div>
+            <div className="country-modal-title">{country.emoji} {country.n}</div>
+            <div className="country-modal-sub">{country.sub}</div>
+          </div>
+        </div>
+        <div className="country-modal-body">
+          <div className="country-modal-tags">
+            {country.tags.map((t,i)=><span key={i} className="country-modal-tag">{t}</span>)}
+          </div>
+          <div className="country-modal-text">{country.text}</div>
+          <button className="country-modal-close" onClick={onClose}>FERMER // ESC</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════
+   BLOG
+══════════════════════════════════════ */
+function Blog(){
+  const [openPost, setOpenPost]=useState(null);
+  return(<>
+    {openPost&&(
+      <div className="blog-modal-overlay" onClick={()=>setOpenPost(null)}>
+        <div className="blog-modal" onClick={e=>e.stopPropagation()}>
+          <div className="blog-modal-inner">
+            <div className="blog-modal-tag">{openPost.tag}</div>
+            <div className="blog-modal-title">{openPost.title}</div>
+            <div className="blog-modal-meta">{openPost.date} · {openPost.readTime} de lecture</div>
+            <div className="blog-modal-body" dangerouslySetInnerHTML={{__html:openPost.body}}/>
+            <button className="blog-modal-close" onClick={()=>setOpenPost(null)}>FERMER // ESC</button>
+          </div>
+        </div>
+      </div>
+    )}
+    <div className="blog-grid">
+      {BLOG_POSTS.map((p,i)=>(
+        <div key={i} className="blog-card reveal" onClick={()=>setOpenPost(p)}>
+          <div className="blog-tag">{p.tag}</div>
+          <div className="blog-title">{p.title}</div>
+          <div className="blog-excerpt">{p.excerpt}</div>
+          <div className="blog-meta"><span>{p.date}</span><span>·</span><span>{p.readTime}</span></div>
+          <div className="blog-read-more">Lire l'article →</div>
+        </div>
+      ))}
+    </div>
+  </>);
+}
+
+/* ══════════════════════════════════════
+   SCROLL TO TOP
+══════════════════════════════════════ */
+function ScrollToTop(){
+  const [show,setShow]=useState(false);
+  useEffect(()=>{
+    const h=()=>setShow(window.scrollY>400);
+    window.addEventListener('scroll',h);return()=>window.removeEventListener('scroll',h);
+  },[]);
+  return(
+    <button className={`scroll-top${show?' visible':''}`} onClick={()=>window.scrollTo({top:0,behavior:'smooth'})} title="Back to top">↑</button>
+  );
+}
+
+/* ══════════════════════════════════════
+   XP COUNTER
+══════════════════════════════════════ */
+function XPCounter(){
+  const start=new Date('2022-03-01');
+  const now=new Date();
+  const years=((now-start)/(1000*60*60*24*365.25));
+  return(
+    <span className="xp-badge">⚡ {years.toFixed(1)} ans d'XP en data & automation</span>
+  );
+}
+
+/* ══════════════════════════════════════
+   COPY EMAIL TOAST
+══════════════════════════════════════ */
+function CopyEmailButton(){
+  const [copied,setCopied]=useState(false);
+  function copy(){
+    navigator.clipboard.writeText('antoinedemaintenant@alumni.ie.edu').then(()=>{
+      setCopied(true);setTimeout(()=>setCopied(false),2200);
+    });
+  }
+  return(<>
+    <div className={`copy-toast${copied?' show':''}`}>✓ Email copié !</div>
+    <a href="mailto:antoinedemaintenant@alumni.ie.edu" className="contact-card" onClick={e=>{e.preventDefault();copy();}}>
+      <span className="contact-icon">📧</span>
+      <div>
+        <div className="contact-lbl">Email <span style={{color:'var(--accent3)',fontSize:'.42rem',marginLeft:'6px',fontFamily:"'Space Mono',monospace"}}>CLIQUER POUR COPIER</span></div>
+        <div className="contact-val">antoinedemaintenant@alumni.ie.edu</div>
+      </div>
+    </a>
+  </>);
+}
+
+/* ══════════════════════════════════════
+   APP
 ══════════════════════════════════════ */
 function App(){
   const [theme,setTheme]=useState('light');
   const [activeExp,setActiveExp]=useState(0);
   const [tagFilter,setTagFilter]=useState('All');
   const [showEgg,setShowEgg]=useState(false);
+  const [activeCountry,setActiveCountry]=useState(null);
   const [typed,setTyped]=useState('');
   const [lineIdx,setLineIdx]=useState(0);
   const [charIdx,setCharIdx]=useState(0);
@@ -743,7 +952,7 @@ function App(){
 
   // Konami
   useEffect(()=>{window.konamiCb=()=>setShowEgg(true);return()=>{window.konamiCb=null}},[]);
-  useEffect(()=>{const h=e=>{if(e.key==='Escape')setShowEgg(false)};window.addEventListener('keydown',h);return()=>window.removeEventListener('keydown',h)},[]);
+  useEffect(()=>{const h=e=>{if(e.key==='Escape'){setShowEgg(false);setActiveCountry(null)}};window.addEventListener('keydown',h);return()=>window.removeEventListener('keydown',h)},[]);
 
   // Scroll reveal
   useEffect(()=>{
@@ -760,13 +969,15 @@ function App(){
 
   return(<>
     {showEgg&&<EasterEgg onClose={()=>setShowEgg(false)}/>}
+    {activeCountry&&<CountryModal country={activeCountry} onClose={()=>setActiveCountry(null)}/>}
+    <ScrollToTop/>
     <VisitorBadge/>
 
     {/* ── NAV (single bar) ── */}
     <nav className="nav">
       <div className="nav-logo">ADM.SYS // v3.0</div>
       <div className="nav-links">
-        {['about','dashboard','pipeline','experience','projects','stack','roi','testimonials','contact'].map(s=>(
+        {['about','dashboard','pipeline','experience','projects','stack','roi','testimonials','blog','contact'].map(s=>(
           <button key={s} className="nav-link" onClick={()=>scrollTo(s)}>{s}</button>
         ))}
       </div>
@@ -803,6 +1014,7 @@ function App(){
         real-time dashboards, self-running pipelines, executive-ready insights.<br/>
         BI &amp; Automation specialist with 5+ years across CPG, SaaS and CSR.
       </p>
+      <XPCounter/>
       <div className="typewriter-row">
         <span className="prompt">{'>'}</span>
         {typed}<span className="t-cursor"/>
@@ -900,13 +1112,13 @@ function App(){
     <section id="skills" className="section">
       <div className="section-eyebrow">Arsenal</div>
       <h2 className="section-title">Tools I use. <span style={{color:'var(--text-dim)'}}>Not just list.</span></h2>
-      <div className="skills-grid reveal">
+      <div className="skills-grid">
         {SKILLS.map((s,i)=>(
-          <div key={i} className="skill-card">
+          <div key={i} className="skill-card reveal">
             <div className="skill-icon">{s.icon}</div>
             <div className="skill-name">{s.name}</div>
             <div className="skill-desc">{s.desc}</div>
-            <div className="skill-bar"><div className="skill-fill" style={{width:`${s.pct}%`}}/></div>
+            <div className="skill-bar"><div className="skill-fill" style={{'--pct':`${s.pct}%`}}/></div>
             <div className="skill-pct">{s.pct}%</div>
           </div>
         ))}
@@ -977,27 +1189,31 @@ function App(){
     {/* ── WORLD STRIP ── */}
     <div className="world-strip">
       <div className="world-inner">
-        <span className="world-label">Lived &amp; worked in</span>
-        {[{iso:'fr',n:'France'},{iso:'ca',n:'Canada'},{iso:'us',n:'USA'},{iso:'de',n:'Germany'},{iso:'it',n:'Italy'},{iso:'es',n:'Spain'},{iso:'tr',n:'Turkey'}].map((c,i)=>(
-          <div key={i} style={{textAlign:'center'}}>
-            <img src={`https://flagcdn.com/48x36/${c.iso}.png`} width="48" height="36" alt={c.n}
-              style={{borderRadius:'4px',border:'2px solid rgba(0,0,0,.15)',boxShadow:'0 2px 8px rgba(0,0,0,.25)',display:'block',margin:'0 auto'}}/>
-            <div style={{fontFamily:"'Space Mono',monospace",fontSize:'.52rem',color:'var(--text-sec)',letterSpacing:'2px',marginTop:'6px'}}>{c.n}</div>
-          </div>
+        <span className="world-label">Cliquez sur un pays →</span>
+        {COUNTRIES.map((c,i)=>(
+          <button key={i} className="country-flag-btn" onClick={()=>setActiveCountry(c)} title={c.n}>
+            <img src={`https://flagcdn.com/48x36/${c.iso}.png`} width="48" height="36" alt={c.n}/>
+            <span className="country-flag-label">{c.n}</span>
+          </button>
         ))}
       </div>
     </div>
 
+    {/* ── BLOG ── */}
+    <section id="blog" className="section">
+      <div className="section-eyebrow">Notes & Réflexions</div>
+      <h2 className="section-title">Ce que je pense <em>tout haut.</em></h2>
+      <p style={{fontSize:'.88rem',color:'var(--text-sec)',maxWidth:'580px',marginBottom:'40px',lineHeight:'1.75'}}>Quelques réflexions sur l'IA, l'automatisation et la data — sans jargon inutile.</p>
+      <Blog/>
+    </section>
+
     {/* ── CONTACT ── */}
-    <section id="contact" className="section">
+    <section id="contact" className="section" style={{background:'var(--bg2)'}}>
       <div className="section-eyebrow">Contact</div>
       <h2 className="section-title">Let's build <em>something real.</em></h2>
       <div className="contact-layout reveal">
         <div className="contact-cards">
-          <a href="mailto:antoinedemaintenant@alumni.ie.edu" className="contact-card">
-            <span className="contact-icon">📧</span>
-            <div><div className="contact-lbl">Email</div><div className="contact-val">antoinedemaintenant@alumni.ie.edu</div></div>
-          </a>
+          <CopyEmailButton/>
           <a href="https://www.linkedin.com/in/antoine2maintenant/" target="_blank" rel="noopener noreferrer" className="contact-card">
             <span className="contact-icon">🔗</span>
             <div><div className="contact-lbl">LinkedIn</div><div className="contact-val">linkedin.com/in/antoine2maintenant</div></div>
