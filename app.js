@@ -11,7 +11,7 @@ const LangCtx = createContext('en');
 /* ─── TRANSLATIONS ────────────────────────────────────────────────────────── */
 const T = {
   en: {
-    nav: ['about', 'dashboard', 'pipeline', 'experience', 'projects', 'stack', 'certificates', 'roi', 'terminal', 'testimonials', 'blog', 'contact'],
+    nav: ['about', 'dashboard', 'pipeline', 'experience', 'projects', 'stack', 'certificates', 'terminal', 'testimonials', 'blog', 'contact'],
     navLabels: {
       about: 'About',
       dashboard: 'Dashboard',
@@ -20,7 +20,6 @@ const T = {
       projects: 'Projects',
       stack: 'Stack',
       certificates: 'Certs',
-      roi: 'ROI',
       terminal: 'Terminal',
       testimonials: 'Reviews',
       blog: 'Blog',
@@ -33,7 +32,6 @@ const T = {
     heroSub3: "AI Architect · Automation · BI · 5+ yrs CPG, SaaS & CSR.",
     heroSub4: "",
     xp: "yrs XP",
-    ctaRoi: "Calculate My ROI →",
     ctaContact: "Get in Touch",
     ctaCV: "↓ Download CV",
     liveCounter: "Hours of reporting saved since you loaded this page",
@@ -85,36 +83,6 @@ const T = {
     stackEyebrow: 'Tech Stack',
     stackTitle: 'Tools I ship with.',
     stackTitleEm: 'Not just buzzwords.',
-    roiEyebrow: 'ROI Calculator',
-    roiTitle: 'Find out what',
-    roiTitleEm: 'not',
-    roiTitle2: 'hiring me costs.',
-    roiH3: "What's your data ops costing you?",
-    roiP: "Move the sliders. Watch the pain materialize.",
-    roiSliders: [{
-      label: "Analysts on manual reports",
-      unit: "people"
-    }, {
-      label: "Hours / week per analyst",
-      unit: "h/wk"
-    }, {
-      label: "Avg hourly cost",
-      unit: "$/h"
-    }, {
-      label: "Error rate in reporting",
-      unit: "%"
-    }],
-    roiComment: '// Automation impact analysis',
-    roiLbl1: 'Annual cost of manual reporting',
-    roiLbl2: '+ Hidden error cost',
-    roiLbl3: 'Total annual pain',
-    roiLbl4: 'After automation (12% residual)',
-    roiLbl5: '🚀 Annual savings unlocked',
-    roiSuffix1: 'analyst',
-    roiSuffix2: 'analysts',
-    roiWks: 'wks',
-    roiRoi: 'ROI on hiring Antoine: ~',
-    roiDisclaimer: '// Conservative estimate. Real results may cause audible gasping.',
     terminalEyebrow: 'Interactive Terminal',
     terminalTitle: 'Ask me',
     terminalTitleEm: 'anything.',
@@ -176,7 +144,7 @@ const T = {
     }]
   },
   fr: {
-    nav: ['about', 'dashboard', 'pipeline', 'experience', 'projects', 'stack', 'certificates', 'roi', 'terminal', 'testimonials', 'blog', 'contact'],
+    nav: ['about', 'dashboard', 'pipeline', 'experience', 'projects', 'stack', 'certificates', 'terminal', 'testimonials', 'blog', 'contact'],
     navLabels: {
       about: 'Profil',
       dashboard: 'Dashboard',
@@ -185,7 +153,6 @@ const T = {
       projects: 'Projets',
       stack: 'Stack',
       certificates: 'Certifs',
-      roi: 'ROI',
       terminal: 'Terminal',
       testimonials: 'Avis',
       blog: 'Blog',
@@ -198,7 +165,6 @@ const T = {
     heroSub3: "Architecte IA · Automatisation · BI · 5+ ans CPG, SaaS & RSE.",
     heroSub4: "",
     xp: "ans d'XP",
-    ctaRoi: "Calculer mon ROI →",
     ctaContact: "Me contacter",
     ctaCV: "↓ Télécharger CV",
     liveCounter: "Heures de reporting économisées depuis que vous êtes sur cette page",
@@ -250,36 +216,6 @@ const T = {
     stackEyebrow: 'Stack Technique',
     stackTitle: 'Ce avec quoi je livre.',
     stackTitleEm: 'Pas des buzzwords.',
-    roiEyebrow: 'Calculateur ROI',
-    roiTitle: 'Découvrez ce que',
-    roiTitleEm: 'ne pas',
-    roiTitle2: 'me recruter vous coûte.',
-    roiH3: "Combien coûte votre data ops actuelle ?",
-    roiP: "Bougez les curseurs. Regardez la douleur se matérialiser.",
-    roiSliders: [{
-      label: "Analystes sur des rapports manuels",
-      unit: "personnes"
-    }, {
-      label: "Heures / semaine par analyste",
-      unit: "h/sem"
-    }, {
-      label: "Coût horaire moyen",
-      unit: "€/h"
-    }, {
-      label: "Taux d'erreur dans les rapports",
-      unit: "%"
-    }],
-    roiComment: "// Analyse d'impact de l'automatisation",
-    roiLbl1: 'Coût annuel du reporting manuel',
-    roiLbl2: '+ Coût caché des erreurs',
-    roiLbl3: 'Douleur annuelle totale',
-    roiLbl4: 'Après automatisation (12% résiduel)',
-    roiLbl5: '🚀 Économies annuelles débloquées',
-    roiSuffix1: 'analyste',
-    roiSuffix2: 'analystes',
-    roiWks: 'sem',
-    roiRoi: "ROI sur le recrutement d'Antoine : ~",
-    roiDisclaimer: '// Estimation conservatrice. Les vrais résultats peuvent provoquer des gasps.',
     terminalEyebrow: 'Terminal Interactif',
     terminalTitle: 'Posez-moi',
     terminalTitleEm: 'vos questions.',
@@ -345,7 +281,7 @@ const T = {
 /* ─── HUMAN TEXTS — même structure que T, langage simple sans jargon ──────── */
 const TH = {
   en: {
-    nav: ['about', 'dashboard', 'pipeline', 'experience', 'projects', 'certificates', 'roi', 'terminal', 'testimonials', 'blog', 'contact'],
+    nav: ['about', 'dashboard', 'pipeline', 'experience', 'projects', 'certificates', 'terminal', 'testimonials', 'blog', 'contact'],
     navLabels: {
       about: 'Home',
       dashboard: 'Proof',
@@ -353,7 +289,6 @@ const TH = {
       experience: 'Journey',
       projects: 'Results',
       certificates: 'Certs',
-      roi: 'ROI',
       terminal: 'Ask me',
       testimonials: 'Reviews',
       blog: 'Blog',
@@ -365,7 +300,6 @@ const TH = {
     heroSub3: "AI Transformation · Automation · BI · 5+ years CPG, SaaS & CSR.",
     heroSub4: "",
     xp: "yrs experience",
-    ctaRoi: "Calculate what this costs me →",
     ctaContact: "Talk in 30 min",
     ctaCV: "↓ Download CV",
     liveCounter: "Hours of manual reporting done worldwide since you opened this page",
@@ -417,40 +351,10 @@ const TH = {
     stackEyebrow: 'My Tools',
     stackTitle: 'What I work with.',
     stackTitleEm: 'Every day.',
-    roiEyebrow: 'ROI Calculator',
-    roiTitle: 'What does',
-    roiTitleEm: 'not fixing this',
-    roiTitle2: 'cost you?',
-    roiH3: "What is your manual reporting actually costing?",
-    roiP: "Move the sliders. See the real cost of doing nothing.",
-    roiSliders: [{
-      label: "People on manual reports",
-      unit: "people"
-    }, {
-      label: "Hours / week per person",
-      unit: "h/wk"
-    }, {
-      label: "Average hourly cost",
-      unit: "$/h"
-    }, {
-      label: "Error rate in reports",
-      unit: "%"
-    }],
-    roiComment: '// Cost of inaction',
-    roiLbl1: 'Annual cost of manual work',
-    roiLbl2: '+ Hidden cost of errors',
-    roiLbl3: 'Total annual cost of the problem',
-    roiLbl4: 'After automation (12% residual)',
-    roiLbl5: '💰 Money saved per year',
-    roiSuffix1: 'person',
-    roiSuffix2: 'people',
-    roiWks: 'wks',
-    roiRoi: 'ROI on hiring Antoine: ~',
-    roiDisclaimer: '// Conservative estimate. Real results often higher.',
     terminalEyebrow: 'Ask Me Anything',
     terminalTitle: 'I answer',
     terminalTitleEm: 'your questions.',
-    terminalDesc: "Ask anything — rates, timeline, what I can automate, how I work. Try: help, rates, contact",
+    terminalDesc: "Ask anything — timeline, what I can automate, how I work. Try: help, whoami, contact",
     terminalHint: "Type 'help' to start",
     testiEyebrow: 'What people say',
     testiTitle: "Don't take",
@@ -508,7 +412,7 @@ const TH = {
     }]
   },
   fr: {
-    nav: ['about', 'dashboard', 'pipeline', 'experience', 'projects', 'certificates', 'roi', 'terminal', 'testimonials', 'blog', 'contact'],
+    nav: ['about', 'dashboard', 'pipeline', 'experience', 'projects', 'certificates', 'terminal', 'testimonials', 'blog', 'contact'],
     navLabels: {
       about: 'Accueil',
       dashboard: 'Preuve',
@@ -516,7 +420,6 @@ const TH = {
       experience: 'Parcours',
       projects: 'Résultats',
       certificates: 'Certifs',
-      roi: 'ROI',
       terminal: 'Posez-moi',
       testimonials: 'Avis',
       blog: 'Blog',
@@ -528,7 +431,6 @@ const TH = {
     heroSub3: "Transformation IA · Automatisation · BI · 5+ ans CPG, SaaS & RSE.",
     heroSub4: "",
     xp: "ans d'expérience",
-    ctaRoi: "Calculer ce que ça me coûte →",
     ctaContact: "Parler en 30 min",
     ctaCV: "↓ Télécharger CV",
     liveCounter: "Heures de reporting manuel faites dans le monde depuis que vous êtes sur cette page",
@@ -580,36 +482,6 @@ const TH = {
     stackEyebrow: 'Mes outils',
     stackTitle: 'Ce avec quoi je travaille.',
     stackTitleEm: 'Tous les jours.',
-    roiEyebrow: 'Calculateur ROI',
-    roiTitle: 'Combien coûte',
-    roiTitleEm: 'ne rien faire',
-    roiTitle2: 'vraiment ?',
-    roiH3: "Combien vous coûte vraiment votre reporting manuel ?",
-    roiP: "Bougez les curseurs. Voyez le vrai coût de l'inaction.",
-    roiSliders: [{
-      label: "Personnes sur des rapports manuels",
-      unit: "pers."
-    }, {
-      label: "Heures / semaine par personne",
-      unit: "h/sem"
-    }, {
-      label: "Coût horaire moyen",
-      unit: "€/h"
-    }, {
-      label: "Taux d'erreur dans les rapports",
-      unit: "%"
-    }],
-    roiComment: "// Coût de l'inaction",
-    roiLbl1: 'Coût annuel du travail manuel',
-    roiLbl2: '+ Coût caché des erreurs',
-    roiLbl3: 'Coût total annuel du problème',
-    roiLbl4: 'Après automatisation (12% résiduel)',
-    roiLbl5: '💰 Argent économisé par an',
-    roiSuffix1: 'personne',
-    roiSuffix2: 'personnes',
-    roiWks: 'sem',
-    roiRoi: "ROI sur le recrutement d'Antoine : ~",
-    roiDisclaimer: '// Estimation conservatrice. Les vrais résultats sont souvent supérieurs.',
     terminalEyebrow: "Posez-moi n'importe quoi",
     terminalTitle: 'Je réponds à',
     terminalTitleEm: 'vos questions.',
@@ -1083,7 +955,7 @@ const TESTIMONIALS = [{
     en: "March 2026 · Aziz was Antoine's senior but not his direct manager",
     fr: "Mars 2026 · Aziz était le supérieur de Antoine mais n'était pas le responsable direct de Antoine"
   },
-  avatarImg: '/images/testimonials/aziz-agoumy.jpeg',
+  avatarImg: '/images/testimonials/aziz-agoumy.jpg',
   avatar: 'AA',
   color: '#F97316',
   stars: 5,
@@ -1123,7 +995,7 @@ const TESTIMONIALS = [{
     en: 'May 2024 · worked with Antoine across teams',
     fr: 'Mai 2024 · a travaillé avec Antoine dans des équipes différentes'
   },
-  avatarImg: '/images/testimonials/robin-blondeau.jpeg',
+  avatarImg: '/images/testimonials/robin-blondeau.jpg',
   avatar: 'RB',
   color: '#415a77',
   stars: 5,
@@ -1143,7 +1015,7 @@ const TESTIMONIALS = [{
     en: 'May 2024 · worked with Antoine in the same team',
     fr: 'Mai 2024 · a travaillé avec Antoine dans la même équipe'
   },
-  avatarImg: '/images/testimonials/thomas-becuwe.jpeg',
+  avatarImg: '/images/testimonials/thomas-becuwe.jpg',
   avatar: 'TB',
   color: '#FF2D78',
   stars: 5,
@@ -1163,7 +1035,7 @@ const TESTIMONIALS = [{
     en: 'May 2024 · worked with Antoine in the same team',
     fr: 'Mai 2024 · a travaillé avec Antoine dans la même équipe'
   },
-  avatarImg: '/images/testimonials/matthieu-conil.jpeg',
+  avatarImg: '/images/testimonials/matthieu-conil.jpg',
   avatar: 'MC',
   color: '#00F0A8',
   stars: 5,
@@ -4097,233 +3969,6 @@ function Pipeline({
     }
   }, running ? lang === 'fr' ? 'EN COURS...' : 'RUNNING...' : lang === 'fr' ? `▶ SIMULER ${cat.label.toUpperCase()}` : `▶ SIMULATE ${cat.label.toUpperCase()}`));
 }
-/* ─── ROI ───────────────────────────────────────────────────────────────────── */
-function ROICalc({
-  lang
-}) {
-  const t = T[lang];
-  const [analysts, setA] = useState(3);
-  const [hours, setH] = useState(15);
-  const [rate, setR] = useState(45);
-  const [err, setE] = useState(12);
-  const [units, setU] = useState(1);
-  const [budget, setBudget] = useState('');
-  const wkH = analysts * hours,
-    waste = wkH * rate * 52,
-    errCost = err / 100 * waste * .8,
-    total = waste + errCost,
-    after = total * .12,
-    savings = total - after;
-  const totalScaled = total * units,
-    savingsScaled = savings * units;
-  const roi = (savingsScaled / 80000 * 100).toFixed(0);
-  const budgetNum = parseFloat(budget) || 0;
-  const budgetRoi = budgetNum > 0 ? ((savingsScaled / budgetNum - 1) * 100).toFixed(0) : null;
-  const fmt = n => n >= 1000 ? `${lang === 'fr' ? '' : '$'}${(n / 1000).toFixed(0)}K${lang === 'fr' ? '€' : ''}` : `${lang === 'fr' ? '' : '$'}${Math.round(n)}${lang === 'fr' ? '€' : ''}`;
-  const sv = [{
-    val: analysts,
-    set: setA,
-    min: 1,
-    max: 20
-  }, {
-    val: hours,
-    set: setH,
-    min: 2,
-    max: 40
-  }, {
-    val: rate,
-    set: setR,
-    min: 20,
-    max: 150
-  }, {
-    val: err,
-    set: setE,
-    min: 1,
-    max: 40
-  }];
-  return /*#__PURE__*/React.createElement("div", {
-    className: "roi-wrap reveal"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "roi-grid"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "roi-inputs"
-  }, /*#__PURE__*/React.createElement("h3", {
-    style: {
-      fontFamily: "'Bebas Neue',sans-serif",
-      fontSize: "1.5rem",
-      letterSpacing: "2px",
-      marginBottom: "5px",
-      color: "var(--text)"
-    }
-  }, t.roiH3), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: ".78rem",
-      color: "var(--text-sec)",
-      lineHeight: "1.75",
-      marginBottom: "18px"
-    }
-  }, t.roiP), t.roiSliders.map((s, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "roi-input-group"
-  }, /*#__PURE__*/React.createElement("label", null, s.label, " ", /*#__PURE__*/React.createElement("span", {
-    className: "roi-val-badge"
-  }, sv[i].val, " ", s.unit)), /*#__PURE__*/React.createElement("input", {
-    type: "range",
-    min: sv[i].min,
-    max: sv[i].max,
-    value: sv[i].val,
-    onChange: e => sv[i].set(+e.target.value)
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "roi-input-group",
-    style: {
-      marginTop: '12px',
-      borderTop: '1px solid var(--border-dim)',
-      paddingTop: '14px'
-    }
-  }, /*#__PURE__*/React.createElement("label", null, lang === 'fr' ? 'Business Units / Équipes concernées' : 'Business Units / Teams impacted', " ", /*#__PURE__*/React.createElement("span", {
-    className: "roi-val-badge"
-  }, units, " BU", units > 1 ? 's' : '')), /*#__PURE__*/React.createElement("input", {
-    type: "range",
-    min: 1,
-    max: 20,
-    value: units,
-    onChange: e => setU(+e.target.value)
-  })), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '16px',
-      borderTop: '1px solid var(--border-dim)',
-      paddingTop: '14px'
-    }
-  }, /*#__PURE__*/React.createElement("label", {
-    style: {
-      display: 'block',
-      fontSize: '.7rem',
-      color: 'var(--text-sec)',
-      marginBottom: '8px',
-      textTransform: 'uppercase',
-      letterSpacing: '1px',
-      fontFamily: "'Space Mono',monospace"
-    }
-  }, lang === 'fr' ? '💰 Votre budget : salaire annuel ou mission freelance' : '💰 Your budget: annual salary or freelance contract'), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '8px'
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: "'Space Mono',monospace",
-      fontSize: '.9rem',
-      color: 'var(--accent4)'
-    }
-  }, lang === 'fr' ? '€' : '$'), /*#__PURE__*/React.createElement("input", {
-    type: "number",
-    min: "0",
-    placeholder: lang === 'fr' ? 'Ex: 80000' : 'E.g. 80000',
-    value: budget,
-    onChange: e => setBudget(e.target.value),
-    style: {
-      flex: 1,
-      background: 'var(--glass-bg)',
-      border: '1px solid var(--border)',
-      color: 'var(--text)',
-      fontFamily: "'Space Mono',monospace",
-      fontSize: '.8rem',
-      padding: '10px 12px',
-      borderRadius: '6px',
-      outline: 'none'
-    }
-  })), budgetRoi !== null && /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '8px',
-      fontFamily: "'Space Mono',monospace",
-      fontSize: '.6rem',
-      color: 'var(--accent3)',
-      background: 'rgba(0,240,168,.07)',
-      border: '1px solid rgba(0,240,168,.2)',
-      borderRadius: '6px',
-      padding: '8px 12px'
-    }
-  }, lang === 'fr' ? `✅ ROI sur votre investissement : ~${budgetRoi}% — payé en ` : `✅ ROI on your investment: ~${budgetRoi}% — paid back in `, /*#__PURE__*/React.createElement("strong", null, Math.max(1, budgetNum / savingsScaled * 12).toFixed(1)), " ", lang === 'fr' ? 'mois' : 'months'))), /*#__PURE__*/React.createElement("div", {
-    className: "roi-out"
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Mono',monospace",
-      fontSize: ".46rem",
-      color: "var(--text-dim)",
-      letterSpacing: "3px",
-      textTransform: "uppercase",
-      marginBottom: "6px"
-    }
-  }, t.roiComment), /*#__PURE__*/React.createElement("div", {
-    className: "roi-metric"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "roi-metric-lbl"
-  }, t.roiLbl1), /*#__PURE__*/React.createElement("div", {
-    className: "roi-metric-val pink"
-  }, fmt(waste)), /*#__PURE__*/React.createElement("div", {
-    className: "roi-helper"
-  }, wkH, "h/", lang === 'fr' ? 'sem' : 'week', " \xD7 ", analysts, " ", analysts > 1 ? t.roiSuffix2 : t.roiSuffix1, " \xD7 52", t.roiWks)), /*#__PURE__*/React.createElement("div", {
-    className: "roi-metric"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "roi-metric-lbl"
-  }, t.roiLbl2, " (", err, "%)"), /*#__PURE__*/React.createElement("div", {
-    className: "roi-metric-val purple"
-  }, fmt(errCost))), units > 1 && /*#__PURE__*/React.createElement("div", {
-    className: "roi-metric"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "roi-metric-lbl"
-  }, "\xD7 ", units, " BU", units > 1 ? 's' : '', " ", lang === 'fr' ? 'concernées' : 'impacted'), /*#__PURE__*/React.createElement("div", {
-    className: "roi-metric-val",
-    style: {
-      color: 'var(--accent4)',
-      fontSize: '1.4rem'
-    }
-  }, "= ", fmt(totalScaled))), /*#__PURE__*/React.createElement("div", {
-    className: "roi-metric"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "roi-metric-lbl"
-  }, t.roiLbl3), /*#__PURE__*/React.createElement("div", {
-    className: "roi-metric-val pink",
-    style: {
-      fontSize: "3rem"
-    }
-  }, fmt(units > 1 ? totalScaled : total))), /*#__PURE__*/React.createElement("div", {
-    className: "roi-metric"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "roi-metric-lbl"
-  }, t.roiLbl4), /*#__PURE__*/React.createElement("div", {
-    className: "roi-metric-val",
-    style: {
-      color: "var(--text-sec)",
-      fontSize: "1.6rem"
-    }
-  }, fmt((units > 1 ? totalScaled : total) * .12))), /*#__PURE__*/React.createElement("div", {
-    className: "roi-savings-box"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "roi-metric-lbl"
-  }, t.roiLbl5), /*#__PURE__*/React.createElement("div", {
-    className: "roi-metric-val green",
-    style: {
-      fontSize: "2.6rem"
-    }
-  }, fmt(units > 1 ? savingsScaled : savings)), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: ".6rem",
-      color: "var(--accent3)",
-      marginTop: "5px",
-      fontFamily: "'Space Mono',monospace"
-    }
-  }, t.roiRoi, roi, "%")), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: ".54rem",
-      color: "var(--text-mute)",
-      fontFamily: "'Space Mono',monospace",
-      fontStyle: "italic"
-    }
-  }, t.roiDisclaimer))));
-}
-
 /* ─── RADAR ─────────────────────────────────────────────────────────────────── */
 function RadarChart({
   lang
@@ -4556,105 +4201,6 @@ function TerminalChatbot({
   })), /*#__PURE__*/React.createElement("div", {
     className: "chat-hint"
   }, "TAB autocomplete \xB7 \u2191\u2193 history \xB7 try: help, ./hack.sh, secret"));
-}
-
-/* ─── ELI5 MODAL ────────────────────────────────────────────────────────────── */
-function ELI5Modal({
-  lang,
-  onClose,
-  onContact
-}) {
-  const cards = {
-    en: [{
-      emoji: '🤖',
-      title: 'What I Actually Do',
-      text: `Imagine your company drowns in Excel files every week — someone spends 10 hours manually copying numbers from one spreadsheet to another just to make a report. I build <strong>robots</strong> that do all that automatically, every day, while everyone sleeps. The report is just… there. Ready. Perfect.`
-    }, {
-      emoji: '📊',
-      title: 'The Dashboards',
-      text: `Instead of a 40-tab Excel file that only one person understands, I create a <strong>live screen</strong> (like a car dashboard) where any manager can see in 10 seconds: are we selling well? Do we have stock? Is the competition doing something weird? All automatic, always up to date.`
-    }, {
-      emoji: '🔍',
-      title: 'Spying on the Competition',
-      text: `Every morning at 6am, my system visits <strong>40+ competitor websites</strong> by itself, reads prices, promotions, and product launches, and sends a clean summary report. It's like having a spy who never sleeps and never makes mistakes.`
-    }, {
-      emoji: '💬',
-      title: 'Reading Thousands of Reviews',
-      text: `I built a system that reads <strong>10,000+ customer reviews per month</strong> from Amazon, Sephora, etc., understands whether they're happy or not, and automatically creates a report: "This week, customers love the scent but hate the packaging." Zero human needed.`
-    }, {
-      emoji: '📦',
-      title: 'Predicting Stock',
-      text: `Using AI, I predict <strong>how much of each product you'll sell</strong> over the next 13 weeks, store by store. So you never run out of stock (losing sales) and never order too much (wasting money). My error rate: 4.2% — better than most humans.`
-    }, {
-      emoji: '⚙️',
-      title: 'Agile @ NAOS',
-      text: `At NAOS, I work in <strong>Agile sprints</strong> — short 2-week cycles where we ship real features fast. No endless planning. We test, we learn, we improve. It's how I delivered a full analytics department in 6 months instead of 2 years.`
-    }],
-    fr: [{
-      emoji: '🤖',
-      title: 'Ce que je fais vraiment',
-      text: `Imaginez que votre entreprise se noie dans des fichiers Excel chaque semaine — quelqu'un passe 10h à copier manuellement des chiffres d'un tableau à l'autre juste pour faire un rapport. Je construis des <strong>robots</strong> qui font tout ça automatiquement, chaque jour, pendant que tout le monde dort. Le rapport est juste… là. Prêt. Parfait.`
-    }, {
-      emoji: '📊',
-      title: 'Les Dashboards',
-      text: `Au lieu d'un fichier Excel de 40 onglets que seule une personne comprend, je crée un <strong>écran en direct</strong> (comme le tableau de bord d'une voiture) où n'importe quel manager voit en 10 secondes : est-ce qu'on vend bien ? A-t-on du stock ? Est-ce que la concurrence fait un truc bizarre ? Tout automatique, toujours à jour.`
-    }, {
-      emoji: '🔍',
-      title: 'Espionner la concurrence',
-      text: `Chaque matin à 6h, mon système visite <strong>40+ sites concurrents</strong> tout seul, lit les prix, les promos et les nouveautés, et envoie un rapport propre. C'est comme avoir un espion qui ne dort jamais et ne fait jamais d'erreurs.`
-    }, {
-      emoji: '💬',
-      title: 'Lire des milliers d\'avis',
-      text: `J'ai construit un système qui lit <strong>10 000+ avis clients par mois</strong> sur Amazon, Sephora, etc., comprend si les gens sont contents ou non, et crée automatiquement un rapport : "Cette semaine, les clients adorent le parfum mais détestent l'emballage." Zéro humain nécessaire.`
-    }, {
-      emoji: '📦',
-      title: 'Prédire les stocks',
-      text: `Grâce à l'IA, je prédit <strong>combien de chaque produit vous allez vendre</strong> dans les 13 prochaines semaines, magasin par magasin. Donc vous ne tombez jamais en rupture (perte de ventes) et ne commandez jamais trop (gaspillage d'argent). Mon taux d'erreur : 4,2% — mieux que la plupart des humains.`
-    }, {
-      emoji: '⚙️',
-      title: 'Agile chez NAOS',
-      text: `Chez NAOS, je travaille en <strong>sprints Agile</strong> — des cycles courts de 2 semaines où l'on livre des vraies fonctionnalités rapidement. Pas de planification sans fin. On teste, on apprend, on améliore. C'est comme ça que j'ai livré un département analytics complet en 6 mois au lieu de 2 ans.`
-    }]
-  };
-  const c = cards[lang];
-  return /*#__PURE__*/React.createElement("div", {
-    className: "eli5-overlay",
-    onClick: onClose
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "eli5-modal",
-    onClick: e => e.stopPropagation()
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "eli5-header"
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    className: "eli5-title"
-  }, "\uD83D\uDCA1 ", lang === 'fr' ? 'Expliquez-moi simplement' : 'Explain it Simply'), /*#__PURE__*/React.createElement("div", {
-    className: "eli5-sub"
-  }, lang === 'fr' ? 'Tout ce que je fais — sans le jargon tech' : 'Everything I do — zero tech jargon')), /*#__PURE__*/React.createElement("button", {
-    className: "eli5-close",
-    onClick: onClose
-  }, "\u2715")), c.map((card, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "eli5-card"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "eli5-card-emoji"
-  }, card.emoji), /*#__PURE__*/React.createElement("div", {
-    className: "eli5-card-title"
-  }, card.title), /*#__PURE__*/React.createElement("div", {
-    className: "eli5-card-text",
-    dangerouslySetInnerHTML: {
-      __html: card.text
-    }
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "eli5-cta"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "eli5-badge"
-  }, "\u2705 ", lang === 'fr' ? 'Pas de jargon. Que des résultats.' : 'No jargon. Just results.'), /*#__PURE__*/React.createElement("button", {
-    className: "book-call-btn",
-    style: {
-      marginTop: 0
-    },
-    onClick: onContact
-  }, "\uD83D\uDCC5 ", lang === 'fr' ? 'Parlons-en en 30 min →' : 'Let\'s talk in 30 min →'))));
 }
 
 /* ─── RECRUITER MODAL ───────────────────────────────────────────────────────── */
@@ -6005,604 +5551,6 @@ function WorldMap({
   }, countries.length, " ", lang === 'fr' ? 'pays' : 'countries')));
 }
 
-/* ─── HUMAN ROI ──────────────────────────────────────────────────────────────── */
-function HumanROI({
-  ht,
-  lang
-}) {
-  const [p1, setP1] = useState(5);
-  const [p2, setP2] = useState(20);
-  const [p3, setP3] = useState(90);
-  const [p4, setP4] = useState(20);
-  const [units, setUnits] = useState(3);
-  const [budget, setBudget] = useState('');
-  const [activeTab, setActiveTab] = useState('cost');
-  const [barsVisible, setBarsVisible] = useState(false);
-  const barsRef = useRef(null);
-  useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) setBarsVisible(true);
-    }, {
-      threshold: 0.3
-    });
-    if (barsRef.current) obs.observe(barsRef.current);
-    return () => obs.disconnect();
-  }, []);
-  const annualWaste = p1 * p2 * p3 * 52;
-  const errCost = p4 / 100 * annualWaste * 0.8;
-  const totalAll = (annualWaste + errCost) * units;
-  const savings = totalAll * 0.88;
-  const budgetNum = parseFloat((budget || '').replace(/[^0-9.,]/g, '').replace(',', '.')) || 0;
-  const paybackMonths = budgetNum > 0 ? (budgetNum / savings * 12).toFixed(1) : null;
-  const budgetRoiPct = budgetNum > 0 ? Math.round((savings / budgetNum - 1) * 100) : null;
-  const refBudget = budgetNum > 0 ? budgetNum : 80000;
-  const roiPct = Math.round(savings / refBudget * 100);
-  const yr1 = savings,
-    yr2 = savings * 1.28,
-    yr3 = savings * 1.62,
-    maxVal = yr3;
-  const fmt = n => {
-    if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
-    if (n >= 1000) return Math.round(n / 1000) + 'K';
-    return Math.round(n) + '';
-  };
-  const sliders = [{
-    v: p1,
-    s: setP1,
-    min: 1,
-    max: 20,
-    lbl: ht.rs[0],
-    hint: ht.rsHint?.[0] || '',
-    unit: ht.ru[0]
-  }, {
-    v: p2,
-    s: setP2,
-    min: 2,
-    max: 40,
-    lbl: ht.rs[1],
-    hint: ht.rsHint?.[1] || '',
-    unit: ht.ru[1]
-  }, {
-    v: p3,
-    s: setP3,
-    min: 20,
-    max: 200,
-    lbl: ht.rs[2],
-    hint: ht.rsHint?.[2] || '',
-    unit: ht.ru[2]
-  }, {
-    v: p4,
-    s: setP4,
-    min: 1,
-    max: 40,
-    lbl: ht.rs[3],
-    hint: ht.rsHint?.[3] || '',
-    unit: ht.ru[3]
-  }];
-  const TABS = [['cost', lang === 'fr' ? '💸 Coût actuel' : '💸 Current cost'], ['roi', '📈 ROI'], ['scale', lang === 'fr' ? '🚀 Sur 3 ans' : '🚀 3-year']];
-
-  // Dark dashboard card style
-  const card = {
-    background: 'var(--bg-card)',
-    border: '1px solid var(--border-dim)',
-    borderRadius: 10,
-    padding: '16px 18px'
-  };
-  const mono = {
-    fontFamily: "'Space Mono',monospace"
-  };
-  return /*#__PURE__*/React.createElement("div", {
-    style: {
-      background: 'var(--glass-bg)',
-      border: '1px solid var(--border)',
-      borderRadius: 16,
-      overflow: 'hidden',
-      boxShadow: '0 4px 30px rgba(0,0,0,.08)'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      background: 'var(--glass-bg)',
-      backdropFilter: 'var(--glass-blur)',
-      WebkitBackdropFilter: 'var(--glass-blur)',
-      borderBottom: '1px solid var(--border-dim)',
-      padding: '12px 20px',
-      display: 'flex',
-      alignItems: 'center',
-      gap: 16
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      gap: 6,
-      flexShrink: 0
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: 10,
-      height: 10,
-      borderRadius: '50%',
-      background: '#FF5F57'
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: 10,
-      height: 10,
-      borderRadius: '50%',
-      background: '#FFBD2E'
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: 10,
-      height: 10,
-      borderRadius: '50%',
-      background: '#28C840'
-    }
-  })), /*#__PURE__*/React.createElement("span", {
-    style: {
-      ...mono,
-      fontSize: 9,
-      color: '#415a77',
-      letterSpacing: '3px',
-      textTransform: 'uppercase'
-    }
-  }, "ROI\xB7SIMULATOR"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 5
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: 6,
-      height: 6,
-      borderRadius: '50%',
-      background: '#00F0A8',
-      boxShadow: '0 0 6px #00F0A8'
-    }
-  }), /*#__PURE__*/React.createElement("span", {
-    style: {
-      ...mono,
-      fontSize: 8,
-      color: '#00F0A8',
-      letterSpacing: '1px'
-    }
-  }, lang === 'fr' ? 'EN DIRECT' : 'LIVE'))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      background: 'var(--glass-bg)',
-      borderBottom: '1px solid var(--border-dim)',
-      display: 'flex',
-      padding: '0 20px'
-    }
-  }, TABS.map(([k, l]) => /*#__PURE__*/React.createElement("button", {
-    key: k,
-    onClick: () => setActiveTab(k),
-    style: {
-      padding: '10px 16px',
-      background: 'transparent',
-      border: 'none',
-      borderBottom: `2px solid ${activeTab === k ? '#415a77' : 'transparent'}`,
-      color: activeTab === k ? '#415a77' : 'var(--text-mute)',
-      fontFamily: "'Space Mono',monospace",
-      fontSize: 9,
-      letterSpacing: '1.5px',
-      textTransform: 'uppercase',
-      cursor: 'pointer',
-      transition: 'all .2s'
-    }
-  }, l))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      padding: '20px',
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      gap: 20
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 12
-    }
-  }, sliders.map((r, i) => {
-    const pct = (r.v - r.min) / (r.max - r.min) * 100 + '%';
-    return /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        ...card
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        marginBottom: 6
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        ...mono,
-        fontSize: 8,
-        color: 'var(--text-sec)',
-        letterSpacing: '1px',
-        textTransform: 'uppercase'
-      }
-    }, r.lbl), /*#__PURE__*/React.createElement("span", {
-      style: {
-        ...mono,
-        fontSize: 10,
-        fontWeight: 700,
-        color: '#415a77'
-      }
-    }, r.v, " ", /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 7,
-        color: 'var(--text-mute)'
-      }
-    }, r.unit))), r.hint && /*#__PURE__*/React.createElement("div", {
-      style: {
-        ...mono,
-        fontSize: 7,
-        color: 'var(--text-mute)',
-        fontStyle: 'italic',
-        marginBottom: 6
-      }
-    }, r.hint), /*#__PURE__*/React.createElement("input", {
-      type: "range",
-      style: {
-        width: '100%',
-        height: 5,
-        borderRadius: 3,
-        appearance: 'none',
-        WebkitAppearance: 'none',
-        cursor: 'pointer',
-        outline: 'none',
-        background: `linear-gradient(90deg,#007AFF ${pct},rgba(0,122,255,0.15) ${pct})`
-      },
-      min: r.min,
-      max: r.max,
-      value: r.v,
-      onChange: e => r.s(+e.target.value)
-    }));
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...card
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      marginBottom: 6
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      ...mono,
-      fontSize: 8,
-      color: 'var(--text-sec)',
-      letterSpacing: '1px',
-      textTransform: 'uppercase'
-    }
-  }, ht.ru2), /*#__PURE__*/React.createElement("span", {
-    style: {
-      ...mono,
-      fontSize: 10,
-      fontWeight: 700,
-      color: '#415a77'
-    }
-  }, units, " ", /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 7,
-      color: 'var(--text-mute)'
-    }
-  }, ht.ru3))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...mono,
-      fontSize: 7,
-      color: 'var(--text-mute)',
-      fontStyle: 'italic',
-      marginBottom: 6
-    }
-  }, lang === 'fr' ? 'Chaque équipe multiplie l\'économie' : 'Each team multiplies savings'), /*#__PURE__*/React.createElement("input", {
-    type: "range",
-    style: {
-      width: '100%',
-      height: 5,
-      borderRadius: 3,
-      appearance: 'none',
-      WebkitAppearance: 'none',
-      cursor: 'pointer',
-      outline: 'none',
-      background: `linear-gradient(90deg,#007AFF ${(units - 1) / 14 * 100 + '%'},rgba(0,122,255,0.15) ${(units - 1) / 14 * 100 + '%'})`
-    },
-    min: 1,
-    max: 15,
-    value: units,
-    onChange: e => setUnits(+e.target.value)
-  }))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 12
-    }
-  }, activeTab === 'cost' && /*#__PURE__*/React.createElement(React.Fragment, null, [[ht.rl[0], annualWaste * units, '#636366'], [ht.rl[1], errCost * units, '#778da9'], [ht.rl[2], totalAll, '#FF3B30']].map(([lbl, val, col], i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      ...card,
-      borderLeft: `3px solid ${col}`,
-      position: 'relative',
-      overflow: 'hidden'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      top: 0,
-      right: 0,
-      bottom: 0,
-      width: 3,
-      background: `linear-gradient(180deg,${col},transparent)`
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...mono,
-      fontSize: 7,
-      color: 'var(--text-mute)',
-      letterSpacing: '1px',
-      textTransform: 'uppercase',
-      marginBottom: 8
-    }
-  }, lbl), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Bebas Neue',sans-serif",
-      fontSize: '2.2rem',
-      color: col,
-      lineHeight: 1
-    }
-  }, ht.cur, fmt(val)))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...card,
-      background: 'rgba(255,59,48,0.06)',
-      border: '1px solid rgba(255,59,48,0.22)'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...mono,
-      fontSize: 7,
-      color: 'var(--text-mute)',
-      textTransform: 'uppercase',
-      marginBottom: 4
-    }
-  }, lang === 'fr' ? 'Coût mensuel (÷12)' : 'Monthly cost (÷12)'), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Bebas Neue',sans-serif",
-      fontSize: '2.8rem',
-      color: '#FF3B30',
-      lineHeight: 1
-    }
-  }, ht.cur, fmt(totalAll / 12), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: '1rem',
-      color: 'var(--text-mute)'
-    }
-  }, "/", lang === 'fr' ? 'mois' : 'mo')))), activeTab === 'roi' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...card,
-      borderTop: '3px solid #007AFF'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...mono,
-      fontSize: 7,
-      color: 'var(--text-mute)',
-      textTransform: 'uppercase',
-      marginBottom: 4
-    }
-  }, ht.rl[3]), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Bebas Neue',sans-serif",
-      fontSize: '1.8rem',
-      color: 'var(--text-sec)',
-      lineHeight: 1
-    }
-  }, ht.cur, fmt(totalAll * 0.12))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      background: 'rgba(52,199,89,0.07)',
-      border: '1px solid rgba(52,199,89,0.28)',
-      borderRadius: 10,
-      padding: '20px 18px',
-      textAlign: 'center'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...mono,
-      fontSize: 8,
-      color: 'var(--accent3)',
-      letterSpacing: '2px',
-      textTransform: 'uppercase',
-      marginBottom: 8
-    }
-  }, ht.rl[4]), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Bebas Neue',sans-serif",
-      fontSize: '3.5rem',
-      color: 'var(--accent3)',
-      lineHeight: 1
-    }
-  }, ht.cur, fmt(savings)), /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...mono,
-      fontSize: 8,
-      color: 'var(--text-mute)',
-      marginTop: 6
-    }
-  }, lang === 'fr' ? 'par an · après automatisation' : 'per year · after automation'), /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...mono,
-      fontSize: 9,
-      color: '#415a77',
-      marginTop: 8,
-      fontWeight: 700
-    }
-  }, ht.rr1, " ", /*#__PURE__*/React.createElement("strong", {
-    style: {
-      color: 'var(--accent3)'
-    }
-  }, roiPct, "%"))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...card
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...mono,
-      fontSize: 7,
-      color: 'var(--text-mute)',
-      letterSpacing: '1px',
-      marginBottom: 8
-    }
-  }, ht.rb), /*#__PURE__*/React.createElement("input", {
-    type: "text",
-    placeholder: ht.rbp,
-    value: budget,
-    onChange: e => setBudget(e.target.value),
-    style: {
-      width: '100%',
-      background: 'var(--glass-bg)',
-      border: '1px solid var(--border)',
-      borderRadius: 6,
-      padding: '8px 12px',
-      color: 'var(--text)',
-      fontFamily: "'Space Mono',monospace",
-      fontSize: 11,
-      outline: 'none',
-      boxSizing: 'border-box'
-    }
-  })), paybackMonths && /*#__PURE__*/React.createElement("div", {
-    style: {
-      background: 'rgba(0,240,168,0.06)',
-      border: '1px solid rgba(0,240,168,0.25)',
-      borderRadius: 10,
-      padding: '14px 16px',
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      gap: 12
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      textAlign: 'center'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Bebas Neue',sans-serif",
-      fontSize: '2rem',
-      color: '#00F0A8',
-      lineHeight: 1
-    }
-  }, paybackMonths), /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...mono,
-      fontSize: 7,
-      color: 'var(--text-mute)'
-    }
-  }, ht.rr2)), /*#__PURE__*/React.createElement("div", {
-    style: {
-      textAlign: 'center'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Bebas Neue',sans-serif",
-      fontSize: '2rem',
-      color: '#415a77',
-      lineHeight: 1
-    }
-  }, budgetRoiPct, "%"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...mono,
-      fontSize: 7,
-      color: 'var(--text-mute)'
-    }
-  }, "ROI net")))), activeTab === 'scale' && /*#__PURE__*/React.createElement("div", {
-    ref: barsRef
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...mono,
-      fontSize: 8,
-      color: 'var(--text-sec)',
-      marginBottom: 14,
-      lineHeight: 1.6
-    }
-  }, lang === 'fr' ? 'Plus on automatise, plus le ROI grandit' : 'The more we automate, the bigger the ROI'), [[lang === 'fr' ? 'An 1' : 'Year 1', yr1, '#415a77', lang === 'fr' ? 'Automatisation initiale' : 'Initial automation'], [lang === 'fr' ? 'An 2' : 'Year 2', yr2, '#5AC8FA', lang === 'fr' ? '+28% nouveaux workflows' : '+28% new workflows'], [lang === 'fr' ? 'An 3' : 'Year 3', yr3, '#778da9', lang === 'fr' ? 'Pleine échelle' : 'Full scale']].map(([yr, val, col, note], i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      ...card,
-      marginBottom: 10
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      marginBottom: 8
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      ...mono,
-      fontSize: 9,
-      color: col,
-      fontWeight: 700
-    }
-  }, yr), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: "'Bebas Neue',sans-serif",
-      fontSize: '1.6rem',
-      color: col,
-      lineHeight: 1
-    }
-  }, ht.cur, fmt(val))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      height: 6,
-      background: 'var(--border-dim)',
-      borderRadius: 3,
-      overflow: 'hidden',
-      marginBottom: 6
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      height: '100%',
-      width: barsVisible ? `${val / maxVal * 100}%` : '0%',
-      background: col,
-      borderRadius: 3,
-      transition: 'width 1.2s ease ' + i * 0.3 + 's'
-    }
-  })), /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...mono,
-      fontSize: 7,
-      color: 'var(--text-mute)'
-    }
-  }, note))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      background: 'rgba(0,240,168,0.06)',
-      border: '1px solid rgba(0,240,168,0.2)',
-      borderRadius: 10,
-      padding: '14px 16px',
-      textAlign: 'center',
-      marginTop: 4
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...mono,
-      fontSize: 7,
-      color: 'var(--text-mute)',
-      marginBottom: 4
-    }
-  }, lang === 'fr' ? 'Total 3 ans' : '3-year total'), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Bebas Neue',sans-serif",
-      fontSize: '2.5rem',
-      color: '#00F0A8',
-      lineHeight: 1
-    }
-  }, ht.cur, fmt(yr1 + yr2 + yr3)))))));
-}
-
 /* ─── HUMAN APP ──────────────────────────────────────────────────────────────── */
 
 const CHAPTERS = [{
@@ -6623,9 +5571,6 @@ const CHAPTERS = [{
 }, {
   id: 'certificates',
   label: 'CERTS'
-}, {
-  id: 'roi',
-  label: 'ROI'
 }, {
   id: 'terminal',
   label: 'CHAT'
@@ -6810,7 +5755,6 @@ function PortfolioApp({
   const [tagFilter, setTagFilter] = useState('All');
   const [showEgg, setShowEgg] = useState(false);
   const [showRecruiter, setShowRecruiter] = useState(false);
-  const [showEli5, setShowEli5] = useState(false);
   const [activeCountry, setActiveCountry] = useState(null);
   const [soundOn, setSoundOn] = useState(false);
   const [showCalendly, setShowCalendly] = useState(false);
@@ -6877,7 +5821,6 @@ function PortfolioApp({
         setActiveCountry(null);
         setShowRecruiter(false);
         setShowCalendly(false);
-        setShowEli5(false);
       }
     };
     window.addEventListener('keydown', h);
@@ -6982,13 +5925,6 @@ function PortfolioApp({
   }, t.eggClose))), showRecruiter && /*#__PURE__*/React.createElement(RecruiterModal, {
     lang: lang,
     onClose: () => setShowRecruiter(false)
-  }), showEli5 && /*#__PURE__*/React.createElement(ELI5Modal, {
-    lang: lang,
-    onClose: () => setShowEli5(false),
-    onContact: () => {
-      setShowEli5(false);
-      scrollTo('contact');
-    }
   }), showCalendly && /*#__PURE__*/React.createElement(CalendlyModal, {
     lang: lang,
     onClose: () => setShowCalendly(false)
@@ -7278,10 +6214,7 @@ function PortfolioApp({
     style: {
       marginBottom: 32
     }
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "btn-primary",
-    onClick: () => scrollTo('roi')
-  }, t.ctaRoi), /*#__PURE__*/React.createElement("a", {
+  }, /*#__PURE__*/React.createElement("a", {
     href: "https://raw.githubusercontent.com/demaintenant-antoine-pro/portfolio-ai/main/CV_Antoine.pdf",
     target: "_blank",
     rel: "noopener noreferrer",
@@ -7420,10 +6353,7 @@ function PortfolioApp({
     className: "t-cursor"
   })), /*#__PURE__*/React.createElement("div", {
     className: "hero-ctas"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "btn-primary",
-    onClick: () => scrollTo('roi')
-  }, t.ctaRoi), /*#__PURE__*/React.createElement("a", {
+  }, /*#__PURE__*/React.createElement("a", {
     href: "https://raw.githubusercontent.com/demaintenant-antoine-pro/portfolio-ai/main/CV_Antoine.pdf",
     target: "_blank",
     rel: "noopener noreferrer",
@@ -7846,7 +6776,7 @@ function PortfolioApp({
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "chapter-label"
-  }, "Chapter 06 \u2014 The Interface"), /*#__PURE__*/React.createElement("div", {
+  }, "Chapter 05 \u2014 The Interface"), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       top: '-20px',
@@ -8083,7 +7013,7 @@ function PortfolioApp({
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "chapter-label"
-  }, "Chapter 07 \u2014 The Decision"), /*#__PURE__*/React.createElement("div", {
+  }, "Chapter 06 \u2014 The Decision"), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       top: '-20px',

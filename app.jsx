@@ -3,11 +3,11 @@ const LangCtx=createContext('en');
 
 /* ─── TRANSLATIONS ────────────────────────────────────────────────────────── */
 const T={en:{
-  nav:['about','dashboard','pipeline','experience','projects','stack','certificates','roi','terminal','testimonials','blog','contact'],
-  navLabels:{about:'About',dashboard:'Dashboard',pipeline:'Pipeline',experience:'XP',projects:'Projects',stack:'Stack',certificates:'Certs',roi:'ROI',terminal:'Terminal',testimonials:'Reviews',blog:'Blog',contact:'Contact'},
+  nav:['about','dashboard','pipeline','experience','projects','stack','certificates','terminal','testimonials','blog','contact'],
+  navLabels:{about:'About',dashboard:'Dashboard',pipeline:'Pipeline',experience:'XP',projects:'Projects',stack:'Stack',certificates:'Certs',terminal:'Terminal',testimonials:'Reviews',blog:'Blog',contact:'Contact'},
   badge:'🟢 Available worldwide · France · Dubai · Canada · Singapore · Remote',
   heroSub1:"I architect end-to-end AI transformation",heroSub1b:"integrating your existing tools into autonomous systems",heroSub2:"— autonomous data pipelines, executive-grade decision dashboards, and LLM-powered workflows. Teams I work with consistently reduce manual overhead by 60–85% and shift capacity toward strategic priorities.",heroSub3:"AI Architect · Automation · BI · 5+ yrs CPG, SaaS & CSR.",heroSub4:"",
-  xp:"yrs XP",ctaRoi:"Calculate My ROI →",ctaContact:"Get in Touch",ctaCV:"↓ Download CV",
+  xp:"yrs XP",ctaContact:"Get in Touch",ctaCV:"↓ Download CV",
   liveCounter:"Hours of reporting saved since you loaded this page",
   metrics:[{n:'85',s:'%',l:'Processing Capacity Gained'},{n:'270',s:'%',l:'Pipeline Efficiency Boost'},{n:'30',s:'+',l:'Workflows Automated'},{n:'6',s:'mo',l:'Analytics Dept Built 0→1'}],
   dashEyebrow:'Live Demo',dashTitle:'Executive',dashTitleEm:'Dashboard',
@@ -23,12 +23,6 @@ const T={en:{
   skillsEyebrow:'Arsenal',skillsTitle:'Tools I use.',skillsTitleDim:'Not just listed.',radarTitle:'Competency Radar',
   projectsEyebrow:'Signature Projects',projectsTitle:'What I actually',projectsTitleEm:'built.',projectsDesc:'3 categories · Auto reports · AI dashboards on your pain point · Custom automations by department.',
   stackEyebrow:'Tech Stack',stackTitle:'Tools I ship with.',stackTitleEm:'Not just buzzwords.',
-  roiEyebrow:'ROI Calculator',roiTitle:'Find out what',roiTitleEm:'not',roiTitle2:'hiring me costs.',
-  roiH3:"What's your data ops costing you?",roiP:"Move the sliders. Watch the pain materialize.",
-  roiSliders:[{label:"Analysts on manual reports",unit:"people"},{label:"Hours / week per analyst",unit:"h/wk"},{label:"Avg hourly cost",unit:"$/h"},{label:"Error rate in reporting",unit:"%"}],
-  roiComment:'// Automation impact analysis',
-  roiLbl1:'Annual cost of manual reporting',roiLbl2:'+ Hidden error cost',roiLbl3:'Total annual pain',roiLbl4:'After automation (12% residual)',roiLbl5:'🚀 Annual savings unlocked',
-  roiSuffix1:'analyst',roiSuffix2:'analysts',roiWks:'wks',roiRoi:'ROI on hiring Antoine: ~',roiDisclaimer:'// Conservative estimate. Real results may cause audible gasping.',
   terminalEyebrow:'Interactive Terminal',terminalTitle:'Ask me',terminalTitleEm:'anything.',
   terminalDesc:"Type commands to explore. Try: help, whoami, skills, ./hire_antoine.sh",terminalHint:"Type 'help' to start · TAB autocomplete · ↑↓ history",
   testiEyebrow:'Social Proof',testiTitle:"Don't take",testiTitleEm:"my word for it.",testiBlur:'Anonymous · NDA',testiSoon:'COMING SOON',
@@ -50,11 +44,11 @@ const T={en:{
     {icon:'🤝',label:'HR / Talent Acquisition',sub:'Give me the career summary and soft skills'},
   ],
 },fr:{
-  nav:['about','dashboard','pipeline','experience','projects','stack','certificates','roi','terminal','testimonials','blog','contact'],
-  navLabels:{about:'Profil',dashboard:'Dashboard',pipeline:'Pipeline',experience:'Expérience',projects:'Projets',stack:'Stack',certificates:'Certifs',roi:'ROI',terminal:'Terminal',testimonials:'Avis',blog:'Blog',contact:'Contact'},
+  nav:['about','dashboard','pipeline','experience','projects','stack','certificates','terminal','testimonials','blog','contact'],
+  navLabels:{about:'Profil',dashboard:'Dashboard',pipeline:'Pipeline',experience:'Expérience',projects:'Projets',stack:'Stack',certificates:'Certifs',terminal:'Terminal',testimonials:'Avis',blog:'Blog',contact:'Contact'},
   badge:'🟢 Disponible partout · France · Dubai · Canada · Singapour · Remote',
   heroSub1:"Je pilote la transformation IA de bout en bout",heroSub1b:"en intégrant vos outils existants en systèmes autonomes",heroSub2:"— pipelines de données autonomes, dashboards décisionnels et workflows LLM. Les équipes avec lesquelles je travaille réduisent systématiquement la charge opérationnelle de 60 à 85 % et recentrent leurs ressources sur les priorités stratégiques.",heroSub3:"Architecte IA · Automatisation · BI · 5+ ans CPG, SaaS & RSE.",heroSub4:"",
-  xp:"ans d'XP",ctaRoi:"Calculer mon ROI →",ctaContact:"Me contacter",ctaCV:"↓ Télécharger CV",
+  xp:"ans d'XP",ctaContact:"Me contacter",ctaCV:"↓ Télécharger CV",
   liveCounter:"Heures de reporting économisées depuis que vous êtes sur cette page",
   metrics:[{n:'85',s:'%',l:'Gain capacité de traitement'},{n:'270',s:'%',l:'Efficacité pipeline boostée'},{n:'30',s:'+',l:'Workflows automatisés'},{n:'6',s:'mois',l:'Dept Analytics 0→1'}],
   dashEyebrow:'Démo Live',dashTitle:'Dashboard',dashTitleEm:'Exécutif',
@@ -70,12 +64,6 @@ const T={en:{
   skillsEyebrow:'Arsenal',skillsTitle:'Mes outils.',skillsTitleDim:'Pas juste une liste.',radarTitle:'Radar de Compétences',
   projectsEyebrow:'Projets Signature',projectsTitle:'Ce que j\'ai vraiment',projectsTitleEm:'construit.',projectsDesc:'3 catégories · Rapports auto · Dashboards IA sur votre pain point · Automatisations customs par département.',
   stackEyebrow:'Stack Technique',stackTitle:'Ce avec quoi je livre.',stackTitleEm:'Pas des buzzwords.',
-  roiEyebrow:'Calculateur ROI',roiTitle:'Découvrez ce que',roiTitleEm:'ne pas',roiTitle2:'me recruter vous coûte.',
-  roiH3:"Combien coûte votre data ops actuelle ?",roiP:"Bougez les curseurs. Regardez la douleur se matérialiser.",
-  roiSliders:[{label:"Analystes sur des rapports manuels",unit:"personnes"},{label:"Heures / semaine par analyste",unit:"h/sem"},{label:"Coût horaire moyen",unit:"€/h"},{label:"Taux d'erreur dans les rapports",unit:"%"}],
-  roiComment:"// Analyse d'impact de l'automatisation",
-  roiLbl1:'Coût annuel du reporting manuel',roiLbl2:'+ Coût caché des erreurs',roiLbl3:'Douleur annuelle totale',roiLbl4:'Après automatisation (12% résiduel)',roiLbl5:'🚀 Économies annuelles débloquées',
-  roiSuffix1:'analyste',roiSuffix2:'analystes',roiWks:'sem',roiRoi:"ROI sur le recrutement d'Antoine : ~",roiDisclaimer:'// Estimation conservatrice. Les vrais résultats peuvent provoquer des gasps.',
   terminalEyebrow:'Terminal Interactif',terminalTitle:'Posez-moi',terminalTitleEm:'vos questions.',
   terminalDesc:"Tapez des commandes pour explorer. Essayez : help, whoami, skills, ./hire_antoine.sh",terminalHint:"Tapez 'help' · TAB pour compléter · ↑↓ historique",
   testiEyebrow:'Preuves Sociales',testiTitle:"Ne prenez pas",testiTitleEm:"ma parole.",testiBlur:'Anonyme · NDA',testiSoon:'BIENTÔT',
@@ -100,10 +88,10 @@ const T={en:{
 
 /* ─── HUMAN TEXTS — même structure que T, langage simple sans jargon ──────── */
 const TH={en:{
-  nav:['about','dashboard','pipeline','experience','projects','certificates','roi','terminal','testimonials','blog','contact'],
-  navLabels:{about:'Home',dashboard:'Proof',pipeline:'Demo',experience:'Journey',projects:'Results',certificates:'Certs',roi:'ROI',terminal:'Ask me',testimonials:'Reviews',blog:'Blog',contact:'Contact'},
+  nav:['about','dashboard','pipeline','experience','projects','certificates','terminal','testimonials','blog','contact'],
+  navLabels:{about:'Home',dashboard:'Proof',pipeline:'Demo',experience:'Journey',projects:'Results',certificates:'Certs',terminal:'Ask me',testimonials:'Reviews',blog:'Blog',contact:'Contact'},
   heroSub1:"I deploy AI in your company",heroSub1b:"and automate everything that moves",heroSub2:"— so your teams stop wasting time on manual work and start making decisions that generate revenue. Finance, Sales, Supply, HR: every process becomes an autonomous system that maximizes your ROI.",heroSub3:"AI Transformation · Automation · BI · 5+ years CPG, SaaS & CSR.",heroSub4:"",
-  xp:"yrs experience",ctaRoi:"Calculate what this costs me →",ctaContact:"Talk in 30 min",ctaCV:"↓ Download CV",
+  xp:"yrs experience",ctaContact:"Talk in 30 min",ctaCV:"↓ Download CV",
   liveCounter:"Hours of manual reporting done worldwide since you opened this page",
   metrics:[{n:'85',s:'%',l:'Reporting time saved'},{n:'30',s:'+',l:'Tasks automated'},{n:'6',s:'mo',l:'Analytics dept from zero'},{n:'4.2',s:'%',l:'AI forecast error'}],
   dashEyebrow:'Live Demo',dashTitle:'Real',dashTitleEm:'Executive Dashboard',
@@ -119,14 +107,8 @@ const TH={en:{
   skillsEyebrow:'What I know',skillsTitle:'Skills that deliver.',skillsTitleDim:'Used daily.',radarTitle:'Overview',
   projectsEyebrow:'Real Projects',projectsTitle:'What I actually',projectsTitleEm:'built.',projectsDesc:'Systems running today. Real problems solved, real results measured.',
   stackEyebrow:'My Tools',stackTitle:'What I work with.',stackTitleEm:'Every day.',
-  roiEyebrow:'ROI Calculator',roiTitle:'What does',roiTitleEm:'not fixing this',roiTitle2:'cost you?',
-  roiH3:"What is your manual reporting actually costing?",roiP:"Move the sliders. See the real cost of doing nothing.",
-  roiSliders:[{label:"People on manual reports",unit:"people"},{label:"Hours / week per person",unit:"h/wk"},{label:"Average hourly cost",unit:"$/h"},{label:"Error rate in reports",unit:"%"}],
-  roiComment:'// Cost of inaction',
-  roiLbl1:'Annual cost of manual work',roiLbl2:'+ Hidden cost of errors',roiLbl3:'Total annual cost of the problem',roiLbl4:'After automation (12% residual)',roiLbl5:'💰 Money saved per year',
-  roiSuffix1:'person',roiSuffix2:'people',roiWks:'wks',roiRoi:'ROI on hiring Antoine: ~',roiDisclaimer:'// Conservative estimate. Real results often higher.',
   terminalEyebrow:'Ask Me Anything',terminalTitle:'I answer',terminalTitleEm:'your questions.',
-  terminalDesc:"Ask anything — rates, timeline, what I can automate, how I work. Try: help, rates, contact",terminalHint:"Type 'help' to start",
+  terminalDesc:"Ask anything — timeline, what I can automate, how I work. Try: help, whoami, contact",terminalHint:"Type 'help' to start",
   testiEyebrow:'What people say',testiTitle:"Don't take",testiTitleEm:"my word for it.",testiBlur:'Anonymous · NDA',testiSoon:'COMING SOON',
   worldLabel:'Click a country →',countryClose:'CLOSE',
   blogEyebrow:'Thoughts',blogTitle:'What I think',blogTitleEm:'out loud.',blogDesc:"Automation, data and AI — no jargon.",blogRead:'Read →',blogReadTime:'min read',blogClose:'CLOSE',
@@ -146,10 +128,10 @@ const TH={en:{
     {icon:'💡',label:'Entrepreneur / Founder',sub:'What can you do for my startup?'},
   ],
 },fr:{
-  nav:['about','dashboard','pipeline','experience','projects','certificates','roi','terminal','testimonials','blog','contact'],
-  navLabels:{about:'Accueil',dashboard:'Preuve',pipeline:'Démo',experience:'Parcours',projects:'Résultats',certificates:'Certifs',roi:'ROI',terminal:'Posez-moi',testimonials:'Avis',blog:'Blog',contact:'Contact'},
+  nav:['about','dashboard','pipeline','experience','projects','certificates','terminal','testimonials','blog','contact'],
+  navLabels:{about:'Accueil',dashboard:'Preuve',pipeline:'Démo',experience:'Parcours',projects:'Résultats',certificates:'Certifs',terminal:'Posez-moi',testimonials:'Avis',blog:'Blog',contact:'Contact'},
   heroSub1:"Je déploie l'IA dans votre entreprise",heroSub1b:"et j'automatise tout ce qui bouge",heroSub2:"— pour que vos équipes arrêtent de perdre du temps sur du travail manuel et commencent à prendre des décisions qui génèrent du revenu. Finance, Sales, Supply, RH : chaque processus devient un système autonome qui maximise votre ROI.",heroSub3:"Transformation IA · Automatisation · BI · 5+ ans CPG, SaaS & RSE.",heroSub4:"",
-  xp:"ans d'expérience",ctaRoi:"Calculer ce que ça me coûte →",ctaContact:"Parler en 30 min",ctaCV:"↓ Télécharger CV",
+  xp:"ans d'expérience",ctaContact:"Parler en 30 min",ctaCV:"↓ Télécharger CV",
   liveCounter:"Heures de reporting manuel faites dans le monde depuis que vous êtes sur cette page",
   metrics:[{n:'85',s:'%',l:'Temps de reporting économisé'},{n:'30',s:'+',l:'Tâches automatisées'},{n:'6',s:'mois',l:'Dept analytics de zéro'},{n:'4,2',s:'%',l:'Taux erreur prévisions IA'}],
   dashEyebrow:'Démo Live',dashTitle:'Vrai',dashTitleEm:'Dashboard Exécutif',
@@ -165,12 +147,6 @@ const TH={en:{
   skillsEyebrow:'Ce que je sais faire',skillsTitle:'Compétences qui livrent.',skillsTitleDim:'Au quotidien.',radarTitle:'Vue d\'ensemble',
   projectsEyebrow:'Projets réels',projectsTitle:"Ce que j'ai vraiment",projectsTitleEm:'construit.',projectsDesc:'Des systèmes en production. Des problèmes réels résolus, des résultats mesurés.',
   stackEyebrow:'Mes outils',stackTitle:'Ce avec quoi je travaille.',stackTitleEm:'Tous les jours.',
-  roiEyebrow:'Calculateur ROI',roiTitle:'Combien coûte',roiTitleEm:'ne rien faire',roiTitle2:'vraiment ?',
-  roiH3:"Combien vous coûte vraiment votre reporting manuel ?",roiP:"Bougez les curseurs. Voyez le vrai coût de l'inaction.",
-  roiSliders:[{label:"Personnes sur des rapports manuels",unit:"pers."},{label:"Heures / semaine par personne",unit:"h/sem"},{label:"Coût horaire moyen",unit:"€/h"},{label:"Taux d'erreur dans les rapports",unit:"%"}],
-  roiComment:"// Coût de l'inaction",
-  roiLbl1:'Coût annuel du travail manuel',roiLbl2:'+ Coût caché des erreurs',roiLbl3:'Coût total annuel du problème',roiLbl4:'Après automatisation (12% résiduel)',roiLbl5:'💰 Argent économisé par an',
-  roiSuffix1:'personne',roiSuffix2:'personnes',roiWks:'sem',roiRoi:"ROI sur le recrutement d'Antoine : ~",roiDisclaimer:'// Estimation conservatrice. Les vrais résultats sont souvent supérieurs.',
   terminalEyebrow:"Posez-moi n'importe quoi",terminalTitle:'Je réponds à',terminalTitleEm:'vos questions.',
   terminalDesc:"Posez n'importe quelle question — tarifs, délais, ce que je peux automatiser. Essayez : help, tarifs, contact",terminalHint:"Tapez 'help' pour commencer",
   testiEyebrow:'Ce que disent les autres',testiTitle:"Ne prenez pas",testiTitleEm:"ma parole.",testiBlur:'Anonyme · NDA',testiSoon:'BIENTÔT',
@@ -299,7 +275,7 @@ const TESTIMONIALS = [
       en: "March 2026 · Aziz was Antoine's senior but not his direct manager",
       fr: "Mars 2026 · Aziz était le supérieur de Antoine mais n'était pas le responsable direct de Antoine",
     },
-    avatarImg: '/images/testimonials/aziz-agoumy.jpeg',
+    avatarImg: '/images/testimonials/aziz-agoumy.jpg',
     avatar: 'AA',
     color: '#F97316',
     stars: 5,
@@ -335,7 +311,7 @@ const TESTIMONIALS = [
       en: 'May 2024 · worked with Antoine across teams',
       fr: 'Mai 2024 · a travaillé avec Antoine dans des équipes différentes',
     },
-    avatarImg: '/images/testimonials/robin-blondeau.jpeg',
+    avatarImg: '/images/testimonials/robin-blondeau.jpg',
     avatar: 'RB',
     color: '#415a77',
     stars: 5,
@@ -353,7 +329,7 @@ const TESTIMONIALS = [
       en: 'May 2024 · worked with Antoine in the same team',
       fr: 'Mai 2024 · a travaillé avec Antoine dans la même équipe',
     },
-    avatarImg: '/images/testimonials/thomas-becuwe.jpeg',
+    avatarImg: '/images/testimonials/thomas-becuwe.jpg',
     avatar: 'TB',
     color: '#FF2D78',
     stars: 5,
@@ -374,7 +350,7 @@ const TESTIMONIALS = [
       en: 'May 2024 · worked with Antoine in the same team',
       fr: 'Mai 2024 · a travaillé avec Antoine dans la même équipe',
     },
-    avatarImg: '/images/testimonials/matthieu-conil.jpeg',
+    avatarImg: '/images/testimonials/matthieu-conil.jpg',
     avatar: 'MC',
     color: '#00F0A8',
     stars: 5,
@@ -1197,62 +1173,6 @@ function Pipeline({lang}){
     </div>
   );
 }
-/* ─── ROI ───────────────────────────────────────────────────────────────────── */
-function ROICalc({lang}){
-  const t=T[lang];
-  const [analysts,setA]=useState(3);const [hours,setH]=useState(15);const [rate,setR]=useState(45);const [err,setE]=useState(12);
-  const [units,setU]=useState(1);
-  const [budget,setBudget]=useState('');
-  const wkH=analysts*hours,waste=wkH*rate*52,errCost=(err/100)*waste*.8,total=waste+errCost,after=total*.12,savings=total-after;
-  const totalScaled=total*units,savingsScaled=savings*units;
-  const roi=(savingsScaled/80000*100).toFixed(0);
-  const budgetNum=parseFloat(budget)||0;
-  const budgetRoi=budgetNum>0?((savingsScaled/budgetNum-1)*100).toFixed(0):null;
-  const fmt=n=>n>=1000?`${lang==='fr'?'':'$'}${(n/1000).toFixed(0)}K${lang==='fr'?'€':''}`:`${lang==='fr'?'':'$'}${Math.round(n)}${lang==='fr'?'€':''}`;
-  const sv=[{val:analysts,set:setA,min:1,max:20},{val:hours,set:setH,min:2,max:40},{val:rate,set:setR,min:20,max:150},{val:err,set:setE,min:1,max:40}];
-  return(
-    <div className="roi-wrap reveal">
-      <div className="roi-grid">
-        <div className="roi-inputs">
-          <h3 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"1.5rem",letterSpacing:"2px",marginBottom:"5px",color:"var(--text)"}}>{t.roiH3}</h3>
-          <p style={{fontSize:".78rem",color:"var(--text-sec)",lineHeight:"1.75",marginBottom:"18px"}}>{t.roiP}</p>
-          {t.roiSliders.map((s,i)=>(<div key={i} className="roi-input-group"><label>{s.label} <span className="roi-val-badge">{sv[i].val} {s.unit}</span></label><input type="range" min={sv[i].min} max={sv[i].max} value={sv[i].val} onChange={e=>sv[i].set(+e.target.value)}/></div>))}
-          <div className="roi-input-group" style={{marginTop:'12px',borderTop:'1px solid var(--border-dim)',paddingTop:'14px'}}>
-            <label>{lang==='fr'?'Business Units / Équipes concernées':'Business Units / Teams impacted'} <span className="roi-val-badge">{units} BU{units>1?'s':''}</span></label>
-            <input type="range" min={1} max={20} value={units} onChange={e=>setU(+e.target.value)}/>
-          </div>
-          <div style={{marginTop:'16px',borderTop:'1px solid var(--border-dim)',paddingTop:'14px'}}>
-            <label style={{display:'block',fontSize:'.7rem',color:'var(--text-sec)',marginBottom:'8px',textTransform:'uppercase',letterSpacing:'1px',fontFamily:"'Space Mono',monospace"}}>
-              {lang==='fr'?'💰 Votre budget : salaire annuel ou mission freelance':'💰 Your budget: annual salary or freelance contract'}
-            </label>
-            <div style={{display:'flex',alignItems:'center',gap:'8px'}}>
-              <span style={{fontFamily:"'Space Mono',monospace",fontSize:'.9rem',color:'var(--accent4)'}}>{lang==='fr'?'€':'$'}</span>
-              <input type="number" min="0" placeholder={lang==='fr'?'Ex: 80000':'E.g. 80000'} value={budget} onChange={e=>setBudget(e.target.value)}
-                style={{flex:1,background:'var(--glass-bg)',border:'1px solid var(--border)',color:'var(--text)',fontFamily:"'Space Mono',monospace",fontSize:'.8rem',padding:'10px 12px',borderRadius:'6px',outline:'none'}}/>
-            </div>
-            {budgetRoi!==null&&(
-              <div style={{marginTop:'8px',fontFamily:"'Space Mono',monospace",fontSize:'.6rem',color:'var(--accent3)',background:'rgba(0,240,168,.07)',border:'1px solid rgba(0,240,168,.2)',borderRadius:'6px',padding:'8px 12px'}}>
-                {lang==='fr'?`✅ ROI sur votre investissement : ~${budgetRoi}% — payé en `:`✅ ROI on your investment: ~${budgetRoi}% — paid back in `}
-                <strong>{Math.max(1,(budgetNum/savingsScaled*12)).toFixed(1)}</strong> {lang==='fr'?'mois':'months'}
-              </div>
-            )}
-          </div>
-        </div>
-        <div className="roi-out">
-          <div style={{fontFamily:"'Space Mono',monospace",fontSize:".46rem",color:"var(--text-dim)",letterSpacing:"3px",textTransform:"uppercase",marginBottom:"6px"}}>{t.roiComment}</div>
-          <div className="roi-metric"><div className="roi-metric-lbl">{t.roiLbl1}</div><div className="roi-metric-val pink">{fmt(waste)}</div><div className="roi-helper">{wkH}h/{lang==='fr'?'sem':'week'} × {analysts} {analysts>1?t.roiSuffix2:t.roiSuffix1} × 52{t.roiWks}</div></div>
-          <div className="roi-metric"><div className="roi-metric-lbl">{t.roiLbl2} ({err}%)</div><div className="roi-metric-val purple">{fmt(errCost)}</div></div>
-          {units>1&&<div className="roi-metric"><div className="roi-metric-lbl">× {units} BU{units>1?'s':''} {lang==='fr'?'concernées':'impacted'}</div><div className="roi-metric-val" style={{color:'var(--accent4)',fontSize:'1.4rem'}}>= {fmt(totalScaled)}</div></div>}
-          <div className="roi-metric"><div className="roi-metric-lbl">{t.roiLbl3}</div><div className="roi-metric-val pink" style={{fontSize:"3rem"}}>{fmt(units>1?totalScaled:total)}</div></div>
-          <div className="roi-metric"><div className="roi-metric-lbl">{t.roiLbl4}</div><div className="roi-metric-val" style={{color:"var(--text-sec)",fontSize:"1.6rem"}}>{fmt((units>1?totalScaled:total)*.12)}</div></div>
-          <div className="roi-savings-box"><div className="roi-metric-lbl">{t.roiLbl5}</div><div className="roi-metric-val green" style={{fontSize:"2.6rem"}}>{fmt(units>1?savingsScaled:savings)}</div><div style={{fontSize:".6rem",color:"var(--accent3)",marginTop:"5px",fontFamily:"'Space Mono',monospace"}}>{t.roiRoi}{roi}%</div></div>
-          <div style={{fontSize:".54rem",color:"var(--text-mute)",fontFamily:"'Space Mono',monospace",fontStyle:"italic"}}>{t.roiDisclaimer}</div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 /* ─── RADAR ─────────────────────────────────────────────────────────────────── */
 function RadarChart({lang}){
   const t=T[lang];const canvasRef=useRef();const chartRef=useRef();
@@ -1311,55 +1231,6 @@ function TerminalChatbot({lang}){
       </div>
       <div className="chat-input-row"><span className="chat-prompt-label">$</span><input ref={inRef} className="chat-input" value={input} onChange={e=>setInput(e.target.value)} onKeyDown={handleKey} autoComplete="off" spellCheck="false" placeholder={t.terminalHint}/></div>
       <div className="chat-hint">TAB autocomplete · ↑↓ history · try: help, ./hack.sh, secret</div>
-    </div>
-  );
-}
-
-/* ─── ELI5 MODAL ────────────────────────────────────────────────────────────── */
-function ELI5Modal({lang,onClose,onContact}){
-  const cards={
-    en:[
-      {emoji:'🤖',title:'What I Actually Do',text:`Imagine your company drowns in Excel files every week — someone spends 10 hours manually copying numbers from one spreadsheet to another just to make a report. I build <strong>robots</strong> that do all that automatically, every day, while everyone sleeps. The report is just… there. Ready. Perfect.`},
-      {emoji:'📊',title:'The Dashboards',text:`Instead of a 40-tab Excel file that only one person understands, I create a <strong>live screen</strong> (like a car dashboard) where any manager can see in 10 seconds: are we selling well? Do we have stock? Is the competition doing something weird? All automatic, always up to date.`},
-      {emoji:'🔍',title:'Spying on the Competition',text:`Every morning at 6am, my system visits <strong>40+ competitor websites</strong> by itself, reads prices, promotions, and product launches, and sends a clean summary report. It's like having a spy who never sleeps and never makes mistakes.`},
-      {emoji:'💬',title:'Reading Thousands of Reviews',text:`I built a system that reads <strong>10,000+ customer reviews per month</strong> from Amazon, Sephora, etc., understands whether they're happy or not, and automatically creates a report: "This week, customers love the scent but hate the packaging." Zero human needed.`},
-      {emoji:'📦',title:'Predicting Stock',text:`Using AI, I predict <strong>how much of each product you'll sell</strong> over the next 13 weeks, store by store. So you never run out of stock (losing sales) and never order too much (wasting money). My error rate: 4.2% — better than most humans.`},
-      {emoji:'⚙️',title:'Agile @ NAOS',text:`At NAOS, I work in <strong>Agile sprints</strong> — short 2-week cycles where we ship real features fast. No endless planning. We test, we learn, we improve. It's how I delivered a full analytics department in 6 months instead of 2 years.`},
-    ],
-    fr:[
-      {emoji:'🤖',title:'Ce que je fais vraiment',text:`Imaginez que votre entreprise se noie dans des fichiers Excel chaque semaine — quelqu'un passe 10h à copier manuellement des chiffres d'un tableau à l'autre juste pour faire un rapport. Je construis des <strong>robots</strong> qui font tout ça automatiquement, chaque jour, pendant que tout le monde dort. Le rapport est juste… là. Prêt. Parfait.`},
-      {emoji:'📊',title:'Les Dashboards',text:`Au lieu d'un fichier Excel de 40 onglets que seule une personne comprend, je crée un <strong>écran en direct</strong> (comme le tableau de bord d'une voiture) où n'importe quel manager voit en 10 secondes : est-ce qu'on vend bien ? A-t-on du stock ? Est-ce que la concurrence fait un truc bizarre ? Tout automatique, toujours à jour.`},
-      {emoji:'🔍',title:'Espionner la concurrence',text:`Chaque matin à 6h, mon système visite <strong>40+ sites concurrents</strong> tout seul, lit les prix, les promos et les nouveautés, et envoie un rapport propre. C'est comme avoir un espion qui ne dort jamais et ne fait jamais d'erreurs.`},
-      {emoji:'💬',title:'Lire des milliers d\'avis',text:`J'ai construit un système qui lit <strong>10 000+ avis clients par mois</strong> sur Amazon, Sephora, etc., comprend si les gens sont contents ou non, et crée automatiquement un rapport : "Cette semaine, les clients adorent le parfum mais détestent l'emballage." Zéro humain nécessaire.`},
-      {emoji:'📦',title:'Prédire les stocks',text:`Grâce à l'IA, je prédit <strong>combien de chaque produit vous allez vendre</strong> dans les 13 prochaines semaines, magasin par magasin. Donc vous ne tombez jamais en rupture (perte de ventes) et ne commandez jamais trop (gaspillage d'argent). Mon taux d'erreur : 4,2% — mieux que la plupart des humains.`},
-      {emoji:'⚙️',title:'Agile chez NAOS',text:`Chez NAOS, je travaille en <strong>sprints Agile</strong> — des cycles courts de 2 semaines où l'on livre des vraies fonctionnalités rapidement. Pas de planification sans fin. On teste, on apprend, on améliore. C'est comme ça que j'ai livré un département analytics complet en 6 mois au lieu de 2 ans.`},
-    ]
-  };
-  const c=cards[lang];
-  return(
-    <div className="eli5-overlay" onClick={onClose}>
-      <div className="eli5-modal" onClick={e=>e.stopPropagation()}>
-        <div className="eli5-header">
-          <div>
-            <div className="eli5-title">💡 {lang==='fr'?'Expliquez-moi simplement':'Explain it Simply'}</div>
-            <div className="eli5-sub">{lang==='fr'?'Tout ce que je fais — sans le jargon tech':'Everything I do — zero tech jargon'}</div>
-          </div>
-          <button className="eli5-close" onClick={onClose}>✕</button>
-        </div>
-        {c.map((card,i)=>(
-          <div key={i} className="eli5-card">
-            <div className="eli5-card-emoji">{card.emoji}</div>
-            <div className="eli5-card-title">{card.title}</div>
-            <div className="eli5-card-text" dangerouslySetInnerHTML={{__html:card.text}}/>
-          </div>
-        ))}
-        <div className="eli5-cta">
-          <span className="eli5-badge">✅ {lang==='fr'?'Pas de jargon. Que des résultats.':'No jargon. Just results.'}</span>
-          <button className="book-call-btn" style={{marginTop:0}} onClick={onContact}>
-            📅 {lang==='fr'?'Parlons-en en 30 min →':'Let\'s talk in 30 min →'}
-          </button>
-        </div>
-      </div>
     </div>
   );
 }
@@ -1887,177 +1758,12 @@ function WorldMap({countries,setActiveCountry,lang}){
   );
 }
 
-/* ─── HUMAN ROI ──────────────────────────────────────────────────────────────── */
-function HumanROI({ht,lang}){
-  const [p1,setP1]=useState(5);
-  const [p2,setP2]=useState(20);
-  const [p3,setP3]=useState(90);
-  const [p4,setP4]=useState(20);
-  const [units,setUnits]=useState(3);
-  const [budget,setBudget]=useState('');
-  const [activeTab,setActiveTab]=useState('cost');
-  const [barsVisible,setBarsVisible]=useState(false);
-  const barsRef=useRef(null);
-
-  useEffect(()=>{
-    const obs=new IntersectionObserver(([e])=>{if(e.isIntersecting)setBarsVisible(true);},{threshold:0.3});
-    if(barsRef.current)obs.observe(barsRef.current);
-    return()=>obs.disconnect();
-  },[]);
-
-  const annualWaste=p1*p2*p3*52;
-  const errCost=(p4/100)*annualWaste*0.8;
-  const totalAll=(annualWaste+errCost)*units;
-  const savings=totalAll*0.88;
-  const budgetNum=parseFloat((budget||'').replace(/[^0-9.,]/g,'').replace(',','.'))||0;
-  const paybackMonths=budgetNum>0?(budgetNum/savings*12).toFixed(1):null;
-  const budgetRoiPct=budgetNum>0?Math.round((savings/budgetNum-1)*100):null;
-  const refBudget=budgetNum>0?budgetNum:80000;
-  const roiPct=Math.round(savings/refBudget*100);
-  const yr1=savings, yr2=savings*1.28, yr3=savings*1.62, maxVal=yr3;
-  const fmt=n=>{if(n>=1000000)return(n/1000000).toFixed(1)+'M';if(n>=1000)return Math.round(n/1000)+'K';return Math.round(n)+''};
-
-  const sliders=[
-    {v:p1,s:setP1,min:1,max:20,lbl:ht.rs[0],hint:ht.rsHint?.[0]||'',unit:ht.ru[0]},
-    {v:p2,s:setP2,min:2,max:40,lbl:ht.rs[1],hint:ht.rsHint?.[1]||'',unit:ht.ru[1]},
-    {v:p3,s:setP3,min:20,max:200,lbl:ht.rs[2],hint:ht.rsHint?.[2]||'',unit:ht.ru[2]},
-    {v:p4,s:setP4,min:1,max:40,lbl:ht.rs[3],hint:ht.rsHint?.[3]||'',unit:ht.ru[3]},
-  ];
-
-  const TABS=[['cost',lang==='fr'?'💸 Coût actuel':'💸 Current cost'],['roi','📈 ROI'],['scale',lang==='fr'?'🚀 Sur 3 ans':'🚀 3-year']];
-
-  // Dark dashboard card style
-  const card={background:'var(--bg-card)',border:'1px solid var(--border-dim)',borderRadius:10,padding:'16px 18px'};
-  const mono={fontFamily:"'Space Mono',monospace"};
-
-  return(
-  <div style={{background:'var(--glass-bg)',border:'1px solid var(--border)',borderRadius:16,overflow:'hidden',boxShadow:'0 4px 30px rgba(0,0,0,.08)'}}>
-
-    {/* Header */}
-    <div style={{background:'var(--glass-bg)',backdropFilter:'var(--glass-blur)',WebkitBackdropFilter:'var(--glass-blur)',borderBottom:'1px solid var(--border-dim)',padding:'12px 20px',display:'flex',alignItems:'center',gap:16}}>
-      <div style={{display:'flex',gap:6,flexShrink:0}}>
-        <div style={{width:10,height:10,borderRadius:'50%',background:'#FF5F57'}}/>
-        <div style={{width:10,height:10,borderRadius:'50%',background:'#FFBD2E'}}/>
-        <div style={{width:10,height:10,borderRadius:'50%',background:'#28C840'}}/>
-      </div>
-      <span style={{...mono,fontSize:9,color:'#415a77',letterSpacing:'3px',textTransform:'uppercase'}}>ROI·SIMULATOR</span>
-      <div style={{flex:1}}/>
-      <div style={{display:'flex',alignItems:'center',gap:5}}>
-        <div style={{width:6,height:6,borderRadius:'50%',background:'#00F0A8',boxShadow:'0 0 6px #00F0A8'}}/>
-        <span style={{...mono,fontSize:8,color:'#00F0A8',letterSpacing:'1px'}}>{lang==='fr'?'EN DIRECT':'LIVE'}</span>
-      </div>
-    </div>
-
-    {/* Tabs */}
-    <div style={{background:'var(--glass-bg)',borderBottom:'1px solid var(--border-dim)',display:'flex',padding:'0 20px'}}>
-      {TABS.map(([k,l])=>(
-        <button key={k} onClick={()=>setActiveTab(k)} style={{padding:'10px 16px',background:'transparent',border:'none',borderBottom:`2px solid ${activeTab===k?'#415a77':'transparent'}`,color:activeTab===k?'#415a77':'var(--text-mute)',fontFamily:"'Space Mono',monospace",fontSize:9,letterSpacing:'1.5px',textTransform:'uppercase',cursor:'pointer',transition:'all .2s'}}>
-          {l}
-        </button>
-      ))}
-    </div>
-
-    {/* Content */}
-    <div style={{padding:'20px',display:'grid',gridTemplateColumns:'1fr 1fr',gap:20}}>
-
-      {/* LEFT — Sliders */}
-      <div style={{display:'flex',flexDirection:'column',gap:12}}>
-        {sliders.map((r,i)=>{
-          const pct=((r.v-r.min)/(r.max-r.min)*100)+'%';
-          return(<div key={i} style={{...card}}>
-            <div style={{display:'flex',justifyContent:'space-between',marginBottom:6}}>
-              <span style={{...mono,fontSize:8,color:'var(--text-sec)',letterSpacing:'1px',textTransform:'uppercase'}}>{r.lbl}</span>
-              <span style={{...mono,fontSize:10,fontWeight:700,color:'#415a77'}}>{r.v} <span style={{fontSize:7,color:'var(--text-mute)'}}>{r.unit}</span></span>
-            </div>
-            {r.hint&&<div style={{...mono,fontSize:7,color:'var(--text-mute)',fontStyle:'italic',marginBottom:6}}>{r.hint}</div>}
-            <input type="range" style={{width:'100%',height:5,borderRadius:3,appearance:'none',WebkitAppearance:'none',cursor:'pointer',outline:'none',background:`linear-gradient(90deg,#007AFF ${pct},rgba(0,122,255,0.15) ${pct})`}}
-              min={r.min} max={r.max} value={r.v} onChange={e=>r.s(+e.target.value)}/>
-          </div>);
-        })}
-        <div style={{...card}}>
-          <div style={{display:'flex',justifyContent:'space-between',marginBottom:6}}>
-            <span style={{...mono,fontSize:8,color:'var(--text-sec)',letterSpacing:'1px',textTransform:'uppercase'}}>{ht.ru2}</span>
-            <span style={{...mono,fontSize:10,fontWeight:700,color:'#415a77'}}>{units} <span style={{fontSize:7,color:'var(--text-mute)'}}>{ht.ru3}</span></span>
-          </div>
-          <div style={{...mono,fontSize:7,color:'var(--text-mute)',fontStyle:'italic',marginBottom:6}}>{lang==='fr'?'Chaque équipe multiplie l\'économie':'Each team multiplies savings'}</div>
-          <input type="range" style={{width:'100%',height:5,borderRadius:3,appearance:'none',WebkitAppearance:'none',cursor:'pointer',outline:'none',background:`linear-gradient(90deg,#007AFF ${((units-1)/14*100)+'%'},rgba(0,122,255,0.15) ${((units-1)/14*100)+'%'})`}}
-            min={1} max={15} value={units} onChange={e=>setUnits(+e.target.value)}/>
-        </div>
-      </div>
-
-      {/* RIGHT — Output */}
-      <div style={{display:'flex',flexDirection:'column',gap:12}}>
-
-        {activeTab==='cost'&&<>
-          {[[ht.rl[0],annualWaste*units,'#636366'],[ht.rl[1],errCost*units,'#778da9'],[ht.rl[2],totalAll,'#FF3B30']].map(([lbl,val,col],i)=>(
-            <div key={i} style={{...card,borderLeft:`3px solid ${col}`,position:'relative',overflow:'hidden'}}>
-              <div style={{position:'absolute',top:0,right:0,bottom:0,width:3,background:`linear-gradient(180deg,${col},transparent)`}}/>
-              <div style={{...mono,fontSize:7,color:'var(--text-mute)',letterSpacing:'1px',textTransform:'uppercase',marginBottom:8}}>{lbl}</div>
-              <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:'2.2rem',color:col,lineHeight:1}}>{ht.cur}{fmt(val)}</div>
-            </div>
-          ))}
-          <div style={{...card,background:'rgba(255,59,48,0.06)',border:'1px solid rgba(255,59,48,0.22)'}}>
-            <div style={{...mono,fontSize:7,color:'var(--text-mute)',textTransform:'uppercase',marginBottom:4}}>{lang==='fr'?'Coût mensuel (÷12)':'Monthly cost (÷12)'}</div>
-            <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:'2.8rem',color:'#FF3B30',lineHeight:1}}>{ht.cur}{fmt(totalAll/12)}<span style={{fontSize:'1rem',color:'var(--text-mute)'}}>/{lang==='fr'?'mois':'mo'}</span></div>
-          </div>
-        </>}
-
-        {activeTab==='roi'&&<>
-          <div style={{...card,borderTop:'3px solid #007AFF'}}>
-            <div style={{...mono,fontSize:7,color:'var(--text-mute)',textTransform:'uppercase',marginBottom:4}}>{ht.rl[3]}</div>
-            <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:'1.8rem',color:'var(--text-sec)',lineHeight:1}}>{ht.cur}{fmt(totalAll*0.12)}</div>
-          </div>
-          <div style={{background:'rgba(52,199,89,0.07)',border:'1px solid rgba(52,199,89,0.28)',borderRadius:10,padding:'20px 18px',textAlign:'center'}}>
-            <div style={{...mono,fontSize:8,color:'var(--accent3)',letterSpacing:'2px',textTransform:'uppercase',marginBottom:8}}>{ht.rl[4]}</div>
-            <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:'3.5rem',color:'var(--accent3)',lineHeight:1}}>{ht.cur}{fmt(savings)}</div>
-            <div style={{...mono,fontSize:8,color:'var(--text-mute)',marginTop:6}}>{lang==='fr'?'par an · après automatisation':'per year · after automation'}</div>
-            <div style={{...mono,fontSize:9,color:'#415a77',marginTop:8,fontWeight:700}}>{ht.rr1} <strong style={{color:'var(--accent3)'}}>{roiPct}%</strong></div>
-          </div>
-          <div style={{...card}}>
-            <div style={{...mono,fontSize:7,color:'var(--text-mute)',letterSpacing:'1px',marginBottom:8}}>{ht.rb}</div>
-            <input type="text" placeholder={ht.rbp} value={budget} onChange={e=>setBudget(e.target.value)}
-              style={{width:'100%',background:'var(--glass-bg)',border:'1px solid var(--border)',borderRadius:6,padding:'8px 12px',color:'var(--text)',fontFamily:"'Space Mono',monospace",fontSize:11,outline:'none',boxSizing:'border-box'}}/>
-          </div>
-          {paybackMonths&&<div style={{background:'rgba(0,240,168,0.06)',border:'1px solid rgba(0,240,168,0.25)',borderRadius:10,padding:'14px 16px',display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
-            <div style={{textAlign:'center'}}><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:'2rem',color:'#00F0A8',lineHeight:1}}>{paybackMonths}</div><div style={{...mono,fontSize:7,color:'var(--text-mute)'}}>{ht.rr2}</div></div>
-            <div style={{textAlign:'center'}}><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:'2rem',color:'#415a77',lineHeight:1}}>{budgetRoiPct}%</div><div style={{...mono,fontSize:7,color:'var(--text-mute)'}}>ROI net</div></div>
-          </div>}
-        </>}
-
-        {activeTab==='scale'&&<div ref={barsRef}>
-          <div style={{...mono,fontSize:8,color:'var(--text-sec)',marginBottom:14,lineHeight:1.6}}>
-            {lang==='fr'?'Plus on automatise, plus le ROI grandit':'The more we automate, the bigger the ROI'}
-          </div>
-          {[[lang==='fr'?'An 1':'Year 1',yr1,'#415a77',lang==='fr'?'Automatisation initiale':'Initial automation'],[lang==='fr'?'An 2':'Year 2',yr2,'#5AC8FA',lang==='fr'?'+28% nouveaux workflows':'+28% new workflows'],[lang==='fr'?'An 3':'Year 3',yr3,'#778da9',lang==='fr'?'Pleine échelle':'Full scale']].map(([yr,val,col,note],i)=>(
-            <div key={i} style={{...card,marginBottom:10}}>
-              <div style={{display:'flex',justifyContent:'space-between',marginBottom:8}}>
-                <span style={{...mono,fontSize:9,color:col,fontWeight:700}}>{yr}</span>
-                <span style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:'1.6rem',color:col,lineHeight:1}}>{ht.cur}{fmt(val)}</span>
-              </div>
-              <div style={{height:6,background:'var(--border-dim)',borderRadius:3,overflow:'hidden',marginBottom:6}}>
-                <div style={{height:'100%',width:barsVisible?`${(val/maxVal*100)}%`:'0%',background:col,borderRadius:3,transition:'width 1.2s ease '+(i*0.3)+'s'}}/>
-              </div>
-              <div style={{...mono,fontSize:7,color:'var(--text-mute)'}}>{note}</div>
-            </div>
-          ))}
-          <div style={{background:'rgba(0,240,168,0.06)',border:'1px solid rgba(0,240,168,0.2)',borderRadius:10,padding:'14px 16px',textAlign:'center',marginTop:4}}>
-            <div style={{...mono,fontSize:7,color:'var(--text-mute)',marginBottom:4}}>{lang==='fr'?'Total 3 ans':'3-year total'}</div>
-            <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:'2.5rem',color:'#00F0A8',lineHeight:1}}>{ht.cur}{fmt(yr1+yr2+yr3)}</div>
-          </div>
-        </div>}
-
-      </div>
-    </div>
-  </div>
-  );
-}
-
 /* ─── HUMAN APP ──────────────────────────────────────────────────────────────── */
 
 const CHAPTERS=[
   {id:'about',label:'INTRO'},{id:'dashboard',label:'PROOF'},{id:'pipeline',label:'DEMO'},
   {id:'experience',label:'XP'},{id:'projects',label:'WORK'},{id:'certificates',label:'CERTS'},
-  {id:'roi',label:'ROI'},{id:'terminal',label:'CHAT'},{id:'contact',label:'HIRE'},
+  {id:'terminal',label:'CHAT'},{id:'contact',label:'HIRE'},
 ];
 
 /* ─── CERT WALL ──────────────────────────────────────────────────────────────── */
@@ -2191,7 +1897,6 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
   const [tagFilter,setTagFilter]=useState('All');
   const [showEgg,setShowEgg]=useState(false);
   const [showRecruiter,setShowRecruiter]=useState(false);
-  const [showEli5,setShowEli5]=useState(false);
   const [activeCountry,setActiveCountry]=useState(null);
   const [soundOn,setSoundOn]=useState(false);
   const [showCalendly,setShowCalendly]=useState(false);
@@ -2219,7 +1924,7 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
   useEffect(()=>{const t=mode==='human'?'light':'dark';setTheme(t);document.body.setAttribute('data-theme',t);},[mode]);
   useEffect(()=>{document.body.setAttribute('data-theme',theme);},[theme]);
   useEffect(()=>{window.konamiCb=()=>setShowEgg(true);return()=>{window.konamiCb=null};},[]);
-  useEffect(()=>{const h=e=>{if(e.key==='Escape'){setShowEgg(false);setActiveCountry(null);setShowRecruiter(false);setShowCalendly(false);setShowEli5(false);}};window.addEventListener('keydown',h);return()=>window.removeEventListener('keydown',h);},[]);
+  useEffect(()=>{const h=e=>{if(e.key==='Escape'){setShowEgg(false);setActiveCountry(null);setShowRecruiter(false);setShowCalendly(false);}};window.addEventListener('keydown',h);return()=>window.removeEventListener('keydown',h);},[]);
 
   // Chapter nav
   useEffect(()=>{
@@ -2292,7 +1997,7 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
       </div>
     )}
     {showRecruiter&&<RecruiterModal lang={lang} onClose={()=>setShowRecruiter(false)}/>}
-    {showEli5&&<ELI5Modal lang={lang} onClose={()=>setShowEli5(false)} onContact={()=>{setShowEli5(false);scrollTo('contact');}}/>}
+
     {showCalendly&&<CalendlyModal lang={lang} onClose={()=>setShowCalendly(false)}/>}
     {activeCountry&&<CountryModal country={activeCountry} onClose={()=>setActiveCountry(null)} lang={lang}/>}
     <ScrollToTop lang={lang}/>
@@ -2390,7 +2095,6 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
             </div>
 
             <div className="hero-ctas" style={{marginBottom:32}}>
-              <button className="btn-primary" onClick={()=>scrollTo('roi')}>{t.ctaRoi}</button>
               <a href="https://raw.githubusercontent.com/demaintenant-antoine-pro/portfolio-ai/main/CV_Antoine.pdf" target="_blank" rel="noopener noreferrer" className="btn-secondary">{t.ctaCV}</a>
             </div>
 
@@ -2450,7 +2154,6 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
           <span className="xp-badge-inline">⚡ {years.toFixed(1)} {t.xp}</span>
           <div className="typewriter-row" style={{marginTop:'14px'}}><span className="prompt">{'>'}</span>{typed}<span className="t-cursor"/></div>
           <div className="hero-ctas">
-            <button className="btn-primary" onClick={()=>scrollTo('roi')}>{t.ctaRoi}</button>
             <a href="https://raw.githubusercontent.com/demaintenant-antoine-pro/portfolio-ai/main/CV_Antoine.pdf" target="_blank" rel="noopener noreferrer" className="btn-secondary">{t.ctaCV}</a>
           </div>
           <LiveCounter lang={lang}/>
@@ -2577,7 +2280,7 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
     <section id="terminal" className="section">
       <div style={{maxWidth:'1500px',margin:'0 auto'}}>
         <div style={{position:'relative',marginBottom:'32px'}}>
-          <div className="chapter-label">Chapter 06 — The Interface</div>
+          <div className="chapter-label">Chapter 05 — The Interface</div>
           <div style={{position:'absolute',top:'-20px',right:'0',fontFamily:"'Bebas Neue',sans-serif",fontSize:'5rem',color:'var(--border-dim)',lineHeight:1}}>06</div>
         </div>
         <div className="section-eyebrow">{t.terminalEyebrow}</div>
@@ -2671,7 +2374,7 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
     {/* CH7 — CONTACT */}
     <section id="contact" className="section">
       <div style={{position:'relative',marginBottom:'32px'}}>
-        <div className="chapter-label">Chapter 07 — The Decision</div>
+        <div className="chapter-label">Chapter 06 — The Decision</div>
         <div style={{position:'absolute',top:'-20px',right:'0',fontFamily:"'Bebas Neue',sans-serif",fontSize:'5rem',color:'var(--border-dim)',lineHeight:1}}>07</div>
       </div>
       <div className="section-eyebrow">{t.contactEyebrow}</div>
