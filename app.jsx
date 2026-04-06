@@ -5,8 +5,7 @@ const LangCtx=createContext('en');
 const T={en:{
   nav:['about','dashboard','pipeline','experience','projects','stack','certificates','terminal','testimonials','blog','contact'],
   navLabels:{about:'About',dashboard:'Dashboard',pipeline:'Pipeline',experience:'XP',projects:'Projects',stack:'Stack',certificates:'Certs',terminal:'Terminal',testimonials:'Reviews',blog:'Blog',contact:'Contact'},
-  badge:'🟢 Available worldwide · France · Dubai · Canada · Singapore · Remote',
-  heroSub1:"I architect end-to-end AI transformation",heroSub1b:"integrating your existing tools into autonomous systems",heroSub2:"— autonomous data pipelines, executive-grade decision dashboards, and LLM-powered workflows. Teams I work with consistently reduce manual overhead by 60–85% and shift capacity toward strategic priorities.",heroSub3:"AI Architect · Automation · BI · 5+ yrs CPG, SaaS & CSR.",heroSub4:"",
+  heroSub1:"I architect end-to-end AI transformation",heroSub1b:"integrating your existing tools into autonomous systems",heroSub2:"— autonomous data pipelines, executive-grade decision dashboards, and LLM-powered workflows. Teams I work with consistently reduce manual overhead by 60–85% and shift capacity toward strategic priorities.",heroSub3:"AI Architect · Automation · BI · 5+ yrs CPG, SaaS & CSR.",
   xp:"yrs XP",ctaContact:"Get in Touch",ctaCV:"↓ Download CV",
   liveCounter:"Hours of reporting saved since you loaded this page",
   metrics:[{n:'85',s:'%',l:'Processing Capacity Gained'},{n:'270',s:'%',l:'Pipeline Efficiency Boost'},{n:'30',s:'+',l:'Workflows Automated'},{n:'6',s:'mo',l:'Analytics Dept Built 0→1'}],
@@ -29,7 +28,7 @@ const T={en:{
   worldLabel:'Click a country →',countryClose:'CLOSE // ESC',
   blogEyebrow:'Notes & Thoughts',blogTitle:'What I think',blogTitleEm:'out loud.',blogDesc:"AI, automation and data — without the jargon.",blogRead:'Read →',blogReadTime:'min read',blogClose:'CLOSE',
   contactEyebrow:'Contact',contactTitle:"Let's build",contactTitleEm:"something real.",
-  contactCopyHint:'CLICK TO COPY',contactCopied:'✓ Copied!',contactLocation:'Location',contactPhone:'Phone',
+  contactCopyHint:'CLICK TO COPY',contactCopied:'✓ Copied!',contactLocation:'Location',
   contactH3:"I'm selective about what I build next.",contactP:"If you have a data problem costing real money — manual reports, broken pipelines, zero visibility — I'm interested.<br/><br/>If you want charts to be prettier, I'll politely refer you to Canva.",
   contactStatus:'Open to new missions · Worldwide · 2026',visitors:'visitors',
   footerKonami:"// Try the Konami code ↑↑↓↓←→←→BA",
@@ -46,8 +45,7 @@ const T={en:{
 },fr:{
   nav:['about','dashboard','pipeline','experience','projects','stack','certificates','terminal','testimonials','blog','contact'],
   navLabels:{about:'Profil',dashboard:'Dashboard',pipeline:'Pipeline',experience:'Expérience',projects:'Projets',stack:'Stack',certificates:'Certifs',terminal:'Terminal',testimonials:'Avis',blog:'Blog',contact:'Contact'},
-  badge:'🟢 Disponible partout · France · Dubai · Canada · Singapour · Remote',
-  heroSub1:"Je pilote la transformation IA de bout en bout",heroSub1b:"en intégrant vos outils existants en systèmes autonomes",heroSub2:"— pipelines de données autonomes, dashboards décisionnels et workflows LLM. Les équipes avec lesquelles je travaille réduisent systématiquement la charge opérationnelle de 60 à 85 % et recentrent leurs ressources sur les priorités stratégiques.",heroSub3:"Architecte IA · Automatisation · BI · 5+ ans CPG, SaaS & RSE.",heroSub4:"",
+  heroSub1:"Je pilote la transformation IA de bout en bout",heroSub1b:"en intégrant vos outils existants en systèmes autonomes",heroSub2:"— pipelines de données autonomes, dashboards décisionnels et workflows LLM. Les équipes avec lesquelles je travaille réduisent systématiquement la charge opérationnelle de 60 à 85 % et recentrent leurs ressources sur les priorités stratégiques.",heroSub3:"Architecte IA · Automatisation · BI · 5+ ans CPG, SaaS & RSE.",
   xp:"ans d'XP",ctaContact:"Me contacter",ctaCV:"↓ Télécharger CV",
   liveCounter:"Heures de reporting économisées depuis que vous êtes sur cette page",
   metrics:[{n:'85',s:'%',l:'Gain capacité de traitement'},{n:'270',s:'%',l:'Efficacité pipeline boostée'},{n:'30',s:'+',l:'Workflows automatisés'},{n:'6',s:'mois',l:'Dept Analytics 0→1'}],
@@ -70,7 +68,7 @@ const T={en:{
   worldLabel:'Cliquez un pays →',countryClose:'FERMER',
   blogEyebrow:'Notes & Réflexions',blogTitle:'Ce que je pense',blogTitleEm:'tout haut.',blogDesc:"IA, automatisation et data — sans jargon inutile.",blogRead:'Lire →',blogReadTime:'min',blogClose:'FERMER',
   contactEyebrow:'Contact',contactTitle:"Construisons",contactTitleEm:"quelque chose de réel.",
-  contactCopyHint:'CLIQUER POUR COPIER',contactCopied:'✓ Copié !',contactLocation:'Localisation',contactPhone:'Téléphone',
+  contactCopyHint:'CLIQUER POUR COPIER',contactCopied:'✓ Copié !',contactLocation:'Localisation',
   contactH3:"Je suis sélectif sur ce que je construis ensuite.",contactP:"Si vous avez un problème data qui coûte vraiment — rapports manuels, pipelines cassés, zéro visibilité — je suis intéressé.<br/><br/>Si vous voulez des graphiques plus jolis, je vous oriente vers Canva.",
   contactStatus:'Disponible partout dans le monde · 2026',visitors:'visiteurs',
   footerKonami:"// Essayez le code Konami ↑↑↓↓←→←→BA",
@@ -90,7 +88,7 @@ const T={en:{
 const TH={en:{
   nav:['about','dashboard','pipeline','experience','projects','certificates','terminal','testimonials','blog','contact'],
   navLabels:{about:'Home',dashboard:'Proof',pipeline:'Demo',experience:'Journey',projects:'Results',certificates:'Certs',terminal:'Ask me',testimonials:'Reviews',blog:'Blog',contact:'Contact'},
-  heroSub1:"I deploy AI in your company",heroSub1b:"and automate everything that moves",heroSub2:"— so your teams stop wasting time on manual work and start making decisions that generate revenue. Finance, Sales, Supply, HR: every process becomes an autonomous system that maximizes your ROI.",heroSub3:"AI Transformation · Automation · BI · 5+ years CPG, SaaS & CSR.",heroSub4:"",
+  heroSub1:"I deploy AI in your company",heroSub1b:"and automate everything that moves",heroSub2:"— so your teams stop wasting time on manual work and start making decisions that generate revenue. Finance, Sales, Supply, HR: every process becomes an autonomous system that maximizes your ROI.",heroSub3:"AI Transformation · Automation · BI · 5+ years CPG, SaaS & CSR.",
   xp:"yrs experience",ctaContact:"Talk in 30 min",ctaCV:"↓ Download CV",
   liveCounter:"Hours of manual reporting done worldwide since you opened this page",
   metrics:[{n:'85',s:'%',l:'Reporting time saved'},{n:'30',s:'+',l:'Tasks automated'},{n:'6',s:'mo',l:'Analytics dept from zero'},{n:'4.2',s:'%',l:'AI forecast error'}],
@@ -113,7 +111,7 @@ const TH={en:{
   worldLabel:'Click a country →',countryClose:'CLOSE',
   blogEyebrow:'Thoughts',blogTitle:'What I think',blogTitleEm:'out loud.',blogDesc:"Automation, data and AI — no jargon.",blogRead:'Read →',blogReadTime:'min read',blogClose:'CLOSE',
   contactEyebrow:'Contact',contactTitle:"Let's solve",contactTitleEm:"something real.",
-  contactCopyHint:'CLICK TO COPY',contactCopied:'✓ Copied!',contactLocation:'Location',contactPhone:'Phone',
+  contactCopyHint:'CLICK TO COPY',contactCopied:'✓ Copied!',contactLocation:'Location',
   contactH3:"I'm selective about my next project.",contactP:"If you have a real problem — manual reports, broken processes, zero visibility — I'm interested.<br/><br/>If you just want prettier charts, I'll point you to Canva.",
   contactStatus:'Open to new projects · Worldwide · 2026',visitors:'visitors',
   footerKonami:"// Try the Konami code ↑↑↓↓←→←→BA",
@@ -130,7 +128,7 @@ const TH={en:{
 },fr:{
   nav:['about','dashboard','pipeline','experience','projects','certificates','terminal','testimonials','blog','contact'],
   navLabels:{about:'Accueil',dashboard:'Preuve',pipeline:'Démo',experience:'Parcours',projects:'Résultats',certificates:'Certifs',terminal:'Posez-moi',testimonials:'Avis',blog:'Blog',contact:'Contact'},
-  heroSub1:"Je déploie l'IA dans votre entreprise",heroSub1b:"et j'automatise tout ce qui bouge",heroSub2:"— pour que vos équipes arrêtent de perdre du temps sur du travail manuel et commencent à prendre des décisions qui génèrent du revenu. Finance, Sales, Supply, RH : chaque processus devient un système autonome qui maximise votre ROI.",heroSub3:"Transformation IA · Automatisation · BI · 5+ ans CPG, SaaS & RSE.",heroSub4:"",
+  heroSub1:"Je déploie l'IA dans votre entreprise",heroSub1b:"et j'automatise tout ce qui bouge",heroSub2:"— pour que vos équipes arrêtent de perdre du temps sur du travail manuel et commencent à prendre des décisions qui génèrent du revenu. Finance, Sales, Supply, RH : chaque processus devient un système autonome qui maximise votre ROI.",heroSub3:"Transformation IA · Automatisation · BI · 5+ ans CPG, SaaS & RSE.",
   xp:"ans d'expérience",ctaContact:"Parler en 30 min",ctaCV:"↓ Télécharger CV",
   liveCounter:"Heures de reporting manuel faites dans le monde depuis que vous êtes sur cette page",
   metrics:[{n:'85',s:'%',l:'Temps de reporting économisé'},{n:'30',s:'+',l:'Tâches automatisées'},{n:'6',s:'mois',l:'Dept analytics de zéro'},{n:'4,2',s:'%',l:'Taux erreur prévisions IA'}],
@@ -153,7 +151,7 @@ const TH={en:{
   worldLabel:'Cliquez un pays →',countryClose:'FERMER',
   blogEyebrow:'Réflexions',blogTitle:'Ce que je pense',blogTitleEm:'tout haut.',blogDesc:"Automatisation, data et IA — sans jargon.",blogRead:'Lire →',blogReadTime:'min',blogClose:'FERMER',
   contactEyebrow:'Contact',contactTitle:"Résolvons",contactTitleEm:"quelque chose de réel.",
-  contactCopyHint:'CLIQUER POUR COPIER',contactCopied:'✓ Copié !',contactLocation:'Localisation',contactPhone:'Téléphone',
+  contactCopyHint:'CLIQUER POUR COPIER',contactCopied:'✓ Copié !',contactLocation:'Localisation',
   contactH3:"Je suis sélectif sur mon prochain projet.",contactP:"Si vous avez un problème réel — rapports manuels, processus cassés, zéro visibilité — je suis intéressé.<br/><br/>Si vous voulez juste des graphiques plus jolis, je vous oriente vers Canva.",
   contactStatus:'Disponible partout dans le monde · 2026',visitors:'visiteurs',
   footerKonami:"// Essayez le code Konami ↑↑↓↓←→←→BA",
@@ -1420,10 +1418,10 @@ function VisitorMap({lang,mode}){
     // Past locations (real historical visitors from worker)
     pastLocations.forEach(v=>{
       if(!v.lat||!v.lon)return;
-      const pastIcon=L.divIcon({className:'',html:`<div style="width:8px;height:8px;border-radius:50%;background:${isHuman?'#415a77':'#415a77'};opacity:0.7;box-shadow:0 0 8px ${isHuman?'#415a77':'#415a77'};"></div>`,iconSize:[8,8],iconAnchor:[4,4]});
+      const pastIcon=L.divIcon({className:'',html:`<div style="width:8px;height:8px;border-radius:50%;background:#415a77;opacity:0.7;box-shadow:0 0 8px #415a77;"></div>`,iconSize:[8,8],iconAnchor:[4,4]});
       const m=L.marker([v.lat,v.lon],{icon:pastIcon,zIndexOffset:0});
       const flag=v.cc?`<img src="https://flagcdn.com/16x12/${v.cc.toLowerCase()}.png" style="margin-right:5px;vertical-align:middle;border-radius:2px"/>`:'';
-      m.bindPopup(`<div style="min-width:110px;font-family:sans-serif">${flag}<strong>${v.city||v.country||'?'}</strong><br/><span style="color:${isHuman?'#415a77':'#415a77'};font-size:10px">${lang==='fr'?'Visiteur passé':'Past visitor'}</span></div>`);
+      m.bindPopup(`<div style="min-width:110px;font-family:sans-serif">${flag}<strong>${v.city||v.country||'?'}</strong><br/><span style="color:#415a77;font-size:10px">${lang==='fr'?'Visiteur passé':'Past visitor'}</span></div>`);
       markersLayer.current.addLayer(m);
     });
 
@@ -2150,7 +2148,7 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
               </h1>
             </div>
           </div>
-          <p className="hero-sub">{t.heroSub1} <span>{t.heroSub1b}</span> {t.heroSub2}<br/>{t.heroSub3}<br/>{t.heroSub4}</p>
+          <p className="hero-sub">{t.heroSub1} <span>{t.heroSub1b}</span> {t.heroSub2}<br/>{t.heroSub3}</p>
           <span className="xp-badge-inline">⚡ {years.toFixed(1)} {t.xp}</span>
           <div className="typewriter-row" style={{marginTop:'14px'}}><span className="prompt">{'>'}</span>{typed}<span className="t-cursor"/></div>
           <div className="hero-ctas">

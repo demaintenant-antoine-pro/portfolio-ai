@@ -25,12 +25,10 @@ const T = {
       blog: 'Blog',
       contact: 'Contact'
     },
-    badge: '🟢 Available worldwide · France · Dubai · Canada · Singapore · Remote',
     heroSub1: "I architect end-to-end AI transformation",
     heroSub1b: "integrating your existing tools into autonomous systems",
     heroSub2: "— autonomous data pipelines, executive-grade decision dashboards, and LLM-powered workflows. Teams I work with consistently reduce manual overhead by 60–85% and shift capacity toward strategic priorities.",
     heroSub3: "AI Architect · Automation · BI · 5+ yrs CPG, SaaS & CSR.",
-    heroSub4: "",
     xp: "yrs XP",
     ctaContact: "Get in Touch",
     ctaCV: "↓ Download CV",
@@ -108,7 +106,6 @@ const T = {
     contactCopyHint: 'CLICK TO COPY',
     contactCopied: '✓ Copied!',
     contactLocation: 'Location',
-    contactPhone: 'Phone',
     contactH3: "I'm selective about what I build next.",
     contactP: "If you have a data problem costing real money — manual reports, broken pipelines, zero visibility — I'm interested.<br/><br/>If you want charts to be prettier, I'll politely refer you to Canva.",
     contactStatus: 'Open to new missions · Worldwide · 2026',
@@ -158,12 +155,10 @@ const T = {
       blog: 'Blog',
       contact: 'Contact'
     },
-    badge: '🟢 Disponible partout · France · Dubai · Canada · Singapour · Remote',
     heroSub1: "Je pilote la transformation IA de bout en bout",
     heroSub1b: "en intégrant vos outils existants en systèmes autonomes",
     heroSub2: "— pipelines de données autonomes, dashboards décisionnels et workflows LLM. Les équipes avec lesquelles je travaille réduisent systématiquement la charge opérationnelle de 60 à 85 % et recentrent leurs ressources sur les priorités stratégiques.",
     heroSub3: "Architecte IA · Automatisation · BI · 5+ ans CPG, SaaS & RSE.",
-    heroSub4: "",
     xp: "ans d'XP",
     ctaContact: "Me contacter",
     ctaCV: "↓ Télécharger CV",
@@ -241,7 +236,6 @@ const T = {
     contactCopyHint: 'CLIQUER POUR COPIER',
     contactCopied: '✓ Copié !',
     contactLocation: 'Localisation',
-    contactPhone: 'Téléphone',
     contactH3: "Je suis sélectif sur ce que je construis ensuite.",
     contactP: "Si vous avez un problème data qui coûte vraiment — rapports manuels, pipelines cassés, zéro visibilité — je suis intéressé.<br/><br/>Si vous voulez des graphiques plus jolis, je vous oriente vers Canva.",
     contactStatus: 'Disponible partout dans le monde · 2026',
@@ -298,7 +292,6 @@ const TH = {
     heroSub1b: "and automate everything that moves",
     heroSub2: "— so your teams stop wasting time on manual work and start making decisions that generate revenue. Finance, Sales, Supply, HR: every process becomes an autonomous system that maximizes your ROI.",
     heroSub3: "AI Transformation · Automation · BI · 5+ years CPG, SaaS & CSR.",
-    heroSub4: "",
     xp: "yrs experience",
     ctaContact: "Talk in 30 min",
     ctaCV: "↓ Download CV",
@@ -376,7 +369,6 @@ const TH = {
     contactCopyHint: 'CLICK TO COPY',
     contactCopied: '✓ Copied!',
     contactLocation: 'Location',
-    contactPhone: 'Phone',
     contactH3: "I'm selective about my next project.",
     contactP: "If you have a real problem — manual reports, broken processes, zero visibility — I'm interested.<br/><br/>If you just want prettier charts, I'll point you to Canva.",
     contactStatus: 'Open to new projects · Worldwide · 2026',
@@ -429,7 +421,6 @@ const TH = {
     heroSub1b: "et j'automatise tout ce qui bouge",
     heroSub2: "— pour que vos équipes arrêtent de perdre du temps sur du travail manuel et commencent à prendre des décisions qui génèrent du revenu. Finance, Sales, Supply, RH : chaque processus devient un système autonome qui maximise votre ROI.",
     heroSub3: "Transformation IA · Automatisation · BI · 5+ ans CPG, SaaS & RSE.",
-    heroSub4: "",
     xp: "ans d'expérience",
     ctaContact: "Parler en 30 min",
     ctaCV: "↓ Télécharger CV",
@@ -507,7 +498,6 @@ const TH = {
     contactCopyHint: 'CLIQUER POUR COPIER',
     contactCopied: '✓ Copié !',
     contactLocation: 'Localisation',
-    contactPhone: 'Téléphone',
     contactH3: "Je suis sélectif sur mon prochain projet.",
     contactP: "Si vous avez un problème réel — rapports manuels, processus cassés, zéro visibilité — je suis intéressé.<br/><br/>Si vous voulez juste des graphiques plus jolis, je vous oriente vers Canva.",
     contactStatus: 'Disponible partout dans le monde · 2026',
@@ -4632,7 +4622,7 @@ function VisitorMap({
       if (!v.lat || !v.lon) return;
       const pastIcon = L.divIcon({
         className: '',
-        html: `<div style="width:8px;height:8px;border-radius:50%;background:${isHuman ? '#415a77' : '#415a77'};opacity:0.7;box-shadow:0 0 8px ${isHuman ? '#415a77' : '#415a77'};"></div>`,
+        html: `<div style="width:8px;height:8px;border-radius:50%;background:#415a77;opacity:0.7;box-shadow:0 0 8px #415a77;"></div>`,
         iconSize: [8, 8],
         iconAnchor: [4, 4]
       });
@@ -4641,7 +4631,7 @@ function VisitorMap({
         zIndexOffset: 0
       });
       const flag = v.cc ? `<img src="https://flagcdn.com/16x12/${v.cc.toLowerCase()}.png" style="margin-right:5px;vertical-align:middle;border-radius:2px"/>` : '';
-      m.bindPopup(`<div style="min-width:110px;font-family:sans-serif">${flag}<strong>${v.city || v.country || '?'}</strong><br/><span style="color:${isHuman ? '#415a77' : '#415a77'};font-size:10px">${lang === 'fr' ? 'Visiteur passé' : 'Past visitor'}</span></div>`);
+      m.bindPopup(`<div style="min-width:110px;font-family:sans-serif">${flag}<strong>${v.city || v.country || '?'}</strong><br/><span style="color:#415a77;font-size:10px">${lang === 'fr' ? 'Visiteur passé' : 'Past visitor'}</span></div>`);
       markersLayer.current.addLayer(m);
     });
 
@@ -6340,7 +6330,7 @@ function PortfolioApp({
     className: "outline"
   }, "MAINTENANT")))), /*#__PURE__*/React.createElement("p", {
     className: "hero-sub"
-  }, t.heroSub1, " ", /*#__PURE__*/React.createElement("span", null, t.heroSub1b), " ", t.heroSub2, /*#__PURE__*/React.createElement("br", null), t.heroSub3, /*#__PURE__*/React.createElement("br", null), t.heroSub4), /*#__PURE__*/React.createElement("span", {
+  }, t.heroSub1, " ", /*#__PURE__*/React.createElement("span", null, t.heroSub1b), " ", t.heroSub2, /*#__PURE__*/React.createElement("br", null), t.heroSub3), /*#__PURE__*/React.createElement("span", {
     className: "xp-badge-inline"
   }, "\u26A1 ", years.toFixed(1), " ", t.xp), /*#__PURE__*/React.createElement("div", {
     className: "typewriter-row",
