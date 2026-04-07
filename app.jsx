@@ -256,6 +256,10 @@ const TESTIMONIALS = [
     avatar: 'GM',
     color: '#6366F1',
     stars: 5,
+    highlight: {
+      en: "Reliable, structured, and always solution-oriented — someone you can trust to deliver in demanding environments.",
+      fr: "Fiable, structuré et toujours orienté solutions — quelqu'un sur qui on peut compter dans les environnements exigeants.",
+    },
     q: {
       en: "I had the pleasure of working with Antoine and can confidently say he stands out for both his professionalism and forward-thinking mindset. Antoine combines strong execution capabilities with an ability to quickly grasp complex topics and turn them into actionable solutions. He has a sharp sense of priorities, consistently focusing on what truly drives impact while maintaining a high level of quality in his work. What particularly differentiates him is his natural curiosity and his ability to leverage AI and emerging technologies in a pragmatic and value-driven way. He stays on top of trends and integrates them intelligently into his approach. Reliable, structured, and always solution-oriented, Antoine is someone you can trust to deliver in demanding environments while continuously pushing boundaries. I would highly recommend Antoine to any organization looking for a talented and forward-looking professional.",
       fr: "J'ai eu le plaisir de travailler avec Antoine et je peux dire avec confiance qu'il se distingue par son professionnalisme et son état d'esprit tourné vers l'avenir. Antoine combine de solides capacités d'exécution avec une aptitude à saisir rapidement des sujets complexes et à les transformer en solutions concrètes. Il a un sens aigu des priorités, se concentrant toujours sur ce qui génère un impact réel tout en maintenant un haut niveau de qualité. Ce qui le différencie particulièrement, c'est sa curiosité naturelle et sa capacité à exploiter l'IA et les technologies émergentes de manière pragmatique et orientée valeur. Fiable, structuré et toujours orienté solutions, Antoine est quelqu'un sur qui on peut compter pour délivrer dans des environnements exigeants. Je recommande vivement Antoine à toute organisation à la recherche d'un professionnel talentueux et tourné vers l'avenir.",
@@ -277,6 +281,10 @@ const TESTIMONIALS = [
     avatar: 'AA',
     color: '#F97316',
     stars: 5,
+    highlight: {
+      en: "Tasks that could take weeks or months, Antoine manages to solve within minutes.",
+      fr: "Des tâches qui pourraient prendre des semaines ou des mois, Antoine les résout en quelques minutes.",
+    },
     q: {
       en: "I've had the pleasure of working with Antoine for the past two years at NAOS, where he has been our go-to expert for BI and AI. His ability to navigate complex data collection, analysis, reporting, and deliver sharp market insights is truly impressive. Tasks that could easily take weeks or even months, Antoine manages to solve within minutes. Beyond his technical expertise, Antoine is an easygoing colleague who consistently brings energy and fun to the workplace. He is always willing to go above and beyond to support his teammates and help the team succeed. I highly recommend Antoine to any team that enjoys tackling challenges and confidently navigating uncertainty.",
       fr: "J'ai eu le plaisir de travailler avec Antoine pendant deux ans chez NAOS, où il a été notre expert référent en BI et IA. Sa capacité à gérer des collectes de données complexes, des analyses, du reporting et à délivrer des insights marché précis est vraiment impressionnante. Des tâches qui pourraient prendre des semaines voire des mois, Antoine les résout en quelques minutes. Au-delà de son expertise technique, Antoine est un collègue sympathique qui apporte constamment énergie et bonne humeur. Il est toujours prêt à aller plus loin pour soutenir ses coéquipiers. Je recommande vivement Antoine à toute équipe qui aime relever des défis et naviguer dans l'incertitude avec confiance.",
@@ -295,6 +303,10 @@ const TESTIMONIALS = [
     avatar: 'TM',
     color: '#38BDF8',
     stars: 5,
+    highlight: {
+      en: "A serious, operational profile I recommend for any role at the intersection of AI and data.",
+      fr: "Un profil sérieux et opérationnel, que je recommande pour tout rôle à l'intersection de l'IA et de la donnée.",
+    },
     q: {
       en: "I worked with Antoine on AI and Business Intelligence topics, and he notably supported me during my onboarding at NAOS, which made a real difference in quickly getting up to speed. What defines him: a genuine ability to implement concrete solutions — workflow automation, LLM integration, automated reporting — with a solid grasp of the business stakes behind them. His strengths: strong applied AI expertise with the ability to identify the right use cases and deploy them effectively, deep know-how in automation via n8n, Power Automate and Python, and a real talent for bringing teams along in adopting new tools. A serious, operational profile I recommend for any role at the intersection of AI and data.",
       fr: "J'ai travaillé avec Antoine sur des sujets IA et Business Intelligence, et il m'a notamment accompagné lors de mon intégration chez NAOS, ce qui a fait une vraie différence dans ma prise en main rapide des sujets. Ce qui le caractérise : une capacité réelle à implémenter des solutions concrètes, automatisation de workflows, intégration de LLMs, reporting automatisé, avec une bonne compréhension des enjeux business derrière. Ses points forts : une maîtrise solide de l'IA appliquée avec une capacité à identifier les bons cas d'usage et les déployer efficacement, une expertise en automatisation via n8n, Power Automate et Python, et une vraie pédagogie pour embarquer les équipes dans l'adoption des nouveaux outils. Un profil sérieux et opérationnel, que je recommande pour tout rôle à l'intersection de l'IA et de la donnée.",
@@ -313,6 +325,10 @@ const TESTIMONIALS = [
     avatar: 'RB',
     color: '#415a77',
     stars: 5,
+    highlight: {
+      en: "He constantly seeks to optimise his work and doesn't hesitate to be proactive.",
+      fr: "Il est en constante volonté d'optimiser ses fonctions et n'hésite pas à être force de proposition.",
+    },
     q: {
       en: "Antoine is a conscientious and resourceful person: beyond his assignments and established processes, he constantly seeks to optimise his work and doesn't hesitate to be proactive. I also highlight his strong analytical capacity to find solutions and build action plans that allow him to be highly autonomous across many areas. On a human level, he is deeply empathetic and driven — sociable and cheerful, he's a force behind great team cohesion.",
       fr: "Antoine est une personne consciencieuse et astucieuse : au delà de ses missions et du respect des process établis, il est en constante volonté d'optimiser ses fonctions et n'hésite pas à être force de proposition. De plus, je souligne sa grande capacité d'analyse à trouver des solutions et aboutir à des plans d'action qui lui permettent d'être très autonome. Sur un aspect plus humain, c'est une personne profondément empathique et volontaire. Sociable et jovial, il est moteur dans la création d'une bonne cohésion d'équipe !",
@@ -331,6 +347,10 @@ const TESTIMONIALS = [
     avatar: 'TB',
     color: '#FF2D78',
     stars: 5,
+    highlight: {
+      en: "He's someone who succeeds in everything he undertakes — and he undertakes a lot — through determination, drive and a touch of talent.",
+      fr: "C'est une personne qui réussit ce qu'elle entreprend (et elle entreprend beaucoup) grâce à sa détermination et son envie de réussir.",
+    },
     q: {
       en: "Having worked closely with Antoine, I was struck by his energy. He's someone who succeeds in everything he undertakes — and he undertakes a lot — through determination, drive and a touch of talent. I worked with him on commercial missions: lead sourcing with SalesNav, hunting major accounts (TotalEnergie, Dior, Tod's...), software demos and deal closing. He performed on all fronts. Day to day, Antoine is a natural leader. He drives a team, inspires performance, and his interpersonal skills make internal communication effortless. I can only recommend Antoine.",
       fr: "Ayant travaillé étroitement avec Antoine, j'ai été frappé par son énergie. C'est une personne qui réussit ce qu'elle entreprend (et elle entreprend beaucoup) grâce à sa détermination, son envie de réussir et une touche de talent. Je l'ai cotoyé sur des missions commerciales : sourcing de lead avec SalesNav, chasse grands comptes (TotalEnergie, Dior, Tod's...), démo et closing. Performant sur tous les fronts. Au quotidien, Antoine est naturellement un leader. Il sait driver une équipe, donne envie de performer et ses qualités relationnelles rendent les communications internes très fluides. Je ne peux que le recommander.",
@@ -352,6 +372,10 @@ const TESTIMONIALS = [
     avatar: 'MC',
     color: '#00F0A8',
     stars: 5,
+    highlight: {
+      en: "Antoine has an ability to quickly grasp business stakes and market dynamics, anticipate needs, and show proactivity.",
+      fr: "Antoine a une aptitude à comprendre rapidement les enjeux de l'entreprise, à anticiper les besoins et à faire preuve de proactivité.",
+    },
     q: {
       en: "Antoine has an ability to quickly grasp business stakes and market dynamics, anticipate needs, and show proactivity in his missions — always pushing into new verticals. He demonstrates great professionalism, giving his time freely to help colleagues. Antoine is invested, reliable, genuinely pleasant and always in good spirits — someone with real human qualities. It was a genuine pleasure working closely with him, and I recommend him wholeheartedly.",
       fr: "Antoine a une aptitude à comprendre rapidement les enjeux de l'entreprise et de son marché, à anticiper les besoins, et à faire preuve de proactivité dans ses missions, pour sans cesse aller démarcher de nouvelles verticales. Il fait preuve d'un grand professionnalisme, n'hésitant pas à donner de sa personne et de son temps pour aider ses collègues. Antoine est une personne investie, sur qui on peut compter, très agréable et sympathique, toujours de bonne humeur. C'était un réel plaisir de travailler en étroite collaboration avec lui et je le recommande vivement !",
@@ -1898,6 +1922,7 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
   const [activeCountry,setActiveCountry]=useState(null);
   const [soundOn,setSoundOn]=useState(false);
   const [showCalendly,setShowCalendly]=useState(false);
+  const [testiModal,setTestiModal]=useState(null);
   const [typed,setTyped]=useState('');
   const [lineIdx,setLineIdx]=useState(0);
   const [charIdx,setCharIdx]=useState(0);
@@ -2295,29 +2320,54 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
         <h2 className="section-title">{t.testiTitle} <em>{t.testiTitleEm}</em></h2>
         <div className="testi-grid reveal">
           {TESTIMONIALS.map((item,i)=>(
-            <div key={i} className="testi-card">
-              <div className="testi-stars">{'★'.repeat(item.stars)}</div>
-              <div className="testi-quote">"{item.q[lang]}"</div>
-              <div className="testi-author">
-                <div className="testi-avatar" style={{background:item.color+'22',borderColor:item.color,border:'1.5px solid',padding:0,overflow:'hidden'}}>
-                  {item.photo
-                    ?<img src={item.photo} alt={item.name} style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
-                    :<span style={{color:item.color,fontWeight:700,fontSize:'.6rem'}}>{item.avatar}</span>
-                  }
+            <div key={i} className="testi-card-v2" style={{'--tcard-color':item.color}}>
+              <div className="tcard-header">
+                <div className="tcard-avatar">
+                  <img src={item.avatarImg} alt={item.name}
+                    onError={e=>{e.target.style.display='none';e.target.nextSibling.style.display='flex';}}
+                  />
+                  <span style={{display:'none',color:item.color,fontWeight:700,fontSize:'.65rem'}}>{item.avatar}</span>
                 </div>
-                <div>
-                  <div className="testi-name">{item.name}</div>
-                  <div className="testi-role">{item.title[lang]} · <span style={{color:'#415a77'}}>{item.company}</span></div>
-                  <div style={{fontFamily:"'Space Mono',monospace",fontSize:'.4rem',color:'var(--text-mute)',letterSpacing:'1px',marginTop:'3px'}}>{item.date[lang]}</div>
-                  <a href={item.linkedin} target="_blank" rel="noopener noreferrer" style={{fontFamily:"'Space Mono',monospace",fontSize:'.4rem',color:'var(--accent3)',letterSpacing:'1px',marginTop:'4px',display:'inline-flex',alignItems:'center',gap:'4px',textDecoration:'none'}}>
-                    <span>🔗</span> LinkedIn
-                  </a>
+                <div className="tcard-meta">
+                  <div className="tcard-name">{item.name}</div>
+                  <div className="tcard-role">{item.title[lang]}</div>
+                  <div className="tcard-company">{item.company}</div>
                 </div>
+                <a href={item.linkedin} target="_blank" rel="noopener noreferrer" className="tcard-li">in</a>
               </div>
+              <div className="tcard-stars">{'★'.repeat(item.stars)}</div>
+              <div className="tcard-excerpt">"{item.highlight[lang]}"</div>
+              <button className="tcard-read" onClick={()=>setTestiModal(item)}>
+                {lang==='fr'?'Lire tout →':'Read full →'}
+              </button>
             </div>
           ))}
         </div>
       </div>
+      {testiModal&&(
+        <div className="testi-modal-bg" onClick={()=>setTestiModal(null)}>
+          <div className="testi-modal" onClick={e=>e.stopPropagation()} style={{'--tcard-color':testiModal.color}}>
+            <button className="testi-modal-close" onClick={()=>setTestiModal(null)}>✕</button>
+            <div className="tcard-header" style={{marginBottom:20}}>
+              <div className="tcard-avatar tcard-avatar-lg">
+                <img src={testiModal.avatarImg} alt={testiModal.name}
+                  onError={e=>{e.target.style.display='none';e.target.nextSibling.style.display='flex';}}
+                />
+                <span style={{display:'none',color:testiModal.color,fontWeight:700,fontSize:'.85rem'}}>{testiModal.avatar}</span>
+              </div>
+              <div className="tcard-meta">
+                <div className="tcard-name" style={{fontSize:'1rem'}}>{testiModal.name}</div>
+                <div className="tcard-role">{testiModal.title[lang]}</div>
+                <div className="tcard-company">{testiModal.company}</div>
+                <div className="tcard-date">{testiModal.date[lang]}</div>
+              </div>
+              <a href={testiModal.linkedin} target="_blank" rel="noopener noreferrer" className="tcard-li">in</a>
+            </div>
+            <div className="tcard-stars" style={{marginBottom:16}}>{'★'.repeat(testiModal.stars)}</div>
+            <div className="testi-modal-quote">"{testiModal.q[lang]}"</div>
+          </div>
+        </div>
+      )}
     </section>
 
     {/* CERTIFICATES */}

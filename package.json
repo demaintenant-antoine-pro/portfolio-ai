@@ -1,0 +1,30 @@
+{
+  "name": "portfolio-ai",
+  "version": "1.0.0",
+  "description": "**Live:** [demaintenant-antoine-pro.github.io/portfolio-ai](https://demaintenant-antoine-pro.github.io/portfolio-ai)",
+  "main": "main.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/demaintenant-antoine-pro/portfolio-ai.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/demaintenant-antoine-pro/portfolio-ai/issues"
+  },
+  "homepage": "https://github.com/demaintenant-antoine-pro/portfolio-ai#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.28.6",
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.2",
+    "@babel/preset-react": "^7.28.5"
+  }
+}

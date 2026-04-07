@@ -1,15 +1,37 @@
-const {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  createContext,
-  useContext
-} = React;
-const LangCtx = createContext('en');
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorValues(e) { if (null != e) { var t = e["function" == typeof Symbol && Symbol.iterator || "@@iterator"], r = 0; if (t) return t.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) return { next: function next() { return e && r >= e.length && (e = void 0), { value: e && e[r++], done: !e }; } }; } throw new TypeError(_typeof(e) + " is not iterable"); }
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+var _React = React,
+  useState = _React.useState,
+  useEffect = _React.useEffect,
+  useRef = _React.useRef,
+  useCallback = _React.useCallback,
+  createContext = _React.createContext,
+  useContext = _React.useContext;
+var LangCtx = createContext('en');
 
 /* ─── TRANSLATIONS ────────────────────────────────────────────────────────── */
-const T = {
+var T = {
   en: {
     nav: ['about', 'dashboard', 'pipeline', 'experience', 'projects', 'stack', 'certificates', 'terminal', 'testimonials', 'blog', 'contact'],
     navLabels: {
@@ -273,7 +295,7 @@ const T = {
 };
 
 /* ─── HUMAN TEXTS — même structure que T, langage simple sans jargon ──────── */
-const TH = {
+var TH = {
   en: {
     nav: ['about', 'dashboard', 'pipeline', 'experience', 'projects', 'certificates', 'terminal', 'testimonials', 'blog', 'contact'],
     navLabels: {
@@ -288,9 +310,9 @@ const TH = {
       blog: 'Blog',
       contact: 'Contact'
     },
-    heroSub1: "I deploy AI in your company",
-    heroSub1b: "and automate everything that moves",
-    heroSub2: "— so your teams stop wasting time on manual work and start making decisions that generate revenue. Finance, Sales, Supply, HR: every process becomes an autonomous system that maximizes your ROI.",
+    heroSub1: "I integrate AI into your existing operations",
+    heroSub1b: "connecting your tools, automating your workflows",
+    heroSub2: "— enabling your teams to focus on decisions that drive revenue. Across Finance, Sales, Supply Chain and HR, I turn manual processes into autonomous systems that deliver measurable results.",
     heroSub3: "AI Transformation · Automation · BI · 5+ years CPG, SaaS & CSR.",
     xp: "yrs experience",
     ctaContact: "Talk in 30 min",
@@ -417,9 +439,9 @@ const TH = {
       blog: 'Blog',
       contact: 'Contact'
     },
-    heroSub1: "Je déploie l'IA dans votre entreprise",
-    heroSub1b: "et j'automatise tout ce qui bouge",
-    heroSub2: "— pour que vos équipes arrêtent de perdre du temps sur du travail manuel et commencent à prendre des décisions qui génèrent du revenu. Finance, Sales, Supply, RH : chaque processus devient un système autonome qui maximise votre ROI.",
+    heroSub1: "J'intègre l'IA dans vos opérations existantes",
+    heroSub1b: "en connectant vos outils et automatisant vos processus",
+    heroSub2: "— pour permettre à vos équipes de se concentrer sur les décisions à valeur ajoutée. Finance, Sales, Supply Chain, RH : je transforme le travail manuel en systèmes autonomes qui délivrent des résultats mesurables.",
     heroSub3: "Transformation IA · Automatisation · BI · 5+ ans CPG, SaaS & RSE.",
     xp: "ans d'expérience",
     ctaContact: "Parler en 30 min",
@@ -535,7 +557,7 @@ const TH = {
 };
 
 /* ─── RECRUITER PROFILES ────────────────────────────────────────────────────── */
-const RECRUITER_PROFILES = {
+var RECRUITER_PROFILES = {
   executive: {
     en: {
       title: 'Optimized for Executive View',
@@ -587,7 +609,7 @@ const RECRUITER_PROFILES = {
 };
 
 /* ─── DATA ────────────────────────────────────────────────────────────────── */
-const EXPERIENCES = {
+var EXPERIENCES = {
   en: [{
     id: 0,
     date: "Jun 2025 – Present",
@@ -663,7 +685,7 @@ const EXPERIENCES = {
     tags: ["Python", "NLP", "ML", "Power BI", "B2B"]
   }]
 };
-const SKILLS = {
+var SKILLS = {
   en: [{
     icon: "📊",
     name: "Power BI",
@@ -727,7 +749,7 @@ const SKILLS = {
     pct: 92
   }]
 };
-const RADAR_DATA = {
+var RADAR_DATA = {
   en: {
     labels: ['BI & Analytics', 'AI / Automation', 'Supply & Ops', 'Data Engineering', 'Sales / Finance', 'Communication'],
     data: [95, 90, 80, 78, 85, 82],
@@ -787,7 +809,7 @@ const RADAR_DATA = {
     }]
   }
 };
-const STACK = [{
+var STACK = [{
   name: 'Power BI',
   cat: 'BI & Analytics',
   level: 'EXPERT',
@@ -848,7 +870,7 @@ const STACK = [{
   level: 'ADVANCED',
   e: '📝'
 }];
-const PIPELINE_STAGES_DEF = {
+var PIPELINE_STAGES_DEF = {
   en: [{
     id: 'src',
     icon: '🗄️',
@@ -912,8 +934,8 @@ const PIPELINE_STAGES_DEF = {
     detail: 'Slack+Mail'
   }]
 };
-const CORRECT_ORDER = ['src', 'ing', 'cln', 'mdl', 'bi', 'ntf'];
-const TESTIMONIALS = [{
+var CORRECT_ORDER = ['src', 'ing', 'cln', 'mdl', 'bi', 'ntf'];
+var TESTIMONIALS = [{
   name: 'Guillaume Martin',
   title: {
     en: 'Finance Director',
@@ -929,6 +951,10 @@ const TESTIMONIALS = [{
   avatar: 'GM',
   color: '#6366F1',
   stars: 5,
+  highlight: {
+    en: "Reliable, structured, and always solution-oriented — someone you can trust to deliver in demanding environments.",
+    fr: "Fiable, structuré et toujours orienté solutions — quelqu'un sur qui on peut compter dans les environnements exigeants."
+  },
   q: {
     en: "I had the pleasure of working with Antoine and can confidently say he stands out for both his professionalism and forward-thinking mindset. Antoine combines strong execution capabilities with an ability to quickly grasp complex topics and turn them into actionable solutions. He has a sharp sense of priorities, consistently focusing on what truly drives impact while maintaining a high level of quality in his work. What particularly differentiates him is his natural curiosity and his ability to leverage AI and emerging technologies in a pragmatic and value-driven way. He stays on top of trends and integrates them intelligently into his approach. Reliable, structured, and always solution-oriented, Antoine is someone you can trust to deliver in demanding environments while continuously pushing boundaries. I would highly recommend Antoine to any organization looking for a talented and forward-looking professional.",
     fr: "J'ai eu le plaisir de travailler avec Antoine et je peux dire avec confiance qu'il se distingue par son professionnalisme et son état d'esprit tourné vers l'avenir. Antoine combine de solides capacités d'exécution avec une aptitude à saisir rapidement des sujets complexes et à les transformer en solutions concrètes. Il a un sens aigu des priorités, se concentrant toujours sur ce qui génère un impact réel tout en maintenant un haut niveau de qualité. Ce qui le différencie particulièrement, c'est sa curiosité naturelle et sa capacité à exploiter l'IA et les technologies émergentes de manière pragmatique et orientée valeur. Fiable, structuré et toujours orienté solutions, Antoine est quelqu'un sur qui on peut compter pour délivrer dans des environnements exigeants. Je recommande vivement Antoine à toute organisation à la recherche d'un professionnel talentueux et tourné vers l'avenir."
@@ -949,6 +975,10 @@ const TESTIMONIALS = [{
   avatar: 'AA',
   color: '#F97316',
   stars: 5,
+  highlight: {
+    en: "Tasks that could take weeks or months, Antoine manages to solve within minutes.",
+    fr: "Des tâches qui pourraient prendre des semaines ou des mois, Antoine les résout en quelques minutes."
+  },
   q: {
     en: "I've had the pleasure of working with Antoine for the past two years at NAOS, where he has been our go-to expert for BI and AI. His ability to navigate complex data collection, analysis, reporting, and deliver sharp market insights is truly impressive. Tasks that could easily take weeks or even months, Antoine manages to solve within minutes. Beyond his technical expertise, Antoine is an easygoing colleague who consistently brings energy and fun to the workplace. He is always willing to go above and beyond to support his teammates and help the team succeed. I highly recommend Antoine to any team that enjoys tackling challenges and confidently navigating uncertainty.",
     fr: "J'ai eu le plaisir de travailler avec Antoine pendant deux ans chez NAOS, où il a été notre expert référent en BI et IA. Sa capacité à gérer des collectes de données complexes, des analyses, du reporting et à délivrer des insights marché précis est vraiment impressionnante. Des tâches qui pourraient prendre des semaines voire des mois, Antoine les résout en quelques minutes. Au-delà de son expertise technique, Antoine est un collègue sympathique qui apporte constamment énergie et bonne humeur. Il est toujours prêt à aller plus loin pour soutenir ses coéquipiers. Je recommande vivement Antoine à toute équipe qui aime relever des défis et naviguer dans l'incertitude avec confiance."
@@ -969,6 +999,10 @@ const TESTIMONIALS = [{
   avatar: 'TM',
   color: '#38BDF8',
   stars: 5,
+  highlight: {
+    en: "A serious, operational profile I recommend for any role at the intersection of AI and data.",
+    fr: "Un profil sérieux et opérationnel, que je recommande pour tout rôle à l'intersection de l'IA et de la donnée."
+  },
   q: {
     en: "I worked with Antoine on AI and Business Intelligence topics, and he notably supported me during my onboarding at NAOS, which made a real difference in quickly getting up to speed. What defines him: a genuine ability to implement concrete solutions — workflow automation, LLM integration, automated reporting — with a solid grasp of the business stakes behind them. His strengths: strong applied AI expertise with the ability to identify the right use cases and deploy them effectively, deep know-how in automation via n8n, Power Automate and Python, and a real talent for bringing teams along in adopting new tools. A serious, operational profile I recommend for any role at the intersection of AI and data.",
     fr: "J'ai travaillé avec Antoine sur des sujets IA et Business Intelligence, et il m'a notamment accompagné lors de mon intégration chez NAOS, ce qui a fait une vraie différence dans ma prise en main rapide des sujets. Ce qui le caractérise : une capacité réelle à implémenter des solutions concrètes, automatisation de workflows, intégration de LLMs, reporting automatisé, avec une bonne compréhension des enjeux business derrière. Ses points forts : une maîtrise solide de l'IA appliquée avec une capacité à identifier les bons cas d'usage et les déployer efficacement, une expertise en automatisation via n8n, Power Automate et Python, et une vraie pédagogie pour embarquer les équipes dans l'adoption des nouveaux outils. Un profil sérieux et opérationnel, que je recommande pour tout rôle à l'intersection de l'IA et de la donnée."
@@ -989,6 +1023,10 @@ const TESTIMONIALS = [{
   avatar: 'RB',
   color: '#415a77',
   stars: 5,
+  highlight: {
+    en: "He constantly seeks to optimise his work and doesn't hesitate to be proactive.",
+    fr: "Il est en constante volonté d'optimiser ses fonctions et n'hésite pas à être force de proposition."
+  },
   q: {
     en: "Antoine is a conscientious and resourceful person: beyond his assignments and established processes, he constantly seeks to optimise his work and doesn't hesitate to be proactive. I also highlight his strong analytical capacity to find solutions and build action plans that allow him to be highly autonomous across many areas. On a human level, he is deeply empathetic and driven — sociable and cheerful, he's a force behind great team cohesion.",
     fr: "Antoine est une personne consciencieuse et astucieuse : au delà de ses missions et du respect des process établis, il est en constante volonté d'optimiser ses fonctions et n'hésite pas à être force de proposition. De plus, je souligne sa grande capacité d'analyse à trouver des solutions et aboutir à des plans d'action qui lui permettent d'être très autonome. Sur un aspect plus humain, c'est une personne profondément empathique et volontaire. Sociable et jovial, il est moteur dans la création d'une bonne cohésion d'équipe !"
@@ -1009,6 +1047,10 @@ const TESTIMONIALS = [{
   avatar: 'TB',
   color: '#FF2D78',
   stars: 5,
+  highlight: {
+    en: "He's someone who succeeds in everything he undertakes — and he undertakes a lot — through determination, drive and a touch of talent.",
+    fr: "C'est une personne qui réussit ce qu'elle entreprend (et elle entreprend beaucoup) grâce à sa détermination et son envie de réussir."
+  },
   q: {
     en: "Having worked closely with Antoine, I was struck by his energy. He's someone who succeeds in everything he undertakes — and he undertakes a lot — through determination, drive and a touch of talent. I worked with him on commercial missions: lead sourcing with SalesNav, hunting major accounts (TotalEnergie, Dior, Tod's...), software demos and deal closing. He performed on all fronts. Day to day, Antoine is a natural leader. He drives a team, inspires performance, and his interpersonal skills make internal communication effortless. I can only recommend Antoine.",
     fr: "Ayant travaillé étroitement avec Antoine, j'ai été frappé par son énergie. C'est une personne qui réussit ce qu'elle entreprend (et elle entreprend beaucoup) grâce à sa détermination, son envie de réussir et une touche de talent. Je l'ai cotoyé sur des missions commerciales : sourcing de lead avec SalesNav, chasse grands comptes (TotalEnergie, Dior, Tod's...), démo et closing. Performant sur tous les fronts. Au quotidien, Antoine est naturellement un leader. Il sait driver une équipe, donne envie de performer et ses qualités relationnelles rendent les communications internes très fluides. Je ne peux que le recommander."
@@ -1029,12 +1071,16 @@ const TESTIMONIALS = [{
   avatar: 'MC',
   color: '#00F0A8',
   stars: 5,
+  highlight: {
+    en: "Antoine has an ability to quickly grasp business stakes and market dynamics, anticipate needs, and show proactivity.",
+    fr: "Antoine a une aptitude à comprendre rapidement les enjeux de l'entreprise, à anticiper les besoins et à faire preuve de proactivité."
+  },
   q: {
     en: "Antoine has an ability to quickly grasp business stakes and market dynamics, anticipate needs, and show proactivity in his missions — always pushing into new verticals. He demonstrates great professionalism, giving his time freely to help colleagues. Antoine is invested, reliable, genuinely pleasant and always in good spirits — someone with real human qualities. It was a genuine pleasure working closely with him, and I recommend him wholeheartedly.",
     fr: "Antoine a une aptitude à comprendre rapidement les enjeux de l'entreprise et de son marché, à anticiper les besoins, et à faire preuve de proactivité dans ses missions, pour sans cesse aller démarcher de nouvelles verticales. Il fait preuve d'un grand professionnalisme, n'hésitant pas à donner de sa personne et de son temps pour aider ses collègues. Antoine est une personne investie, sur qui on peut compter, très agréable et sympathique, toujours de bonne humeur. C'était un réel plaisir de travailler en étroite collaboration avec lui et je le recommande vivement !"
   }
 }];
-const COUNTRIES = {
+var COUNTRIES = {
   en: [{
     iso: 'fr',
     n: 'France',
@@ -1122,28 +1168,28 @@ const COUNTRIES = {
     text: "Mon tout premier stage. La Turquie m'a jeté dans le grand bain. Istanbul — entre Europe et Asie — est une ville qui ne te laisse jamais indifférent. Elle a posé les bases de tout ce qui a suivi."
   }]
 };
-const BLOG_POSTS = {
+var BLOG_POSTS = {
   en: [{
     tag: 'AI & AUTOMATION',
     title: 'Why your data teams still waste 60% of their time',
     date: 'Feb 2026',
     readTime: '4',
     excerpt: "Most data teams spend more time preparing data than analysing it. Here's why — and how to flip it.",
-    body: `<p>I've spent 18 months building automation systems for commercial teams. Always the same pattern: <strong>50–70% of analytical time is spent on preparation</strong> — extracting files, merging, cleaning, reformatting.</p><p>High-value human time burned on tasks Python handles in 12 seconds. Nobody takes 2 weeks to <strong>automate what takes 2 days every week</strong>. Urgency of daily work crushes structural investment.</p><p><strong>Typical result:</strong> a team of 3 analysts recovers the equivalent of one full headcount on value-added tasks.</p>`
+    body: "<p>I've spent 18 months building automation systems for commercial teams. Always the same pattern: <strong>50\u201370% of analytical time is spent on preparation</strong> \u2014 extracting files, merging, cleaning, reformatting.</p><p>High-value human time burned on tasks Python handles in 12 seconds. Nobody takes 2 weeks to <strong>automate what takes 2 days every week</strong>. Urgency of daily work crushes structural investment.</p><p><strong>Typical result:</strong> a team of 3 analysts recovers the equivalent of one full headcount on value-added tasks.</p>"
   }, {
     tag: 'COMPETITIVE INTELLIGENCE',
     title: '40 competitors, 1,300 SKUs, zero analyst — how?',
     date: 'Jan 2026',
     readTime: '5',
     excerpt: "How I built a system monitoring 40 competitors across 1,300 SKUs every morning, without human intervention.",
-    body: `<p>Manual competitive intelligence is one of the most underestimated cost centres in product marketing. Hours every week checking prices, promotions, stock-outs, new launches — dozens of sites.</p><p>I built an alternative: <strong>a Python scraper running every night</strong>, covering 40+ competitors across 1,300 SKUs, auto-generating Power BI fed with fresh morning data.</p><p><strong>Stack:</strong> Python (Scrapy + Selenium), n8n orchestration, Power BI, Slack alerts.</p>`
+    body: "<p>Manual competitive intelligence is one of the most underestimated cost centres in product marketing. Hours every week checking prices, promotions, stock-outs, new launches \u2014 dozens of sites.</p><p>I built an alternative: <strong>a Python scraper running every night</strong>, covering 40+ competitors across 1,300 SKUs, auto-generating Power BI fed with fresh morning data.</p><p><strong>Stack:</strong> Python (Scrapy + Selenium), n8n orchestration, Power BI, Slack alerts.</p>"
   }, {
     tag: 'PERSPECTIVE',
     title: 'AI doesn\'t replace data analysts — it changes what they do',
     date: 'Mar 2026',
     readTime: '3',
     excerpt: "The AI vs human debate is badly framed. What should a data analyst spend time on in 2026?",
-    body: `<p>18 months integrating AI tools into analytical workflows. Always the same fear: "will it replace analysts?"</p><p>Short answer: no. Long answer: <strong>it will make obsolete those who refuse to evolve</strong>.</p><p>The analysts who thrive in 2026 are those who use AI to eliminate mechanical work and focus on real added value: interpretation, storytelling, strategic recommendation.</p>`
+    body: "<p>18 months integrating AI tools into analytical workflows. Always the same fear: \"will it replace analysts?\"</p><p>Short answer: no. Long answer: <strong>it will make obsolete those who refuse to evolve</strong>.</p><p>The analysts who thrive in 2026 are those who use AI to eliminate mechanical work and focus on real added value: interpretation, storytelling, strategic recommendation.</p>"
   }],
   fr: [{
     tag: 'IA & AUTOMATISATION',
@@ -1151,24 +1197,24 @@ const BLOG_POSTS = {
     date: 'Fév 2026',
     readTime: '4',
     excerpt: "La plupart des équipes data passent plus de temps à préparer les données qu'à les analyser.",
-    body: `<p>18 mois à construire des systèmes d'automatisation. Toujours le même pattern : <strong>50–70% du temps analytique est consacré à la préparation</strong> — extraire, merger, nettoyer, reformater.</p><p>Du temps humain de haute valeur brûlé sur des tâches que Python fait en 12 secondes. Personne ne prend 2 semaines pour <strong>automatiser ce qui prend 2 jours chaque semaine</strong>.</p><p><strong>Résultat type :</strong> une équipe de 3 analystes récupère l'équivalent d'un ETP complet.</p>`
+    body: "<p>18 mois \xE0 construire des syst\xE8mes d'automatisation. Toujours le m\xEAme pattern : <strong>50\u201370% du temps analytique est consacr\xE9 \xE0 la pr\xE9paration</strong> \u2014 extraire, merger, nettoyer, reformater.</p><p>Du temps humain de haute valeur br\xFBl\xE9 sur des t\xE2ches que Python fait en 12 secondes. Personne ne prend 2 semaines pour <strong>automatiser ce qui prend 2 jours chaque semaine</strong>.</p><p><strong>R\xE9sultat type :</strong> une \xE9quipe de 3 analystes r\xE9cup\xE8re l'\xE9quivalent d'un ETP complet.</p>"
   }, {
     tag: 'INTELLIGENCE COMPÉTITIVE',
     title: '40 concurrents, 1300 SKUs, zéro analyste — comment ?',
     date: 'Janv 2026',
     readTime: '5',
     excerpt: "Comment surveiller 40 concurrents sur 1 300 références chaque matin, sans intervention humaine.",
-    body: `<p>La veille concurrentielle manuelle — un poste de coût sous-estimé. Des heures chaque semaine pour vérifier prix, promos, ruptures, nouveautés sur des dizaines de sites.</p><p>J'ai construit une alternative : <strong>un scraper Python qui tourne chaque nuit</strong>, couvre 40+ concurrents sur 1 300 SKUs, génère automatiquement un Power BI alimenté avec les données fraîches.</p><p><strong>Stack :</strong> Python (Scrapy + Selenium), n8n, Power BI, alertes Slack.</p>`
+    body: "<p>La veille concurrentielle manuelle \u2014 un poste de co\xFBt sous-estim\xE9. Des heures chaque semaine pour v\xE9rifier prix, promos, ruptures, nouveaut\xE9s sur des dizaines de sites.</p><p>J'ai construit une alternative : <strong>un scraper Python qui tourne chaque nuit</strong>, couvre 40+ concurrents sur 1 300 SKUs, g\xE9n\xE8re automatiquement un Power BI aliment\xE9 avec les donn\xE9es fra\xEEches.</p><p><strong>Stack :</strong> Python (Scrapy + Selenium), n8n, Power BI, alertes Slack.</p>"
   }, {
     tag: 'RÉFLEXION',
     title: "L'IA ne remplace pas les data analysts",
     date: 'Mars 2026',
     readTime: '3',
     excerpt: "Le débat IA vs humain est mal posé. À quoi consacrer son temps en 2026 ?",
-    body: `<p>18 mois d'intégration d'outils IA dans des workflows analytiques. Toujours la même peur : "ça va remplacer les analystes ?"</p><p>Non. Mais ça va <strong>rendre obsolètes ceux qui refusent d'évoluer</strong>.</p><p>Les analystes qui prospèrent en 2026 sont ceux qui utilisent l'IA pour éliminer le travail mécanique et se concentrent sur la vraie valeur ajoutée.</p>`
+    body: "<p>18 mois d'int\xE9gration d'outils IA dans des workflows analytiques. Toujours la m\xEAme peur : \"\xE7a va remplacer les analystes ?\"</p><p>Non. Mais \xE7a va <strong>rendre obsol\xE8tes ceux qui refusent d'\xE9voluer</strong>.</p><p>Les analystes qui prosp\xE8rent en 2026 sont ceux qui utilisent l'IA pour \xE9liminer le travail m\xE9canique et se concentrent sur la vraie valeur ajout\xE9e.</p>"
   }]
 };
-const TERMINAL_CMDS = {
+var TERMINAL_CMDS = {
   en: {
     help: {
       output: [{
@@ -1620,36 +1666,46 @@ const TERMINAL_CMDS = {
 };
 
 /* ─── ANIMATED METRIC ───────────────────────────────────────────────────────── */
-function AnimatedMetric({
-  n,
-  s,
-  l,
-  delay = 0
-}) {
-  const [val, setVal] = useState(0);
-  const [started, setStarted] = useState(false);
-  const ref = useRef();
-  useEffect(() => {
-    const obs = new IntersectionObserver(entries => {
+function AnimatedMetric(_ref) {
+  var n = _ref.n,
+    s = _ref.s,
+    l = _ref.l,
+    _ref$delay = _ref.delay,
+    delay = _ref$delay === void 0 ? 0 : _ref$delay;
+  var _useState = useState(0),
+    _useState2 = _slicedToArray(_useState, 2),
+    val = _useState2[0],
+    setVal = _useState2[1];
+  var _useState3 = useState(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    started = _useState4[0],
+    setStarted = _useState4[1];
+  var ref = useRef();
+  useEffect(function () {
+    var obs = new IntersectionObserver(function (entries) {
       if (entries[0].isIntersecting && !started) setStarted(true);
     }, {
       threshold: .5
     });
     if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
+    return function () {
+      return obs.disconnect();
+    };
   }, [started]);
-  useEffect(() => {
+  useEffect(function () {
     if (!started) return;
-    const target = parseInt(n, 10);
-    const dur = 2000;
-    const start = performance.now();
+    var target = parseInt(n, 10);
+    var dur = 2000;
+    var start = performance.now();
     function tick(now) {
-      const p = Math.min((now - start) / dur, 1);
-      const e = 1 - Math.pow(1 - p, 3);
+      var p = Math.min((now - start) / dur, 1);
+      var e = 1 - Math.pow(1 - p, 3);
       setVal(Math.round(e * target));
       if (p < 1) requestAnimationFrame(tick);
     }
-    setTimeout(() => requestAnimationFrame(tick), delay);
+    setTimeout(function () {
+      return requestAnimationFrame(tick);
+    }, delay);
   }, [started, n, delay]);
   return /*#__PURE__*/React.createElement("div", {
     className: "metric",
@@ -1662,18 +1718,22 @@ function AnimatedMetric({
 }
 
 /* ─── LIVE COUNTER ──────────────────────────────────────────────────────────── */
-function LiveCounter({
-  lang
-}) {
-  const t = T[lang];
-  const start = useRef(Date.now());
-  const [val, setVal] = useState(0);
-  useEffect(() => {
-    const iv = setInterval(() => {
-      const hrs = (Date.now() - start.current) / 3600000;
+function LiveCounter(_ref2) {
+  var lang = _ref2.lang;
+  var t = T[lang];
+  var start = useRef(Date.now());
+  var _useState5 = useState(0),
+    _useState6 = _slicedToArray(_useState5, 2),
+    val = _useState6[0],
+    setVal = _useState6[1];
+  useEffect(function () {
+    var iv = setInterval(function () {
+      var hrs = (Date.now() - start.current) / 3600000;
       setVal((hrs * 85 * 40).toFixed(1));
     }, 1000);
-    return () => clearInterval(iv);
+    return function () {
+      return clearInterval(iv);
+    };
   }, []);
   return /*#__PURE__*/React.createElement("div", {
     className: "live-counter reveal"
@@ -1686,7 +1746,7 @@ function LiveCounter({
 
 /* ─── DASHBOARD ─────────────────────────────────────────────────────────────── */
 /* ─ SALES POINTS DATA ─ */
-const SALES_PTS = [{
+var SALES_PTS = [{
   city: 'Paris',
   x: 215,
   y: 115,
@@ -1744,7 +1804,7 @@ const SALES_PTS = [{
   weather: '⛅',
   temp: '15°C'
 }];
-const STOCK_RISK = [{
+var STOCK_RISK = [{
   name: 'Produit A',
   units: 320,
   weeks: 1.4,
@@ -1772,7 +1832,7 @@ const STOCK_RISK = [{
   lead: 'Lead: 4 sem.',
   data: [2100, 2050, 2000, 1940, 1870, 1790, 1700, 1600]
 }];
-const DASH_ALERTS = [{
+var DASH_ALERTS = [{
   type: 'warn',
   msg: 'Ventes Bordeaux sous objectif (−8%)',
   icon: '⚠️',
@@ -1788,7 +1848,7 @@ const DASH_ALERTS = [{
   icon: '💡',
   color: '#415a77'
 }];
-const DASH_NEWS = [{
+var DASH_NEWS = [{
   tag: 'Marché',
   txt: 'Les PME françaises adoptent massivement l\'IA en 2025'
 }, {
@@ -1801,27 +1861,26 @@ const DASH_NEWS = [{
   tag: 'Retail',
   txt: 'Shopify intègre des agents IA pour les stocks'
 }];
-function StockSparkline({
-  data,
-  color
-}) {
-  const max = Math.max(...data),
-    min = Math.min(...data),
+function StockSparkline(_ref3) {
+  var data = _ref3.data,
+    color = _ref3.color;
+  var max = Math.max.apply(Math, _toConsumableArray(data)),
+    min = Math.min.apply(Math, _toConsumableArray(data)),
     W = 56,
     H = 30;
-  const pts = data.map((v, i) => {
-    const x = i / (data.length - 1) * W;
-    const y = H - (v - min) / (max - min || 1) * (H - 4) - 2;
-    return `${x},${y}`;
+  var pts = data.map(function (v, i) {
+    var x = i / (data.length - 1) * W;
+    var y = H - (v - min) / (max - min || 1) * (H - 4) - 2;
+    return "".concat(x, ",").concat(y);
   }).join(' ');
-  const area = `0,${H} ${pts} ${W},${H}`;
+  var area = "0,".concat(H, " ").concat(pts, " ").concat(W, ",").concat(H);
   return /*#__PURE__*/React.createElement("svg", {
-    viewBox: `0 0 ${W} ${H}`,
+    viewBox: "0 0 ".concat(W, " ").concat(H),
     width: "100%",
     height: "32",
     preserveAspectRatio: "none"
   }, /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("linearGradient", {
-    id: `sg${color.slice(1)}`,
+    id: "sg".concat(color.slice(1)),
     x1: "0",
     y1: "0",
     x2: "0",
@@ -1836,7 +1895,7 @@ function StockSparkline({
     stopOpacity: "0"
   }))), /*#__PURE__*/React.createElement("polygon", {
     points: area,
-    fill: `url(#sg${color.slice(1)})`
+    fill: "url(#sg".concat(color.slice(1), ")")
   }), /*#__PURE__*/React.createElement("polyline", {
     points: pts,
     fill: "none",
@@ -1844,13 +1903,17 @@ function StockSparkline({
     strokeWidth: "1.8"
   }));
 }
-function FranceMap({
-  lang
-}) {
-  const [hov, setHov] = useState(null);
-  const maxS = Math.max(...SALES_PTS.map(p => p.sales));
+function FranceMap(_ref4) {
+  var lang = _ref4.lang;
+  var _useState7 = useState(null),
+    _useState8 = _slicedToArray(_useState7, 2),
+    hov = _useState8[0],
+    setHov = _useState8[1];
+  var maxS = Math.max.apply(Math, _toConsumableArray(SALES_PTS.map(function (p) {
+    return p.sales;
+  })));
   // Simplified but recognizable French regions as separate SVG paths
-  const REGIONS = [{
+  var REGIONS = [{
     id: 'idf',
     name: 'Île-de-France',
     d: 'M195 148L210 143L222 150L220 165L208 170L196 163Z',
@@ -1945,17 +2008,23 @@ function FranceMap({
       minHeight: 180
     },
     height: "100%"
-  }, REGIONS.map(r => {
-    const pt = SALES_PTS.find(p => p.city && r.name && (r.id === 'idf' && p.city === 'Paris' || r.id === 'ara' && p.city === 'Lyon' || r.id === 'pca' && p.city === 'Marseille' || r.id === 'naq' && p.city === 'Bordeaux' || r.id === 'hdf' && p.city === 'Lille'));
-    const active = pt && hov === pt.city;
-    const hasData = !!pt;
+  }, REGIONS.map(function (r) {
+    var pt = SALES_PTS.find(function (p) {
+      return p.city && r.name && (r.id === 'idf' && p.city === 'Paris' || r.id === 'ara' && p.city === 'Lyon' || r.id === 'pca' && p.city === 'Marseille' || r.id === 'naq' && p.city === 'Bordeaux' || r.id === 'hdf' && p.city === 'Lille');
+    });
+    var active = pt && hov === pt.city;
+    var hasData = !!pt;
     return /*#__PURE__*/React.createElement("g", {
       key: r.id,
       style: {
         cursor: hasData ? 'pointer' : 'default'
       },
-      onMouseEnter: () => pt && setHov(pt.city),
-      onMouseLeave: () => setHov(null)
+      onMouseEnter: function onMouseEnter() {
+        return pt && setHov(pt.city);
+      },
+      onMouseLeave: function onMouseLeave() {
+        return setHov(null);
+      }
     }, /*#__PURE__*/React.createElement("path", {
       d: r.d,
       fill: active ? 'rgba(191,58,255,0.35)' : hasData ? 'rgba(191,58,255,0.18)' : 'rgba(191,58,255,0.06)',
@@ -2007,75 +2076,96 @@ function FranceMap({
       overflowY: 'auto',
       maxHeight: 220
     }
-  }, SALES_PTS.map((p, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    onMouseEnter: () => setHov(p.city),
-    onMouseLeave: () => setHov(null),
-    style: {
-      padding: '5px 8px',
-      borderRadius: 5,
-      border: `1px solid ${hov === p.city ? 'rgba(191,58,255,0.5)' : 'rgba(191,58,255,0.15)'}`,
-      background: hov === p.city ? 'rgba(191,58,255,0.1)' : 'transparent',
-      cursor: 'pointer',
-      transition: 'all .2s',
-      flexShrink: 0
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontWeight: 700,
-      color: 'var(--text)',
-      fontSize: 10
-    }
-  }, p.city), /*#__PURE__*/React.createElement("div", {
-    style: {
-      color: p.warn ? '#FFB800' : 'var(--accent3)',
-      fontFamily: "'Space Mono',monospace",
-      fontSize: 8
-    }
-  }, p.sales, " ventes \xB7 ", p.trend)))));
+  }, SALES_PTS.map(function (p, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      onMouseEnter: function onMouseEnter() {
+        return setHov(p.city);
+      },
+      onMouseLeave: function onMouseLeave() {
+        return setHov(null);
+      },
+      style: {
+        padding: '5px 8px',
+        borderRadius: 5,
+        border: "1px solid ".concat(hov === p.city ? 'rgba(191,58,255,0.5)' : 'rgba(191,58,255,0.15)'),
+        background: hov === p.city ? 'rgba(191,58,255,0.1)' : 'transparent',
+        cursor: 'pointer',
+        transition: 'all .2s',
+        flexShrink: 0
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 700,
+        color: 'var(--text)',
+        fontSize: 10
+      }
+    }, p.city), /*#__PURE__*/React.createElement("div", {
+      style: {
+        color: p.warn ? '#FFB800' : 'var(--accent3)',
+        fontFamily: "'Space Mono',monospace",
+        fontSize: 8
+      }
+    }, p.sales, " ventes \xB7 ", p.trend));
+  })));
 }
-function Dashboard({
-  lang
-}) {
-  const t = T[lang];
-  const lRef = useRef(),
+function Dashboard(_ref5) {
+  var lang = _ref5.lang;
+  var t = T[lang];
+  var lRef = useRef(),
     bRef = useRef(),
     lC = useRef(),
     bC = useRef();
-  const [alIdx, setAlIdx] = useState(0);
-  const [sentAction, setSentAction] = useState(null);
-  const [activeTab, setActiveTab] = useState('overview');
-  const now = new Date();
-  const timeStr = now.toLocaleTimeString(lang === 'fr' ? 'fr-FR' : 'en-GB', {
+  var _useState9 = useState(0),
+    _useState0 = _slicedToArray(_useState9, 2),
+    alIdx = _useState0[0],
+    setAlIdx = _useState0[1];
+  var _useState1 = useState(null),
+    _useState10 = _slicedToArray(_useState1, 2),
+    sentAction = _useState10[0],
+    setSentAction = _useState10[1];
+  var _useState11 = useState('overview'),
+    _useState12 = _slicedToArray(_useState11, 2),
+    activeTab = _useState12[0],
+    setActiveTab = _useState12[1];
+  var now = new Date();
+  var timeStr = now.toLocaleTimeString(lang === 'fr' ? 'fr-FR' : 'en-GB', {
     hour: '2-digit',
     minute: '2-digit',
     second: '2-digit'
   });
-  const [clock, setClock] = useState(timeStr);
-  useEffect(() => {
-    const iv = setInterval(() => setAlIdx(a => (a + 1) % DASH_ALERTS.length), 3800);
-    const ck = setInterval(() => {
-      const n = new Date();
+  var _useState13 = useState(timeStr),
+    _useState14 = _slicedToArray(_useState13, 2),
+    clock = _useState14[0],
+    setClock = _useState14[1];
+  useEffect(function () {
+    var iv = setInterval(function () {
+      return setAlIdx(function (a) {
+        return (a + 1) % DASH_ALERTS.length;
+      });
+    }, 3800);
+    var ck = setInterval(function () {
+      var n = new Date();
       setClock(n.toLocaleTimeString(lang === 'fr' ? 'fr-FR' : 'en-GB', {
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit'
       }));
     }, 1000);
-    return () => {
+    return function () {
       clearInterval(iv);
       clearInterval(ck);
     };
   }, [lang]);
-  useEffect(() => {
+  useEffect(function () {
     if (!lRef.current || !bRef.current) return;
-    const labels = lang === 'fr' ? ['Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc', 'Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun'] : ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
-    const gc = 'rgba(255,255,255,0.05)',
+    var labels = lang === 'fr' ? ['Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc', 'Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun'] : ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+    var gc = 'rgba(255,255,255,0.05)',
       tc = 'rgba(200,186,232,0.55)';
     lC.current = new Chart(lRef.current, {
       type: 'line',
       data: {
-        labels,
+        labels: labels,
         datasets: [{
           label: lang === 'fr' ? 'Réel' : 'Actual',
           data: [180, 210, 195, 240, 225, 260, 290, 310, 340, null, null, null, null],
@@ -2162,7 +2252,9 @@ function Dashboard({
                 family: 'Space Mono',
                 size: 8
               },
-              callback: v => `€${v}K`
+              callback: function callback(v) {
+                return "\u20AC".concat(v, "K");
+              }
             },
             grid: {
               color: gc
@@ -2222,7 +2314,9 @@ function Dashboard({
                 family: 'Space Mono',
                 size: 8
               },
-              callback: v => `${v}K`
+              callback: function callback(v) {
+                return "".concat(v, "K");
+              }
             },
             grid: {
               color: gc
@@ -2231,16 +2325,26 @@ function Dashboard({
         }
       }
     });
-    return () => {
-      lC.current?.destroy();
-      bC.current?.destroy();
+    return function () {
+      var _lC$current, _bC$current;
+      (_lC$current = lC.current) === null || _lC$current === void 0 || _lC$current.destroy();
+      (_bC$current = bC.current) === null || _bC$current === void 0 || _bC$current.destroy();
     };
   }, [lang]);
-  const [analysts, setAnalysts] = useState(3);
-  const [hoursWasted, setHoursWasted] = useState(12);
-  const [hourlyRate, setHourlyRate] = useState(55);
-  const al = DASH_ALERTS[alIdx];
-  const tabs = lang === 'fr' ? [{
+  var _useState15 = useState(3),
+    _useState16 = _slicedToArray(_useState15, 2),
+    analysts = _useState16[0],
+    setAnalysts = _useState16[1];
+  var _useState17 = useState(12),
+    _useState18 = _slicedToArray(_useState17, 2),
+    hoursWasted = _useState18[0],
+    setHoursWasted = _useState18[1];
+  var _useState19 = useState(55),
+    _useState20 = _slicedToArray(_useState19, 2),
+    hourlyRate = _useState20[0],
+    setHourlyRate = _useState20[1];
+  var al = DASH_ALERTS[alIdx];
+  var tabs = lang === 'fr' ? [{
     id: 'overview',
     label: 'Vue globale'
   }, {
@@ -2273,7 +2377,7 @@ function Dashboard({
   }];
 
   /* ── Shared card style ── */
-  const card = {
+  var card = {
     backdropFilter: 'var(--glass-blur)',
     WebkitBackdropFilter: 'var(--glass-blur)',
     background: 'var(--glass-bg)',
@@ -2282,14 +2386,14 @@ function Dashboard({
     padding: '16px 20px',
     boxShadow: 'var(--glass-shadow)'
   };
-  const label8 = {
+  var label8 = {
     fontFamily: "'Space Mono',monospace",
     fontSize: 8,
     letterSpacing: '1.5px',
     textTransform: 'uppercase',
     color: 'var(--text-mute)'
   };
-  const bigNum = {
+  var bigNum = {
     fontFamily: "'Bebas Neue',sans-serif",
     lineHeight: 1
   };
@@ -2316,22 +2420,23 @@ function Dashboard({
       gap: 6,
       flexShrink: 0
     }
-  }, ['#FF5F57', '#FFBD2E', '#28C840'].map((c, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      width: 10,
-      height: 10,
-      borderRadius: '50%',
-      background: c,
-      opacity: .9
-    }
-  }))), /*#__PURE__*/React.createElement("span", {
-    style: {
-      ...label8,
+  }, ['#FF5F57', '#FFBD2E', '#28C840'].map(function (c, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        width: 10,
+        height: 10,
+        borderRadius: '50%',
+        background: c,
+        opacity: .9
+      }
+    });
+  })), /*#__PURE__*/React.createElement("span", {
+    style: _objectSpread(_objectSpread({}, label8), {}, {
       color: '#415a77',
       letterSpacing: '3px',
       fontSize: 9
-    }
+    })
   }, "ADM \xB7 BI \xB7 PLATFORM"), /*#__PURE__*/React.createElement("div", {
     style: {
       flex: 1,
@@ -2367,17 +2472,15 @@ function Dashboard({
       animation: 'blink 2s infinite'
     }
   }), /*#__PURE__*/React.createElement("span", {
-    style: {
-      ...label8,
+    style: _objectSpread(_objectSpread({}, label8), {}, {
       color: 'var(--accent3)',
       fontSize: 8
-    }
+    })
   }, lang === 'fr' ? 'EN DIRECT' : 'LIVE')), /*#__PURE__*/React.createElement("span", {
-    style: {
-      ...label8,
+    style: _objectSpread(_objectSpread({}, label8), {}, {
       color: 'var(--text-dim)',
       fontSize: 9
-    }
+    })
   }, clock))), /*#__PURE__*/React.createElement("div", {
     style: {
       background: 'var(--glass-bg)',
@@ -2388,25 +2491,29 @@ function Dashboard({
       gap: 0,
       overflowX: 'auto'
     }
-  }, tabs.map(tab => /*#__PURE__*/React.createElement("button", {
-    key: tab.id,
-    onClick: () => setActiveTab(tab.id),
-    style: {
-      padding: '10px 16px',
-      background: 'transparent',
-      border: 'none',
-      borderBottom: `2px solid ${activeTab === tab.id ? 'var(--accent1)' : 'transparent'}`,
-      color: activeTab === tab.id ? 'var(--accent1)' : 'var(--text-mute)',
-      fontFamily: "'Space Mono',monospace",
-      fontSize: 8,
-      letterSpacing: '1.5px',
-      textTransform: 'uppercase',
-      cursor: 'pointer',
-      transition: 'all .2s',
-      whiteSpace: 'nowrap',
-      flexShrink: 0
-    }
-  }, tab.label)), /*#__PURE__*/React.createElement("div", {
+  }, tabs.map(function (tab) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: tab.id,
+      onClick: function onClick() {
+        return setActiveTab(tab.id);
+      },
+      style: {
+        padding: '10px 16px',
+        background: 'transparent',
+        border: 'none',
+        borderBottom: "2px solid ".concat(activeTab === tab.id ? 'var(--accent1)' : 'transparent'),
+        color: activeTab === tab.id ? 'var(--accent1)' : 'var(--text-mute)',
+        fontFamily: "'Space Mono',monospace",
+        fontSize: 8,
+        letterSpacing: '1.5px',
+        textTransform: 'uppercase',
+        cursor: 'pointer',
+        transition: 'all .2s',
+        whiteSpace: 'nowrap',
+        flexShrink: 0
+      }
+    }, tab.label);
+  }), /*#__PURE__*/React.createElement("div", {
     style: {
       flex: 1
     }
@@ -2434,7 +2541,9 @@ function Dashboard({
       whiteSpace: 'nowrap'
     }
   }, al.msg), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setSentAction(al.msg),
+    onClick: function onClick() {
+      return setSentAction(al.msg);
+    },
     style: {
       padding: '3px 10px',
       borderRadius: 6,
@@ -2462,19 +2571,22 @@ function Dashboard({
       gap: 8,
       marginBottom: 14
     }
-  }, t.dashKpis.map(([v, l, d], i) => {
-    const colors = ['var(--accent1)', 'var(--accent3)', 'var(--accent2)', 'var(--accent4)', 'var(--accent3)', 'var(--accent1)'];
-    const col = colors[i % colors.length];
-    const isUp = d.startsWith('↑') || d.startsWith('+');
-    const isDown = d.startsWith('↓') || d.startsWith('-');
+  }, t.dashKpis.map(function (_ref6, i) {
+    var _ref7 = _slicedToArray(_ref6, 3),
+      v = _ref7[0],
+      l = _ref7[1],
+      d = _ref7[2];
+    var colors = ['var(--accent1)', 'var(--accent3)', 'var(--accent2)', 'var(--accent4)', 'var(--accent3)', 'var(--accent1)'];
+    var col = colors[i % colors.length];
+    var isUp = d.startsWith('↑') || d.startsWith('+');
+    var isDown = d.startsWith('↓') || d.startsWith('-');
     return /*#__PURE__*/React.createElement("div", {
       key: i,
-      style: {
-        ...card,
+      style: _objectSpread(_objectSpread({}, card), {}, {
         padding: '12px 14px',
         position: 'relative',
         overflow: 'hidden'
-      }
+      })
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         position: 'absolute',
@@ -2490,17 +2602,15 @@ function Dashboard({
         paddingLeft: 8
       }
     }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        ...label8,
+      style: _objectSpread(_objectSpread({}, label8), {}, {
         marginBottom: 6,
         lineHeight: 1.5
-      }
+      })
     }, l), /*#__PURE__*/React.createElement("div", {
-      style: {
-        ...bigNum,
+      style: _objectSpread(_objectSpread({}, bigNum), {}, {
         fontSize: '1.8rem',
         color: col
-      }
+      })
     }, v), /*#__PURE__*/React.createElement("div", {
       style: {
         fontFamily: "'Space Mono',monospace",
@@ -2531,35 +2641,38 @@ function Dashboard({
       marginBottom: 12
     }
   }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      ...label8,
+    style: _objectSpread(_objectSpread({}, label8), {}, {
       color: '#415a77'
-    }
+    })
   }, t.dashChart1), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       gap: 12
     }
-  }, [['var(--accent1)', lang === 'fr' ? 'Réel' : 'Actual'], ['#00F0A8', 'IA'], ['rgba(122,107,158,.55)', 'N−1']].map(([c, lbl], i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 4
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: 16,
-      height: 2,
-      background: c,
-      borderRadius: 1
-    }
-  }), /*#__PURE__*/React.createElement("span", {
-    style: {
-      ...label8,
-      fontSize: 7
-    }
-  }, lbl))))), /*#__PURE__*/React.createElement("div", {
+  }, [['var(--accent1)', lang === 'fr' ? 'Réel' : 'Actual'], ['#00F0A8', 'IA'], ['rgba(122,107,158,.55)', 'N−1']].map(function (_ref8, i) {
+    var _ref9 = _slicedToArray(_ref8, 2),
+      c = _ref9[0],
+      lbl = _ref9[1];
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 4
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        width: 16,
+        height: 2,
+        background: c,
+        borderRadius: 1
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      style: _objectSpread(_objectSpread({}, label8), {}, {
+        fontSize: 7
+      })
+    }, lbl));
+  }))), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 150
     }
@@ -2568,11 +2681,10 @@ function Dashboard({
   }))), /*#__PURE__*/React.createElement("div", {
     style: card
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...label8,
+    style: _objectSpread(_objectSpread({}, label8), {}, {
       color: '#415a77',
       marginBottom: 12
-    }
+    })
   }, t.dashChart2), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 150
@@ -2588,11 +2700,10 @@ function Dashboard({
   }, /*#__PURE__*/React.createElement("div", {
     style: card
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...label8,
+    style: _objectSpread(_objectSpread({}, label8), {}, {
       color: '#415a77',
       marginBottom: 8
-    }
+    })
   }, lang === 'fr' ? 'CARTE VENTES · FRANCE' : 'SALES MAP · FRANCE'), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 190,
@@ -2601,17 +2712,15 @@ function Dashboard({
   }, /*#__PURE__*/React.createElement(FranceMap, {
     lang: lang
   }))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...card,
+    style: _objectSpread(_objectSpread({}, card), {}, {
       display: 'flex',
       flexDirection: 'column'
-    }
+    })
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...label8,
+    style: _objectSpread(_objectSpread({}, label8), {}, {
       color: '#415a77',
       marginBottom: 10
-    }
+    })
   }, lang === 'fr' ? 'MARCHÉ · PULSE' : 'MARKET · PULSE'), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
@@ -2619,36 +2728,40 @@ function Dashboard({
       gap: 0,
       flex: 1
     }
-  }, DASH_NEWS.map((n, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      display: 'flex',
-      gap: 8,
-      alignItems: 'flex-start',
-      padding: '8px 0',
-      borderBottom: i < DASH_NEWS.length - 1 ? '1px solid var(--border-dim)' : 'none'
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: "'Space Mono',monospace",
-      fontSize: 7,
-      fontWeight: 700,
-      padding: '3px 7px',
-      borderRadius: 3,
-      background: 'rgba(191,58,255,.1)',
-      color: '#415a77',
-      whiteSpace: 'nowrap',
-      flexShrink: 0,
-      letterSpacing: .5
-    }
-  }, n.tag), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 10,
-      color: 'var(--text-sec)',
-      lineHeight: 1.55
-    }
-  }, n.txt)))), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setSentAction('news'),
+  }, DASH_NEWS.map(function (n, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        display: 'flex',
+        gap: 8,
+        alignItems: 'flex-start',
+        padding: '8px 0',
+        borderBottom: i < DASH_NEWS.length - 1 ? '1px solid var(--border-dim)' : 'none'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontFamily: "'Space Mono',monospace",
+        fontSize: 7,
+        fontWeight: 700,
+        padding: '3px 7px',
+        borderRadius: 3,
+        background: 'rgba(191,58,255,.1)',
+        color: '#415a77',
+        whiteSpace: 'nowrap',
+        flexShrink: 0,
+        letterSpacing: .5
+      }
+    }, n.tag), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 10,
+        color: 'var(--text-sec)',
+        lineHeight: 1.55
+      }
+    }, n.txt));
+  })), /*#__PURE__*/React.createElement("button", {
+    onClick: function onClick() {
+      return setSentAction('news');
+    },
     style: {
       marginTop: 12,
       width: '100%',
@@ -2691,30 +2804,28 @@ function Dashboard({
     v: '34%',
     delta: '+8pts vs N-1',
     color: 'var(--accent2)'
-  }].map((k, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      ...card
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...label8,
-      marginBottom: 8
-    }
-  }, k.label), /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...bigNum,
-      fontSize: '2.6rem',
-      color: k.color
-    }
-  }, k.v), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Mono',monospace",
-      fontSize: 8,
-      color: '#00F0A8',
-      marginTop: 6
-    }
-  }, k.delta)))), /*#__PURE__*/React.createElement("div", {
+  }].map(function (k, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: _objectSpread({}, card)
+    }, /*#__PURE__*/React.createElement("div", {
+      style: _objectSpread(_objectSpread({}, label8), {}, {
+        marginBottom: 8
+      })
+    }, k.label), /*#__PURE__*/React.createElement("div", {
+      style: _objectSpread(_objectSpread({}, bigNum), {}, {
+        fontSize: '2.6rem',
+        color: k.color
+      })
+    }, k.v), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: "'Space Mono',monospace",
+        fontSize: 8,
+        color: '#00F0A8',
+        marginTop: 6
+      }
+    }, k.delta));
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'grid',
       gridTemplateColumns: '1.5fr 1fr',
@@ -2723,11 +2834,10 @@ function Dashboard({
   }, /*#__PURE__*/React.createElement("div", {
     style: card
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...label8,
+    style: _objectSpread(_objectSpread({}, label8), {}, {
       color: '#415a77',
       marginBottom: 14
-    }
+    })
   }, lang === 'fr' ? 'PIPELINE PAR STAGE' : 'PIPELINE BY STAGE'), [{
     stage: 'Qualification',
     v: 24,
@@ -2753,52 +2863,53 @@ function Dashboard({
     v: 4,
     pct: 17,
     color: 'var(--accent3)'
-  }].map((s, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      marginBottom: 12
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      marginBottom: 5
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 10,
-      color: 'var(--text-sec)'
-    }
-  }, s.stage), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: "'Space Mono',monospace",
-      fontSize: 9,
-      color: s.color,
-      fontWeight: 700
-    }
-  }, s.v)), /*#__PURE__*/React.createElement("div", {
-    style: {
-      height: 4,
-      background: 'rgba(255,255,255,.06)',
-      borderRadius: 2,
-      overflow: 'hidden'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      height: '100%',
-      width: `${s.pct}%`,
-      background: s.color,
-      borderRadius: 2,
-      transition: 'width .8s ease'
-    }
-  }))))), /*#__PURE__*/React.createElement("div", {
+  }].map(function (s, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        marginBottom: 12
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        marginBottom: 5
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 10,
+        color: 'var(--text-sec)'
+      }
+    }, s.stage), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontFamily: "'Space Mono',monospace",
+        fontSize: 9,
+        color: s.color,
+        fontWeight: 700
+      }
+    }, s.v)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        height: 4,
+        background: 'rgba(255,255,255,.06)',
+        borderRadius: 2,
+        overflow: 'hidden'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        height: '100%',
+        width: "".concat(s.pct, "%"),
+        background: s.color,
+        borderRadius: 2,
+        transition: 'width .8s ease'
+      }
+    })));
+  })), /*#__PURE__*/React.createElement("div", {
     style: card
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...label8,
+    style: _objectSpread(_objectSpread({}, label8), {}, {
       color: '#415a77',
       marginBottom: 12
-    }
+    })
   }, lang === 'fr' ? 'ALERTES PROSPECTS' : 'PROSPECT ALERTS'), [{
     ico: '🔥',
     txt: lang === 'fr' ? 'TotalEnergies — pas de réponse 8j' : 'TotalEnergies — 8d no response'
@@ -2811,27 +2922,29 @@ function Dashboard({
   }, {
     ico: '📩',
     txt: lang === 'fr' ? '3 nouveaux leads inbound' : '3 new inbound leads today'
-  }].map((a, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      display: 'flex',
-      gap: 10,
-      alignItems: 'flex-start',
-      padding: '9px 0',
-      borderBottom: i < 3 ? '1px solid var(--border-dim)' : 'none'
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 16,
-      flexShrink: 0
-    }
-  }, a.ico), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 10,
-      color: 'var(--text-sec)',
-      lineHeight: 1.55
-    }
-  }, a.txt)))))), activeTab === 'supply' && /*#__PURE__*/React.createElement("div", {
+  }].map(function (a, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        display: 'flex',
+        gap: 10,
+        alignItems: 'flex-start',
+        padding: '9px 0',
+        borderBottom: i < 3 ? '1px solid var(--border-dim)' : 'none'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 16,
+        flexShrink: 0
+      }
+    }, a.ico), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 10,
+        color: 'var(--text-sec)',
+        lineHeight: 1.55
+      }
+    }, a.txt));
+  })))), activeTab === 'supply' && /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -2858,96 +2971,97 @@ function Dashboard({
     v: '12j',
     delta: lang === 'fr' ? 'Optimisé −3j' : 'Optimised −3d',
     color: '#415a77'
-  }].map((k, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
+  }].map(function (k, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: card
+    }, /*#__PURE__*/React.createElement("div", {
+      style: _objectSpread(_objectSpread({}, label8), {}, {
+        marginBottom: 8
+      })
+    }, k.label), /*#__PURE__*/React.createElement("div", {
+      style: _objectSpread(_objectSpread({}, bigNum), {}, {
+        fontSize: '2.6rem',
+        color: k.color
+      })
+    }, k.v), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: "'Space Mono',monospace",
+        fontSize: 8,
+        color: 'var(--accent3)',
+        marginTop: 6
+      }
+    }, k.delta));
+  })), /*#__PURE__*/React.createElement("div", {
     style: card
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...label8,
-      marginBottom: 8
-    }
-  }, k.label), /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...bigNum,
-      fontSize: '2.6rem',
-      color: k.color
-    }
-  }, k.v), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Mono',monospace",
-      fontSize: 8,
-      color: 'var(--accent3)',
-      marginTop: 6
-    }
-  }, k.delta)))), /*#__PURE__*/React.createElement("div", {
-    style: card
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...label8,
+    style: _objectSpread(_objectSpread({}, label8), {}, {
       color: '#415a77',
       marginBottom: 14
-    }
+    })
   }, lang === 'fr' ? 'RISQUES RUPTURE · PRÉVISION IA 8 SEMAINES' : 'STOCKOUT RISK · AI FORECAST 8 WEEKS'), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'grid',
       gridTemplateColumns: 'repeat(3,1fr)',
       gap: 10
     }
-  }, STOCK_RISK.map((s, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      background: 'var(--glass-bg)',
-      border: `1px solid ${s.color}33`,
-      borderRadius: 8,
-      padding: '14px 16px'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginBottom: 8
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 11,
-      fontWeight: 700,
-      color: 'var(--text)'
-    }
-  }, s.name), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 7.5,
-      fontWeight: 700,
-      padding: '2px 8px',
-      borderRadius: 3,
-      background: `${s.color}20`,
-      color: s.color,
-      fontFamily: "'Space Mono',monospace"
-    }
-  }, s.status)), /*#__PURE__*/React.createElement(StockSparkline, {
-    data: s.data,
-    color: s.color
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      marginTop: 10,
-      alignItems: 'baseline'
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 18,
-      fontWeight: 800,
-      color: s.color,
-      fontFamily: "'Bebas Neue',sans-serif"
-    }
-  }, s.weeks, lang === 'fr' ? ' sem.' : ' wks'), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 8,
-      color: s.color,
-      fontFamily: "'Space Mono',monospace"
-    }
-  }, s.action))))))), activeTab === 'ai' && /*#__PURE__*/React.createElement("div", {
+  }, STOCK_RISK.map(function (s, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        background: 'var(--glass-bg)',
+        border: "1px solid ".concat(s.color, "33"),
+        borderRadius: 8,
+        padding: '14px 16px'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 8
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 11,
+        fontWeight: 700,
+        color: 'var(--text)'
+      }
+    }, s.name), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 7.5,
+        fontWeight: 700,
+        padding: '2px 8px',
+        borderRadius: 3,
+        background: "".concat(s.color, "20"),
+        color: s.color,
+        fontFamily: "'Space Mono',monospace"
+      }
+    }, s.status)), /*#__PURE__*/React.createElement(StockSparkline, {
+      data: s.data,
+      color: s.color
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        marginTop: 10,
+        alignItems: 'baseline'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 18,
+        fontWeight: 800,
+        color: s.color,
+        fontFamily: "'Bebas Neue',sans-serif"
+      }
+    }, s.weeks, lang === 'fr' ? ' sem.' : ' wks'), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 8,
+        color: s.color,
+        fontFamily: "'Space Mono',monospace"
+      }
+    }, s.action)));
+  })))), activeTab === 'ai' && /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr',
@@ -2956,11 +3070,10 @@ function Dashboard({
   }, /*#__PURE__*/React.createElement("div", {
     style: card
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...label8,
+    style: _objectSpread(_objectSpread({}, label8), {}, {
       color: '#415a77',
       marginBottom: 14
-    }
+    })
   }, lang === 'fr' ? 'MODÈLE PRÉVISION VENTES · IA' : 'SALES FORECAST MODEL · AI'), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'grid',
@@ -2984,27 +3097,27 @@ function Dashboard({
     label: lang === 'fr' ? 'Dernière MAJ' : 'Last update',
     v: '06:00',
     color: 'var(--accent3)'
-  }].map((k, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      background: 'var(--glass-bg)',
-      borderRadius: 7,
-      padding: '10px 14px',
-      border: '1px solid var(--border-dim)'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...label8,
-      fontSize: 7,
-      marginBottom: 5
-    }
-  }, k.label), /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...bigNum,
-      fontSize: '1.7rem',
-      color: k.color
-    }
-  }, k.v)))), /*#__PURE__*/React.createElement("div", {
+  }].map(function (k, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        background: 'var(--glass-bg)',
+        borderRadius: 7,
+        padding: '10px 14px',
+        border: '1px solid var(--border-dim)'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: _objectSpread(_objectSpread({}, label8), {}, {
+        fontSize: 7,
+        marginBottom: 5
+      })
+    }, k.label), /*#__PURE__*/React.createElement("div", {
+      style: _objectSpread(_objectSpread({}, bigNum), {}, {
+        fontSize: '1.7rem',
+        color: k.color
+      })
+    }, k.v));
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 140
     }
@@ -3013,11 +3126,10 @@ function Dashboard({
   }))), /*#__PURE__*/React.createElement("div", {
     style: card
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...label8,
+    style: _objectSpread(_objectSpread({}, label8), {}, {
       color: '#415a77',
       marginBottom: 14
-    }
+    })
   }, lang === 'fr' ? 'AUTOMATISATIONS ACTIVES' : 'ACTIVE AUTOMATIONS'), [{
     icon: '📊',
     name: lang === 'fr' ? 'Reporting hebdo auto' : 'Weekly auto-report',
@@ -3038,55 +3150,57 @@ function Dashboard({
     icon: '📈',
     name: lang === 'fr' ? 'Scoring leads inbound' : 'Inbound lead scoring',
     status: lang === 'fr' ? 'Pipeline auto · CRM sync' : 'Auto pipeline · CRM sync'
-  }].map((a, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 12,
-      padding: '11px 0',
-      borderBottom: i < 4 ? '1px solid var(--border-dim)' : 'none'
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 18,
-      flexShrink: 0
-    }
-  }, a.icon), /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 10,
-      fontWeight: 600,
-      color: 'var(--text)',
-      marginBottom: 2
-    }
-  }, a.name), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Mono',monospace",
-      fontSize: 7.5,
-      color: 'var(--text-mute)'
-    }
-  }, a.status)), /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: 7,
-      height: 7,
-      borderRadius: '50%',
-      background: '#00F0A8',
-      boxShadow: '0 0 6px #00F0A8',
-      flexShrink: 0
-    }
-  }))))), activeTab === 'hiring' && (() => {
-    const weekCost = analysts * hoursWasted * hourlyRate;
-    const yearCost = weekCost * 52;
-    const savedYear = Math.round(yearCost * 0.85);
-    const roiPct = Math.round((savedYear / 80000 - 1) * 100);
-    const pctA = (analysts - 1) / 19 * 100 + '%';
-    const pctH = (hoursWasted - 2) / 38 * 100 + '%';
-    const pctR = (hourlyRate - 20) / 180 * 100 + '%';
-    const sliders = [{
+  }].map(function (a, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 12,
+        padding: '11px 0',
+        borderBottom: i < 4 ? '1px solid var(--border-dim)' : 'none'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 18,
+        flexShrink: 0
+      }
+    }, a.icon), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10,
+        fontWeight: 600,
+        color: 'var(--text)',
+        marginBottom: 2
+      }
+    }, a.name), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: "'Space Mono',monospace",
+        fontSize: 7.5,
+        color: 'var(--text-mute)'
+      }
+    }, a.status)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        width: 7,
+        height: 7,
+        borderRadius: '50%',
+        background: '#00F0A8',
+        boxShadow: '0 0 6px #00F0A8',
+        flexShrink: 0
+      }
+    }));
+  }))), activeTab === 'hiring' && function () {
+    var weekCost = analysts * hoursWasted * hourlyRate;
+    var yearCost = weekCost * 52;
+    var savedYear = Math.round(yearCost * 0.85);
+    var roiPct = Math.round((savedYear / 80000 - 1) * 100);
+    var pctA = (analysts - 1) / 19 * 100 + '%';
+    var pctH = (hoursWasted - 2) / 38 * 100 + '%';
+    var pctR = (hourlyRate - 20) / 180 * 100 + '%';
+    var sliders = [{
       lbl: lang === 'fr' ? 'PERSONNES EN REPORTING MANUEL' : 'PEOPLE IN MANUAL REPORTING',
       v: analysts,
       set: setAnalysts,
@@ -3111,7 +3225,7 @@ function Dashboard({
       unit: '€/h',
       pct: pctR
     }];
-    const gCard = {
+    var gCard = {
       backdropFilter: 'var(--glass-blur)',
       WebkitBackdropFilter: 'var(--glass-blur)',
       background: 'var(--glass-bg)',
@@ -3126,27 +3240,25 @@ function Dashboard({
         gap: 12
       }
     }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        ...gCard,
+      style: _objectSpread(_objectSpread({}, gCard), {}, {
         padding: '14px 18px',
         display: 'flex',
         alignItems: 'center',
         gap: 14,
         borderLeft: '3px solid var(--danger)'
-      }
+      })
     }, /*#__PURE__*/React.createElement("span", {
       style: {
         fontSize: 22,
         flexShrink: 0
       }
     }, "\u23F3"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-      style: {
-        ...label8,
+      style: _objectSpread(_objectSpread({}, label8), {}, {
         color: 'var(--danger)',
         marginBottom: 3,
         fontSize: 7.5,
         letterSpacing: '2px'
-      }
+      })
     }, lang === 'fr' ? 'CALCULATEUR · COÛT DU STATU QUO' : 'CALCULATOR · COST OF DOING NOTHING'), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 10,
@@ -3165,83 +3277,83 @@ function Dashboard({
         flexDirection: 'column',
         gap: 9
       }
-    }, sliders.map((s, i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        ...gCard,
-        padding: '14px 16px'
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'baseline',
-        marginBottom: 10
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        ...label8,
-        fontSize: 7,
-        color: 'var(--text-mute)'
-      }
-    }, s.lbl), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontFamily: "'Bebas Neue',sans-serif",
-        fontSize: '1.7rem',
-        color: 'var(--danger)',
-        lineHeight: 1
-      }
-    }, s.v, /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: '.58rem',
-        fontFamily: "'Space Mono',monospace",
-        color: 'var(--text-mute)',
-        marginLeft: 3
-      }
-    }, s.unit))), /*#__PURE__*/React.createElement("input", {
-      type: "range",
-      min: s.min,
-      max: s.max,
-      value: s.v,
-      onChange: e => s.set(+e.target.value),
-      style: {
-        width: '100%',
-        height: 4,
-        borderRadius: 3,
-        appearance: 'none',
-        WebkitAppearance: 'none',
-        cursor: 'pointer',
-        outline: 'none',
-        background: `linear-gradient(90deg,var(--danger) ${s.pct},rgba(217,91,91,.18) ${s.pct})`
-      }
-    }), /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        fontFamily: "'Space Mono',monospace",
-        fontSize: 6.5,
-        color: 'var(--text-mute)',
-        marginTop: 5
-      }
-    }, /*#__PURE__*/React.createElement("span", null, s.min, s.unit === '€/h' ? '€/h' : ''), /*#__PURE__*/React.createElement("span", null, s.max, s.unit === '€/h' ? '€/h' : ''))))), /*#__PURE__*/React.createElement("div", {
+    }, sliders.map(function (s, i) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: _objectSpread(_objectSpread({}, gCard), {}, {
+          padding: '14px 16px'
+        })
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'baseline',
+          marginBottom: 10
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        style: _objectSpread(_objectSpread({}, label8), {}, {
+          fontSize: 7,
+          color: 'var(--text-mute)'
+        })
+      }, s.lbl), /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontFamily: "'Bebas Neue',sans-serif",
+          fontSize: '1.7rem',
+          color: 'var(--danger)',
+          lineHeight: 1
+        }
+      }, s.v, /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: '.58rem',
+          fontFamily: "'Space Mono',monospace",
+          color: 'var(--text-mute)',
+          marginLeft: 3
+        }
+      }, s.unit))), /*#__PURE__*/React.createElement("input", {
+        type: "range",
+        min: s.min,
+        max: s.max,
+        value: s.v,
+        onChange: function onChange(e) {
+          return s.set(+e.target.value);
+        },
+        style: {
+          width: '100%',
+          height: 4,
+          borderRadius: 3,
+          appearance: 'none',
+          WebkitAppearance: 'none',
+          cursor: 'pointer',
+          outline: 'none',
+          background: "linear-gradient(90deg,var(--danger) ".concat(s.pct, ",rgba(217,91,91,.18) ").concat(s.pct, ")")
+        }
+      }), /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: 'flex',
+          justifyContent: 'space-between',
+          fontFamily: "'Space Mono',monospace",
+          fontSize: 6.5,
+          color: 'var(--text-mute)',
+          marginTop: 5
+        }
+      }, /*#__PURE__*/React.createElement("span", null, s.min, s.unit === '€/h' ? '€/h' : ''), /*#__PURE__*/React.createElement("span", null, s.max, s.unit === '€/h' ? '€/h' : '')));
+    })), /*#__PURE__*/React.createElement("div", {
       style: {
         display: 'flex',
         flexDirection: 'column',
         gap: 9
       }
     }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        ...gCard,
+      style: _objectSpread(_objectSpread({}, gCard), {}, {
         padding: '14px 16px',
         borderLeft: '3px solid var(--accent4)'
-      }
+      })
     }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        ...label8,
+      style: _objectSpread(_objectSpread({}, label8), {}, {
         fontSize: 7,
         marginBottom: 7,
         color: 'var(--text-mute)'
-      }
+      })
     }, lang === 'fr' ? 'COÛT HEBDOMADAIRE' : 'WEEKLY BURN'), /*#__PURE__*/React.createElement("div", {
       style: {
         fontFamily: "'Bebas Neue',sans-serif",
@@ -3250,29 +3362,26 @@ function Dashboard({
         lineHeight: 1
       }
     }, "\u20AC", Math.round(weekCost).toLocaleString()), /*#__PURE__*/React.createElement("div", {
-      style: {
-        ...label8,
+      style: _objectSpread(_objectSpread({}, label8), {}, {
         fontSize: 6.5,
         color: 'var(--text-mute)',
         marginTop: 5
-      }
-    }, lang === 'fr' ? `${analysts} × ${hoursWasted}h × ${hourlyRate}€` : `${analysts} × ${hoursWasted}h × €${hourlyRate}`)), /*#__PURE__*/React.createElement("div", {
-      style: {
-        ...gCard,
+      })
+    }, lang === 'fr' ? "".concat(analysts, " \xD7 ").concat(hoursWasted, "h \xD7 ").concat(hourlyRate, "\u20AC") : "".concat(analysts, " \xD7 ").concat(hoursWasted, "h \xD7 \u20AC").concat(hourlyRate))), /*#__PURE__*/React.createElement("div", {
+      style: _objectSpread(_objectSpread({}, gCard), {}, {
         padding: '18px 16px',
         textAlign: 'center',
         background: 'rgba(217,91,91,.1)',
         border: '1px solid rgba(217,91,91,.28)',
         borderTop: '2px solid rgba(217,91,91,.5)'
-      }
+      })
     }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        ...label8,
+      style: _objectSpread(_objectSpread({}, label8), {}, {
         color: 'var(--danger)',
         marginBottom: 8,
         fontSize: 7.5,
         letterSpacing: '2px'
-      }
+      })
     }, lang === 'fr' ? '🔥 ARGENT BRÛLÉ PAR AN' : '🔥 MONEY BURNED PER YEAR'), /*#__PURE__*/React.createElement("div", {
       style: {
         fontFamily: "'Bebas Neue',sans-serif",
@@ -3289,21 +3398,19 @@ function Dashboard({
         marginTop: 7
       }
     }, Math.round(analysts * hoursWasted), " h/", lang === 'fr' ? 'sem' : 'week', " \xB7 ", lang === 'fr' ? '0 valeur produite' : '0 value produced')), /*#__PURE__*/React.createElement("div", {
-      style: {
-        ...gCard,
+      style: _objectSpread(_objectSpread({}, gCard), {}, {
         padding: '14px 16px',
         background: 'rgba(92,184,122,.08)',
         border: '1px solid rgba(92,184,122,.25)',
         borderTop: '2px solid rgba(92,184,122,.45)'
-      }
+      })
     }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        ...label8,
+      style: _objectSpread(_objectSpread({}, label8), {}, {
         color: 'var(--accent3)',
         marginBottom: 10,
         fontSize: 7,
         letterSpacing: '2px'
-      }
+      })
     }, lang === 'fr' ? '✦ RÉCUPÉRÉ PAR AUTOMATISATION' : '✦ RECOVERED VIA AUTOMATION'), /*#__PURE__*/React.createElement("div", {
       style: {
         display: 'flex',
@@ -3319,14 +3426,13 @@ function Dashboard({
         lineHeight: 1
       }
     }, "\u20AC", savedYear.toLocaleString()), /*#__PURE__*/React.createElement("div", {
-      style: {
-        ...gCard,
+      style: _objectSpread(_objectSpread({}, gCard), {}, {
         padding: '5px 12px',
         textAlign: 'center',
         background: 'rgba(94,141,238,.12)',
         border: '1px solid rgba(94,141,238,.25)',
         borderRadius: 8
-      }
+      })
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         fontFamily: "'Bebas Neue',sans-serif",
@@ -3335,11 +3441,10 @@ function Dashboard({
         lineHeight: 1
       }
     }, roiPct, "%"), /*#__PURE__*/React.createElement("div", {
-      style: {
-        ...label8,
+      style: _objectSpread(_objectSpread({}, label8), {}, {
         fontSize: 6,
         color: 'var(--text-mute)'
-      }
+      })
     }, "ROI Y1"))), /*#__PURE__*/React.createElement("div", {
       style: {
         height: 4,
@@ -3351,7 +3456,7 @@ function Dashboard({
       style: {
         height: '100%',
         width: '85%',
-        background: `linear-gradient(90deg,var(--accent3),var(--accent1))`,
+        background: "linear-gradient(90deg,var(--accent3),var(--accent1))",
         borderRadius: 3
       }
     })), /*#__PURE__*/React.createElement("div", {
@@ -3368,15 +3473,14 @@ function Dashboard({
         color: 'var(--accent3)'
       }
     }, "85% ", lang === 'fr' ? 'récupéré' : 'recovered'), /*#__PURE__*/React.createElement("span", null, "100%"))))), /*#__PURE__*/React.createElement("div", {
-      style: {
-        ...gCard,
+      style: _objectSpread(_objectSpread({}, gCard), {}, {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
         gap: 12,
         flexWrap: 'wrap',
         padding: '14px 18px'
-      }
+      })
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         display: 'flex',
@@ -3385,12 +3489,11 @@ function Dashboard({
         flexWrap: 'wrap'
       }
     }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-      style: {
-        ...label8,
+      style: _objectSpread(_objectSpread({}, label8), {}, {
         fontSize: 6.5,
         color: 'var(--text-mute)',
         marginBottom: 4
-      }
+      })
     }, lang === 'fr' ? 'PAYBACK ESTIMÉ' : 'ESTIMATED PAYBACK'), /*#__PURE__*/React.createElement("div", {
       style: {
         fontFamily: "'Bebas Neue',sans-serif",
@@ -3399,12 +3502,11 @@ function Dashboard({
         lineHeight: 1
       }
     }, lang === 'fr' ? '< 3 mois' : '< 3 months')), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-      style: {
-        ...label8,
+      style: _objectSpread(_objectSpread({}, label8), {}, {
         fontSize: 6.5,
         color: 'var(--text-mute)',
         marginBottom: 4
-      }
+      })
     }, lang === 'fr' ? 'ÉCONOMIE AN 3' : '3-YEAR SAVING'), /*#__PURE__*/React.createElement("div", {
       style: {
         fontFamily: "'Bebas Neue',sans-serif",
@@ -3413,7 +3515,9 @@ function Dashboard({
         lineHeight: 1
       }
     }, "\u20AC", Math.round(savedYear * 3).toLocaleString()))), /*#__PURE__*/React.createElement("button", {
-      onClick: () => window.location.href = 'mailto:antoinedemaintenant@alumni.ie.edu',
+      onClick: function onClick() {
+        return window.location.href = 'mailto:antoinedemaintenant@alumni.ie.edu';
+      },
       style: {
         padding: '11px 22px',
         borderRadius: 10,
@@ -3431,15 +3535,14 @@ function Dashboard({
         boxShadow: '0 4px 16px rgba(94,141,238,.35)'
       }
     }, "\uD83D\uDCE9 ", lang === 'fr' ? 'Stopper l\'hémorragie →' : 'Stop the bleeding →')));
-  })()));
+  }()));
 }
 
 /* ─── PIPELINE ──────────────────────────────────────────────────────────────── */
-function Pipeline({
-  lang
-}) {
-  const t = T[lang];
-  const CATS = lang === 'fr' ? [{
+function Pipeline(_ref0) {
+  var lang = _ref0.lang;
+  var t = T[lang];
+  var CATS = lang === 'fr' ? [{
     id: 'finance',
     icon: '💰',
     label: 'Finance & Clôture',
@@ -3490,7 +3593,7 @@ function Pipeline({
     label: 'Auto Reporting',
     color: '#FF2D78'
   }];
-  const FLOWS = lang === 'fr' ? {
+  var FLOWS = lang === 'fr' ? {
     finance: [{
       icon: '🗄️',
       label: 'SAP / ERP',
@@ -3773,7 +3876,7 @@ function Pipeline({
       color: '#FF2D78'
     }]
   };
-  const DESCS = lang === 'fr' ? {
+  var DESCS = lang === 'fr' ? {
     finance: 'Récupération automatique des données comptables, analyse par IA, génération du document de clôture et envoi automatique aux équipes — sans aucune saisie manuelle.',
     sales: 'Surveillance des ventes en temps réel, alertes automatiques sur les écarts, dashboard Power BI live mis à jour chaque heure et diffusé aux commerciaux.',
     supply: 'Prévision des ruptures de stock 8 semaines à l\'avance, génération automatique des bons de commande et workflow d\'approbation digitalisé.',
@@ -3786,7 +3889,7 @@ function Pipeline({
     linkedin: 'Ideal prospect identification via Sales Navigator, AI-personalized messages and automated follow-up sequence with CRM tracking.',
     reporting: 'Multi-source collection, overnight transformation, Power BI report enriched with AI narrative and automatically sent every Monday morning.'
   };
-  const STATS = lang === 'fr' ? {
+  var STATS = lang === 'fr' ? {
     finance: ['−40h/mois clôture', '−95% erreurs saisie', 'Livré en 6 min auto'],
     sales: ['Alertes < 5 min', 'Dashboard 100% live', '0 rapport manuel'],
     supply: ['Ruptures −80%', 'Lead time optimisé', 'PO en 1 clic'],
@@ -3799,37 +3902,95 @@ function Pipeline({
     linkedin: ['5× more replies', '100 prospects/day', '3-msg sequence'],
     reporting: ['Monday 8AM auto', '14 reports/week', '0 copy-paste']
   };
-  const [active, setActive] = useState('finance');
-  const [running, setRunning] = useState(false);
-  const [done, setDone] = useState(-1);
-  const [logs, setLogs] = useState([]);
-  const logRef = useRef();
-  const cat = CATS.find(c => c.id === active);
-  const flow = FLOWS[active];
-  const desc = DESCS[active];
-  const stats = STATS[active];
-  useEffect(() => {
+  var _useState21 = useState('finance'),
+    _useState22 = _slicedToArray(_useState21, 2),
+    active = _useState22[0],
+    setActive = _useState22[1];
+  var _useState23 = useState(false),
+    _useState24 = _slicedToArray(_useState23, 2),
+    running = _useState24[0],
+    setRunning = _useState24[1];
+  var _useState25 = useState(-1),
+    _useState26 = _slicedToArray(_useState25, 2),
+    done = _useState26[0],
+    setDone = _useState26[1];
+  var _useState27 = useState([]),
+    _useState28 = _slicedToArray(_useState27, 2),
+    logs = _useState28[0],
+    setLogs = _useState28[1];
+  var logRef = useRef();
+  var cat = CATS.find(function (c) {
+    return c.id === active;
+  });
+  var flow = FLOWS[active];
+  var desc = DESCS[active];
+  var stats = STATS[active];
+  useEffect(function () {
     setDone(-1);
     setLogs([]);
     setRunning(false);
   }, [active, lang]);
-  async function runFlow() {
-    if (running) return;
-    setRunning(true);
-    setDone(-1);
-    setLogs([]);
-    for (let i = 0; i < flow.length; i++) {
-      await new Promise(r => setTimeout(r, 750));
-      setDone(i);
-      setLogs(l => [...l, {
-        step: flow[i].label,
-        detail: flow[i].detail
-      }]);
-      if (logRef.current) setTimeout(() => {
-        if (logRef.current) logRef.current.scrollTop = 9999;
-      }, 50);
-    }
-    setRunning(false);
+  function runFlow() {
+    return _runFlow.apply(this, arguments);
+  }
+  function _runFlow() {
+    _runFlow = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+      var _loop, i;
+      return _regenerator().w(function (_context2) {
+        while (1) switch (_context2.n) {
+          case 0:
+            if (!running) {
+              _context2.n = 1;
+              break;
+            }
+            return _context2.a(2);
+          case 1:
+            setRunning(true);
+            setDone(-1);
+            setLogs([]);
+            _loop = /*#__PURE__*/_regenerator().m(function _loop(i) {
+              return _regenerator().w(function (_context) {
+                while (1) switch (_context.n) {
+                  case 0:
+                    _context.n = 1;
+                    return new Promise(function (r) {
+                      return setTimeout(r, 750);
+                    });
+                  case 1:
+                    setDone(i);
+                    setLogs(function (l) {
+                      return [].concat(_toConsumableArray(l), [{
+                        step: flow[i].label,
+                        detail: flow[i].detail
+                      }]);
+                    });
+                    if (logRef.current) setTimeout(function () {
+                      if (logRef.current) logRef.current.scrollTop = 9999;
+                    }, 50);
+                  case 2:
+                    return _context.a(2);
+                }
+              }, _loop);
+            });
+            i = 0;
+          case 2:
+            if (!(i < flow.length)) {
+              _context2.n = 4;
+              break;
+            }
+            return _context2.d(_regeneratorValues(_loop(i)), 3);
+          case 3:
+            i++;
+            _context2.n = 2;
+            break;
+          case 4:
+            setRunning(false);
+          case 5:
+            return _context2.a(2);
+        }
+      }, _callee);
+    }));
+    return _runFlow.apply(this, arguments);
   }
   return /*#__PURE__*/React.createElement("div", {
     className: "pipeline-wrap reveal"
@@ -3840,64 +4001,70 @@ function Pipeline({
       marginBottom: 20,
       flexWrap: 'wrap'
     }
-  }, CATS.map(c => /*#__PURE__*/React.createElement("button", {
-    key: c.id,
-    onClick: () => setActive(c.id),
-    style: {
-      padding: '8px 14px',
-      borderRadius: 8,
-      border: `1.5px solid ${active === c.id ? c.color : 'var(--border-dim)'}`,
-      background: active === c.id ? `rgba(${c.color === '#00F0A8' ? '0,240,168' : c.color === '#415a77' ? '191,58,255' : c.color === '#FFB800' ? '255,184,0' : c.color === '#0091FF' ? '0,145,255' : '255,45,120'},0.12)` : 'var(--bg)',
-      color: active === c.id ? c.color : 'var(--text-dim)',
-      fontSize: 11,
-      fontFamily: "'Space Mono',monospace",
-      fontWeight: 700,
-      cursor: 'pointer',
-      letterSpacing: '0.5px',
-      transition: 'all .25s',
-      display: 'flex',
-      alignItems: 'center',
-      gap: 6
-    }
-  }, /*#__PURE__*/React.createElement("span", null, c.icon), /*#__PURE__*/React.createElement("span", null, c.label)))), /*#__PURE__*/React.createElement("div", {
+  }, CATS.map(function (c) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: c.id,
+      onClick: function onClick() {
+        return setActive(c.id);
+      },
+      style: {
+        padding: '8px 14px',
+        borderRadius: 8,
+        border: "1.5px solid ".concat(active === c.id ? c.color : 'var(--border-dim)'),
+        background: active === c.id ? "rgba(".concat(c.color === '#00F0A8' ? '0,240,168' : c.color === '#415a77' ? '191,58,255' : c.color === '#FFB800' ? '255,184,0' : c.color === '#0091FF' ? '0,145,255' : '255,45,120', ",0.12)") : 'var(--bg)',
+        color: active === c.id ? c.color : 'var(--text-dim)',
+        fontSize: 11,
+        fontFamily: "'Space Mono',monospace",
+        fontWeight: 700,
+        cursor: 'pointer',
+        letterSpacing: '0.5px',
+        transition: 'all .25s',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 6
+      }
+    }, /*#__PURE__*/React.createElement("span", null, c.icon), /*#__PURE__*/React.createElement("span", null, c.label));
+  })), /*#__PURE__*/React.createElement("div", {
     className: "pipeline-stages",
     style: {
       marginBottom: 14
     }
-  }, flow.map((s, i) => /*#__PURE__*/React.createElement(React.Fragment, {
-    key: i
-  }, /*#__PURE__*/React.createElement("div", {
-    className: `p-node${running && i === done + 1 ? ' running' : ''}${i <= done ? ' done' : ''}`,
-    style: i <= done ? {
-      borderColor: cat.color,
-      background: `rgba(${cat.color === '#00F0A8' ? '0,240,168' : cat.color === '#415a77' ? '191,58,255' : cat.color === '#FFB800' ? '255,184,0' : cat.color === '#0091FF' ? '0,145,255' : '255,45,120'},0.1)`
-    } : {}
-  }, i < done && /*#__PURE__*/React.createElement("span", {
-    className: "p-node-tick",
-    style: {
-      background: cat.color
-    }
-  }, "\u2713"), i === done && running && /*#__PURE__*/React.createElement("span", {
-    className: "p-node-tick",
-    style: {
-      background: cat.color
-    }
-  }, "\u27F3"), /*#__PURE__*/React.createElement("span", {
-    className: "p-node-icon"
-  }, s.icon), /*#__PURE__*/React.createElement("span", {
-    className: "p-node-label"
-  }, s.label), /*#__PURE__*/React.createElement("span", {
-    className: "p-node-detail"
-  }, s.detail)), i < flow.length - 1 && /*#__PURE__*/React.createElement("div", {
-    className: "p-connector"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "p-connector-fill",
-    style: {
-      width: done >= i ? '100%' : '0%',
-      background: cat.color,
-      transition: 'width 0.4s'
-    }
-  }))))), /*#__PURE__*/React.createElement("div", {
+  }, flow.map(function (s, i) {
+    return /*#__PURE__*/React.createElement(React.Fragment, {
+      key: i
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "p-node".concat(running && i === done + 1 ? ' running' : '').concat(i <= done ? ' done' : ''),
+      style: i <= done ? {
+        borderColor: cat.color,
+        background: "rgba(".concat(cat.color === '#00F0A8' ? '0,240,168' : cat.color === '#415a77' ? '191,58,255' : cat.color === '#FFB800' ? '255,184,0' : cat.color === '#0091FF' ? '0,145,255' : '255,45,120', ",0.1)")
+      } : {}
+    }, i < done && /*#__PURE__*/React.createElement("span", {
+      className: "p-node-tick",
+      style: {
+        background: cat.color
+      }
+    }, "\u2713"), i === done && running && /*#__PURE__*/React.createElement("span", {
+      className: "p-node-tick",
+      style: {
+        background: cat.color
+      }
+    }, "\u27F3"), /*#__PURE__*/React.createElement("span", {
+      className: "p-node-icon"
+    }, s.icon), /*#__PURE__*/React.createElement("span", {
+      className: "p-node-label"
+    }, s.label), /*#__PURE__*/React.createElement("span", {
+      className: "p-node-detail"
+    }, s.detail)), i < flow.length - 1 && /*#__PURE__*/React.createElement("div", {
+      className: "p-connector"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "p-connector-fill",
+      style: {
+        width: done >= i ? '100%' : '0%',
+        background: cat.color,
+        transition: 'width 0.4s'
+      }
+    })));
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       background: 'var(--glass-bg)',
       border: '1px solid var(--border-dim)',
@@ -3914,37 +4081,41 @@ function Pipeline({
       gap: 10,
       marginBottom: 14
     }
-  }, stats.map((s, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      flex: 1,
-      background: `rgba(${cat.color === '#00F0A8' ? '0,240,168' : cat.color === '#415a77' ? '191,58,255' : cat.color === '#FFB800' ? '255,184,0' : cat.color === '#0091FF' ? '0,145,255' : '255,45,120'},0.08)`,
-      border: `1px solid rgba(${cat.color === '#00F0A8' ? '0,240,168' : cat.color === '#415a77' ? '191,58,255' : cat.color === '#FFB800' ? '255,184,0' : cat.color === '#0091FF' ? '0,145,255' : '255,45,120'},0.25)`,
-      borderRadius: 8,
-      padding: '8px 12px',
-      textAlign: 'center'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 11,
-      fontWeight: 700,
-      color: cat.color,
-      fontFamily: "'Space Mono',monospace"
-    }
-  }, s)))), logs.length > 0 && /*#__PURE__*/React.createElement("div", {
+  }, stats.map(function (s, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        flex: 1,
+        background: "rgba(".concat(cat.color === '#00F0A8' ? '0,240,168' : cat.color === '#415a77' ? '191,58,255' : cat.color === '#FFB800' ? '255,184,0' : cat.color === '#0091FF' ? '0,145,255' : '255,45,120', ",0.08)"),
+        border: "1px solid rgba(".concat(cat.color === '#00F0A8' ? '0,240,168' : cat.color === '#415a77' ? '191,58,255' : cat.color === '#FFB800' ? '255,184,0' : cat.color === '#0091FF' ? '0,145,255' : '255,45,120', ",0.25)"),
+        borderRadius: 8,
+        padding: '8px 12px',
+        textAlign: 'center'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 11,
+        fontWeight: 700,
+        color: cat.color,
+        fontFamily: "'Space Mono',monospace"
+      }
+    }, s));
+  })), logs.length > 0 && /*#__PURE__*/React.createElement("div", {
     className: "pipeline-log",
     ref: logRef,
     style: {
       marginBottom: 12
     }
-  }, logs.map((l, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "log-line"
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: cat.color
-    }
-  }, "[", l.step, "]"), " ", l.detail, " \u2713")), !running && done === flow.length - 1 && /*#__PURE__*/React.createElement("div", {
+  }, logs.map(function (l, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: "log-line"
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: cat.color
+      }
+    }, "[", l.step, "]"), " ", l.detail, " \u2713");
+  }), !running && done === flow.length - 1 && /*#__PURE__*/React.createElement("div", {
     className: "log-line",
     style: {
       color: cat.color,
@@ -3955,25 +4126,25 @@ function Pipeline({
     onClick: runFlow,
     disabled: running,
     style: {
-      background: `linear-gradient(135deg,${cat.color},${cat.color === '#00F0A8' ? '#415a77' : cat.color === '#415a77' ? '#FF2D78' : '#00F0A8'})`
+      background: "linear-gradient(135deg,".concat(cat.color, ",").concat(cat.color === '#00F0A8' ? '#415a77' : cat.color === '#415a77' ? '#FF2D78' : '#00F0A8', ")")
     }
-  }, running ? lang === 'fr' ? 'EN COURS...' : 'RUNNING...' : lang === 'fr' ? `▶ SIMULER ${cat.label.toUpperCase()}` : `▶ SIMULATE ${cat.label.toUpperCase()}`));
+  }, running ? lang === 'fr' ? 'EN COURS...' : 'RUNNING...' : lang === 'fr' ? "\u25B6 SIMULER ".concat(cat.label.toUpperCase()) : "\u25B6 SIMULATE ".concat(cat.label.toUpperCase())));
 }
 /* ─── RADAR ─────────────────────────────────────────────────────────────────── */
-function RadarChart({
-  lang
-}) {
-  const t = T[lang];
-  const canvasRef = useRef();
-  const chartRef = useRef();
-  const data = RADAR_DATA[lang];
-  const COLORS = ['#415a77', '#FF2D78', '#00F0A8', '#FFB800', '#00C8FF', '#FF8C42'];
-  useEffect(() => {
+function RadarChart(_ref1) {
+  var lang = _ref1.lang;
+  var t = T[lang];
+  var canvasRef = useRef();
+  var chartRef = useRef();
+  var data = RADAR_DATA[lang];
+  var COLORS = ['#415a77', '#FF2D78', '#00F0A8', '#FFB800', '#00C8FF', '#FF8C42'];
+  useEffect(function () {
+    var _chartRef$current;
     if (!canvasRef.current) return;
-    chartRef.current?.destroy();
-    const th = document.body.getAttribute('data-theme');
-    const gridColor = th === 'light' ? 'rgba(114,0,212,.1)' : 'rgba(191,58,255,.12)';
-    const tickColor = th === 'light' ? '#6050A0' : '#7A6B9E';
+    (_chartRef$current = chartRef.current) === null || _chartRef$current === void 0 || _chartRef$current.destroy();
+    var th = document.body.getAttribute('data-theme');
+    var gridColor = th === 'light' ? 'rgba(114,0,212,.1)' : 'rgba(191,58,255,.12)';
+    var tickColor = th === 'light' ? '#6050A0' : '#7A6B9E';
     chartRef.current = new Chart(canvasRef.current, {
       type: 'radar',
       data: {
@@ -4034,7 +4205,10 @@ function RadarChart({
         }
       }
     });
-    return () => chartRef.current?.destroy();
+    return function () {
+      var _chartRef$current2;
+      return (_chartRef$current2 = chartRef.current) === null || _chartRef$current2 === void 0 ? void 0 : _chartRef$current2.destroy();
+    };
   }, [lang]);
   return /*#__PURE__*/React.createElement("div", {
     className: "radar-wrap reveal"
@@ -4044,47 +4218,63 @@ function RadarChart({
     ref: canvasRef
   })), /*#__PURE__*/React.createElement("div", {
     className: "radar-legend"
-  }, data.details.map((d, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "radar-legend-item"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "radar-legend-dot",
-    style: {
-      background: COLORS[i]
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "radar-legend-label"
-  }, d.label), /*#__PURE__*/React.createElement("div", {
-    className: "radar-legend-sub"
-  }, d.sub)), /*#__PURE__*/React.createElement("div", {
-    className: "radar-legend-pct"
-  }, d.pct, "%")))));
+  }, data.details.map(function (d, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: "radar-legend-item"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "radar-legend-dot",
+      style: {
+        background: COLORS[i]
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "radar-legend-label"
+    }, d.label), /*#__PURE__*/React.createElement("div", {
+      className: "radar-legend-sub"
+    }, d.sub)), /*#__PURE__*/React.createElement("div", {
+      className: "radar-legend-pct"
+    }, d.pct, "%"));
+  })));
 }
 
 /* ─── TERMINAL CHATBOT ──────────────────────────────────────────────────────── */
-function TerminalChatbot({
-  lang
-}) {
-  const t = T[lang];
-  const cmds = TERMINAL_CMDS[lang];
-  const [history, setHistory] = useState([{
-    t: 'sys',
-    m: lang === 'fr' ? "Bienvenue — antoine@portfolio:~$" : "Welcome — antoine@portfolio:~$"
-  }, {
-    t: 'dim',
-    m: lang === 'fr' ? "Tapez 'help' pour voir les commandes." : "Type 'help' to see commands."
-  }]);
-  const [input, setInput] = useState('');
-  const [cmdHist, setCmdHist] = useState([]);
-  const [histIdx, setHistIdx] = useState(-1);
-  const [typing, setTyping] = useState(false);
-  const outRef = useRef();
-  const inRef = useRef();
-  useEffect(() => {
+function TerminalChatbot(_ref10) {
+  var lang = _ref10.lang;
+  var t = T[lang];
+  var cmds = TERMINAL_CMDS[lang];
+  var _useState29 = useState([{
+      t: 'sys',
+      m: lang === 'fr' ? "Bienvenue — antoine@portfolio:~$" : "Welcome — antoine@portfolio:~$"
+    }, {
+      t: 'dim',
+      m: lang === 'fr' ? "Tapez 'help' pour voir les commandes." : "Type 'help' to see commands."
+    }]),
+    _useState30 = _slicedToArray(_useState29, 2),
+    history = _useState30[0],
+    setHistory = _useState30[1];
+  var _useState31 = useState(''),
+    _useState32 = _slicedToArray(_useState31, 2),
+    input = _useState32[0],
+    setInput = _useState32[1];
+  var _useState33 = useState([]),
+    _useState34 = _slicedToArray(_useState33, 2),
+    cmdHist = _useState34[0],
+    setCmdHist = _useState34[1];
+  var _useState35 = useState(-1),
+    _useState36 = _slicedToArray(_useState35, 2),
+    histIdx = _useState36[0],
+    setHistIdx = _useState36[1];
+  var _useState37 = useState(false),
+    _useState38 = _slicedToArray(_useState37, 2),
+    typing = _useState38[0],
+    setTyping = _useState38[1];
+  var outRef = useRef();
+  var inRef = useRef();
+  useEffect(function () {
     setHistory([{
       t: 'sys',
       m: lang === 'fr' ? "Bienvenue — antoine@portfolio:~$" : "Welcome — antoine@portfolio:~$"
@@ -4093,10 +4283,10 @@ function TerminalChatbot({
       m: lang === 'fr' ? "Tapez 'help' pour voir les commandes." : "Type 'help' to see commands."
     }]);
   }, [lang]);
-  useEffect(() => {
+  useEffect(function () {
     if (outRef.current) outRef.current.scrollTop = outRef.current.scrollHeight;
   }, [history, typing]);
-  const colorClass = {
+  var colorClass = {
     sys: 'chat-line-sys',
     info: 'chat-line-info',
     cmd: 'chat-line-info',
@@ -4106,51 +4296,111 @@ function TerminalChatbot({
     acc4: 'chat-line-acc4',
     err: 'chat-line-err'
   };
-  async function runCmd(raw) {
-    const cmd = raw.trim().toLowerCase();
-    if (!cmd) return;
-    setCmdHist(h => [raw, ...h]);
-    setHistIdx(-1);
-    setHistory(h => [...h, {
-      t: 'user',
-      m: `> ${raw}`
-    }]);
-    if (cmd === 'clear') {
-      setTimeout(() => setHistory([]), 100);
-      return;
-    }
-    const def = cmds[cmd] || cmds[raw.trim()];
-    if (!def) {
-      setHistory(h => [...h, {
-        t: 'err',
-        m: lang === 'fr' ? `Commande '${cmd}' introuvable. Tapez 'help'.` : `Command '${cmd}' not found. Type 'help'.`
-      }]);
-      return;
-    }
-    window.XP && window.XP.earn('terminal_cmd');
-    setTyping(true);
-    for (let i = 0; i < def.output.length; i++) {
-      await new Promise(r => setTimeout(r, i === 0 ? 200 : 75));
-      setHistory(h => [...h, def.output[i]]);
-    }
-    setTyping(false);
+  function runCmd(_x) {
+    return _runCmd.apply(this, arguments);
+  }
+  function _runCmd() {
+    _runCmd = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(raw) {
+      var cmd, def, _loop2, i;
+      return _regenerator().w(function (_context4) {
+        while (1) switch (_context4.n) {
+          case 0:
+            cmd = raw.trim().toLowerCase();
+            if (cmd) {
+              _context4.n = 1;
+              break;
+            }
+            return _context4.a(2);
+          case 1:
+            setCmdHist(function (h) {
+              return [raw].concat(_toConsumableArray(h));
+            });
+            setHistIdx(-1);
+            setHistory(function (h) {
+              return [].concat(_toConsumableArray(h), [{
+                t: 'user',
+                m: "> ".concat(raw)
+              }]);
+            });
+            if (!(cmd === 'clear')) {
+              _context4.n = 2;
+              break;
+            }
+            setTimeout(function () {
+              return setHistory([]);
+            }, 100);
+            return _context4.a(2);
+          case 2:
+            def = cmds[cmd] || cmds[raw.trim()];
+            if (def) {
+              _context4.n = 3;
+              break;
+            }
+            setHistory(function (h) {
+              return [].concat(_toConsumableArray(h), [{
+                t: 'err',
+                m: lang === 'fr' ? "Commande '".concat(cmd, "' introuvable. Tapez 'help'.") : "Command '".concat(cmd, "' not found. Type 'help'.")
+              }]);
+            });
+            return _context4.a(2);
+          case 3:
+            window.XP && window.XP.earn('terminal_cmd');
+            setTyping(true);
+            _loop2 = /*#__PURE__*/_regenerator().m(function _loop2(i) {
+              return _regenerator().w(function (_context3) {
+                while (1) switch (_context3.n) {
+                  case 0:
+                    _context3.n = 1;
+                    return new Promise(function (r) {
+                      return setTimeout(r, i === 0 ? 200 : 75);
+                    });
+                  case 1:
+                    setHistory(function (h) {
+                      return [].concat(_toConsumableArray(h), [def.output[i]]);
+                    });
+                  case 2:
+                    return _context3.a(2);
+                }
+              }, _loop2);
+            });
+            i = 0;
+          case 4:
+            if (!(i < def.output.length)) {
+              _context4.n = 6;
+              break;
+            }
+            return _context4.d(_regeneratorValues(_loop2(i)), 5);
+          case 5:
+            i++;
+            _context4.n = 4;
+            break;
+          case 6:
+            setTyping(false);
+          case 7:
+            return _context4.a(2);
+        }
+      }, _callee2);
+    }));
+    return _runCmd.apply(this, arguments);
   }
   function handleKey(e) {
     if (e.key === 'Enter') {
       runCmd(input);
       setInput('');
     } else if (e.key === 'ArrowUp') {
-      const ni = Math.min(histIdx + 1, cmdHist.length - 1);
+      var ni = Math.min(histIdx + 1, cmdHist.length - 1);
       setHistIdx(ni);
       setInput(cmdHist[ni] || '');
     } else if (e.key === 'ArrowDown') {
-      const ni = Math.max(histIdx - 1, -1);
-      setHistIdx(ni);
-      setInput(ni === -1 ? '' : cmdHist[ni] || '');
+      var _ni = Math.max(histIdx - 1, -1);
+      setHistIdx(_ni);
+      setInput(_ni === -1 ? '' : cmdHist[_ni] || '');
     } else if (e.key === 'Tab') {
       e.preventDefault();
-      const keys = Object.keys(cmds);
-      const m = keys.find(k => k.startsWith(input));
+      var keys = Object.keys(cmds);
+      var m = keys.find(function (k) {
+        return k.startsWith(input);
+      });
       if (m) setInput(m);
     }
   }
@@ -4169,11 +4419,16 @@ function TerminalChatbot({
   }, "antoine@portfolio:~$")), /*#__PURE__*/React.createElement("div", {
     className: "chat-output",
     ref: outRef,
-    onClick: () => inRef.current?.focus()
-  }, history.map((l, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: l.t === 'user' ? 'chat-line-user' : colorClass[l.t] || 'chat-line-info'
-  }, l.m)), typing && /*#__PURE__*/React.createElement("div", {
+    onClick: function onClick() {
+      var _inRef$current;
+      return (_inRef$current = inRef.current) === null || _inRef$current === void 0 ? void 0 : _inRef$current.focus();
+    }
+  }, history.map(function (l, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: l.t === 'user' ? 'chat-line-user' : colorClass[l.t] || 'chat-line-info'
+    }, l.m);
+  }), typing && /*#__PURE__*/React.createElement("div", {
     className: "chat-line-dim"
   }, "\u258A")), /*#__PURE__*/React.createElement("div", {
     className: "chat-input-row"
@@ -4183,7 +4438,9 @@ function TerminalChatbot({
     ref: inRef,
     className: "chat-input",
     value: input,
-    onChange: e => setInput(e.target.value),
+    onChange: function onChange(e) {
+      return setInput(e.target.value);
+    },
     onKeyDown: handleKey,
     autoComplete: "off",
     spellCheck: "false",
@@ -4194,24 +4451,29 @@ function TerminalChatbot({
 }
 
 /* ─── RECRUITER MODAL ───────────────────────────────────────────────────────── */
-function RecruiterModal({
-  lang,
-  onClose
-}) {
-  const t = T[lang];
-  const [profile, setProfile] = useState(null);
-  const profileKeys = ['executive', 'tech', 'data', 'hr'];
+function RecruiterModal(_ref11) {
+  var _RECRUITER_PROFILES$p;
+  var lang = _ref11.lang,
+    onClose = _ref11.onClose;
+  var t = T[lang];
+  var _useState39 = useState(null),
+    _useState40 = _slicedToArray(_useState39, 2),
+    profile = _useState40[0],
+    setProfile = _useState40[1];
+  var profileKeys = ['executive', 'tech', 'data', 'hr'];
   function pick(i) {
     setProfile(profileKeys[i]);
     window.XP && window.XP.earn('recruiter');
   }
-  const pdata = profile && RECRUITER_PROFILES[profile]?.[lang];
+  var pdata = profile && ((_RECRUITER_PROFILES$p = RECRUITER_PROFILES[profile]) === null || _RECRUITER_PROFILES$p === void 0 ? void 0 : _RECRUITER_PROFILES$p[lang]);
   return /*#__PURE__*/React.createElement("div", {
     className: "recruiter-modal-overlay",
     onClick: onClose
   }, /*#__PURE__*/React.createElement("div", {
     className: "recruiter-modal",
-    onClick: e => e.stopPropagation()
+    onClick: function onClick(e) {
+      return e.stopPropagation();
+    }
   }, /*#__PURE__*/React.createElement("div", {
     className: "recruiter-modal-header"
   }, /*#__PURE__*/React.createElement("div", {
@@ -4224,56 +4486,68 @@ function RecruiterModal({
     className: "recruiter-q"
   }, t.recruiterQ), /*#__PURE__*/React.createElement("div", {
     className: "recruiter-options"
-  }, t.recruiterProfiles.map((p, i) => /*#__PURE__*/React.createElement("button", {
-    key: i,
-    className: "recruiter-option",
-    onClick: () => pick(i)
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "recruiter-option-icon"
-  }, p.icon), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontWeight: 700,
-      marginBottom: '2px'
-    }
-  }, p.label), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: '.72rem',
-      color: 'var(--text-mute)'
-    }
-  }, p.sub)))))) : /*#__PURE__*/React.createElement("div", {
+  }, t.recruiterProfiles.map(function (p, i) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      className: "recruiter-option",
+      onClick: function onClick() {
+        return pick(i);
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "recruiter-option-icon"
+    }, p.icon), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 700,
+        marginBottom: '2px'
+      }
+    }, p.label), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: '.72rem',
+        color: 'var(--text-mute)'
+      }
+    }, p.sub)));
+  }))) : /*#__PURE__*/React.createElement("div", {
     className: "recruiter-mode-content"
   }, /*#__PURE__*/React.createElement("div", {
     className: "recruiter-mode-title"
-  }, pdata?.title), /*#__PURE__*/React.createElement("div", {
+  }, pdata === null || pdata === void 0 ? void 0 : pdata.title), /*#__PURE__*/React.createElement("div", {
     className: "recruiter-highlight"
   }, /*#__PURE__*/React.createElement("div", {
     className: "recruiter-highlight-title"
   }, lang === 'fr' ? 'CE QUI COMPTE POUR VOUS' : 'WHAT MATTERS TO YOU'), /*#__PURE__*/React.createElement("div", {
     className: "recruiter-highlight-items"
-  }, pdata?.highlights.map((h, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "recruiter-highlight-item"
-  }, h)))), /*#__PURE__*/React.createElement("div", {
+  }, pdata === null || pdata === void 0 ? void 0 : pdata.highlights.map(function (h, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: "recruiter-highlight-item"
+    }, h);
+  }))), /*#__PURE__*/React.createElement("div", {
     className: "recruiter-mode-text"
-  }, pdata?.note), /*#__PURE__*/React.createElement("button", {
+  }, pdata === null || pdata === void 0 ? void 0 : pdata.note), /*#__PURE__*/React.createElement("button", {
     className: "recruiter-close-btn",
     onClick: onClose
   }, lang === 'fr' ? '✓ COMPRIS, MERCI' : '✓ GOT IT, THANKS'))));
 }
 
 /* ─── BLOG ──────────────────────────────────────────────────────────────────── */
-function Blog({
-  lang
-}) {
-  const t = T[lang];
-  const [openPost, setOpenPost] = useState(null);
-  const posts = BLOG_POSTS[lang];
+function Blog(_ref12) {
+  var lang = _ref12.lang;
+  var t = T[lang];
+  var _useState41 = useState(null),
+    _useState42 = _slicedToArray(_useState41, 2),
+    openPost = _useState42[0],
+    setOpenPost = _useState42[1];
+  var posts = BLOG_POSTS[lang];
   return /*#__PURE__*/React.createElement(React.Fragment, null, openPost && /*#__PURE__*/React.createElement("div", {
     className: "blog-modal-overlay",
-    onClick: () => setOpenPost(null)
+    onClick: function onClick() {
+      return setOpenPost(null);
+    }
   }, /*#__PURE__*/React.createElement("div", {
     className: "blog-modal",
-    onClick: e => e.stopPropagation()
+    onClick: function onClick(e) {
+      return e.stopPropagation();
+    }
   }, /*#__PURE__*/React.createElement("div", {
     className: "blog-modal-inner"
   }, /*#__PURE__*/React.createElement("div", {
@@ -4289,70 +4563,86 @@ function Blog({
     }
   }), /*#__PURE__*/React.createElement("button", {
     className: "blog-modal-close",
-    onClick: () => setOpenPost(null)
+    onClick: function onClick() {
+      return setOpenPost(null);
+    }
   }, t.blogClose)))), /*#__PURE__*/React.createElement("div", {
     className: "blog-grid"
-  }, posts.map((p, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: `blog-card reveal reveal-delay-${i + 1}`,
-    onClick: () => setOpenPost(p)
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "blog-tag"
-  }, p.tag), /*#__PURE__*/React.createElement("div", {
-    className: "blog-title"
-  }, p.title), /*#__PURE__*/React.createElement("div", {
-    className: "blog-excerpt"
-  }, p.excerpt), /*#__PURE__*/React.createElement("div", {
-    className: "blog-meta"
-  }, /*#__PURE__*/React.createElement("span", null, p.date), /*#__PURE__*/React.createElement("span", null, "\xB7"), /*#__PURE__*/React.createElement("span", null, p.readTime, " ", t.blogReadTime)), /*#__PURE__*/React.createElement("div", {
-    className: "blog-read-more"
-  }, t.blogRead)))));
+  }, posts.map(function (p, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: "blog-card reveal reveal-delay-".concat(i + 1),
+      onClick: function onClick() {
+        return setOpenPost(p);
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "blog-tag"
+    }, p.tag), /*#__PURE__*/React.createElement("div", {
+      className: "blog-title"
+    }, p.title), /*#__PURE__*/React.createElement("div", {
+      className: "blog-excerpt"
+    }, p.excerpt), /*#__PURE__*/React.createElement("div", {
+      className: "blog-meta"
+    }, /*#__PURE__*/React.createElement("span", null, p.date), /*#__PURE__*/React.createElement("span", null, "\xB7"), /*#__PURE__*/React.createElement("span", null, p.readTime, " ", t.blogReadTime)), /*#__PURE__*/React.createElement("div", {
+      className: "blog-read-more"
+    }, t.blogRead));
+  })));
 }
 
 /* ─── MISC COMPONENTS ───────────────────────────────────────────────────────── */
-function ScrollToTop({
-  lang
-}) {
-  const t = T[lang];
-  const [show, setShow] = useState(false);
-  useEffect(() => {
-    const h = () => setShow(window.scrollY > 400);
+function ScrollToTop(_ref13) {
+  var lang = _ref13.lang;
+  var t = T[lang];
+  var _useState43 = useState(false),
+    _useState44 = _slicedToArray(_useState43, 2),
+    show = _useState44[0],
+    setShow = _useState44[1];
+  useEffect(function () {
+    var h = function h() {
+      return setShow(window.scrollY > 400);
+    };
     window.addEventListener('scroll', h);
-    return () => window.removeEventListener('scroll', h);
+    return function () {
+      return window.removeEventListener('scroll', h);
+    };
   }, []);
   return /*#__PURE__*/React.createElement("button", {
-    className: `scroll-top${show ? ' visible' : ''}`,
-    onClick: () => window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    })
+    className: "scroll-top".concat(show ? ' visible' : ''),
+    onClick: function onClick() {
+      return window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
   }, t.scrollTop);
 }
-function FloatingPills({
-  lang,
-  mode
-}) {
+function FloatingPills(_ref14) {
+  var lang = _ref14.lang,
+    mode = _ref14.mode;
   // phase: 'float' | 'explode' | 'hidden' | 'return'
-  const [phase, setPhase] = useState('float');
-  const phaseRef = useRef('float');
-  const isHuman = mode === 'human';
-  const grad = isHuman ? 'linear-gradient(135deg,#415a77,#7C3AED)' : 'linear-gradient(135deg,#BF3AFF,#FF2D78)';
-  const glows = isHuman ? ['rgba(65,90,119,.55)', 'rgba(124,58,237,.45)', 'rgba(65,90,119,.4)'] : ['rgba(191,58,255,.55)', 'rgba(191,58,255,.45)', 'rgba(255,45,120,.4)'];
-  const labelColor = isHuman ? '#7C3AED' : '#415a77';
-  const label3Color = isHuman ? '#7C3AED' : '#FF2D78';
-  useEffect(() => {
+  var _useState45 = useState('float'),
+    _useState46 = _slicedToArray(_useState45, 2),
+    phase = _useState46[0],
+    setPhase = _useState46[1];
+  var phaseRef = useRef('float');
+  var isHuman = mode === 'human';
+  var grad = isHuman ? 'linear-gradient(135deg,#415a77,#7C3AED)' : 'linear-gradient(135deg,#BF3AFF,#FF2D78)';
+  var glows = isHuman ? ['rgba(65,90,119,.55)', 'rgba(124,58,237,.45)', 'rgba(65,90,119,.4)'] : ['rgba(191,58,255,.55)', 'rgba(191,58,255,.45)', 'rgba(255,45,120,.4)'];
+  var labelColor = isHuman ? '#7C3AED' : '#415a77';
+  var label3Color = isHuman ? '#7C3AED' : '#FF2D78';
+  useEffect(function () {
     phaseRef.current = phase;
   }, [phase]);
-  useEffect(() => {
-    let t1 = null,
+  useEffect(function () {
+    var t1 = null,
       t2 = null;
-    const onScroll = () => {
-      const down = window.scrollY > 80;
-      const p = phaseRef.current;
+    var onScroll = function onScroll() {
+      var down = window.scrollY > 80;
+      var p = phaseRef.current;
       if (down && p === 'float') {
         setPhase('explode');
         phaseRef.current = 'explode';
-        t1 = setTimeout(() => {
+        t1 = setTimeout(function () {
           setPhase('hidden');
           phaseRef.current = 'hidden';
         }, 500);
@@ -4360,7 +4650,7 @@ function FloatingPills({
         clearTimeout(t1);
         setPhase('return');
         phaseRef.current = 'return';
-        t2 = setTimeout(() => {
+        t2 = setTimeout(function () {
           setPhase('float');
           phaseRef.current = 'float';
         }, 650);
@@ -4369,13 +4659,13 @@ function FloatingPills({
     window.addEventListener('scroll', onScroll, {
       passive: true
     });
-    return () => {
+    return function () {
       window.removeEventListener('scroll', onScroll);
       clearTimeout(t1);
       clearTimeout(t2);
     };
   }, []);
-  const pills = [{
+  var pills = [{
     tag: 'a',
     href: 'mailto:antoinedemaintenant@alumni.ie.edu',
     icon: '✉️',
@@ -4415,9 +4705,9 @@ function FloatingPills({
     explodeAnim: 'explodePill3 0.5s 0.1s ease-in forwards',
     returnAnim: 'returnPill3 0.65s 0.1s cubic-bezier(.18,.89,.32,1.28) forwards'
   }];
-  return /*#__PURE__*/React.createElement(React.Fragment, null, pills.map((p, i) => {
-    const anim = phase === 'float' ? p.floatAnim : phase === 'explode' ? p.explodeAnim : phase === 'return' ? p.returnAnim : 'none';
-    const st = {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, pills.map(function (p, i) {
+    var anim = phase === 'float' ? p.floatAnim : phase === 'explode' ? p.explodeAnim : phase === 'return' ? p.returnAnim : 'none';
+    var st = {
       position: 'fixed',
       right: p.right,
       top: p.top,
@@ -4434,7 +4724,7 @@ function FloatingPills({
       visibility: phase === 'hidden' ? 'hidden' : 'visible',
       pointerEvents: phase === 'hidden' || phase === 'explode' ? 'none' : 'auto'
     };
-    const inner = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    var inner = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
       style: {
         width: p.size,
         height: p.size,
@@ -4443,7 +4733,7 @@ function FloatingPills({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        boxShadow: `0 0 26px ${glows[p.gi]}`,
+        boxShadow: "0 0 26px ".concat(glows[p.gi]),
         fontSize: p.size === 50 ? 22 : 20
       }
     }, p.icon), /*#__PURE__*/React.createElement("span", {
@@ -4464,8 +4754,8 @@ function FloatingPills({
     }));
     if (p.tag === 'button') return /*#__PURE__*/React.createElement("button", {
       key: i,
-      onClick: () => {
-        const el = document.getElementById('experience');
+      onClick: function onClick() {
+        var el = document.getElementById('experience');
         if (el) el.scrollIntoView({
           behavior: 'smooth'
         });
@@ -4475,9 +4765,9 @@ function FloatingPills({
     if (p.onClick) return /*#__PURE__*/React.createElement("a", {
       key: i,
       href: p.href,
-      onClick: e => {
+      onClick: function onClick(e) {
         e.preventDefault();
-        const el = document.getElementById('certificates');
+        var el = document.getElementById('certificates');
         if (el) el.scrollIntoView({
           behavior: 'smooth'
         });
@@ -4491,14 +4781,22 @@ function FloatingPills({
     }, inner);
   }));
 }
-function VisitorBadge({
-  lang
-}) {
-  const t = T[lang];
-  const [c, setC] = useState(2847);
-  useEffect(() => {
-    const iv = setInterval(() => setC(x => x + Math.floor(Math.random() * 2)), 55000);
-    return () => clearInterval(iv);
+function VisitorBadge(_ref15) {
+  var lang = _ref15.lang;
+  var t = T[lang];
+  var _useState47 = useState(2847),
+    _useState48 = _slicedToArray(_useState47, 2),
+    c = _useState48[0],
+    setC = _useState48[1];
+  useEffect(function () {
+    var iv = setInterval(function () {
+      return setC(function (x) {
+        return x + Math.floor(Math.random() * 2);
+      });
+    }, 55000);
+    return function () {
+      return clearInterval(iv);
+    };
   }, []);
   return /*#__PURE__*/React.createElement("div", {
     className: "visitor-badge"
@@ -4511,25 +4809,35 @@ function VisitorBadge({
   }, c.toLocaleString()), /*#__PURE__*/React.createElement("span", null, t.visitors));
 }
 /* ─── VISITOR LIVE MAP ───────────────────────────────────────────────────────── */
-function VisitorMap({
-  lang,
-  mode
-}) {
-  const WORKER_URL = "https://dm_antoine--a8211e3c18ee11f18d2742dde27851f2.web.val.run";
-  const mapRef = useRef(null);
-  const leafletMap = useRef(null);
-  const markersLayer = useRef(null);
-  const [myGeo, setMyGeo] = useState(null);
-  const [mapReady, setMapReady] = useState(false);
-  const [realCount, setRealCount] = useState(null); // real count from tracking POST response
-  const FALLBACK = 2847;
-  const isHuman = mode === 'human';
+function VisitorMap(_ref16) {
+  var lang = _ref16.lang,
+    mode = _ref16.mode;
+  var WORKER_URL = "https://dm_antoine--a8211e3c18ee11f18d2742dde27851f2.web.val.run";
+  var mapRef = useRef(null);
+  var leafletMap = useRef(null);
+  var markersLayer = useRef(null);
+  var _useState49 = useState(null),
+    _useState50 = _slicedToArray(_useState49, 2),
+    myGeo = _useState50[0],
+    setMyGeo = _useState50[1];
+  var _useState51 = useState(false),
+    _useState52 = _slicedToArray(_useState51, 2),
+    mapReady = _useState52[0],
+    setMapReady = _useState52[1];
+  var _useState53 = useState(null),
+    _useState54 = _slicedToArray(_useState53, 2),
+    realCount = _useState54[0],
+    setRealCount = _useState54[1]; // real count from tracking POST response
+  var FALLBACK = 2847;
+  var isHuman = mode === 'human';
 
   // 1. Geo-locate current visitor (real IP)
-  useEffect(() => {
+  useEffect(function () {
     fetch('https://ipapi.co/json/', {
       signal: AbortSignal.timeout(5000)
-    }).then(r => r.json()).then(d => {
+    }).then(function (r) {
+      return r.json();
+    }).then(function (d) {
       if (d && d.latitude) {
         setMyGeo({
           lat: d.latitude,
@@ -4539,21 +4847,24 @@ function VisitorMap({
           countryCode: d.country_code
         });
       }
-    }).catch(() => {});
+    })["catch"](function () {});
   }, []);
 
   // 2. GET worker → count réel + locations historiques
-  const [pastLocations, setPastLocations] = useState([]);
-  useEffect(() => {
+  var _useState55 = useState([]),
+    _useState56 = _slicedToArray(_useState55, 2),
+    pastLocations = _useState56[0],
+    setPastLocations = _useState56[1];
+  useEffect(function () {
     // Fallback depuis l'event POST si dispo immédiatement
     if (typeof window.__realVisitCount === 'number') setRealCount(window.__realVisitCount);else {
       try {
-        const s = sessionStorage.getItem('__visitCount');
+        var s = sessionStorage.getItem('__visitCount');
         if (s) setRealCount(parseInt(s));
       } catch (e) {}
     }
     // Event POST
-    const handler = e => {
+    var handler = function handler(e) {
       if (typeof e.detail === 'number') setRealCount(e.detail);
     };
     window.addEventListener('workerCount', handler);
@@ -4561,22 +4872,26 @@ function VisitorMap({
     fetch(WORKER_URL, {
       method: 'GET',
       signal: AbortSignal.timeout(5000)
-    }).then(r => r.ok ? r.json() : null).then(d => {
+    }).then(function (r) {
+      return r.ok ? r.json() : null;
+    }).then(function (d) {
       if (!d) return;
       if (typeof d.count === 'number' && d.count > 0) setRealCount(d.count);
       if (Array.isArray(d.locations) && d.locations.length > 0) setPastLocations(d.locations);
-    }).catch(() => {});
-    return () => window.removeEventListener('workerCount', handler);
+    })["catch"](function () {});
+    return function () {
+      return window.removeEventListener('workerCount', handler);
+    };
   }, []);
-  const displayCount = realCount ?? FALLBACK;
+  var displayCount = realCount !== null && realCount !== void 0 ? realCount : FALLBACK;
 
   // 3. Init Leaflet — tiles adapt to mode (dark/light)
-  useEffect(() => {
+  useEffect(function () {
     if (!mapRef.current || leafletMap.current) return;
-    const tileUrl = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png';
-    const initMap = L => {
+    var tileUrl = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png';
+    var initMap = function initMap(L) {
       if (!mapRef.current) return;
-      const map = L.map(mapRef.current, {
+      var map = L.map(mapRef.current, {
         center: [30, 15],
         zoom: 3,
         minZoom: 2,
@@ -4595,12 +4910,14 @@ function VisitorMap({
       setMapReady(true);
     };
     if (window.L) initMap(window.L);else {
-      const s = document.createElement('script');
+      var s = document.createElement('script');
       s.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
-      s.onload = () => initMap(window.L);
+      s.onload = function () {
+        return initMap(window.L);
+      };
       document.head.appendChild(s);
     }
-    return () => {
+    return function () {
       if (leafletMap.current) {
         try {
           leafletMap.current.remove();
@@ -4611,44 +4928,44 @@ function VisitorMap({
   }, [isHuman]);
 
   // 4. Pin current visitor + past locations on map
-  useEffect(() => {
+  useEffect(function () {
     if (!leafletMap.current || !markersLayer.current || !window.L) return;
-    const L = window.L;
+    var L = window.L;
     markersLayer.current.clearLayers();
-    const dotColor = isHuman ? '#7C3AED' : '#00F0A8';
+    var dotColor = isHuman ? '#7C3AED' : '#00F0A8';
 
     // Past locations (real historical visitors from worker)
-    pastLocations.forEach(v => {
+    pastLocations.forEach(function (v) {
       if (!v.lat || !v.lon) return;
-      const pastIcon = L.divIcon({
+      var pastIcon = L.divIcon({
         className: '',
-        html: `<div style="width:8px;height:8px;border-radius:50%;background:#415a77;opacity:0.7;box-shadow:0 0 8px #415a77;"></div>`,
+        html: "<div style=\"width:8px;height:8px;border-radius:50%;background:#415a77;opacity:0.7;box-shadow:0 0 8px #415a77;\"></div>",
         iconSize: [8, 8],
         iconAnchor: [4, 4]
       });
-      const m = L.marker([v.lat, v.lon], {
+      var m = L.marker([v.lat, v.lon], {
         icon: pastIcon,
         zIndexOffset: 0
       });
-      const flag = v.cc ? `<img src="https://flagcdn.com/16x12/${v.cc.toLowerCase()}.png" style="margin-right:5px;vertical-align:middle;border-radius:2px"/>` : '';
-      m.bindPopup(`<div style="min-width:110px;font-family:sans-serif">${flag}<strong>${v.city || v.country || '?'}</strong><br/><span style="color:#415a77;font-size:10px">${lang === 'fr' ? 'Visiteur passé' : 'Past visitor'}</span></div>`);
+      var flag = v.cc ? "<img src=\"https://flagcdn.com/16x12/".concat(v.cc.toLowerCase(), ".png\" style=\"margin-right:5px;vertical-align:middle;border-radius:2px\"/>") : '';
+      m.bindPopup("<div style=\"min-width:110px;font-family:sans-serif\">".concat(flag, "<strong>").concat(v.city || v.country || '?', "</strong><br/><span style=\"color:#415a77;font-size:10px\">").concat(lang === 'fr' ? 'Visiteur passé' : 'Past visitor', "</span></div>"));
       markersLayer.current.addLayer(m);
     });
 
     // Current visitor
     if (myGeo) {
-      const icon = L.divIcon({
+      var icon = L.divIcon({
         className: '',
-        html: `<div style="width:14px;height:14px;border-radius:50%;background:${dotColor};box-shadow:0 0 14px ${dotColor};border:2px solid #fff;"></div>`,
+        html: "<div style=\"width:14px;height:14px;border-radius:50%;background:".concat(dotColor, ";box-shadow:0 0 14px ").concat(dotColor, ";border:2px solid #fff;\"></div>"),
         iconSize: [14, 14],
         iconAnchor: [7, 7]
       });
-      const marker = L.marker([myGeo.lat, myGeo.lon], {
-        icon,
+      var marker = L.marker([myGeo.lat, myGeo.lon], {
+        icon: icon,
         zIndexOffset: 1000
       });
-      const flag = myGeo.countryCode ? `<img src="https://flagcdn.com/16x12/${myGeo.countryCode.toLowerCase()}.png" style="margin-right:5px;vertical-align:middle;border-radius:2px"/>` : '';
-      marker.bindPopup(`<div style="min-width:130px;font-family:sans-serif">${flag}<strong>${myGeo.city || myGeo.country || '?'}</strong><br/><span style="color:${dotColor};font-size:10px">← ${lang === 'fr' ? 'Vous êtes ici' : 'You are here'}</span></div>`);
+      var flag = myGeo.countryCode ? "<img src=\"https://flagcdn.com/16x12/".concat(myGeo.countryCode.toLowerCase(), ".png\" style=\"margin-right:5px;vertical-align:middle;border-radius:2px\"/>") : '';
+      marker.bindPopup("<div style=\"min-width:130px;font-family:sans-serif\">".concat(flag, "<strong>").concat(myGeo.city || myGeo.country || '?', "</strong><br/><span style=\"color:").concat(dotColor, ";font-size:10px\">\u2190 ").concat(lang === 'fr' ? 'Vous êtes ici' : 'You are here', "</span></div>"));
       markersLayer.current.addLayer(marker);
       leafletMap.current.setView([myGeo.lat, myGeo.lon], 4, {
         animate: true,
@@ -4656,9 +4973,9 @@ function VisitorMap({
       });
     }
   }, [myGeo, pastLocations, isHuman, lang]);
-  const ua = navigator.userAgent;
-  const device = /iPhone|iPad/.test(ua) ? '📱 iPhone' : /Android/.test(ua) ? '📱 Android' : /Mac/.test(ua) ? '🖥️ Mac' : /Windows/.test(ua) ? '🖥️ Windows' : /Linux/.test(ua) ? '🐧 Linux' : '🖥️ Desktop';
-  const browserLang = (navigator.language || 'en').split('-')[0].toUpperCase();
+  var ua = navigator.userAgent;
+  var device = /iPhone|iPad/.test(ua) ? '📱 iPhone' : /Android/.test(ua) ? '📱 Android' : /Mac/.test(ua) ? '🖥️ Mac' : /Windows/.test(ua) ? '🖥️ Windows' : /Linux/.test(ua) ? '🐧 Linux' : '🖥️ Desktop';
+  var browserLang = (navigator.language || 'en').split('-')[0].toUpperCase();
 
   /* ── HUMAN MODE ─────────────────────────────────────────────────── */
   if (isHuman) {
@@ -4722,11 +5039,11 @@ function VisitorMap({
       style: {
         color: '#7C3AED'
       }
-    }, myGeo ? `${myGeo.city || myGeo.country || '…'} ${myGeo.countryCode ? `🏴` : '🌍'}` : 'quelque part sur Terre 🌍')) : /*#__PURE__*/React.createElement(React.Fragment, null, "You're reading from", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("em", {
+    }, myGeo ? "".concat(myGeo.city || myGeo.country || '…', " ").concat(myGeo.countryCode ? "\uD83C\uDFF4" : '🌍') : 'quelque part sur Terre 🌍')) : /*#__PURE__*/React.createElement(React.Fragment, null, "You're reading from", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("em", {
       style: {
         color: '#7C3AED'
       }
-    }, myGeo ? `${myGeo.city || myGeo.country || '…'} 🌍` : 'somewhere on Earth 🌍')))), /*#__PURE__*/React.createElement("div", {
+    }, myGeo ? "".concat(myGeo.city || myGeo.country || '…', " \uD83C\uDF0D") : 'somewhere on Earth 🌍')))), /*#__PURE__*/React.createElement("div", {
       style: {
         textAlign: 'right',
         paddingTop: 4
@@ -4838,7 +5155,7 @@ function VisitorMap({
         letterSpacing: '1px'
       }
     }, myGeo.city || myGeo.country, " \xB7 ", lang === 'fr' ? 'vous' : 'you'), myGeo.countryCode && /*#__PURE__*/React.createElement("img", {
-      src: `https://flagcdn.com/16x12/${myGeo.countryCode.toLowerCase()}.png`,
+      src: "https://flagcdn.com/16x12/".concat(myGeo.countryCode.toLowerCase(), ".png"),
       style: {
         height: 11,
         borderRadius: 2
@@ -4853,7 +5170,7 @@ function VisitorMap({
     }, [{
       icon: '📍',
       label: lang === 'fr' ? 'Votre ville' : 'Your city',
-      value: myGeo ? `${myGeo.city || '—'}, ${myGeo.country || ''}` : lang === 'fr' ? 'Localisation…' : 'Locating…',
+      value: myGeo ? "".concat(myGeo.city || '—', ", ").concat(myGeo.country || '') : lang === 'fr' ? 'Localisation…' : 'Locating…',
       accent: '#7C3AED',
       live: true
     }, {
@@ -4869,73 +5186,75 @@ function VisitorMap({
     }, {
       icon: '🔢',
       label: lang === 'fr' ? 'Vous êtes visiteur n°' : 'You are visitor #',
-      value: `${(displayCount + 1).toLocaleString()}`,
+      value: "".concat((displayCount + 1).toLocaleString()),
       accent: '#10B981'
-    }].map((c, i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        background: 'var(--bg-card)',
-        border: `1px solid ${c.accent}20`,
-        borderLeft: `3px solid ${c.accent}`,
-        borderRadius: 12,
-        padding: '16px 18px',
-        display: 'flex',
-        alignItems: 'center',
-        gap: 14,
-        transition: 'transform .18s,box-shadow .18s',
-        cursor: 'default'
-      },
-      onMouseEnter: e => {
-        e.currentTarget.style.transform = 'translateX(4px)';
-        e.currentTarget.style.boxShadow = `0 6px 20px ${c.accent}18`;
-      },
-      onMouseLeave: e => {
-        e.currentTarget.style.transform = 'none';
-        e.currentTarget.style.boxShadow = 'none';
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: '1.3rem',
-        flexShrink: 0
-      }
-    }, c.icon), /*#__PURE__*/React.createElement("div", {
-      style: {
-        flex: 1,
-        minWidth: 0
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontFamily: "'Space Mono',monospace",
-        fontSize: '.4rem',
-        color: 'var(--text-mute)',
-        letterSpacing: '2px',
-        textTransform: 'uppercase',
-        marginBottom: 4,
-        display: 'flex',
-        alignItems: 'center',
-        gap: 6
-      }
-    }, c.label, c.live && /*#__PURE__*/React.createElement("span", {
-      style: {
-        width: 5,
-        height: 5,
-        borderRadius: '50%',
-        background: '#10B981',
-        display: 'inline-block',
-        animation: 'pulse 2s infinite'
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontFamily: "'Space Grotesk',sans-serif",
-        fontSize: '1rem',
-        fontWeight: 700,
-        color: 'var(--text)',
-        lineHeight: 1.2,
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap'
-      }
-    }, c.value)))), /*#__PURE__*/React.createElement("div", {
+    }].map(function (c, i) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          background: 'var(--bg-card)',
+          border: "1px solid ".concat(c.accent, "20"),
+          borderLeft: "3px solid ".concat(c.accent),
+          borderRadius: 12,
+          padding: '16px 18px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 14,
+          transition: 'transform .18s,box-shadow .18s',
+          cursor: 'default'
+        },
+        onMouseEnter: function onMouseEnter(e) {
+          e.currentTarget.style.transform = 'translateX(4px)';
+          e.currentTarget.style.boxShadow = "0 6px 20px ".concat(c.accent, "18");
+        },
+        onMouseLeave: function onMouseLeave(e) {
+          e.currentTarget.style.transform = 'none';
+          e.currentTarget.style.boxShadow = 'none';
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: '1.3rem',
+          flexShrink: 0
+        }
+      }, c.icon), /*#__PURE__*/React.createElement("div", {
+        style: {
+          flex: 1,
+          minWidth: 0
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontFamily: "'Space Mono',monospace",
+          fontSize: '.4rem',
+          color: 'var(--text-mute)',
+          letterSpacing: '2px',
+          textTransform: 'uppercase',
+          marginBottom: 4,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 6
+        }
+      }, c.label, c.live && /*#__PURE__*/React.createElement("span", {
+        style: {
+          width: 5,
+          height: 5,
+          borderRadius: '50%',
+          background: '#10B981',
+          display: 'inline-block',
+          animation: 'pulse 2s infinite'
+        }
+      })), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontFamily: "'Space Grotesk',sans-serif",
+          fontSize: '1rem',
+          fontWeight: 700,
+          color: 'var(--text)',
+          lineHeight: 1.2,
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap'
+        }
+      }, c.value)));
+    }), /*#__PURE__*/React.createElement("div", {
       style: {
         fontFamily: "'Space Mono',monospace",
         fontSize: '.38rem',
@@ -4979,39 +5298,41 @@ function VisitorMap({
         flexWrap: 'wrap',
         gap: 8
       }
-    }, pastLocations.slice(0, 15).map((v, i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        display: 'flex',
-        alignItems: 'center',
-        gap: 7,
-        padding: '7px 14px',
-        borderRadius: 30,
-        background: 'var(--bg-card)',
-        border: '1px solid var(--border-dim)',
-        fontFamily: "'Space Grotesk',sans-serif",
-        fontSize: '.82rem',
-        color: 'var(--text)',
-        transition: 'transform .15s,box-shadow .15s',
-        cursor: 'default'
-      },
-      onMouseEnter: e => {
-        e.currentTarget.style.transform = 'translateY(-2px)';
-        e.currentTarget.style.boxShadow = '0 4px 16px rgba(124,58,237,.12)';
-      },
-      onMouseLeave: e => {
-        e.currentTarget.style.transform = 'none';
-        e.currentTarget.style.boxShadow = 'none';
-      }
-    }, v.cc && /*#__PURE__*/React.createElement("img", {
-      src: `https://flagcdn.com/16x12/${v.cc.toLowerCase()}.png`,
-      style: {
-        height: 11,
-        borderRadius: 2,
-        flexShrink: 0
-      },
-      alt: ""
-    }), /*#__PURE__*/React.createElement("span", null, v.city || v.country || '—')))))));
+    }, pastLocations.slice(0, 15).map(function (v, i) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          display: 'flex',
+          alignItems: 'center',
+          gap: 7,
+          padding: '7px 14px',
+          borderRadius: 30,
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border-dim)',
+          fontFamily: "'Space Grotesk',sans-serif",
+          fontSize: '.82rem',
+          color: 'var(--text)',
+          transition: 'transform .15s,box-shadow .15s',
+          cursor: 'default'
+        },
+        onMouseEnter: function onMouseEnter(e) {
+          e.currentTarget.style.transform = 'translateY(-2px)';
+          e.currentTarget.style.boxShadow = '0 4px 16px rgba(124,58,237,.12)';
+        },
+        onMouseLeave: function onMouseLeave(e) {
+          e.currentTarget.style.transform = 'none';
+          e.currentTarget.style.boxShadow = 'none';
+        }
+      }, v.cc && /*#__PURE__*/React.createElement("img", {
+        src: "https://flagcdn.com/16x12/".concat(v.cc.toLowerCase(), ".png"),
+        style: {
+          height: 11,
+          borderRadius: 2,
+          flexShrink: 0
+        },
+        alt: ""
+      }), /*#__PURE__*/React.createElement("span", null, v.city || v.country || '—'));
+    })))));
   }
 
   /* ── TECH MODE ──────────────────────────────────────────────────── */
@@ -5057,11 +5378,11 @@ function VisitorMap({
     style: {
       color: '#415a77'
     }
-  }, "depuis ", myGeo ? `${myGeo.city || myGeo.country || '…'}` : '…')) : /*#__PURE__*/React.createElement(React.Fragment, null, "You're connecting ", /*#__PURE__*/React.createElement("em", {
+  }, "depuis ", myGeo ? "".concat(myGeo.city || myGeo.country || '…') : '…')) : /*#__PURE__*/React.createElement(React.Fragment, null, "You're connecting ", /*#__PURE__*/React.createElement("em", {
     style: {
       color: '#415a77'
     }
-  }, "from ", myGeo ? `${myGeo.city || myGeo.country || '…'}` : '…'))), myGeo && /*#__PURE__*/React.createElement("div", {
+  }, "from ", myGeo ? "".concat(myGeo.city || myGeo.country || '…') : '…'))), myGeo && /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 8,
       fontFamily: "'Space Mono',monospace",
@@ -5073,7 +5394,7 @@ function VisitorMap({
       gap: 6
     }
   }, "\uD83D\uDCCD ", myGeo.city, myGeo.city && myGeo.country ? ', ' : '', myGeo.country, myGeo.countryCode && /*#__PURE__*/React.createElement("img", {
-    src: `https://flagcdn.com/16x12/${myGeo.countryCode.toLowerCase()}.png`,
+    src: "https://flagcdn.com/16x12/".concat(myGeo.countryCode.toLowerCase(), ".png"),
     style: {
       height: 10,
       verticalAlign: 'middle',
@@ -5086,7 +5407,7 @@ function VisitorMap({
     className: "vmap-stat"
   }, /*#__PURE__*/React.createElement("div", {
     className: "vmap-stat-n"
-  }, realCount ? realCount.toLocaleString() : `${FALLBACK.toLocaleString()}+`), /*#__PURE__*/React.createElement("div", {
+  }, realCount ? realCount.toLocaleString() : "".concat(FALLBACK.toLocaleString(), "+")), /*#__PURE__*/React.createElement("div", {
     className: "vmap-stat-l"
   }, lang === 'fr' ? 'sessions totales' : 'total sessions', !realCount && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
     style: {
@@ -5176,7 +5497,7 @@ function VisitorMap({
       boxShadow: '0 0 6px #00F0A8'
     }
   }), myGeo.countryCode && /*#__PURE__*/React.createElement("img", {
-    src: `https://flagcdn.com/16x12/${myGeo.countryCode.toLowerCase()}.png`,
+    src: "https://flagcdn.com/16x12/".concat(myGeo.countryCode.toLowerCase(), ".png"),
     style: {
       height: 10,
       borderRadius: 2,
@@ -5195,23 +5516,27 @@ function VisitorMap({
     }
   }, "// ", lang === 'fr' ? 'Géoloc. IP anonyme · 0 données simulées · compteur réel si worker expose GET' : 'Anonymous IP geoloc · 0 simulated data · real count if worker exposes GET')));
 }
-function CopyEmailButton({
-  lang
-}) {
-  const t = T[lang];
-  const [copied, setCopied] = useState(false);
+function CopyEmailButton(_ref17) {
+  var lang = _ref17.lang;
+  var t = T[lang];
+  var _useState57 = useState(false),
+    _useState58 = _slicedToArray(_useState57, 2),
+    copied = _useState58[0],
+    setCopied = _useState58[1];
   function copy() {
-    navigator.clipboard.writeText('antoinedemaintenant@alumni.ie.edu').then(() => {
+    navigator.clipboard.writeText('antoinedemaintenant@alumni.ie.edu').then(function () {
       setCopied(true);
-      setTimeout(() => setCopied(false), 2200);
+      setTimeout(function () {
+        return setCopied(false);
+      }, 2200);
     });
   }
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: `copy-toast${copied ? ' show' : ''}`
+    className: "copy-toast".concat(copied ? ' show' : '')
   }, t.contactCopied), /*#__PURE__*/React.createElement("a", {
     href: "mailto:antoinedemaintenant@alumni.ie.edu",
     className: "contact-card",
-    onClick: e => {
+    onClick: function onClick(e) {
       e.preventDefault();
       copy();
     }
@@ -5230,24 +5555,25 @@ function CopyEmailButton({
     className: "contact-val"
   }, "antoinedemaintenant@alumni.ie.edu"))));
 }
-function CountryModal({
-  country,
-  onClose,
-  lang
-}) {
-  const t = T[lang];
+function CountryModal(_ref18) {
+  var country = _ref18.country,
+    onClose = _ref18.onClose,
+    lang = _ref18.lang;
+  var t = T[lang];
   if (!country) return null;
   return /*#__PURE__*/React.createElement("div", {
     className: "country-modal-overlay",
     onClick: onClose
   }, /*#__PURE__*/React.createElement("div", {
     className: "country-modal",
-    onClick: e => e.stopPropagation()
+    onClick: function onClick(e) {
+      return e.stopPropagation();
+    }
   }, /*#__PURE__*/React.createElement("div", {
     className: "country-modal-header"
   }, /*#__PURE__*/React.createElement("img", {
     className: "country-modal-flag",
-    src: `https://flagcdn.com/80x60/${country.iso}.png`,
+    src: "https://flagcdn.com/80x60/".concat(country.iso, ".png"),
     alt: country.n
   }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "country-modal-title"
@@ -5257,10 +5583,12 @@ function CountryModal({
     className: "country-modal-body"
   }, /*#__PURE__*/React.createElement("div", {
     className: "country-modal-tags"
-  }, country.tags.map((tag, i) => /*#__PURE__*/React.createElement("span", {
-    key: i,
-    className: "country-modal-tag"
-  }, tag))), /*#__PURE__*/React.createElement("div", {
+  }, country.tags.map(function (tag, i) {
+    return /*#__PURE__*/React.createElement("span", {
+      key: i,
+      className: "country-modal-tag"
+    }, tag);
+  })), /*#__PURE__*/React.createElement("div", {
     className: "country-modal-text"
   }, country.text), /*#__PURE__*/React.createElement("button", {
     className: "country-modal-close",
@@ -5269,23 +5597,31 @@ function CountryModal({
 }
 
 /* ─── CALENDLY MOCK ──────────────────────────────────────────────────────────── */
-function CalendlyModal({
-  lang,
-  onClose
-}) {
-  const [selDay, setSelDay] = useState(null);
-  const [selTime, setSelTime] = useState(null);
-  const [confirmed, setConfirmed] = useState(false);
-  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  const times = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00'];
+function CalendlyModal(_ref19) {
+  var lang = _ref19.lang,
+    onClose = _ref19.onClose;
+  var _useState59 = useState(null),
+    _useState60 = _slicedToArray(_useState59, 2),
+    selDay = _useState60[0],
+    setSelDay = _useState60[1];
+  var _useState61 = useState(null),
+    _useState62 = _slicedToArray(_useState61, 2),
+    selTime = _useState62[0],
+    setSelTime = _useState62[1];
+  var _useState63 = useState(false),
+    _useState64 = _slicedToArray(_useState63, 2),
+    confirmed = _useState64[0],
+    setConfirmed = _useState64[1];
+  var days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  var times = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00'];
   // Build a simple 4-week calendar starting from today
-  const today = new Date();
-  const todayNum = today.getDate();
-  const firstDow = new Date(today.getFullYear(), today.getMonth(), 1).getDay();
-  const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+  var today = new Date();
+  var todayNum = today.getDate();
+  var firstDow = new Date(today.getFullYear(), today.getMonth(), 1).getDay();
+  var daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
   // available days: not weekend, not past, not today
-  const isAvail = d => {
-    const dow = new Date(today.getFullYear(), today.getMonth(), d).getDay();
+  var isAvail = function isAvail(d) {
+    var dow = new Date(today.getFullYear(), today.getMonth(), d).getDay();
     return d > todayNum && dow !== 0 && dow !== 6;
   };
   function confirm() {
@@ -5296,15 +5632,17 @@ function CalendlyModal({
     // open real calendly in bg
     window.open('https://calendly.com/antoinedemaintenant-alumni/30min', '_blank');
   }
-  const cells = [];
-  for (let i = 0; i < firstDow; i++) cells.push(null);
-  for (let d = 1; d <= daysInMonth; d++) cells.push(d);
+  var cells = [];
+  for (var i = 0; i < firstDow; i++) cells.push(null);
+  for (var d = 1; d <= daysInMonth; d++) cells.push(d);
   return /*#__PURE__*/React.createElement("div", {
     className: "cal-overlay",
     onClick: onClose
   }, /*#__PURE__*/React.createElement("div", {
     className: "cal-modal",
-    onClick: e => e.stopPropagation()
+    onClick: function onClick(e) {
+      return e.stopPropagation();
+    }
   }, /*#__PURE__*/React.createElement("div", {
     className: "cal-header"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
@@ -5330,17 +5668,23 @@ function CalendlyModal({
     year: 'numeric'
   }).toUpperCase()), /*#__PURE__*/React.createElement("div", {
     className: "cal-fake"
-  }, (lang === 'fr' ? ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'] : days).map(d => /*#__PURE__*/React.createElement("div", {
-    key: d,
-    className: "cal-day-header"
-  }, d)), cells.map((d, i) => d === null ? /*#__PURE__*/React.createElement("div", {
-    key: 'e' + i,
-    className: "cal-day empty"
-  }) : /*#__PURE__*/React.createElement("div", {
-    key: d,
-    className: `cal-day${d === todayNum ? ' past' : ''}${isAvail(d) ? ' available' : ''}${selDay === d ? ' selected' : ''}`,
-    onClick: () => isAvail(d) && setSelDay(d)
-  }, d))), selDay && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }, (lang === 'fr' ? ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'] : days).map(function (d) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: d,
+      className: "cal-day-header"
+    }, d);
+  }), cells.map(function (d, i) {
+    return d === null ? /*#__PURE__*/React.createElement("div", {
+      key: 'e' + i,
+      className: "cal-day empty"
+    }) : /*#__PURE__*/React.createElement("div", {
+      key: d,
+      className: "cal-day".concat(d === todayNum ? ' past' : '').concat(isAvail(d) ? ' available' : '').concat(selDay === d ? ' selected' : ''),
+      onClick: function onClick() {
+        return isAvail(d) && setSelDay(d);
+      }
+    }, d);
+  })), selDay && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: "'Space Mono',monospace",
       fontSize: '.5rem',
@@ -5349,17 +5693,21 @@ function CalendlyModal({
       marginBottom: '8px',
       textTransform: 'uppercase'
     }
-  }, lang === 'fr' ? `Créneaux le ${selDay}` : `Slots on ${selDay}`), /*#__PURE__*/React.createElement("div", {
+  }, lang === 'fr' ? "Cr\xE9neaux le ".concat(selDay) : "Slots on ".concat(selDay)), /*#__PURE__*/React.createElement("div", {
     className: "cal-time-slots"
-  }, times.map(t => /*#__PURE__*/React.createElement("div", {
-    key: t,
-    className: `cal-slot${selTime === t ? ' selected' : ''}`,
-    onClick: () => setSelTime(t)
-  }, t)))), /*#__PURE__*/React.createElement("button", {
+  }, times.map(function (t) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: t,
+      className: "cal-slot".concat(selTime === t ? ' selected' : ''),
+      onClick: function onClick() {
+        return setSelTime(t);
+      }
+    }, t);
+  }))), /*#__PURE__*/React.createElement("button", {
     className: "cal-confirm",
     onClick: confirm,
     disabled: !selDay || !selTime
-  }, selDay && selTime ? `✓ ${lang === 'fr' ? 'Confirmer' : 'Confirm'} ${selDay} @ ${selTime}` : lang === 'fr' ? 'Sélectionnez une date et un créneau' : 'Select a date and time slot'), /*#__PURE__*/React.createElement("div", {
+  }, selDay && selTime ? "\u2713 ".concat(lang === 'fr' ? 'Confirmer' : 'Confirm', " ").concat(selDay, " @ ").concat(selTime) : lang === 'fr' ? 'Sélectionnez une date et un créneau' : 'Select a date and time slot'), /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: "'Space Mono',monospace",
       fontSize: '.44rem',
@@ -5376,7 +5724,7 @@ function CalendlyModal({
     className: "cal-confirmed-title"
   }, lang === 'fr' ? 'Call réservé !' : 'Call Booked!'), /*#__PURE__*/React.createElement("div", {
     className: "cal-confirmed-text"
-  }, lang === 'fr' ? `${selDay} @ ${selTime} — Vous recevrez un email de confirmation.` : `${selDay} @ ${selTime} — You'll receive a confirmation email.`, /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+  }, lang === 'fr' ? "".concat(selDay, " @ ").concat(selTime, " \u2014 Vous recevrez un email de confirmation.") : "".concat(selDay, " @ ").concat(selTime, " \u2014 You'll receive a confirmation email."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
     style: {
       color: '#415a77'
     }
@@ -5384,12 +5732,14 @@ function CalendlyModal({
 }
 
 /* ─── WORLD MAP (D3 — visited countries only) ───────────────────────────────── */
-function WorldMap({
-  countries,
-  setActiveCountry,
-  lang
-}) {
-  const [hov, setHov] = useState(null);
+function WorldMap(_ref20) {
+  var countries = _ref20.countries,
+    setActiveCountry = _ref20.setActiveCountry,
+    lang = _ref20.lang;
+  var _useState65 = useState(null),
+    _useState66 = _slicedToArray(_useState65, 2),
+    hov = _useState66[0],
+    setHov = _useState66[1];
   return /*#__PURE__*/React.createElement("div", {
     style: {
       width: '100%'
@@ -5400,101 +5750,112 @@ function WorldMap({
       gridTemplateColumns: 'repeat(3,1fr)',
       gap: 16
     }
-  }, countries.map((c, i) => /*#__PURE__*/React.createElement("button", {
-    key: i,
-    onClick: () => setActiveCountry(c),
-    onMouseEnter: () => setHov(i),
-    onMouseLeave: () => setHov(null),
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-      gap: 0,
-      padding: 0,
-      overflow: 'hidden',
-      backdropFilter: 'var(--glass-blur)',
-      WebkitBackdropFilter: 'var(--glass-blur)',
-      background: 'var(--card-solid)',
-      border: `1px solid ${hov === i ? 'var(--accent1)' : 'var(--glass-border)'}`,
-      borderRadius: 18,
-      cursor: 'pointer',
-      transition: 'all .28s cubic-bezier(.16,1,.3,1)',
-      textAlign: 'left',
-      transform: hov === i ? 'translateY(-4px)' : 'none',
-      boxShadow: hov === i ? 'var(--glass-shadow)' : '0 2px 12px rgba(0,0,0,.08)'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: '100%',
-      padding: '16px 18px 12px',
-      background: 'rgba(255,255,255,.06)',
-      borderBottom: '1px solid var(--glass-border)',
-      display: 'flex',
-      alignItems: 'center',
-      gap: 12
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 34,
-      lineHeight: 1,
-      flexShrink: 0
-    }
-  }, c.emoji), /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1,
-      minWidth: 0
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Grotesk',sans-serif",
-      fontWeight: 800,
-      fontSize: '1.1rem',
-      color: 'var(--text)',
-      letterSpacing: '-.2px',
-      lineHeight: 1,
-      marginBottom: 4
-    }
-  }, c.n), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Mono',monospace",
-      fontSize: '.4rem',
-      color: 'var(--accent2)',
-      letterSpacing: '2px',
-      textTransform: 'uppercase'
-    }
-  }, c.sub))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      padding: '12px 18px 14px',
-      flex: 1,
-      width: '100%'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Grotesk',sans-serif",
-      fontSize: '.76rem',
-      color: 'var(--text-sec)',
-      lineHeight: 1.65,
-      marginBottom: 10
-    }
-  }, c.text?.slice(0, 88), c.text?.length > 88 ? '…' : ''), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      gap: 5,
-      flexWrap: 'wrap'
-    }
-  }, c.tags?.slice(0, 3).map((tag, j) => /*#__PURE__*/React.createElement("span", {
-    key: j,
-    style: {
-      fontFamily: "'Space Grotesk',sans-serif",
-      fontSize: '.6rem',
-      fontWeight: 500,
-      color: '#415a77',
-      background: 'rgba(255,255,255,.06)',
-      border: '1px solid var(--glass-border)',
-      padding: '3px 9px',
-      borderRadius: 20
-    }
-  }, tag))))))), /*#__PURE__*/React.createElement("div", {
+  }, countries.map(function (c, i) {
+    var _c$text, _c$text2, _c$tags;
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      onClick: function onClick() {
+        return setActiveCountry(c);
+      },
+      onMouseEnter: function onMouseEnter() {
+        return setHov(i);
+      },
+      onMouseLeave: function onMouseLeave() {
+        return setHov(null);
+      },
+      style: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        gap: 0,
+        padding: 0,
+        overflow: 'hidden',
+        backdropFilter: 'var(--glass-blur)',
+        WebkitBackdropFilter: 'var(--glass-blur)',
+        background: 'var(--card-solid)',
+        border: "1px solid ".concat(hov === i ? 'var(--accent1)' : 'var(--glass-border)'),
+        borderRadius: 18,
+        cursor: 'pointer',
+        transition: 'all .28s cubic-bezier(.16,1,.3,1)',
+        textAlign: 'left',
+        transform: hov === i ? 'translateY(-4px)' : 'none',
+        boxShadow: hov === i ? 'var(--glass-shadow)' : '0 2px 12px rgba(0,0,0,.08)'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        width: '100%',
+        padding: '16px 18px 12px',
+        background: 'rgba(255,255,255,.06)',
+        borderBottom: '1px solid var(--glass-border)',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 12
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 34,
+        lineHeight: 1,
+        flexShrink: 0
+      }
+    }, c.emoji), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1,
+        minWidth: 0
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: "'Space Grotesk',sans-serif",
+        fontWeight: 800,
+        fontSize: '1.1rem',
+        color: 'var(--text)',
+        letterSpacing: '-.2px',
+        lineHeight: 1,
+        marginBottom: 4
+      }
+    }, c.n), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: "'Space Mono',monospace",
+        fontSize: '.4rem',
+        color: 'var(--accent2)',
+        letterSpacing: '2px',
+        textTransform: 'uppercase'
+      }
+    }, c.sub))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        padding: '12px 18px 14px',
+        flex: 1,
+        width: '100%'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: "'Space Grotesk',sans-serif",
+        fontSize: '.76rem',
+        color: 'var(--text-sec)',
+        lineHeight: 1.65,
+        marginBottom: 10
+      }
+    }, (_c$text = c.text) === null || _c$text === void 0 ? void 0 : _c$text.slice(0, 88), ((_c$text2 = c.text) === null || _c$text2 === void 0 ? void 0 : _c$text2.length) > 88 ? '…' : ''), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: 5,
+        flexWrap: 'wrap'
+      }
+    }, (_c$tags = c.tags) === null || _c$tags === void 0 ? void 0 : _c$tags.slice(0, 3).map(function (tag, j) {
+      return /*#__PURE__*/React.createElement("span", {
+        key: j,
+        style: {
+          fontFamily: "'Space Grotesk',sans-serif",
+          fontSize: '.6rem',
+          fontWeight: 500,
+          color: '#415a77',
+          background: 'rgba(255,255,255,.06)',
+          border: '1px solid var(--glass-border)',
+          padding: '3px 9px',
+          borderRadius: 20
+        }
+      }, tag);
+    }))));
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 14,
       backdropFilter: 'var(--glass-blur)',
@@ -5543,7 +5904,7 @@ function WorldMap({
 
 /* ─── HUMAN APP ──────────────────────────────────────────────────────────────── */
 
-const CHAPTERS = [{
+var CHAPTERS = [{
   id: 'about',
   label: 'INTRO'
 }, {
@@ -5570,10 +5931,9 @@ const CHAPTERS = [{
 }];
 
 /* ─── CERT WALL ──────────────────────────────────────────────────────────────── */
-function CertWall({
-  lang
-}) {
-  const FEATURED = [{
+function CertWall(_ref21) {
+  var lang = _ref21.lang;
+  var FEATURED = [{
     title: 'Claude with the\nAnthropic API',
     issuer: 'Anthropic',
     date: 'March 5, 2026',
@@ -5619,7 +5979,7 @@ function CertWall({
     linkBg: 'rgba(255,45,120,.1)',
     linkBorder: 'rgba(255,45,120,.38)'
   }];
-  const SECONDARY = [{
+  var SECONDARY = [{
     title: 'Intro to Model Context Protocol',
     issuer: 'Anthropic',
     id: 'qi53hzrjg8gn',
@@ -5659,153 +6019,224 @@ function CertWall({
     className: "cert-wall"
   }, /*#__PURE__*/React.createElement("div", {
     className: "cert-stat-banner"
-  }, [['8', lang === 'fr' ? 'CERTIFICATIONS TOTALES' : 'TOTAL CERTS'], null, ['3', lang === 'fr' ? 'NIVEAU AVANCÉ' : 'ADVANCED LEVEL'], null, ['2', lang === 'fr' ? 'CO-DIPLÔMÉS UNIVERSITÉ' : 'UNIVERSITY CO-ISSUED'], null, ['Mar 2026', lang === 'fr' ? 'TOUTES OBTENUES LE' : 'ALL EARNED']].map((item, i) => item === null ? /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "cert-stat-div"
-  }) : /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "cert-stat-item"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "cert-stat-n"
-  }, item[0]), /*#__PURE__*/React.createElement("span", {
-    className: "cert-stat-l"
-  }, item[1])))), /*#__PURE__*/React.createElement("div", {
+  }, [['8', lang === 'fr' ? 'CERTIFICATIONS TOTALES' : 'TOTAL CERTS'], null, ['3', lang === 'fr' ? 'NIVEAU AVANCÉ' : 'ADVANCED LEVEL'], null, ['2', lang === 'fr' ? 'CO-DIPLÔMÉS UNIVERSITÉ' : 'UNIVERSITY CO-ISSUED'], null, ['Mar 2026', lang === 'fr' ? 'TOUTES OBTENUES LE' : 'ALL EARNED']].map(function (item, i) {
+    return item === null ? /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: "cert-stat-div"
+    }) : /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: "cert-stat-item"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "cert-stat-n"
+    }, item[0]), /*#__PURE__*/React.createElement("span", {
+      className: "cert-stat-l"
+    }, item[1]));
+  })), /*#__PURE__*/React.createElement("div", {
     className: "cert-featured-row"
-  }, FEATURED.map((c, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "cert-feat",
-    style: {
-      background: c.bg,
-      border: `1px solid ${c.border}`,
-      boxShadow: `0 20px 60px ${c.glow},inset 0 1px 0 rgba(255,255,255,.04)`
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "cert-feat-num"
-  }, String(i + 1).padStart(2, '0')), /*#__PURE__*/React.createElement("div", {
-    className: "cert-feat-tier",
-    style: {
-      color: c.accent,
-      background: c.tierBg,
-      border: `1px solid ${c.tierBorder}`
-    }
-  }, c.tier), /*#__PURE__*/React.createElement("div", {
-    className: "cert-feat-title"
-  }, c.title.split('\n').map((l, j) => /*#__PURE__*/React.createElement("span", {
-    key: j
-  }, l, j === 0 && /*#__PURE__*/React.createElement("br", null)))), /*#__PURE__*/React.createElement("div", {
-    className: "cert-feat-issuer"
-  }, c.issuer), /*#__PURE__*/React.createElement("div", {
-    className: "cert-feat-footer"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "cert-feat-date"
-  }, "\uD83D\uDCC5 ", c.date), /*#__PURE__*/React.createElement("a", {
-    href: c.url,
-    target: "_blank",
-    rel: "noopener noreferrer",
-    className: "cert-feat-link",
-    style: {
-      background: c.linkBg,
-      border: `1px solid ${c.linkBorder}`,
-      color: c.accent
-    }
-  }, "\u2705 ", lang === 'fr' ? 'Vérifier' : 'Verify', " \u2192"))))), /*#__PURE__*/React.createElement("div", {
+  }, FEATURED.map(function (c, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: "cert-feat",
+      style: {
+        background: c.bg,
+        border: "1px solid ".concat(c.border),
+        boxShadow: "0 20px 60px ".concat(c.glow, ",inset 0 1px 0 rgba(255,255,255,.04)")
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cert-feat-num"
+    }, String(i + 1).padStart(2, '0')), /*#__PURE__*/React.createElement("div", {
+      className: "cert-feat-tier",
+      style: {
+        color: c.accent,
+        background: c.tierBg,
+        border: "1px solid ".concat(c.tierBorder)
+      }
+    }, c.tier), /*#__PURE__*/React.createElement("div", {
+      className: "cert-feat-title"
+    }, c.title.split('\n').map(function (l, j) {
+      return /*#__PURE__*/React.createElement("span", {
+        key: j
+      }, l, j === 0 && /*#__PURE__*/React.createElement("br", null));
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "cert-feat-issuer"
+    }, c.issuer), /*#__PURE__*/React.createElement("div", {
+      className: "cert-feat-footer"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "cert-feat-date"
+    }, "\uD83D\uDCC5 ", c.date), /*#__PURE__*/React.createElement("a", {
+      href: c.url,
+      target: "_blank",
+      rel: "noopener noreferrer",
+      className: "cert-feat-link",
+      style: {
+        background: c.linkBg,
+        border: "1px solid ".concat(c.linkBorder),
+        color: c.accent
+      }
+    }, "\u2705 ", lang === 'fr' ? 'Vérifier' : 'Verify', " \u2192")));
+  })), /*#__PURE__*/React.createElement("div", {
     className: "cert-secondary-row"
-  }, SECONDARY.map((c, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "cert-sec"
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      height: '2px',
-      background: c.top,
-      opacity: .8
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "cert-sec-title"
-  }, c.title), /*#__PURE__*/React.createElement("div", {
-    className: "cert-sec-issuer"
-  }, c.issuer), /*#__PURE__*/React.createElement("a", {
-    href: c.url,
-    target: "_blank",
-    rel: "noopener noreferrer",
-    className: "cert-sec-link"
-  }, "\u2705 ", lang === 'fr' ? 'Vérifier →' : 'Verify →')))));
+  }, SECONDARY.map(function (c, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: "cert-sec"
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: '2px',
+        background: c.top,
+        opacity: .8
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "cert-sec-title"
+    }, c.title), /*#__PURE__*/React.createElement("div", {
+      className: "cert-sec-issuer"
+    }, c.issuer), /*#__PURE__*/React.createElement("a", {
+      href: c.url,
+      target: "_blank",
+      rel: "noopener noreferrer",
+      className: "cert-sec-link"
+    }, "\u2705 ", lang === 'fr' ? 'Vérifier →' : 'Verify →'));
+  })));
 }
-function PortfolioApp({
-  initLang,
-  mode,
-  onSwitchMode
-}) {
-  const [theme, setTheme] = useState(() => mode === 'human' ? 'light' : 'dark');
-  const [lang, setLang] = useState(initLang || 'en');
-  const [activeExp, setActiveExp] = useState(0);
-  const [tagFilter, setTagFilter] = useState('All');
-  const [showEgg, setShowEgg] = useState(false);
-  const [showRecruiter, setShowRecruiter] = useState(false);
-  const [activeCountry, setActiveCountry] = useState(null);
-  const [soundOn, setSoundOn] = useState(false);
-  const [showCalendly, setShowCalendly] = useState(false);
-  const [typed, setTyped] = useState('');
-  const [lineIdx, setLineIdx] = useState(0);
-  const [charIdx, setCharIdx] = useState(0);
-  const [deleting, setDeleting] = useState(false);
-  const [activeChapter, setActiveChapter] = useState(0);
-  const t = (mode === 'human' ? TH : T)[lang];
-  const exps = EXPERIENCES[lang];
-  const exp = exps[activeExp] || exps[0];
-  const skills = SKILLS[lang];
-  const countries = COUNTRIES[lang];
-  const LINES = mode === 'human' ? {
+function PortfolioApp(_ref22) {
+  var initLang = _ref22.initLang,
+    mode = _ref22.mode,
+    onSwitchMode = _ref22.onSwitchMode;
+  var _useState67 = useState(function () {
+      return mode === 'human' ? 'light' : 'dark';
+    }),
+    _useState68 = _slicedToArray(_useState67, 2),
+    theme = _useState68[0],
+    setTheme = _useState68[1];
+  var _useState69 = useState(initLang || 'en'),
+    _useState70 = _slicedToArray(_useState69, 2),
+    lang = _useState70[0],
+    setLang = _useState70[1];
+  var _useState71 = useState(0),
+    _useState72 = _slicedToArray(_useState71, 2),
+    activeExp = _useState72[0],
+    setActiveExp = _useState72[1];
+  var _useState73 = useState('All'),
+    _useState74 = _slicedToArray(_useState73, 2),
+    tagFilter = _useState74[0],
+    setTagFilter = _useState74[1];
+  var _useState75 = useState(false),
+    _useState76 = _slicedToArray(_useState75, 2),
+    showEgg = _useState76[0],
+    setShowEgg = _useState76[1];
+  var _useState77 = useState(false),
+    _useState78 = _slicedToArray(_useState77, 2),
+    showRecruiter = _useState78[0],
+    setShowRecruiter = _useState78[1];
+  var _useState79 = useState(null),
+    _useState80 = _slicedToArray(_useState79, 2),
+    activeCountry = _useState80[0],
+    setActiveCountry = _useState80[1];
+  var _useState81 = useState(false),
+    _useState82 = _slicedToArray(_useState81, 2),
+    soundOn = _useState82[0],
+    setSoundOn = _useState82[1];
+  var _useState83 = useState(false),
+    _useState84 = _slicedToArray(_useState83, 2),
+    showCalendly = _useState84[0],
+    setShowCalendly = _useState84[1];
+  var _useState85 = useState(null),
+    _useState86 = _slicedToArray(_useState85, 2),
+    testiModal = _useState86[0],
+    setTestiModal = _useState86[1];
+  var _useState87 = useState(''),
+    _useState88 = _slicedToArray(_useState87, 2),
+    typed = _useState88[0],
+    setTyped = _useState88[1];
+  var _useState89 = useState(0),
+    _useState90 = _slicedToArray(_useState89, 2),
+    lineIdx = _useState90[0],
+    setLineIdx = _useState90[1];
+  var _useState91 = useState(0),
+    _useState92 = _slicedToArray(_useState91, 2),
+    charIdx = _useState92[0],
+    setCharIdx = _useState92[1];
+  var _useState93 = useState(false),
+    _useState94 = _slicedToArray(_useState93, 2),
+    deleting = _useState94[0],
+    setDeleting = _useState94[1];
+  var _useState95 = useState(0),
+    _useState96 = _slicedToArray(_useState95, 2),
+    activeChapter = _useState96[0],
+    setActiveChapter = _useState96[1];
+  var t = (mode === 'human' ? TH : T)[lang];
+  var exps = EXPERIENCES[lang];
+  var exp = exps[activeExp] || exps[0];
+  var skills = SKILLS[lang];
+  var countries = COUNTRIES[lang];
+  var LINES = mode === 'human' ? {
     en: ['Time saver.', 'Excel killer.', 'Report automator.', 'Revenue booster.', 'Decision enabler.'],
     fr: ['Gain de temps.', 'Rapports automatisés.', 'Zéro saisie manuelle.', 'Hausse de revenus.', 'Aide à la décision.']
   } : {
     en: ['BI Engineer.', 'AI Architect.', 'Revenue Optimizer.', 'Automation Dealer.', 'Data Storyteller.'],
     fr: ['Ingénieur BI.', 'Architecte IA.', 'Optimiseur de Revenus.', 'Dealer d\'Automatisation.', 'Data Storyteller.']
   };
-  useEffect(() => setActiveExp(0), [lang]);
-  useEffect(() => setTagFilter(t.expFilterAll), [lang]);
+  useEffect(function () {
+    return setActiveExp(0);
+  }, [lang]);
+  useEffect(function () {
+    return setTagFilter(t.expFilterAll);
+  }, [lang]);
 
   // Typewriter
-  useEffect(() => {
-    const lines = LINES[lang],
+  useEffect(function () {
+    var lines = LINES[lang],
       cur = lines[lineIdx % lines.length];
-    const tm = setTimeout(() => {
+    var tm = setTimeout(function () {
       if (!deleting) {
         if (charIdx < cur.length) {
           setTyped(cur.slice(0, charIdx + 1));
-          setCharIdx(c => c + 1);
-        } else setTimeout(() => setDeleting(true), 1800);
+          setCharIdx(function (c) {
+            return c + 1;
+          });
+        } else setTimeout(function () {
+          return setDeleting(true);
+        }, 1800);
       } else {
         if (charIdx > 0) {
           setTyped(cur.slice(0, charIdx - 1));
-          setCharIdx(c => c - 1);
+          setCharIdx(function (c) {
+            return c - 1;
+          });
         } else {
           setDeleting(false);
-          setLineIdx(i => (i + 1) % lines.length);
+          setLineIdx(function (i) {
+            return (i + 1) % lines.length;
+          });
         }
       }
     }, deleting ? 36 : 65);
-    return () => clearTimeout(tm);
+    return function () {
+      return clearTimeout(tm);
+    };
   }, [charIdx, deleting, lineIdx, lang]);
-  useEffect(() => {
-    const t = mode === 'human' ? 'light' : 'dark';
+  useEffect(function () {
+    var t = mode === 'human' ? 'light' : 'dark';
     setTheme(t);
     document.body.setAttribute('data-theme', t);
   }, [mode]);
-  useEffect(() => {
+  useEffect(function () {
     document.body.setAttribute('data-theme', theme);
   }, [theme]);
-  useEffect(() => {
-    window.konamiCb = () => setShowEgg(true);
-    return () => {
+  useEffect(function () {
+    window.konamiCb = function () {
+      return setShowEgg(true);
+    };
+    return function () {
       window.konamiCb = null;
     };
   }, []);
-  useEffect(() => {
-    const h = e => {
+  useEffect(function () {
+    var h = function h(e) {
       if (e.key === 'Escape') {
         setShowEgg(false);
         setActiveCountry(null);
@@ -5814,32 +6245,37 @@ function PortfolioApp({
       }
     };
     window.addEventListener('keydown', h);
-    return () => window.removeEventListener('keydown', h);
+    return function () {
+      return window.removeEventListener('keydown', h);
+    };
   }, []);
 
   // Chapter nav
-  useEffect(() => {
-    const nav = document.getElementById('chapter-nav');
+  useEffect(function () {
+    var nav = document.getElementById('chapter-nav');
     if (!nav) return;
     nav.innerHTML = '';
-    CHAPTERS.forEach((ch, i) => {
-      const d = document.createElement('div');
-      d.className = `ch-dot${i === activeChapter ? ' active' : ''}`;
+    CHAPTERS.forEach(function (ch, i) {
+      var d = document.createElement('div');
+      d.className = "ch-dot".concat(i === activeChapter ? ' active' : '');
       d.title = ch.label;
-      d.innerHTML = `<span class="ch-label">${ch.label}</span>`;
-      d.onclick = () => document.getElementById(ch.id)?.scrollIntoView({
-        behavior: 'smooth'
-      });
+      d.innerHTML = "<span class=\"ch-label\">".concat(ch.label, "</span>");
+      d.onclick = function () {
+        var _document$getElementB;
+        return (_document$getElementB = document.getElementById(ch.id)) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.scrollIntoView({
+          behavior: 'smooth'
+        });
+      };
       nav.appendChild(d);
     });
   }, [activeChapter]);
 
   // Scroll observer for XP + chapter tracking
-  useEffect(() => {
+  useEffect(function () {
     // On mount, immediately reveal any .reveal elements already in viewport
-    const revealInView = () => {
-      document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el => {
-        const r = el.getBoundingClientRect();
+    var revealInView = function revealInView() {
+      document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(function (el) {
+        var r = el.getBoundingClientRect();
         if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('visible');
       });
     };
@@ -5847,14 +6283,16 @@ function PortfolioApp({
     window.addEventListener('scroll', revealInView, {
       passive: true
     });
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
         if (e.isIntersecting) {
           e.target.classList.add('visible');
-          const id = e.target.id;
+          var id = e.target.id;
           if (id) {
             window.XP && window.XP.earn(id);
-            const ci = CHAPTERS.findIndex(c => c.id === id);
+            var ci = CHAPTERS.findIndex(function (c) {
+              return c.id === id;
+            });
             if (ci >= 0) setActiveChapter(ci);
           }
         }
@@ -5863,38 +6301,48 @@ function PortfolioApp({
       threshold: .05,
       rootMargin: '0px 0px -20px 0px'
     });
-    document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el => obs.observe(el));
+    document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(function (el) {
+      return obs.observe(el);
+    });
     // observe sections for XP
-    CHAPTERS.forEach(ch => {
-      const el = document.getElementById(ch.id);
+    CHAPTERS.forEach(function (ch) {
+      var el = document.getElementById(ch.id);
       if (el) obs.observe(el);
     });
-    return () => {
+    return function () {
       obs.disconnect();
       window.removeEventListener('scroll', revealInView);
     };
   }, []);
-  const scrollTo = id => {
-    const el = document.getElementById(id);
+  var scrollTo = function scrollTo(id) {
+    var el = document.getElementById(id);
     if (!el) return;
     el.scrollIntoView({
       behavior: 'smooth'
     });
     // Force reveal on elements inside target section that may be in viewport
-    setTimeout(() => {
-      el.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(r => r.classList.add('visible'));
+    setTimeout(function () {
+      el.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(function (r) {
+        return r.classList.add('visible');
+      });
     }, 600);
   };
-  const allTags = [t.expFilterAll, ...new Set(exps.flatMap(e => e.tags))];
-  const years = (new Date() - new Date('2022-03-01')) / (1000 * 60 * 60 * 24 * 365.25);
+  var allTags = [t.expFilterAll].concat(_toConsumableArray(new Set(exps.flatMap(function (e) {
+    return e.tags;
+  }))));
+  var years = (new Date() - new Date('2022-03-01')) / (1000 * 60 * 60 * 24 * 365.25);
   return /*#__PURE__*/React.createElement(LangCtx.Provider, {
     value: lang
   }, showEgg && /*#__PURE__*/React.createElement("div", {
     className: "modal-overlay",
-    onClick: () => setShowEgg(false)
+    onClick: function onClick() {
+      return setShowEgg(false);
+    }
   }, /*#__PURE__*/React.createElement("div", {
     className: "modal",
-    onClick: e => e.stopPropagation()
+    onClick: function onClick(e) {
+      return e.stopPropagation();
+    }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: "3rem",
@@ -5907,20 +6355,30 @@ function PortfolioApp({
     }
   }, t.eggP3)), /*#__PURE__*/React.createElement("div", {
     className: "modal-code"
-  }, t.eggCode.split('\n').map((l, i) => /*#__PURE__*/React.createElement("div", {
-    key: i
-  }, l))), /*#__PURE__*/React.createElement("button", {
+  }, t.eggCode.split('\n').map(function (l, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i
+    }, l);
+  })), /*#__PURE__*/React.createElement("button", {
     className: "modal-close",
-    onClick: () => setShowEgg(false)
+    onClick: function onClick() {
+      return setShowEgg(false);
+    }
   }, t.eggClose))), showRecruiter && /*#__PURE__*/React.createElement(RecruiterModal, {
     lang: lang,
-    onClose: () => setShowRecruiter(false)
+    onClose: function onClose() {
+      return setShowRecruiter(false);
+    }
   }), showCalendly && /*#__PURE__*/React.createElement(CalendlyModal, {
     lang: lang,
-    onClose: () => setShowCalendly(false)
+    onClose: function onClose() {
+      return setShowCalendly(false);
+    }
   }), activeCountry && /*#__PURE__*/React.createElement(CountryModal, {
     country: activeCountry,
-    onClose: () => setActiveCountry(null),
+    onClose: function onClose() {
+      return setActiveCountry(null);
+    },
     lang: lang
   }), /*#__PURE__*/React.createElement(ScrollToTop, {
     lang: lang
@@ -5930,23 +6388,29 @@ function PortfolioApp({
     className: "nav"
   }, /*#__PURE__*/React.createElement("div", {
     className: "nav-logo",
-    onClick: () => scrollTo('about')
+    onClick: function onClick() {
+      return scrollTo('about');
+    }
   }, mode === 'human' ? /*#__PURE__*/React.createElement("span", null, "Antoine", /*#__PURE__*/React.createElement("span", {
     style: {
       color: '#415a77'
     }
   }, ".")) : 'ADM.SYS // v5'), /*#__PURE__*/React.createElement("div", {
     className: "nav-links"
-  }, t.nav.map(s => /*#__PURE__*/React.createElement("button", {
-    key: s,
-    className: "nav-link",
-    onClick: () => scrollTo(s)
-  }, t.navLabels[s]))), /*#__PURE__*/React.createElement("div", {
+  }, t.nav.map(function (s) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: s,
+      className: "nav-link",
+      onClick: function onClick() {
+        return scrollTo(s);
+      }
+    }, t.navLabels[s]);
+  })), /*#__PURE__*/React.createElement("div", {
     className: "nav-controls"
   }, mode !== 'human' && /*#__PURE__*/React.createElement("button", {
-    className: `sound-btn${soundOn ? ' on' : ''}`,
-    onClick: () => {
-      const s = SFX.toggle();
+    className: "sound-btn".concat(soundOn ? ' on' : ''),
+    onClick: function onClick() {
+      var s = SFX.toggle();
       setSoundOn(s);
     },
     title: soundOn ? 'Sound OFF' : 'Sound ON (8-bit)'
@@ -5972,17 +6436,17 @@ function PortfolioApp({
       flexShrink: 0,
       animation: 'ctapulse 3s ease-in-out infinite'
     },
-    onMouseEnter: e => {
+    onMouseEnter: function onMouseEnter(e) {
       e.currentTarget.style.background = 'rgba(0,240,168,.2)';
       e.currentTarget.style.transform = 'translateY(-1px)';
     },
-    onMouseLeave: e => {
+    onMouseLeave: function onMouseLeave(e) {
       e.currentTarget.style.background = 'rgba(0,240,168,.1)';
       e.currentTarget.style.transform = 'none';
     }
   }, "\uD83D\uDCC5 ", lang === 'fr' ? '30 min →' : '30 min →'), /*#__PURE__*/React.createElement("button", {
-    className: `recruiter-btn${showRecruiter ? ' active' : ''}`,
-    onClick: () => {
+    className: "recruiter-btn".concat(showRecruiter ? ' active' : ''),
+    onClick: function onClick() {
       setShowRecruiter(true);
       SFX.click();
     }
@@ -6011,7 +6475,7 @@ function PortfolioApp({
       height: 18,
       borderRadius: 9,
       background: mode === 'human' ? 'rgba(0,240,168,.2)' : 'rgba(191,58,255,.2)',
-      border: `1.5px solid ${mode === 'human' ? '#00F0A8' : '#415a77'}`,
+      border: "1.5px solid ".concat(mode === 'human' ? '#00F0A8' : '#415a77'),
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -6023,17 +6487,24 @@ function PortfolioApp({
       display: 'flex',
       gap: '1px'
     }
-  }, [['en', '🇬🇧'], ['fr', '🇫🇷']].map(([l, f]) => /*#__PURE__*/React.createElement("button", {
-    key: l,
-    className: `theme-btn${lang === l ? ' active' : ''}`,
-    onClick: () => setLang(l)
-  }, f, " ", l.toUpperCase()))))), /*#__PURE__*/React.createElement("div", {
+  }, [['en', '🇬🇧'], ['fr', '🇫🇷']].map(function (_ref23) {
+    var _ref24 = _slicedToArray(_ref23, 2),
+      l = _ref24[0],
+      f = _ref24[1];
+    return /*#__PURE__*/React.createElement("button", {
+      key: l,
+      className: "theme-btn".concat(lang === l ? ' active' : ''),
+      onClick: function onClick() {
+        return setLang(l);
+      }
+    }, f, " ", l.toUpperCase());
+  })))), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'relative',
       zIndex: 5,
       background: mode === 'human' ? 'rgba(0,122,255,.04)' : 'rgba(191,58,255,.06)',
-      borderTop: `1px solid ${mode === 'human' ? 'rgba(0,122,255,.1)' : 'rgba(191,58,255,.15)'}`,
-      borderBottom: `1px solid ${mode === 'human' ? 'rgba(0,122,255,.1)' : 'rgba(191,58,255,.15)'}`,
+      borderTop: "1px solid ".concat(mode === 'human' ? 'rgba(0,122,255,.1)' : 'rgba(191,58,255,.15)'),
+      borderBottom: "1px solid ".concat(mode === 'human' ? 'rgba(0,122,255,.1)' : 'rgba(191,58,255,.15)'),
       padding: '10px 0',
       overflow: 'hidden',
       marginTop: '60px',
@@ -6050,84 +6521,88 @@ function PortfolioApp({
       flexShrink: 0,
       alignItems: 'center'
     }
-  }, [0, 1].map(ri => /*#__PURE__*/React.createElement("div", {
-    key: ri,
-    style: {
-      display: 'flex',
-      gap: 0,
-      alignItems: 'center'
-    }
-  }, (lang === 'fr' ? [{
-    emoji: '⚡',
-    txt: '85% de temps reporting économisé'
-  }, {
-    emoji: '🤖',
-    txt: '30+ workflows automatisés'
-  }, {
-    emoji: '📊',
-    txt: '270% efficacité pipeline'
-  }, {
-    emoji: '🚀',
-    txt: 'Analytics 0→1 en 6 mois'
-  }, {
-    emoji: '🧠',
-    txt: 'IA · n8n · Python · LLMs'
-  }, {
-    emoji: '🔍',
-    txt: '40 concurrents · 1 300 SKUs · daily'
-  }, {
-    emoji: '💰',
-    txt: 'ROI 400-600% an 1'
-  }, {
-    emoji: '🌍',
-    txt: 'France · Dubai · Canada · Singapour'
-  }] : [{
-    emoji: '⚡',
-    txt: '85% reporting time saved'
-  }, {
-    emoji: '🤖',
-    txt: '30+ workflows automated'
-  }, {
-    emoji: '📊',
-    txt: '270% pipeline efficiency'
-  }, {
-    emoji: '🚀',
-    txt: 'Analytics dept 0→1 in 6 months'
-  }, {
-    emoji: '🧠',
-    txt: 'AI · n8n · Python · LLMs'
-  }, {
-    emoji: '🔍',
-    txt: '40 competitors · 1,300 SKUs · daily'
-  }, {
-    emoji: '💰',
-    txt: '400-600% ROI Year 1'
-  }, {
-    emoji: '🌍',
-    txt: 'France · Dubai · Canada · Singapore'
-  }]).map((item, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: 8,
-      padding: '0 28px',
-      fontFamily: "'Space Mono',monospace",
-      fontSize: '.58rem',
-      color: mode === 'human' ? 'rgba(60,60,67,.55)' : 'rgba(200,180,240,.75)',
-      letterSpacing: '1.5px',
-      textTransform: 'uppercase'
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: '.8rem'
-    }
-  }, item.emoji), /*#__PURE__*/React.createElement("span", null, item.txt), /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: mode === 'human' ? 'rgba(0,122,255,.3)' : 'rgba(191,58,255,.4)',
-      marginLeft: 4
-    }
-  }, "\u25C6"))))))), /*#__PURE__*/React.createElement("section", {
+  }, [0, 1].map(function (ri) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: ri,
+      style: {
+        display: 'flex',
+        gap: 0,
+        alignItems: 'center'
+      }
+    }, (lang === 'fr' ? [{
+      emoji: '⚡',
+      txt: '85% de temps reporting économisé'
+    }, {
+      emoji: '🤖',
+      txt: '30+ workflows automatisés'
+    }, {
+      emoji: '📊',
+      txt: '270% efficacité pipeline'
+    }, {
+      emoji: '🚀',
+      txt: 'Analytics 0→1 en 6 mois'
+    }, {
+      emoji: '🧠',
+      txt: 'IA · n8n · Python · LLMs'
+    }, {
+      emoji: '🔍',
+      txt: '40 concurrents · 1 300 SKUs · daily'
+    }, {
+      emoji: '💰',
+      txt: 'ROI 400-600% an 1'
+    }, {
+      emoji: '🌍',
+      txt: 'France · Dubai · Canada · Singapour'
+    }] : [{
+      emoji: '⚡',
+      txt: '85% reporting time saved'
+    }, {
+      emoji: '🤖',
+      txt: '30+ workflows automated'
+    }, {
+      emoji: '📊',
+      txt: '270% pipeline efficiency'
+    }, {
+      emoji: '🚀',
+      txt: 'Analytics dept 0→1 in 6 months'
+    }, {
+      emoji: '🧠',
+      txt: 'AI · n8n · Python · LLMs'
+    }, {
+      emoji: '🔍',
+      txt: '40 competitors · 1,300 SKUs · daily'
+    }, {
+      emoji: '💰',
+      txt: '400-600% ROI Year 1'
+    }, {
+      emoji: '🌍',
+      txt: 'France · Dubai · Canada · Singapore'
+    }]).map(function (item, i) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 8,
+          padding: '0 28px',
+          fontFamily: "'Space Mono',monospace",
+          fontSize: '.58rem',
+          color: mode === 'human' ? 'rgba(60,60,67,.55)' : 'rgba(200,180,240,.75)',
+          letterSpacing: '1.5px',
+          textTransform: 'uppercase'
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: '.8rem'
+        }
+      }, item.emoji), /*#__PURE__*/React.createElement("span", null, item.txt), /*#__PURE__*/React.createElement("span", {
+        style: {
+          color: mode === 'human' ? 'rgba(0,122,255,.3)' : 'rgba(191,58,255,.4)',
+          marginLeft: 4
+        }
+      }, "\u25C6"));
+    }));
+  }))), /*#__PURE__*/React.createElement("section", {
     id: "about",
     className: "hero",
     style: mode === 'human' ? {
@@ -6169,10 +6644,12 @@ function PortfolioApp({
     className: "hero-badge-dot"
   }), /*#__PURE__*/React.createElement("span", {
     className: "hero-badge-status"
-  }, lang === 'fr' ? 'Disponible' : 'Available'), ['France', 'Dubai', 'Canada', 'Singapore', 'Remote'].map((city, i) => /*#__PURE__*/React.createElement("span", {
-    key: i,
-    className: "hero-city-pill"
-  }, city))), /*#__PURE__*/React.createElement("h1", {
+  }, lang === 'fr' ? 'Disponible' : 'Available'), ['France', 'Dubai', 'Canada', 'Singapore', 'Remote'].map(function (city, i) {
+    return /*#__PURE__*/React.createElement("span", {
+      key: i,
+      className: "hero-city-pill"
+    }, city);
+  })), /*#__PURE__*/React.createElement("h1", {
     className: "hero-h1",
     style: {
       marginBottom: 32
@@ -6231,71 +6708,73 @@ function PortfolioApp({
     title: lang === 'fr' ? 'Retour sur investissement' : 'Return on investment',
     sub: lang === 'fr' ? 'Analytics dept 0→1 en 6 mois · MAPE 4.2%' : 'Analytics dept 0→1 in 6 months · MAPE 4.2%',
     color: 'var(--accent4)'
-  }].map((s, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      backdropFilter: 'var(--glass-blur)',
-      WebkitBackdropFilter: 'var(--glass-blur)',
-      background: 'var(--glass-bg)',
-      border: '1px solid var(--glass-border)',
-      borderRadius: 20,
-      boxShadow: 'var(--glass-shadow)',
-      padding: '28px 32px',
-      display: 'flex',
-      alignItems: 'center',
-      gap: 24
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      flexShrink: 0,
-      minWidth: 72
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Grotesk',sans-serif",
-      fontWeight: 800,
-      fontSize: '1.9rem',
-      color: s.color,
-      lineHeight: 1,
-      letterSpacing: '-2px'
-    }
-  }, s.n), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Grotesk',sans-serif",
-      fontWeight: 600,
-      fontSize: '.62rem',
-      color: s.badgeColor,
-      marginTop: 4,
-      letterSpacing: '.3px'
-    }
-  }, s.badge)), /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: 1,
-      alignSelf: 'stretch',
-      background: 'var(--glass-border)',
-      flexShrink: 0
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Grotesk',sans-serif",
-      fontWeight: 700,
-      fontSize: '.8rem',
-      color: 'var(--text)',
-      lineHeight: 1.3,
-      marginBottom: 6
-    }
-  }, s.title), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Grotesk',sans-serif",
-      fontSize: '.65rem',
-      color: 'var(--text-mute)',
-      lineHeight: 1.5
-    }
-  }, s.sub)))))) :
+  }].map(function (s, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        backdropFilter: 'var(--glass-blur)',
+        WebkitBackdropFilter: 'var(--glass-blur)',
+        background: 'var(--glass-bg)',
+        border: '1px solid var(--glass-border)',
+        borderRadius: 20,
+        boxShadow: 'var(--glass-shadow)',
+        padding: '28px 32px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 24
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        flexShrink: 0,
+        minWidth: 72
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: "'Space Grotesk',sans-serif",
+        fontWeight: 800,
+        fontSize: '1.9rem',
+        color: s.color,
+        lineHeight: 1,
+        letterSpacing: '-2px'
+      }
+    }, s.n), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: "'Space Grotesk',sans-serif",
+        fontWeight: 600,
+        fontSize: '.62rem',
+        color: s.badgeColor,
+        marginTop: 4,
+        letterSpacing: '.3px'
+      }
+    }, s.badge)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        width: 1,
+        alignSelf: 'stretch',
+        background: 'var(--glass-border)',
+        flexShrink: 0
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: "'Space Grotesk',sans-serif",
+        fontWeight: 700,
+        fontSize: '.8rem',
+        color: 'var(--text)',
+        lineHeight: 1.3,
+        marginBottom: 6
+      }
+    }, s.title), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: "'Space Grotesk',sans-serif",
+        fontSize: '.65rem',
+        color: 'var(--text-mute)',
+        lineHeight: 1.5
+      }
+    }, s.sub)));
+  }))) :
   /*#__PURE__*/
   /* ── TECH MODE: original layout ── */
   React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
@@ -6304,10 +6783,12 @@ function PortfolioApp({
     className: "hero-badge-dot"
   }), /*#__PURE__*/React.createElement("span", {
     className: "hero-badge-status"
-  }, lang === 'fr' ? 'Disponible' : 'Available'), ['France', 'Dubai', 'Canada', 'Singapore', 'Remote'].map((city, i) => /*#__PURE__*/React.createElement("span", {
-    key: i,
-    className: "hero-city-pill"
-  }, city))), /*#__PURE__*/React.createElement("div", {
+  }, lang === 'fr' ? 'Disponible' : 'Available'), ['France', 'Dubai', 'Canada', 'Singapore', 'Remote'].map(function (city, i) {
+    return /*#__PURE__*/React.createElement("span", {
+      key: i,
+      className: "hero-city-pill"
+    }, city);
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       alignItems: 'flex-start',
@@ -6461,27 +6942,33 @@ function PortfolioApp({
     className: "section-title"
   }, t.expTitle, " ", /*#__PURE__*/React.createElement("em", null, t.expTitleEm)), /*#__PURE__*/React.createElement("div", {
     className: "exp-filter-bar"
-  }, allTags.map(tag => /*#__PURE__*/React.createElement("button", {
-    key: tag,
-    className: `filter-btn${tagFilter === tag ? ' active' : ''}`,
-    onClick: () => {
-      setTagFilter(tag);
-      if (tag !== t.expFilterAll) {
-        const m = exps.findIndex(e => e.tags.includes(tag));
-        if (m >= 0) setActiveExp(m);
-      } else setActiveExp(0);
-    }
-  }, tag))), /*#__PURE__*/React.createElement("div", {
+  }, allTags.map(function (tag) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: tag,
+      className: "filter-btn".concat(tagFilter === tag ? ' active' : ''),
+      onClick: function onClick() {
+        setTagFilter(tag);
+        if (tag !== t.expFilterAll) {
+          var m = exps.findIndex(function (e) {
+            return e.tags.includes(tag);
+          });
+          if (m >= 0) setActiveExp(m);
+        } else setActiveExp(0);
+      }
+    }, tag);
+  })), /*#__PURE__*/React.createElement("div", {
     className: "exp-layout reveal"
   }, /*#__PURE__*/React.createElement("div", {
     className: "exp-nav"
-  }, exps.map(e => {
-    const hidden = tagFilter !== t.expFilterAll && !e.tags.includes(tagFilter);
+  }, exps.map(function (e) {
+    var hidden = tagFilter !== t.expFilterAll && !e.tags.includes(tagFilter);
     if (hidden) return null;
     return /*#__PURE__*/React.createElement("div", {
       key: e.id,
-      className: `exp-nav-item${activeExp === e.id ? ' active' : ''}`,
-      onClick: () => setActiveExp(e.id)
+      className: "exp-nav-item".concat(activeExp === e.id ? ' active' : ''),
+      onClick: function onClick() {
+        return setActiveExp(e.id);
+      }
     }, /*#__PURE__*/React.createElement("div", {
       className: "exp-nav-date"
     }, e.date), /*#__PURE__*/React.createElement("div", {
@@ -6497,14 +6984,18 @@ function PortfolioApp({
     className: "exp-detail-meta"
   }, /*#__PURE__*/React.createElement("span", null, exp.company), /*#__PURE__*/React.createElement("span", null, "\xB7"), /*#__PURE__*/React.createElement("span", null, exp.location), /*#__PURE__*/React.createElement("span", null, "\xB7"), /*#__PURE__*/React.createElement("span", null, exp.revenue)), /*#__PURE__*/React.createElement("ul", {
     className: "exp-bullets"
-  }, exp.highlights.map((h, i) => /*#__PURE__*/React.createElement("li", {
-    key: i
-  }, h))), /*#__PURE__*/React.createElement("div", {
+  }, exp.highlights.map(function (h, i) {
+    return /*#__PURE__*/React.createElement("li", {
+      key: i
+    }, h);
+  })), /*#__PURE__*/React.createElement("div", {
     className: "exp-tags"
-  }, exp.tags.map(tag => /*#__PURE__*/React.createElement("span", {
-    key: tag,
-    className: "exp-tag"
-  }, tag))))))), /*#__PURE__*/React.createElement("section", {
+  }, exp.tags.map(function (tag) {
+    return /*#__PURE__*/React.createElement("span", {
+      key: tag,
+      className: "exp-tag"
+    }, tag);
+  })))))), /*#__PURE__*/React.createElement("section", {
     id: "skills",
     className: "section"
   }, /*#__PURE__*/React.createElement("div", {
@@ -6517,25 +7008,27 @@ function PortfolioApp({
     }
   }, t.skillsTitleDim)), /*#__PURE__*/React.createElement("div", {
     className: "skills-grid"
-  }, skills.map((s, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: `skill-card reveal reveal-delay-${i % 3 + 1}`
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "skill-icon"
-  }, s.icon), /*#__PURE__*/React.createElement("div", {
-    className: "skill-name"
-  }, s.name), /*#__PURE__*/React.createElement("div", {
-    className: "skill-desc"
-  }, s.desc), /*#__PURE__*/React.createElement("div", {
-    className: "skill-bar"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "skill-fill",
-    style: {
-      width: `${s.pct}%`
-    }
+  }, skills.map(function (s, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: "skill-card reveal reveal-delay-".concat(i % 3 + 1)
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "skill-icon"
+    }, s.icon), /*#__PURE__*/React.createElement("div", {
+      className: "skill-name"
+    }, s.name), /*#__PURE__*/React.createElement("div", {
+      className: "skill-desc"
+    }, s.desc), /*#__PURE__*/React.createElement("div", {
+      className: "skill-bar"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "skill-fill",
+      style: {
+        width: "".concat(s.pct, "%")
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "skill-pct"
+    }, s.pct, "%"));
   })), /*#__PURE__*/React.createElement("div", {
-    className: "skill-pct"
-  }, s.pct, "%")))), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: '32px'
     }
@@ -6664,69 +7157,75 @@ function PortfolioApp({
         d: lang === 'fr' ? 'auto en 1 clic' : 'auto in 1 click'
       }]
     }
-  }].map((p, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: `project-card reveal reveal-delay-${i % 2 + 1}`
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "project-header"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "project-badge"
-  }, p.badge), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: '1.5rem',
-      lineHeight: 1
-    }
-  }, p.icon)), /*#__PURE__*/React.createElement("div", {
-    className: "project-title"
-  }, p.title), /*#__PURE__*/React.createElement("div", {
-    className: "project-desc"
-  }, p.desc), /*#__PURE__*/React.createElement("div", {
-    style: {
-      background: 'rgba(0,240,168,0.06)',
-      border: '1px solid rgba(0,240,168,0.22)',
-      borderRadius: 8,
-      padding: '10px 14px',
-      marginBottom: 14
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 8,
-      fontWeight: 700,
-      letterSpacing: '1.5px',
-      color: '#00F0A8',
-      fontFamily: "'Space Mono',monospace",
-      marginBottom: 8
-    }
-  }, p.roi.label), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      gap: 14
-    }
-  }, p.roi.items.map((r, j) => /*#__PURE__*/React.createElement("div", {
-    key: j,
-    style: {
-      textAlign: 'center'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 16,
-      fontWeight: 800,
-      color: '#00F0A8',
-      fontFamily: "'Space Grotesk',sans-serif"
-    }
-  }, r.v), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 9,
-      color: 'var(--text-dim)',
-      marginTop: 2,
-      lineHeight: 1.3
-    }
-  }, r.d))))), /*#__PURE__*/React.createElement("div", {
-    className: "project-tags"
-  }, p.tags.map((tg, j) => /*#__PURE__*/React.createElement("span", {
-    key: j,
-    className: "project-tag"
-  }, tg)))))))), mode !== 'human' && /*#__PURE__*/React.createElement("section", {
+  }].map(function (p, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: "project-card reveal reveal-delay-".concat(i % 2 + 1)
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "project-header"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "project-badge"
+    }, p.badge), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: '1.5rem',
+        lineHeight: 1
+      }
+    }, p.icon)), /*#__PURE__*/React.createElement("div", {
+      className: "project-title"
+    }, p.title), /*#__PURE__*/React.createElement("div", {
+      className: "project-desc"
+    }, p.desc), /*#__PURE__*/React.createElement("div", {
+      style: {
+        background: 'rgba(0,240,168,0.06)',
+        border: '1px solid rgba(0,240,168,0.22)',
+        borderRadius: 8,
+        padding: '10px 14px',
+        marginBottom: 14
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 8,
+        fontWeight: 700,
+        letterSpacing: '1.5px',
+        color: '#00F0A8',
+        fontFamily: "'Space Mono',monospace",
+        marginBottom: 8
+      }
+    }, p.roi.label), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: 14
+      }
+    }, p.roi.items.map(function (r, j) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: j,
+        style: {
+          textAlign: 'center'
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 16,
+          fontWeight: 800,
+          color: '#00F0A8',
+          fontFamily: "'Space Grotesk',sans-serif"
+        }
+      }, r.v), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 9,
+          color: 'var(--text-dim)',
+          marginTop: 2,
+          lineHeight: 1.3
+        }
+      }, r.d));
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "project-tags"
+    }, p.tags.map(function (tg, j) {
+      return /*#__PURE__*/React.createElement("span", {
+        key: j,
+        className: "project-tag"
+      }, tg);
+    })));
+  })))), mode !== 'human' && /*#__PURE__*/React.createElement("section", {
     id: "stack",
     className: "section"
   }, /*#__PURE__*/React.createElement("div", {
@@ -6740,18 +7239,20 @@ function PortfolioApp({
     className: "section-title"
   }, t.stackTitle, " ", /*#__PURE__*/React.createElement("em", null, t.stackTitleEm)), /*#__PURE__*/React.createElement("div", {
     className: "stack-grid reveal"
-  }, STACK.map((s, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "stack-card"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "stack-level"
-  }, s.level), /*#__PURE__*/React.createElement("span", {
-    className: "stack-emoji"
-  }, s.e), /*#__PURE__*/React.createElement("div", {
-    className: "stack-name"
-  }, s.name), /*#__PURE__*/React.createElement("div", {
-    className: "stack-cat"
-  }, s.cat)))))), /*#__PURE__*/React.createElement("section", {
+  }, STACK.map(function (s, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: "stack-card"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "stack-level"
+    }, s.level), /*#__PURE__*/React.createElement("span", {
+      className: "stack-emoji"
+    }, s.e), /*#__PURE__*/React.createElement("div", {
+      className: "stack-name"
+    }, s.name), /*#__PURE__*/React.createElement("div", {
+      className: "stack-cat"
+    }, s.cat));
+  })))), /*#__PURE__*/React.createElement("section", {
     id: "terminal",
     className: "section"
   }, /*#__PURE__*/React.createElement("div", {
@@ -6807,71 +7308,119 @@ function PortfolioApp({
     className: "section-title"
   }, t.testiTitle, " ", /*#__PURE__*/React.createElement("em", null, t.testiTitleEm)), /*#__PURE__*/React.createElement("div", {
     className: "testi-grid reveal"
-  }, TESTIMONIALS.map((item, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "testi-card"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "testi-stars"
-  }, '★'.repeat(item.stars)), /*#__PURE__*/React.createElement("div", {
-    className: "testi-quote"
-  }, "\"", item.q[lang], "\""), /*#__PURE__*/React.createElement("div", {
-    className: "testi-author"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "testi-avatar",
-    style: {
-      background: item.color + '22',
-      borderColor: item.color,
-      border: '1.5px solid',
-      padding: 0,
-      overflow: 'hidden'
+  }, TESTIMONIALS.map(function (item, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: "testi-card-v2",
+      style: {
+        '--tcard-color': item.color
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "tcard-header"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "tcard-avatar"
+    }, /*#__PURE__*/React.createElement("img", {
+      src: item.avatarImg,
+      alt: item.name,
+      onError: function onError(e) {
+        e.target.style.display = 'none';
+        e.target.nextSibling.style.display = 'flex';
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        display: 'none',
+        color: item.color,
+        fontWeight: 700,
+        fontSize: '.65rem'
+      }
+    }, item.avatar)), /*#__PURE__*/React.createElement("div", {
+      className: "tcard-meta"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "tcard-name"
+    }, item.name), /*#__PURE__*/React.createElement("div", {
+      className: "tcard-role"
+    }, item.title[lang]), /*#__PURE__*/React.createElement("div", {
+      className: "tcard-company"
+    }, item.company)), /*#__PURE__*/React.createElement("a", {
+      href: item.linkedin,
+      target: "_blank",
+      rel: "noopener noreferrer",
+      className: "tcard-li"
+    }, "in")), /*#__PURE__*/React.createElement("div", {
+      className: "tcard-stars"
+    }, '★'.repeat(item.stars)), /*#__PURE__*/React.createElement("div", {
+      className: "tcard-excerpt"
+    }, "\"", item.highlight[lang], "\""), /*#__PURE__*/React.createElement("button", {
+      className: "tcard-read",
+      onClick: function onClick() {
+        return setTestiModal(item);
+      }
+    }, lang === 'fr' ? 'Lire tout →' : 'Read full →'));
+  }))), testiModal && /*#__PURE__*/React.createElement("div", {
+    className: "testi-modal-bg",
+    onClick: function onClick() {
+      return setTestiModal(null);
     }
-  }, item.photo ? /*#__PURE__*/React.createElement("img", {
-    src: item.photo,
-    alt: item.name,
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "testi-modal",
+    onClick: function onClick(e) {
+      return e.stopPropagation();
+    },
     style: {
-      width: '100%',
-      height: '100%',
-      objectFit: 'cover',
-      display: 'block'
+      '--tcard-color': testiModal.color
     }
-  }) : /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "testi-modal-close",
+    onClick: function onClick() {
+      return setTestiModal(null);
+    }
+  }, "\u2715"), /*#__PURE__*/React.createElement("div", {
+    className: "tcard-header",
     style: {
-      color: item.color,
+      marginBottom: 20
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "tcard-avatar tcard-avatar-lg"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: testiModal.avatarImg,
+    alt: testiModal.name,
+    onError: function onError(e) {
+      e.target.style.display = 'none';
+      e.target.nextSibling.style.display = 'flex';
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'none',
+      color: testiModal.color,
       fontWeight: 700,
-      fontSize: '.6rem'
+      fontSize: '.85rem'
     }
-  }, item.avatar)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    className: "testi-name"
-  }, item.name), /*#__PURE__*/React.createElement("div", {
-    className: "testi-role"
-  }, item.title[lang], " \xB7 ", /*#__PURE__*/React.createElement("span", {
+  }, testiModal.avatar)), /*#__PURE__*/React.createElement("div", {
+    className: "tcard-meta"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "tcard-name",
     style: {
-      color: '#415a77'
+      fontSize: '1rem'
     }
-  }, item.company)), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Mono',monospace",
-      fontSize: '.4rem',
-      color: 'var(--text-mute)',
-      letterSpacing: '1px',
-      marginTop: '3px'
-    }
-  }, item.date[lang]), /*#__PURE__*/React.createElement("a", {
-    href: item.linkedin,
+  }, testiModal.name), /*#__PURE__*/React.createElement("div", {
+    className: "tcard-role"
+  }, testiModal.title[lang]), /*#__PURE__*/React.createElement("div", {
+    className: "tcard-company"
+  }, testiModal.company), /*#__PURE__*/React.createElement("div", {
+    className: "tcard-date"
+  }, testiModal.date[lang])), /*#__PURE__*/React.createElement("a", {
+    href: testiModal.linkedin,
     target: "_blank",
     rel: "noopener noreferrer",
+    className: "tcard-li"
+  }, "in")), /*#__PURE__*/React.createElement("div", {
+    className: "tcard-stars",
     style: {
-      fontFamily: "'Space Mono',monospace",
-      fontSize: '.4rem',
-      color: 'var(--accent3)',
-      letterSpacing: '1px',
-      marginTop: '4px',
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: '4px',
-      textDecoration: 'none'
+      marginBottom: 16
     }
-  }, /*#__PURE__*/React.createElement("span", null, "\uD83D\uDD17"), " LinkedIn")))))))), /*#__PURE__*/React.createElement("section", {
+  }, '★'.repeat(testiModal.stars)), /*#__PURE__*/React.createElement("div", {
+    className: "testi-modal-quote"
+  }, "\"", testiModal.q[lang], "\"")))), /*#__PURE__*/React.createElement("section", {
     id: "certificates",
     className: "section reveal"
   }, /*#__PURE__*/React.createElement("div", {
@@ -7105,7 +7654,7 @@ function PortfolioApp({
     className: "status-dot"
   }), t.contactStatus), /*#__PURE__*/React.createElement("button", {
     className: "book-call-btn",
-    onClick: () => {
+    onClick: function onClick() {
       setShowCalendly(true);
       SFX.click();
     }
@@ -7123,28 +7672,42 @@ function PortfolioApp({
 
 /* ─── ROOT APP ─────────────────────────────────────────────────────────────── */
 function App() {
-  const [mode, setMode] = useState(() => window._psMode || null);
-  const [initLang, setInitLang] = useState(() => window._psLang || 'en');
-  useEffect(() => {
+  var _useState97 = useState(function () {
+      return window._psMode || null;
+    }),
+    _useState98 = _slicedToArray(_useState97, 2),
+    mode = _useState98[0],
+    setMode = _useState98[1];
+  var _useState99 = useState(function () {
+      return window._psLang || 'en';
+    }),
+    _useState100 = _slicedToArray(_useState99, 2),
+    initLang = _useState100[0],
+    setInitLang = _useState100[1];
+  useEffect(function () {
     function handler(e) {
       setMode(e.detail.mode);
       setInitLang(e.detail.lang || 'en');
     }
     window.addEventListener('psChosen', handler);
-    const poll = setInterval(() => {
+    var poll = setInterval(function () {
       if (window._psMode && !window._psBootPending) {
-        setMode(m => m || window._psMode);
-        setInitLang(l => l || window._psLang || 'en');
+        setMode(function (m) {
+          return m || window._psMode;
+        });
+        setInitLang(function (l) {
+          return l || window._psLang || 'en';
+        });
         clearInterval(poll);
       }
     }, 150);
-    return () => {
+    return function () {
       window.removeEventListener('psChosen', handler);
       clearInterval(poll);
     };
   }, []);
   function switchMode() {
-    const next = mode === 'human' ? 'tech' : 'human';
+    var next = mode === 'human' ? 'tech' : 'human';
     setMode(next);
     if (next === 'human') {
       document.body.classList.add('human-mode');
