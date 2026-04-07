@@ -5791,13 +5791,18 @@ function WorldMap(_ref20) {
         alignItems: 'center',
         gap: 12
       }
-    }, /*#__PURE__*/React.createElement("span", {
+    }, /*#__PURE__*/React.createElement("img", {
+      src: "https://flagcdn.com/w40/".concat(c.iso, ".png"),
+      alt: c.n,
       style: {
-        fontSize: 34,
-        lineHeight: 1,
-        flexShrink: 0
+        width: 40,
+        height: 'auto',
+        display: 'block',
+        borderRadius: 4,
+        flexShrink: 0,
+        boxShadow: '0 1px 4px rgba(0,0,0,.3)'
       }
-    }, c.emoji), /*#__PURE__*/React.createElement("div", {
+    }), /*#__PURE__*/React.createElement("div", {
       style: {
         flex: 1,
         minWidth: 0
@@ -6834,81 +6839,7 @@ function PortfolioApp(_ref22) {
   }))), /*#__PURE__*/React.createElement(FloatingPills, {
     lang: lang,
     mode: mode
-  }), /*#__PURE__*/React.createElement("div", {
-    id: "dashboard",
-    className: "section-full"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "section-full-inner",
-    style: {
-      paddingTop: '80px',
-      paddingBottom: '80px'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "chapter-header",
-    style: {
-      padding: '0 0 32px',
-      position: 'relative'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "chapter-label"
-  }, "Chapter 01 \u2014 The Proof"), /*#__PURE__*/React.createElement("div", {
-    className: "chapter-num",
-    style: {
-      position: 'absolute',
-      top: '-20px',
-      right: '0',
-      fontSize: '5rem',
-      color: 'var(--border-dim)'
-    }
-  }, "01")), /*#__PURE__*/React.createElement("div", {
-    className: "section-eyebrow"
-  }, t.dashEyebrow), /*#__PURE__*/React.createElement("h2", {
-    className: "section-title"
-  }, t.dashTitle, " ", /*#__PURE__*/React.createElement("em", null, t.dashTitleEm)), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: '.84rem',
-      color: 'var(--text-sec)',
-      maxWidth: '560px',
-      marginBottom: '32px',
-      lineHeight: '1.8'
-    }
-  }, t.dashDesc), /*#__PURE__*/React.createElement(Dashboard, {
-    lang: lang
-  }))), /*#__PURE__*/React.createElement("section", {
-    id: "pipeline",
-    className: "section"
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'relative',
-      marginBottom: '32px'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "chapter-label"
-  }, "Chapter 02 \u2014 The Demo"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      top: '-20px',
-      right: '0',
-      fontFamily: "'Bebas Neue',sans-serif",
-      fontSize: '5rem',
-      color: 'var(--border-dim)',
-      lineHeight: 1
-    }
-  }, "02")), /*#__PURE__*/React.createElement("div", {
-    className: "section-eyebrow"
-  }, t.pipeEyebrow), /*#__PURE__*/React.createElement("h2", {
-    className: "section-title"
-  }, t.pipeTitle, " ", /*#__PURE__*/React.createElement("em", null, t.pipeTitleEm)), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: '.84rem',
-      color: 'var(--text-sec)',
-      maxWidth: '560px',
-      marginBottom: '32px',
-      lineHeight: '1.8'
-    }
-  }, t.pipeDesc), /*#__PURE__*/React.createElement(Pipeline, {
-    lang: lang
-  })), /*#__PURE__*/React.createElement("section", {
+  }), /*#__PURE__*/React.createElement("section", {
     id: "experience",
     className: "section",
     style: {
@@ -6926,7 +6857,7 @@ function PortfolioApp(_ref22) {
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "chapter-label"
-  }, "Chapter 03 \u2014 The Journey"), /*#__PURE__*/React.createElement("div", {
+  }, "Chapter 01 \u2014 The Journey"), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       top: '-20px',
@@ -6936,7 +6867,7 @@ function PortfolioApp(_ref22) {
       color: 'var(--border-dim)',
       lineHeight: 1
     }
-  }, "03")), /*#__PURE__*/React.createElement("div", {
+  }, "01")), /*#__PURE__*/React.createElement("div", {
     className: "section-eyebrow"
   }, t.expEyebrow), /*#__PURE__*/React.createElement("h2", {
     className: "section-title"
@@ -6996,6 +6927,209 @@ function PortfolioApp(_ref22) {
       className: "exp-tag"
     }, tag);
   })))))), /*#__PURE__*/React.createElement("section", {
+    id: "testimonials",
+    className: "section",
+    style: {
+      background: 'transparent'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: '1500px',
+      margin: '0 auto'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-eyebrow"
+  }, t.testiEyebrow), /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, t.testiTitle, " ", /*#__PURE__*/React.createElement("em", null, t.testiTitleEm)), /*#__PURE__*/React.createElement("div", {
+    className: "testi-grid reveal"
+  }, TESTIMONIALS.map(function (item, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: "testi-card-v2",
+      style: {
+        '--tcard-color': item.color
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "tcard-header"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "tcard-avatar"
+    }, /*#__PURE__*/React.createElement("img", {
+      src: item.avatarImg,
+      alt: item.name,
+      onError: function onError(e) {
+        e.target.style.display = 'none';
+        e.target.nextSibling.style.display = 'flex';
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        display: 'none',
+        color: item.color,
+        fontWeight: 700,
+        fontSize: '.65rem'
+      }
+    }, item.avatar)), /*#__PURE__*/React.createElement("div", {
+      className: "tcard-meta"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "tcard-name"
+    }, item.name), /*#__PURE__*/React.createElement("div", {
+      className: "tcard-role"
+    }, item.title[lang]), /*#__PURE__*/React.createElement("div", {
+      className: "tcard-company"
+    }, item.company)), /*#__PURE__*/React.createElement("a", {
+      href: item.linkedin,
+      target: "_blank",
+      rel: "noopener noreferrer",
+      className: "tcard-li"
+    }, "in")), /*#__PURE__*/React.createElement("div", {
+      className: "tcard-stars"
+    }, '★'.repeat(item.stars)), /*#__PURE__*/React.createElement("div", {
+      className: "tcard-excerpt"
+    }, "\"", item.highlight[lang], "\""), /*#__PURE__*/React.createElement("button", {
+      className: "tcard-read",
+      onClick: function onClick() {
+        return setTestiModal(item);
+      }
+    }, lang === 'fr' ? 'Lire tout →' : 'Read full →'));
+  }))), testiModal && /*#__PURE__*/React.createElement("div", {
+    className: "testi-modal-bg",
+    onClick: function onClick() {
+      return setTestiModal(null);
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "testi-modal",
+    onClick: function onClick(e) {
+      return e.stopPropagation();
+    },
+    style: {
+      '--tcard-color': testiModal.color
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "testi-modal-close",
+    onClick: function onClick() {
+      return setTestiModal(null);
+    }
+  }, "\u2715"), /*#__PURE__*/React.createElement("div", {
+    className: "tcard-header",
+    style: {
+      marginBottom: 20
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "tcard-avatar tcard-avatar-lg"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: testiModal.avatarImg,
+    alt: testiModal.name,
+    onError: function onError(e) {
+      e.target.style.display = 'none';
+      e.target.nextSibling.style.display = 'flex';
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'none',
+      color: testiModal.color,
+      fontWeight: 700,
+      fontSize: '.85rem'
+    }
+  }, testiModal.avatar)), /*#__PURE__*/React.createElement("div", {
+    className: "tcard-meta"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "tcard-name",
+    style: {
+      fontSize: '1rem'
+    }
+  }, testiModal.name), /*#__PURE__*/React.createElement("div", {
+    className: "tcard-role"
+  }, testiModal.title[lang]), /*#__PURE__*/React.createElement("div", {
+    className: "tcard-company"
+  }, testiModal.company), /*#__PURE__*/React.createElement("div", {
+    className: "tcard-date"
+  }, testiModal.date[lang])), /*#__PURE__*/React.createElement("a", {
+    href: testiModal.linkedin,
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "tcard-li"
+  }, "in")), /*#__PURE__*/React.createElement("div", {
+    className: "tcard-stars",
+    style: {
+      marginBottom: 16
+    }
+  }, '★'.repeat(testiModal.stars)), /*#__PURE__*/React.createElement("div", {
+    className: "testi-modal-quote"
+  }, "\"", testiModal.q[lang], "\"")))), /*#__PURE__*/React.createElement("div", {
+    id: "dashboard",
+    className: "section-full"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-full-inner",
+    style: {
+      paddingTop: '80px',
+      paddingBottom: '80px'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "chapter-header",
+    style: {
+      padding: '0 0 32px',
+      position: 'relative'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "chapter-label"
+  }, "Chapter 03 \u2014 The Proof"), /*#__PURE__*/React.createElement("div", {
+    className: "chapter-num",
+    style: {
+      position: 'absolute',
+      top: '-20px',
+      right: '0',
+      fontSize: '5rem',
+      color: 'var(--border-dim)'
+    }
+  }, "03")), /*#__PURE__*/React.createElement("div", {
+    className: "section-eyebrow"
+  }, t.dashEyebrow), /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, t.dashTitle, " ", /*#__PURE__*/React.createElement("em", null, t.dashTitleEm)), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: '.84rem',
+      color: 'var(--text-sec)',
+      maxWidth: '560px',
+      marginBottom: '32px',
+      lineHeight: '1.8'
+    }
+  }, t.dashDesc), /*#__PURE__*/React.createElement(Dashboard, {
+    lang: lang
+  }))), /*#__PURE__*/React.createElement("section", {
+    id: "pipeline",
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'relative',
+      marginBottom: '32px'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "chapter-label"
+  }, "Chapter 04 \u2014 The Demo"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      top: '-20px',
+      right: '0',
+      fontFamily: "'Bebas Neue',sans-serif",
+      fontSize: '5rem',
+      color: 'var(--border-dim)',
+      lineHeight: 1
+    }
+  }, "04")), /*#__PURE__*/React.createElement("div", {
+    className: "section-eyebrow"
+  }, t.pipeEyebrow), /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, t.pipeTitle, " ", /*#__PURE__*/React.createElement("em", null, t.pipeTitleEm)), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: '.84rem',
+      color: 'var(--text-sec)',
+      maxWidth: '560px',
+      marginBottom: '32px',
+      lineHeight: '1.8'
+    }
+  }, t.pipeDesc), /*#__PURE__*/React.createElement(Pipeline, {
+    lang: lang
+  })), /*#__PURE__*/React.createElement("section", {
     id: "skills",
     className: "section"
   }, /*#__PURE__*/React.createElement("div", {
@@ -7007,7 +7141,18 @@ function PortfolioApp(_ref22) {
       color: 'var(--text-dim)'
     }
   }, t.skillsTitleDim)), /*#__PURE__*/React.createElement("div", {
-    className: "skills-grid"
+    style: {
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      gap: '40px',
+      alignItems: 'start',
+      marginTop: '24px'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "skills-grid",
+    style: {
+      marginTop: 0
+    }
   }, skills.map(function (s, i) {
     return /*#__PURE__*/React.createElement("div", {
       key: i,
@@ -7028,18 +7173,14 @@ function PortfolioApp(_ref22) {
     })), /*#__PURE__*/React.createElement("div", {
       className: "skill-pct"
     }, s.pct, "%"));
-  })), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '32px'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "section-eyebrow",
     style: {
       marginBottom: '0'
     }
   }, t.radarTitle), /*#__PURE__*/React.createElement(RadarChart, {
     lang: lang
-  }))), /*#__PURE__*/React.createElement("section", {
+  })))), /*#__PURE__*/React.createElement("section", {
     id: "projects",
     className: "section",
     style: {
@@ -7057,7 +7198,7 @@ function PortfolioApp(_ref22) {
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "chapter-label"
-  }, "Chapter 04 \u2014 The Work"), /*#__PURE__*/React.createElement("div", {
+  }, "Chapter 05 \u2014 The Work"), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       top: '-20px',
@@ -7067,7 +7208,7 @@ function PortfolioApp(_ref22) {
       color: 'var(--border-dim)',
       lineHeight: 1
     }
-  }, "04")), /*#__PURE__*/React.createElement("div", {
+  }, "05")), /*#__PURE__*/React.createElement("div", {
     className: "section-eyebrow"
   }, t.projectsEyebrow), /*#__PURE__*/React.createElement("h2", {
     className: "section-title"
@@ -7253,6 +7394,45 @@ function PortfolioApp(_ref22) {
       className: "stack-cat"
     }, s.cat));
   })))), /*#__PURE__*/React.createElement("section", {
+    id: "certificates",
+    className: "section reveal"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: '1500px',
+      margin: '0 auto'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-eyebrow"
+  }, "\uD83C\uDF93 ", lang === 'fr' ? 'Anthropic School · Mars 2026' : 'Anthropic School · March 2026'), /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, lang === 'fr' ? /*#__PURE__*/React.createElement(React.Fragment, null, "8 ", /*#__PURE__*/React.createElement("em", null, "Certifications"), " obtenues") : /*#__PURE__*/React.createElement(React.Fragment, null, "8 ", /*#__PURE__*/React.createElement("em", null, "Certifications"), " earned")), /*#__PURE__*/React.createElement(CertWall, {
+    lang: lang
+  }))), /*#__PURE__*/React.createElement("section", {
+    id: "blog",
+    className: "section",
+    style: {
+      background: 'transparent'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: '1500px',
+      margin: '0 auto'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-eyebrow"
+  }, t.blogEyebrow), /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, t.blogTitle, " ", /*#__PURE__*/React.createElement("em", null, t.blogTitleEm)), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: '.84rem',
+      color: 'var(--text-sec)',
+      maxWidth: '560px',
+      marginBottom: '36px',
+      lineHeight: '1.8'
+    }
+  }, t.blogDesc), /*#__PURE__*/React.createElement(Blog, {
+    lang: lang
+  }))), /*#__PURE__*/React.createElement("section", {
     id: "terminal",
     className: "section"
   }, /*#__PURE__*/React.createElement("div", {
@@ -7267,7 +7447,7 @@ function PortfolioApp(_ref22) {
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "chapter-label"
-  }, "Chapter 05 \u2014 The Interface"), /*#__PURE__*/React.createElement("div", {
+  }, "Chapter 06 \u2014 The Interface"), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       top: '-20px',
@@ -7290,149 +7470,6 @@ function PortfolioApp(_ref22) {
       lineHeight: '1.8'
     }
   }, t.terminalDesc), /*#__PURE__*/React.createElement(TerminalChatbot, {
-    lang: lang
-  }))), /*#__PURE__*/React.createElement("section", {
-    id: "testimonials",
-    className: "section",
-    style: {
-      background: 'transparent'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      maxWidth: '1500px',
-      margin: '0 auto'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "section-eyebrow"
-  }, t.testiEyebrow), /*#__PURE__*/React.createElement("h2", {
-    className: "section-title"
-  }, t.testiTitle, " ", /*#__PURE__*/React.createElement("em", null, t.testiTitleEm)), /*#__PURE__*/React.createElement("div", {
-    className: "testi-grid reveal"
-  }, TESTIMONIALS.map(function (item, i) {
-    return /*#__PURE__*/React.createElement("div", {
-      key: i,
-      className: "testi-card-v2",
-      style: {
-        '--tcard-color': item.color
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "tcard-header"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "tcard-avatar"
-    }, /*#__PURE__*/React.createElement("img", {
-      src: item.avatarImg,
-      alt: item.name,
-      onError: function onError(e) {
-        e.target.style.display = 'none';
-        e.target.nextSibling.style.display = 'flex';
-      }
-    }), /*#__PURE__*/React.createElement("span", {
-      style: {
-        display: 'none',
-        color: item.color,
-        fontWeight: 700,
-        fontSize: '.65rem'
-      }
-    }, item.avatar)), /*#__PURE__*/React.createElement("div", {
-      className: "tcard-meta"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "tcard-name"
-    }, item.name), /*#__PURE__*/React.createElement("div", {
-      className: "tcard-role"
-    }, item.title[lang]), /*#__PURE__*/React.createElement("div", {
-      className: "tcard-company"
-    }, item.company)), /*#__PURE__*/React.createElement("a", {
-      href: item.linkedin,
-      target: "_blank",
-      rel: "noopener noreferrer",
-      className: "tcard-li"
-    }, "in")), /*#__PURE__*/React.createElement("div", {
-      className: "tcard-stars"
-    }, '★'.repeat(item.stars)), /*#__PURE__*/React.createElement("div", {
-      className: "tcard-excerpt"
-    }, "\"", item.highlight[lang], "\""), /*#__PURE__*/React.createElement("button", {
-      className: "tcard-read",
-      onClick: function onClick() {
-        return setTestiModal(item);
-      }
-    }, lang === 'fr' ? 'Lire tout →' : 'Read full →'));
-  }))), testiModal && /*#__PURE__*/React.createElement("div", {
-    className: "testi-modal-bg",
-    onClick: function onClick() {
-      return setTestiModal(null);
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "testi-modal",
-    onClick: function onClick(e) {
-      return e.stopPropagation();
-    },
-    style: {
-      '--tcard-color': testiModal.color
-    }
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "testi-modal-close",
-    onClick: function onClick() {
-      return setTestiModal(null);
-    }
-  }, "\u2715"), /*#__PURE__*/React.createElement("div", {
-    className: "tcard-header",
-    style: {
-      marginBottom: 20
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "tcard-avatar tcard-avatar-lg"
-  }, /*#__PURE__*/React.createElement("img", {
-    src: testiModal.avatarImg,
-    alt: testiModal.name,
-    onError: function onError(e) {
-      e.target.style.display = 'none';
-      e.target.nextSibling.style.display = 'flex';
-    }
-  }), /*#__PURE__*/React.createElement("span", {
-    style: {
-      display: 'none',
-      color: testiModal.color,
-      fontWeight: 700,
-      fontSize: '.85rem'
-    }
-  }, testiModal.avatar)), /*#__PURE__*/React.createElement("div", {
-    className: "tcard-meta"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "tcard-name",
-    style: {
-      fontSize: '1rem'
-    }
-  }, testiModal.name), /*#__PURE__*/React.createElement("div", {
-    className: "tcard-role"
-  }, testiModal.title[lang]), /*#__PURE__*/React.createElement("div", {
-    className: "tcard-company"
-  }, testiModal.company), /*#__PURE__*/React.createElement("div", {
-    className: "tcard-date"
-  }, testiModal.date[lang])), /*#__PURE__*/React.createElement("a", {
-    href: testiModal.linkedin,
-    target: "_blank",
-    rel: "noopener noreferrer",
-    className: "tcard-li"
-  }, "in")), /*#__PURE__*/React.createElement("div", {
-    className: "tcard-stars",
-    style: {
-      marginBottom: 16
-    }
-  }, '★'.repeat(testiModal.stars)), /*#__PURE__*/React.createElement("div", {
-    className: "testi-modal-quote"
-  }, "\"", testiModal.q[lang], "\"")))), /*#__PURE__*/React.createElement("section", {
-    id: "certificates",
-    className: "section reveal"
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      maxWidth: '1500px',
-      margin: '0 auto'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "section-eyebrow"
-  }, "\uD83C\uDF93 ", lang === 'fr' ? 'Anthropic School · Mars 2026' : 'Anthropic School · March 2026'), /*#__PURE__*/React.createElement("h2", {
-    className: "section-title"
-  }, lang === 'fr' ? /*#__PURE__*/React.createElement(React.Fragment, null, "8 ", /*#__PURE__*/React.createElement("em", null, "Certifications"), " obtenues") : /*#__PURE__*/React.createElement(React.Fragment, null, "8 ", /*#__PURE__*/React.createElement("em", null, "Certifications"), " earned")), /*#__PURE__*/React.createElement(CertWall, {
     lang: lang
   }))), /*#__PURE__*/React.createElement("div", {
     className: "world-map-section",
@@ -7518,31 +7555,6 @@ function PortfolioApp(_ref22) {
     lang: lang,
     mode: mode
   }), /*#__PURE__*/React.createElement("section", {
-    id: "blog",
-    className: "section",
-    style: {
-      background: 'transparent'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      maxWidth: '1500px',
-      margin: '0 auto'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "section-eyebrow"
-  }, t.blogEyebrow), /*#__PURE__*/React.createElement("h2", {
-    className: "section-title"
-  }, t.blogTitle, " ", /*#__PURE__*/React.createElement("em", null, t.blogTitleEm)), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: '.84rem',
-      color: 'var(--text-sec)',
-      maxWidth: '560px',
-      marginBottom: '36px',
-      lineHeight: '1.8'
-    }
-  }, t.blogDesc), /*#__PURE__*/React.createElement(Blog, {
-    lang: lang
-  }))), /*#__PURE__*/React.createElement("section", {
     id: "contact",
     className: "section"
   }, /*#__PURE__*/React.createElement("div", {

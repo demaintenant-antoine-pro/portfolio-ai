@@ -1740,7 +1740,7 @@ function WorldMap({countries,setActiveCountry,lang}){
               borderBottom:'1px solid var(--glass-border)',
               display:'flex',alignItems:'center',gap:12,
             }}>
-              <span style={{fontSize:34,lineHeight:1,flexShrink:0}}>{c.emoji}</span>
+              <img src={`https://flagcdn.com/w40/${c.iso}.png`} alt={c.n} style={{width:40,height:'auto',display:'block',borderRadius:4,flexShrink:0,boxShadow:'0 1px 4px rgba(0,0,0,.3)'}}/>
               <div style={{flex:1,minWidth:0}}>
                 <div style={{fontFamily:"'Space Grotesk',sans-serif",fontWeight:800,fontSize:'1.1rem',color:'var(--text)',letterSpacing:'-.2px',lineHeight:1,marginBottom:4}}>{c.n}</div>
                 <div style={{fontFamily:"'Space Mono',monospace",fontSize:'.4rem',color:'var(--accent2)',letterSpacing:'2px',textTransform:'uppercase'}}>{c.sub}</div>
@@ -2189,38 +2189,12 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
 
     {/* METRICS removed */}
 
-    {/* CH1 — DASHBOARD */}
-    <div id="dashboard" className="section-full">
-      <div className="section-full-inner" style={{paddingTop:'80px',paddingBottom:'80px'}}>
-        <div className="chapter-header" style={{padding:'0 0 32px',position:'relative'}}>
-          <div className="chapter-label">Chapter 01 — The Proof</div>
-          <div className="chapter-num" style={{position:'absolute',top:'-20px',right:'0',fontSize:'5rem',color:'var(--border-dim)'}}>01</div>
-        </div>
-        <div className="section-eyebrow">{t.dashEyebrow}</div>
-        <h2 className="section-title">{t.dashTitle} <em>{t.dashTitleEm}</em></h2>
-        <p style={{fontSize:'.84rem',color:'var(--text-sec)',maxWidth:'560px',marginBottom:'32px',lineHeight:'1.8'}}>{t.dashDesc}</p>
-        <Dashboard lang={lang}/>
-      </div>
-    </div>
-
-    {/* CH2 — PIPELINE */}
-    <section id="pipeline" className="section">
-      <div style={{position:'relative',marginBottom:'32px'}}>
-        <div className="chapter-label">Chapter 02 — The Demo</div>
-        <div style={{position:'absolute',top:'-20px',right:'0',fontFamily:"'Bebas Neue',sans-serif",fontSize:'5rem',color:'var(--border-dim)',lineHeight:1}}>02</div>
-      </div>
-      <div className="section-eyebrow">{t.pipeEyebrow}</div>
-      <h2 className="section-title">{t.pipeTitle} <em>{t.pipeTitleEm}</em></h2>
-      <p style={{fontSize:'.84rem',color:'var(--text-sec)',maxWidth:'560px',marginBottom:'32px',lineHeight:'1.8'}}>{t.pipeDesc}</p>
-      <Pipeline lang={lang}/>
-    </section>
-
-    {/* CH3 — EXPERIENCE */}
+    {/* CH1 — EXPERIENCE */}
     <section id="experience" className="section" style={{background:'transparent'}}>
       <div style={{maxWidth:'1500px',margin:'0 auto'}}>
         <div style={{position:'relative',marginBottom:'32px'}}>
-          <div className="chapter-label">Chapter 03 — The Journey</div>
-          <div style={{position:'absolute',top:'-20px',right:'0',fontFamily:"'Bebas Neue',sans-serif",fontSize:'5rem',color:'var(--border-dim)',lineHeight:1}}>03</div>
+          <div className="chapter-label">Chapter 01 — The Journey</div>
+          <div style={{position:'absolute',top:'-20px',right:'0',fontFamily:"'Bebas Neue',sans-serif",fontSize:'5rem',color:'var(--border-dim)',lineHeight:1}}>01</div>
         </div>
         <div className="section-eyebrow">{t.expEyebrow}</div>
         <h2 className="section-title">{t.expTitle} <em>{t.expTitleEm}</em></h2>
@@ -2237,83 +2211,7 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
       </div>
     </section>
 
-    {/* SKILLS + RADAR */}
-    <section id="skills" className="section">
-      <div className="section-eyebrow">{t.skillsEyebrow}</div>
-      <h2 className="section-title">{t.skillsTitle} <span style={{color:'var(--text-dim)'}}>{t.skillsTitleDim}</span></h2>
-      <div className="skills-grid">
-        {skills.map((s,i)=>(<div key={i} className={`skill-card reveal reveal-delay-${i%3+1}`}><div className="skill-icon">{s.icon}</div><div className="skill-name">{s.name}</div><div className="skill-desc">{s.desc}</div><div className="skill-bar"><div className="skill-fill" style={{width:`${s.pct}%`}}/></div><div className="skill-pct">{s.pct}%</div></div>))}
-      </div>
-      <div style={{marginTop:'32px'}}>
-        <div className="section-eyebrow" style={{marginBottom:'0'}}>{t.radarTitle}</div>
-        <RadarChart lang={lang}/>
-      </div>
-    </section>
-
-    {/* PROJECTS */}
-    <section id="projects" className="section" style={{background:'transparent'}}>
-      <div style={{maxWidth:'1500px',margin:'0 auto'}}>
-        <div style={{position:'relative',marginBottom:'32px'}}>
-          <div className="chapter-label">Chapter 04 — The Work</div>
-          <div style={{position:'absolute',top:'-20px',right:'0',fontFamily:"'Bebas Neue',sans-serif",fontSize:'5rem',color:'var(--border-dim)',lineHeight:1}}>04</div>
-        </div>
-        <div className="section-eyebrow">{t.projectsEyebrow}</div>
-        <h2 className="section-title">{t.projectsTitle} <em>{t.projectsTitleEm}</em></h2>
-        <p style={{fontSize:'.84rem',color:'var(--text-sec)',maxWidth:'560px',marginBottom:'36px',lineHeight:'1.8'}}>{t.projectsDesc}</p>
-        <div className="projects-grid">
-          {[
-            {icon:'📊',badge:lang==='fr'?'DASHBOARD IA SUR-MESURE':'AI DECISION DASHBOARD',title:lang==='fr'?'Dashboard décisionnel construit sur votre pain point exact':'Decision dashboard built on your exact pain point',desc:lang==='fr'?'KPIs actionnables, alertes seuils critiques, prévisions 13 semaines (MAPE 4,2%), veille concurrentielle 40+ marques. Un outil de décision — pas un template.':'Actionable KPIs, critical threshold alerts, 13-week forecasting (MAPE 4.2%), competitive intelligence on 40+ brands. A decision tool — not a template.',tags:['Power BI','Python','Prophet','SQL'],roi:{label:lang==='fr'?'ROI MESURÉ':'MEASURED ROI',items:[{v:lang==='fr'?'−40h/mois':'−40h/month',d:lang==='fr'?'reporting manuel':'manual reporting'},{v:'4.2%',d:'MAPE forecast'},{v:lang==='fr'?'< 5 min':'< 5 min',d:lang==='fr'?'délai alerte':'alert latency'}]}},
-            {icon:'🤖',badge:lang==='fr'?'AUTOMATISATION FINANCIÈRE':'FINANCIAL AUTOMATION',title:lang==='fr'?'Clôture financière en 6 min — sans aucune saisie manuelle':'Financial close in 6 minutes — zero manual input',desc:lang==='fr'?'Export ERP → transformation → commentaires IA → Word/PDF → envoi automatique équipes et DG. Ce qui prenait 2 jours se fait seul à 6h du matin.':'ERP export → transformation → AI commentary → Word/PDF → auto delivery to teams & CEO. What took 2 days now runs alone at 6am.',tags:['N8N','GPT-4','Python','SAP'],roi:{label:lang==='fr'?'GAINS DIRECTS':'DIRECT SAVINGS',items:[{v:'−95%',d:lang==='fr'?'erreurs saisie':'entry errors'},{v:'6 min',d:lang==='fr'?'vs 2 jours avant':'vs 2 days before'},{v:'12+',d:lang==='fr'?'équipes servies':'teams served'}]}},
-            {icon:'🔗',badge:lang==='fr'?'PROSPECTION LINKEDIN AUTO':'LINKEDIN AUTO PROSPECTING',title:lang==='fr'?'100 prospects qualifiés par jour — séquence personnalisée par IA':'100 qualified prospects per day — AI-personalized outreach',desc:lang==='fr'?'Ciblage ICP via Sales Navigator, messages personnalisés par IA, séquence 3 touchpoints, sync CRM automatique. Le pipeline se remplit pendant que vous travaillez.':'ICP targeting via Sales Navigator, AI-personalized messages, 3-touchpoint sequence, auto CRM sync. The pipeline fills while you work.',tags:['Sales Navigator','GPT-4','Make.com','CRM'],roi:{label:lang==='fr'?'RÉSULTATS':'RESULTS',items:[{v:'5×',d:lang==='fr'?'taux de réponse':'reply rate'},{v:'100/j',d:lang==='fr'?'prospects auto':'auto prospects'},{v:'−80%',d:lang==='fr'?'temps prospection':'prospecting time'}]}},
-            {icon:'📦',badge:lang==='fr'?'SUPPLY CHAIN IA':'AI SUPPLY CHAIN',title:lang==='fr'?'Zéro rupture de stock — prévision et commande automatique':'Zero stockouts — AI forecasting and automatic purchase orders',desc:lang==='fr'?'Prévision niveau SKU 8 semaines, détection risques rupture, génération PO automatique, workflow approbation digitalisé. Surplus et ruptures éliminés simultanément.':'8-week SKU-level forecasting, stockout risk detection, automatic PO generation, digitized approval workflow. Surplus and stockouts eliminated simultaneously.',tags:['Python','Prophet','N8N','ERP'],roi:{label:lang==='fr'?'IMPACT MESURÉ':'MEASURED IMPACT',items:[{v:'−80%',d:lang==='fr'?'ruptures de stock':'stockouts'},{v:'8 sem.',d:lang==='fr'?'horizon prévision':'forecast horizon'},{v:'PO',d:lang==='fr'?'auto en 1 clic':'auto in 1 click'}]}}
-          ].map((p,i)=>(
-            <div key={i} className={`project-card reveal reveal-delay-${i%2+1}`}>
-              <div className="project-header">
-                <span className="project-badge">{p.badge}</span>
-                <span style={{fontSize:'1.5rem',lineHeight:1}}>{p.icon}</span>
-              </div>
-              <div className="project-title">{p.title}</div>
-              <div className="project-desc">{p.desc}</div>
-              <div style={{background:'rgba(0,240,168,0.06)',border:'1px solid rgba(0,240,168,0.22)',borderRadius:8,padding:'10px 14px',marginBottom:14}}>
-                <div style={{fontSize:8,fontWeight:700,letterSpacing:'1.5px',color:'#00F0A8',fontFamily:"'Space Mono',monospace",marginBottom:8}}>{p.roi.label}</div>
-                <div style={{display:'flex',gap:14}}>
-                  {p.roi.items.map((r,j)=>(<div key={j} style={{textAlign:'center'}}>
-                    <div style={{fontSize:16,fontWeight:800,color:'#00F0A8',fontFamily:"'Space Grotesk',sans-serif"}}>{r.v}</div>
-                    <div style={{fontSize:9,color:'var(--text-dim)',marginTop:2,lineHeight:1.3}}>{r.d}</div>
-                  </div>))}
-                </div>
-              </div>
-              <div className="project-tags">{p.tags.map((tg,j)=><span key={j} className="project-tag">{tg}</span>)}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* STACK — tech mode only */}
-    {mode!=='human'&&<section id="stack" className="section">
-      <div style={{maxWidth:'1500px',margin:'0 auto'}}>
-        <div className="section-eyebrow">{t.stackEyebrow}</div>
-        <h2 className="section-title">{t.stackTitle} <em>{t.stackTitleEm}</em></h2>
-        <div className="stack-grid reveal">{STACK.map((s,i)=>(<div key={i} className="stack-card"><div className="stack-level">{s.level}</div><span className="stack-emoji">{s.e}</span><div className="stack-name">{s.name}</div><div className="stack-cat">{s.cat}</div></div>))}</div>
-      </div>
-    </section>}
-
-    {/* CH5 — TERMINAL */}
-    <section id="terminal" className="section">
-      <div style={{maxWidth:'1500px',margin:'0 auto'}}>
-        <div style={{position:'relative',marginBottom:'32px'}}>
-          <div className="chapter-label">Chapter 05 — The Interface</div>
-          <div style={{position:'absolute',top:'-20px',right:'0',fontFamily:"'Bebas Neue',sans-serif",fontSize:'5rem',color:'var(--border-dim)',lineHeight:1}}>06</div>
-        </div>
-        <div className="section-eyebrow">{t.terminalEyebrow}</div>
-        <h2 className="section-title">{t.terminalTitle} <em>{t.terminalTitleEm}</em></h2>
-        <p style={{fontSize:'.84rem',color:'var(--text-sec)',maxWidth:'560px',marginBottom:'32px',lineHeight:'1.8'}}>{t.terminalDesc}</p>
-        <TerminalChatbot lang={lang}/>
-      </div>
-    </section>
-
-    {/* TESTIMONIALS */}
+    {/* CH2 — TESTIMONIALS */}
     <section id="testimonials" className="section" style={{background:'transparent'}}>
       <div style={{maxWidth:'1500px',margin:'0 auto'}}>
         <div className="section-eyebrow">{t.testiEyebrow}</div>
@@ -2370,12 +2268,126 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
       )}
     </section>
 
+    {/* CH3 — DASHBOARD */}
+    <div id="dashboard" className="section-full">
+      <div className="section-full-inner" style={{paddingTop:'80px',paddingBottom:'80px'}}>
+        <div className="chapter-header" style={{padding:'0 0 32px',position:'relative'}}>
+          <div className="chapter-label">Chapter 03 — The Proof</div>
+          <div className="chapter-num" style={{position:'absolute',top:'-20px',right:'0',fontSize:'5rem',color:'var(--border-dim)'}}>03</div>
+        </div>
+        <div className="section-eyebrow">{t.dashEyebrow}</div>
+        <h2 className="section-title">{t.dashTitle} <em>{t.dashTitleEm}</em></h2>
+        <p style={{fontSize:'.84rem',color:'var(--text-sec)',maxWidth:'560px',marginBottom:'32px',lineHeight:'1.8'}}>{t.dashDesc}</p>
+        <Dashboard lang={lang}/>
+      </div>
+    </div>
+
+    {/* CH4 — PIPELINE */}
+    <section id="pipeline" className="section">
+      <div style={{position:'relative',marginBottom:'32px'}}>
+        <div className="chapter-label">Chapter 04 — The Demo</div>
+        <div style={{position:'absolute',top:'-20px',right:'0',fontFamily:"'Bebas Neue',sans-serif",fontSize:'5rem',color:'var(--border-dim)',lineHeight:1}}>04</div>
+      </div>
+      <div className="section-eyebrow">{t.pipeEyebrow}</div>
+      <h2 className="section-title">{t.pipeTitle} <em>{t.pipeTitleEm}</em></h2>
+      <p style={{fontSize:'.84rem',color:'var(--text-sec)',maxWidth:'560px',marginBottom:'32px',lineHeight:'1.8'}}>{t.pipeDesc}</p>
+      <Pipeline lang={lang}/>
+    </section>
+
+    {/* SKILLS + RADAR — side by side */}
+    <section id="skills" className="section">
+      <div className="section-eyebrow">{t.skillsEyebrow}</div>
+      <h2 className="section-title">{t.skillsTitle} <span style={{color:'var(--text-dim)'}}>{t.skillsTitleDim}</span></h2>
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'40px',alignItems:'start',marginTop:'24px'}}>
+        <div className="skills-grid" style={{marginTop:0}}>
+          {skills.map((s,i)=>(<div key={i} className={`skill-card reveal reveal-delay-${i%3+1}`}><div className="skill-icon">{s.icon}</div><div className="skill-name">{s.name}</div><div className="skill-desc">{s.desc}</div><div className="skill-bar"><div className="skill-fill" style={{width:`${s.pct}%`}}/></div><div className="skill-pct">{s.pct}%</div></div>))}
+        </div>
+        <div>
+          <div className="section-eyebrow" style={{marginBottom:'0'}}>{t.radarTitle}</div>
+          <RadarChart lang={lang}/>
+        </div>
+      </div>
+    </section>
+
+    {/* PROJECTS */}
+    <section id="projects" className="section" style={{background:'transparent'}}>
+      <div style={{maxWidth:'1500px',margin:'0 auto'}}>
+        <div style={{position:'relative',marginBottom:'32px'}}>
+          <div className="chapter-label">Chapter 05 — The Work</div>
+          <div style={{position:'absolute',top:'-20px',right:'0',fontFamily:"'Bebas Neue',sans-serif",fontSize:'5rem',color:'var(--border-dim)',lineHeight:1}}>05</div>
+        </div>
+        <div className="section-eyebrow">{t.projectsEyebrow}</div>
+        <h2 className="section-title">{t.projectsTitle} <em>{t.projectsTitleEm}</em></h2>
+        <p style={{fontSize:'.84rem',color:'var(--text-sec)',maxWidth:'560px',marginBottom:'36px',lineHeight:'1.8'}}>{t.projectsDesc}</p>
+        <div className="projects-grid">
+          {[
+            {icon:'📊',badge:lang==='fr'?'DASHBOARD IA SUR-MESURE':'AI DECISION DASHBOARD',title:lang==='fr'?'Dashboard décisionnel construit sur votre pain point exact':'Decision dashboard built on your exact pain point',desc:lang==='fr'?'KPIs actionnables, alertes seuils critiques, prévisions 13 semaines (MAPE 4,2%), veille concurrentielle 40+ marques. Un outil de décision — pas un template.':'Actionable KPIs, critical threshold alerts, 13-week forecasting (MAPE 4.2%), competitive intelligence on 40+ brands. A decision tool — not a template.',tags:['Power BI','Python','Prophet','SQL'],roi:{label:lang==='fr'?'ROI MESURÉ':'MEASURED ROI',items:[{v:lang==='fr'?'−40h/mois':'−40h/month',d:lang==='fr'?'reporting manuel':'manual reporting'},{v:'4.2%',d:'MAPE forecast'},{v:lang==='fr'?'< 5 min':'< 5 min',d:lang==='fr'?'délai alerte':'alert latency'}]}},
+            {icon:'🤖',badge:lang==='fr'?'AUTOMATISATION FINANCIÈRE':'FINANCIAL AUTOMATION',title:lang==='fr'?'Clôture financière en 6 min — sans aucune saisie manuelle':'Financial close in 6 minutes — zero manual input',desc:lang==='fr'?'Export ERP → transformation → commentaires IA → Word/PDF → envoi automatique équipes et DG. Ce qui prenait 2 jours se fait seul à 6h du matin.':'ERP export → transformation → AI commentary → Word/PDF → auto delivery to teams & CEO. What took 2 days now runs alone at 6am.',tags:['N8N','GPT-4','Python','SAP'],roi:{label:lang==='fr'?'GAINS DIRECTS':'DIRECT SAVINGS',items:[{v:'−95%',d:lang==='fr'?'erreurs saisie':'entry errors'},{v:'6 min',d:lang==='fr'?'vs 2 jours avant':'vs 2 days before'},{v:'12+',d:lang==='fr'?'équipes servies':'teams served'}]}},
+            {icon:'🔗',badge:lang==='fr'?'PROSPECTION LINKEDIN AUTO':'LINKEDIN AUTO PROSPECTING',title:lang==='fr'?'100 prospects qualifiés par jour — séquence personnalisée par IA':'100 qualified prospects per day — AI-personalized outreach',desc:lang==='fr'?'Ciblage ICP via Sales Navigator, messages personnalisés par IA, séquence 3 touchpoints, sync CRM automatique. Le pipeline se remplit pendant que vous travaillez.':'ICP targeting via Sales Navigator, AI-personalized messages, 3-touchpoint sequence, auto CRM sync. The pipeline fills while you work.',tags:['Sales Navigator','GPT-4','Make.com','CRM'],roi:{label:lang==='fr'?'RÉSULTATS':'RESULTS',items:[{v:'5×',d:lang==='fr'?'taux de réponse':'reply rate'},{v:'100/j',d:lang==='fr'?'prospects auto':'auto prospects'},{v:'−80%',d:lang==='fr'?'temps prospection':'prospecting time'}]}},
+            {icon:'📦',badge:lang==='fr'?'SUPPLY CHAIN IA':'AI SUPPLY CHAIN',title:lang==='fr'?'Zéro rupture de stock — prévision et commande automatique':'Zero stockouts — AI forecasting and automatic purchase orders',desc:lang==='fr'?'Prévision niveau SKU 8 semaines, détection risques rupture, génération PO automatique, workflow approbation digitalisé. Surplus et ruptures éliminés simultanément.':'8-week SKU-level forecasting, stockout risk detection, automatic PO generation, digitized approval workflow. Surplus and stockouts eliminated simultaneously.',tags:['Python','Prophet','N8N','ERP'],roi:{label:lang==='fr'?'IMPACT MESURÉ':'MEASURED IMPACT',items:[{v:'−80%',d:lang==='fr'?'ruptures de stock':'stockouts'},{v:'8 sem.',d:lang==='fr'?'horizon prévision':'forecast horizon'},{v:'PO',d:lang==='fr'?'auto en 1 clic':'auto in 1 click'}]}}
+          ].map((p,i)=>(
+            <div key={i} className={`project-card reveal reveal-delay-${i%2+1}`}>
+              <div className="project-header">
+                <span className="project-badge">{p.badge}</span>
+                <span style={{fontSize:'1.5rem',lineHeight:1}}>{p.icon}</span>
+              </div>
+              <div className="project-title">{p.title}</div>
+              <div className="project-desc">{p.desc}</div>
+              <div style={{background:'rgba(0,240,168,0.06)',border:'1px solid rgba(0,240,168,0.22)',borderRadius:8,padding:'10px 14px',marginBottom:14}}>
+                <div style={{fontSize:8,fontWeight:700,letterSpacing:'1.5px',color:'#00F0A8',fontFamily:"'Space Mono',monospace",marginBottom:8}}>{p.roi.label}</div>
+                <div style={{display:'flex',gap:14}}>
+                  {p.roi.items.map((r,j)=>(<div key={j} style={{textAlign:'center'}}>
+                    <div style={{fontSize:16,fontWeight:800,color:'#00F0A8',fontFamily:"'Space Grotesk',sans-serif"}}>{r.v}</div>
+                    <div style={{fontSize:9,color:'var(--text-dim)',marginTop:2,lineHeight:1.3}}>{r.d}</div>
+                  </div>))}
+                </div>
+              </div>
+              <div className="project-tags">{p.tags.map((tg,j)=><span key={j} className="project-tag">{tg}</span>)}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* STACK — tech mode only */}
+    {mode!=='human'&&<section id="stack" className="section">
+      <div style={{maxWidth:'1500px',margin:'0 auto'}}>
+        <div className="section-eyebrow">{t.stackEyebrow}</div>
+        <h2 className="section-title">{t.stackTitle} <em>{t.stackTitleEm}</em></h2>
+        <div className="stack-grid reveal">{STACK.map((s,i)=>(<div key={i} className="stack-card"><div className="stack-level">{s.level}</div><span className="stack-emoji">{s.e}</span><div className="stack-name">{s.name}</div><div className="stack-cat">{s.cat}</div></div>))}</div>
+      </div>
+    </section>}
+
     {/* CERTIFICATES */}
     <section id="certificates" className="section reveal">
       <div style={{maxWidth:'1500px',margin:'0 auto'}}>
         <div className="section-eyebrow">🎓 {lang==='fr'?'Anthropic School · Mars 2026':'Anthropic School · March 2026'}</div>
         <h2 className="section-title">{lang==='fr'?<>8 <em>Certifications</em> obtenues</>:<>8 <em>Certifications</em> earned</>}</h2>
         <CertWall lang={lang}/>
+      </div>
+    </section>
+
+    {/* BLOG */}
+    <section id="blog" className="section" style={{background:'transparent'}}>
+      <div style={{maxWidth:'1500px',margin:'0 auto'}}>
+        <div className="section-eyebrow">{t.blogEyebrow}</div>
+        <h2 className="section-title">{t.blogTitle} <em>{t.blogTitleEm}</em></h2>
+        <p style={{fontSize:'.84rem',color:'var(--text-sec)',maxWidth:'560px',marginBottom:'36px',lineHeight:'1.8'}}>{t.blogDesc}</p>
+        <Blog lang={lang}/>
+      </div>
+    </section>
+
+    {/* TERMINAL — way down */}
+    <section id="terminal" className="section">
+      <div style={{maxWidth:'1500px',margin:'0 auto'}}>
+        <div style={{position:'relative',marginBottom:'32px'}}>
+          <div className="chapter-label">Chapter 06 — The Interface</div>
+          <div style={{position:'absolute',top:'-20px',right:'0',fontFamily:"'Bebas Neue',sans-serif",fontSize:'5rem',color:'var(--border-dim)',lineHeight:1}}>06</div>
+        </div>
+        <div className="section-eyebrow">{t.terminalEyebrow}</div>
+        <h2 className="section-title">{t.terminalTitle} <em>{t.terminalTitleEm}</em></h2>
+        <p style={{fontSize:'.84rem',color:'var(--text-sec)',maxWidth:'560px',marginBottom:'32px',lineHeight:'1.8'}}>{t.terminalDesc}</p>
+        <TerminalChatbot lang={lang}/>
       </div>
     </section>
 
@@ -2408,16 +2420,6 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
 
     {/* VISITOR LIVE MAP */}
     <VisitorMap lang={lang} mode={mode}/>
-
-    {/* BLOG */}
-    <section id="blog" className="section" style={{background:'transparent'}}>
-      <div style={{maxWidth:'1500px',margin:'0 auto'}}>
-        <div className="section-eyebrow">{t.blogEyebrow}</div>
-        <h2 className="section-title">{t.blogTitle} <em>{t.blogTitleEm}</em></h2>
-        <p style={{fontSize:'.84rem',color:'var(--text-sec)',maxWidth:'560px',marginBottom:'36px',lineHeight:'1.8'}}>{t.blogDesc}</p>
-        <Blog lang={lang}/>
-      </div>
-    </section>
 
     {/* CH7 — CONTACT */}
     <section id="contact" className="section">
