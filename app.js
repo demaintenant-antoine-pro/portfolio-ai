@@ -947,7 +947,7 @@ var TESTIMONIALS = [{
     en: "March 2026 · Guillaume was Antoine's senior but not his direct manager",
     fr: "Mars 2026 · Guillaume était le supérieur de Antoine mais n'était pas le responsable direct de Antoine"
   },
-  avatarImg: '/images/testimonials/guillaume-martin.png',
+  avatarImg: 'images/testimonials/guillaume-martin.png',
   avatar: 'GM',
   color: '#6366F1',
   stars: 5,
@@ -971,7 +971,7 @@ var TESTIMONIALS = [{
     en: "March 2026 · Aziz was Antoine's senior but not his direct manager",
     fr: "Mars 2026 · Aziz était le supérieur de Antoine mais n'était pas le responsable direct de Antoine"
   },
-  avatarImg: '/images/testimonials/aziz-agoumy.jpg',
+  avatarImg: 'images/testimonials/aziz-agoumy.jpg',
   avatar: 'AA',
   color: '#F97316',
   stars: 5,
@@ -995,7 +995,7 @@ var TESTIMONIALS = [{
     en: 'March 2026 · worked with Antoine in the same team',
     fr: 'Mars 2026 · a travaillé avec Antoine dans la même équipe'
   },
-  avatarImg: '/images/testimonials/theo-massot.png',
+  avatarImg: 'images/testimonials/theo-massot.png',
   avatar: 'TM',
   color: '#38BDF8',
   stars: 5,
@@ -1019,7 +1019,7 @@ var TESTIMONIALS = [{
     en: 'May 2024 · worked with Antoine across teams',
     fr: 'Mai 2024 · a travaillé avec Antoine dans des équipes différentes'
   },
-  avatarImg: '/images/testimonials/robin-blondeau.jpg',
+  avatarImg: 'images/testimonials/robin-blondeau.jpg',
   avatar: 'RB',
   color: '#415a77',
   stars: 5,
@@ -1043,7 +1043,7 @@ var TESTIMONIALS = [{
     en: 'May 2024 · worked with Antoine in the same team',
     fr: 'Mai 2024 · a travaillé avec Antoine dans la même équipe'
   },
-  avatarImg: '/images/testimonials/thomas-becuwe.jpg',
+  avatarImg: 'images/testimonials/thomas-becuwe.jpg',
   avatar: 'TB',
   color: '#FF2D78',
   stars: 5,
@@ -1067,7 +1067,7 @@ var TESTIMONIALS = [{
     en: 'May 2024 · worked with Antoine in the same team',
     fr: 'Mai 2024 · a travaillé avec Antoine dans la même équipe'
   },
-  avatarImg: '/images/testimonials/matthieu-conil.jpg',
+  avatarImg: 'images/testimonials/matthieu-conil.jpg',
   avatar: 'MC',
   color: '#00F0A8',
   stars: 5,
