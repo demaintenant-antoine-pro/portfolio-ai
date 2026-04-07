@@ -88,7 +88,7 @@ const T={en:{
 const TH={en:{
   nav:['about','dashboard','pipeline','experience','projects','certificates','terminal','testimonials','blog','contact'],
   navLabels:{about:'Home',dashboard:'Proof',pipeline:'Demo',experience:'Journey',projects:'Results',certificates:'Certs',terminal:'Ask me',testimonials:'Reviews',blog:'Blog',contact:'Contact'},
-  heroSub1:"I deploy AI in your company",heroSub1b:"and automate everything that moves",heroSub2:"— so your teams stop wasting time on manual work and start making decisions that generate revenue. Finance, Sales, Supply, HR: every process becomes an autonomous system that maximizes your ROI.",heroSub3:"AI Transformation · Automation · BI · 5+ years CPG, SaaS & CSR.",
+  heroSub1:"I integrate AI into your existing operations",heroSub1b:"connecting your tools, automating your workflows",heroSub2:"— enabling your teams to focus on decisions that drive revenue. Across Finance, Sales, Supply Chain and HR, I turn manual processes into autonomous systems that deliver measurable results.",heroSub3:"AI Transformation · Automation · BI · 5+ years CPG, SaaS & CSR.",
   xp:"yrs experience",ctaContact:"Talk in 30 min",ctaCV:"↓ Download CV",
   liveCounter:"Hours of manual reporting done worldwide since you opened this page",
   metrics:[{n:'85',s:'%',l:'Reporting time saved'},{n:'30',s:'+',l:'Tasks automated'},{n:'6',s:'mo',l:'Analytics dept from zero'},{n:'4.2',s:'%',l:'AI forecast error'}],
@@ -128,7 +128,7 @@ const TH={en:{
 },fr:{
   nav:['about','dashboard','pipeline','experience','projects','certificates','terminal','testimonials','blog','contact'],
   navLabels:{about:'Accueil',dashboard:'Preuve',pipeline:'Démo',experience:'Parcours',projects:'Résultats',certificates:'Certifs',terminal:'Posez-moi',testimonials:'Avis',blog:'Blog',contact:'Contact'},
-  heroSub1:"Je déploie l'IA dans votre entreprise",heroSub1b:"et j'automatise tout ce qui bouge",heroSub2:"— pour que vos équipes arrêtent de perdre du temps sur du travail manuel et commencent à prendre des décisions qui génèrent du revenu. Finance, Sales, Supply, RH : chaque processus devient un système autonome qui maximise votre ROI.",heroSub3:"Transformation IA · Automatisation · BI · 5+ ans CPG, SaaS & RSE.",
+  heroSub1:"J'intègre l'IA dans vos opérations existantes",heroSub1b:"en connectant vos outils et automatisant vos processus",heroSub2:"— pour permettre à vos équipes de se concentrer sur les décisions à valeur ajoutée. Finance, Sales, Supply Chain, RH : je transforme le travail manuel en systèmes autonomes qui délivrent des résultats mesurables.",heroSub3:"Transformation IA · Automatisation · BI · 5+ ans CPG, SaaS & RSE.",
   xp:"ans d'expérience",ctaContact:"Parler en 30 min",ctaCV:"↓ Télécharger CV",
   liveCounter:"Heures de reporting manuel faites dans le monde depuis que vous êtes sur cette page",
   metrics:[{n:'85',s:'%',l:'Temps de reporting économisé'},{n:'30',s:'+',l:'Tâches automatisées'},{n:'6',s:'mois',l:'Dept analytics de zéro'},{n:'4,2',s:'%',l:'Taux erreur prévisions IA'}],
