@@ -606,13 +606,45 @@ body.hovering #cur-o{width:44px;height:44px;border-color:var(--accent2);opacity:
 
 /* ═══════════════════ STACK ═══════════════════ */
 .stack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
+
+/* ── Tech Stack — horizontal auto-scrolling ticker ── */
+.stack-ticker-wrap{
+  position:relative;width:100%;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+}
+.stack-ticker{
+  display:flex;gap:14px;width:max-content;
+  animation:stackScroll 55s linear infinite;
+  will-change:transform;
+}
+.stack-ticker:hover{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.stack-ticker{animation:none}}
+@keyframes stackScroll{
+  from{transform:translateX(0)}
+  to{transform:translateX(calc(-50% - 7px))}
+}
+
 .stack-card{background:var(--bg-card);border:1px solid var(--border-dim);padding:18px 12px;text-align:center;transition:all .3s;border-radius:6px;position:relative;overflow:hidden;cursor:default}
 .stack-card:hover{border-color:var(--accent1);transform:translateY(-5px);box-shadow:0 14px 32px var(--glow1)}
+
+.stack-card-compact{
+  flex:0 0 auto;
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;border-radius:12px;
+  min-width:220px;
+}
+.stack-card-compact .stack-card-text{text-align:left;flex:1;min-width:0}
+.stack-card-compact:hover{transform:translateY(-2px)}
+
 .stack-emoji{font-size:1.4rem;margin-bottom:8px;display:block;transition:transform .3s}
+.stack-card-compact .stack-emoji{margin-bottom:0;font-size:1.6rem;flex-shrink:0}
 .stack-card:hover .stack-emoji{transform:scale(1.2) rotate(-5deg)}
 .stack-name{font-size:.74rem;font-weight:700;color:var(--text);margin-bottom:2px}
 .stack-cat{font-family:'Space Mono',monospace;font-size:.42rem;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase}
+.stack-card-compact .stack-cat{font-size:.52rem}
 .stack-level{position:absolute;top:6px;right:6px;font-family:'Space Mono',monospace;font-size:.4rem;color:var(--accent3);background:rgba(0,240,168,.08);border:1px solid rgba(0,240,168,.18);padding:2px 4px;border-radius:2px}
+.stack-level-pill{position:static;flex-shrink:0;font-size:.42rem;padding:3px 7px;border-radius:999px}
 
 /* ═══════════════════ ROI ═══════════════════ */
 .roi-wrap{background:var(--bg-card);border:1px solid var(--border-dim);padding:36px;border-radius:8px;position:relative;overflow:hidden}

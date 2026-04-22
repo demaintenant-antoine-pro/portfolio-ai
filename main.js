@@ -135,93 +135,11 @@ document.addEventListener('mouseover',e=>{
   else document.body.classList.remove('hovering');
 });
 
-/* ═══════════ THREE.JS SPHERE ═══════════ */
-(function(){
-  // Skip on mobile, low-power devices, or when user prefers reduced motion
-  const isSmall = window.matchMedia('(max-width:600px)').matches;
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const lowMem = (navigator.deviceMemory && navigator.deviceMemory < 4);
-  // Also skip if page is inactive tab OR if the hero is scrolled out of view (we keep rendering state but not painting)
-  if(isSmall || reducedMotion || lowMem){
-    const c = document.getElementById('three-canvas');
-    if(c) c.style.display = 'none';
-    return;
-  }
-  const canvas=document.getElementById('three-canvas');
-  const renderer=new THREE.WebGLRenderer({canvas,antialias:false,alpha:true,powerPreference:'low-power'});
-  renderer.setPixelRatio(Math.min(devicePixelRatio,1.25));
-  renderer.setClearColor(0x000000,0);
-  const scene=new THREE.Scene();
-  const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,1000);
-  camera.position.z=4;
-
-  function resize(){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();}
-  resize();window.addEventListener('resize',resize);
-
-  // Particle sphere — reduced from 1800 to 700 (3x cheaper per frame)
-  const N=700;
-  const positions=new Float32Array(N*3);
-  const colors=new Float32Array(N*3);
-  const c1=new THREE.Color('#415a77'),c2=new THREE.Color('#FF2D78'),c3=new THREE.Color('#00F0A8');
-  for(let i=0;i<N;i++){
-    const phi=Math.acos(-1+2*i/N);
-    const theta=Math.sqrt(N*Math.PI)*phi*(1+Math.random()*.3-.15);
-    const r=1.6+Math.random()*.15;
-    positions[i*3]=r*Math.sin(phi)*Math.cos(theta);
-    positions[i*3+1]=r*Math.sin(phi)*Math.sin(theta);
-    positions[i*3+2]=r*Math.cos(phi);
-    const t=Math.random();
-    const col=t<.33?c1.clone().lerp(c2,t*3):t<.66?c2.clone().lerp(c3,(t-.33)*3):c3.clone().lerp(c1,(t-.66)*3);
-    colors[i*3]=col.r;colors[i*3+1]=col.g;colors[i*3+2]=col.b;
-  }
-  const geo=new THREE.BufferGeometry();
-  geo.setAttribute('position',new THREE.BufferAttribute(positions,3));
-  geo.setAttribute('color',new THREE.BufferAttribute(colors,3));
-  const mat=new THREE.PointsMaterial({size:.03,vertexColors:true,transparent:true,opacity:.9,sizeAttenuation:true});
-  const sphere=new THREE.Points(geo,mat);
-  scene.add(sphere);
-
-  // Orbiting rings — 3 → 2, lower segment count
-  for(let r=0;r<2;r++){
-    const ringGeo=new THREE.TorusGeometry(1.6+r*.35,0.003,2,64);
-    const ringMat=new THREE.MeshBasicMaterial({color:r===0?0xBF3AFF:0x00F0A8,transparent:true,opacity:.22});
-    const ring=new THREE.Mesh(ringGeo,ringMat);
-    ring.rotation.x=Math.PI/2+r*.7;ring.rotation.y=r*.5;
-    scene.add(ring);
-  }
-
-  window._threeMouseX=0;window._threeMouseY=0;
-
-  // Only render when the hero is in view AND tab is active — saves most CPU on long pages
-  let heroInView=true;
-  const heroEl=document.querySelector('.hero,#about');
-  if('IntersectionObserver' in window && heroEl){
-    const io=new IntersectionObserver(([e])=>{heroInView=e.isIntersecting;},{rootMargin:'200px'});
-    io.observe(heroEl);
-  }
-  let tabActive=true;
-  document.addEventListener('visibilitychange',()=>{tabActive=!document.hidden;});
-
-  // Cap at ~30 FPS to halve the per-frame cost (sphere rotation reads fine at 30 FPS)
-  let t=0,last=0;
-  const MIN_FRAME_MS=33;
-  function animate(now){
-    requestAnimationFrame(animate);
-    if(!tabActive||!heroInView)return;
-    if(now-last<MIN_FRAME_MS)return;
-    last=now;
-    t+=.006; // compensate for 30 FPS vs prior 60 FPS (rotation speed unchanged)
-    sphere.rotation.y=t+window._threeMouseX*.3;
-    sphere.rotation.x=window._threeMouseY*.15;
-    const ch=scene.children;
-    for(let i=0;i<ch.length;i++){
-      const c=ch[i];
-      if(c.geometry&&c.geometry.type==='TorusGeometry'){c.rotation.y=t*(i*.3+.2);c.rotation.z=t*(i*.2+.1);}
-    }
-    renderer.render(scene,camera);
-  }
-  requestAnimationFrame(animate);
-})();
+/* ═══════════ THREE.JS SPHERE — REMOVED (distracting + perf cost on desktop) ═══════════ */
+{
+  const c = document.getElementById('three-canvas');
+  if(c) c.style.display = 'none';
+}
 
 /* ═══════════ SCROLL PROGRESS ═══════════ */
 window.addEventListener('scroll',()=>{

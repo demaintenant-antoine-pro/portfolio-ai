@@ -25,10 +25,10 @@ const T = {
       blog: 'Blog',
       contact: 'Contact'
     },
-    heroSub1: "I replace manual reporting with",
-    heroSub1b: "autonomous AI systems.",
-    heroSub2: " Teams cut ops time by 60–85%.",
-    heroSub3: "AI Architect · Automation · BI · 5+ yrs CPG, SaaS, CSR.",
+    heroSub1: "AI expert. I embed",
+    heroSub1b: "agentic systems",
+    heroSub2: " into your business ops — and coach C-levels to run them daily. 60–85% time saved.",
+    heroSub3: "AI Architect · Automation · Executive Training · 5+ yrs CPG, SaaS, CSR.",
     xp: "yrs XP",
     ctaContact: "Get in Touch",
     ctaCV: "↓ Download CV",
@@ -155,10 +155,10 @@ const T = {
       blog: 'Blog',
       contact: 'Contact'
     },
-    heroSub1: "Je remplace le reporting manuel par des",
-    heroSub1b: "systèmes IA autonomes.",
-    heroSub2: " Les équipes gagnent 60 à 85 % de temps opérationnel.",
-    heroSub3: "Architecte IA · Automatisation · BI · 5+ ans CPG, SaaS, RSE.",
+    heroSub1: "Expert IA. J'intègre",
+    heroSub1b: "des systèmes agentiques",
+    heroSub2: " dans vos opérations — et je forme vos C-levels à les piloter au quotidien. 60 à 85 % de temps gagné.",
+    heroSub3: "Architecte IA · Automatisation · Formation dirigeants · 5+ ans CPG, SaaS, RSE.",
     xp: "ans d'XP",
     ctaContact: "Me contacter",
     ctaCV: "↓ Télécharger CV",
@@ -808,20 +808,40 @@ const STACK = [{
   level: 'EXPERT',
   e: '🤖'
 }, {
+  name: 'Claude Code',
+  cat: 'Coding Agent',
+  level: 'EXPERT',
+  e: '💻'
+}, {
+  name: 'Claude Cowork',
+  cat: 'AI Teamwork',
+  level: 'ADVANCED',
+  e: '🧩'
+}, {
+  name: 'Codex',
+  cat: 'Coding Agent',
+  level: 'ADVANCED',
+  e: '🧠'
+}, {
   name: 'GPT-4',
   cat: 'AI / LLM',
   level: 'ADVANCED',
   e: '🧠'
 }, {
-  name: 'React',
-  cat: 'Frontend',
-  level: 'INTERMEDIATE',
-  e: '⚛️'
+  name: 'Obsidian',
+  cat: 'Second Brain',
+  level: 'EXPERT',
+  e: '🗂️'
 }, {
   name: 'SQL',
   cat: 'Database',
   level: 'EXPERT',
   e: '🗄️'
+}, {
+  name: 'React',
+  cat: 'Frontend',
+  level: 'INTERMEDIATE',
+  e: '⚛️'
 }, {
   name: 'Git',
   cat: 'DevOps',
@@ -6817,19 +6837,24 @@ function PortfolioApp({
   }, t.stackEyebrow), /*#__PURE__*/React.createElement("h2", {
     className: "section-title"
   }, t.stackTitle, " ", /*#__PURE__*/React.createElement("em", null, t.stackTitleEm)), /*#__PURE__*/React.createElement("div", {
-    className: "stack-grid reveal"
-  }, STACK.map((s, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "stack-card"
+    className: "stack-ticker-wrap reveal"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "stack-level"
-  }, s.level), /*#__PURE__*/React.createElement("span", {
+    className: "stack-ticker"
+  }, [...STACK, ...STACK].map((s, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "stack-card stack-card-compact",
+    "aria-hidden": i >= STACK.length ? 'true' : 'false'
+  }, /*#__PURE__*/React.createElement("span", {
     className: "stack-emoji"
   }, s.e), /*#__PURE__*/React.createElement("div", {
+    className: "stack-card-text"
+  }, /*#__PURE__*/React.createElement("div", {
     className: "stack-name"
   }, s.name), /*#__PURE__*/React.createElement("div", {
     className: "stack-cat"
-  }, s.cat)))))), /*#__PURE__*/React.createElement("section", {
+  }, s.cat)), /*#__PURE__*/React.createElement("div", {
+    className: "stack-level stack-level-pill"
+  }, s.level))))))), /*#__PURE__*/React.createElement("section", {
     id: "certificates",
     className: "section reveal"
   }, /*#__PURE__*/React.createElement("div", {

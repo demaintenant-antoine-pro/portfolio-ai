@@ -5,7 +5,7 @@ const LangCtx=createContext('en');
 const T={en:{
   nav:['about','dashboard','pipeline','experience','projects','stack','certificates','terminal','testimonials','blog','contact'],
   navLabels:{about:'About',dashboard:'Dashboard',pipeline:'Pipeline',experience:'XP',projects:'Projects',stack:'Stack',certificates:'Certs',terminal:'Terminal',testimonials:'Reviews',blog:'Blog',contact:'Contact'},
-  heroSub1:"I replace manual reporting with",heroSub1b:"autonomous AI systems.",heroSub2:" Teams cut ops time by 60–85%.",heroSub3:"AI Architect · Automation · BI · 5+ yrs CPG, SaaS, CSR.",
+  heroSub1:"AI expert. I embed",heroSub1b:"agentic systems",heroSub2:" into your business ops — and coach C-levels to run them daily. 60–85% time saved.",heroSub3:"AI Architect · Automation · Executive Training · 5+ yrs CPG, SaaS, CSR.",
   xp:"yrs XP",ctaContact:"Get in Touch",ctaCV:"↓ Download CV",
   liveCounter:"Hours of reporting saved since you loaded this page",
   metrics:[{n:'85',s:'%',l:'Processing Capacity Gained'},{n:'270',s:'%',l:'Pipeline Efficiency Boost'},{n:'30',s:'+',l:'Workflows Automated'},{n:'6',s:'mo',l:'Analytics Dept Built 0→1'}],
@@ -45,7 +45,7 @@ const T={en:{
 },fr:{
   nav:['about','dashboard','pipeline','experience','projects','stack','certificates','terminal','testimonials','blog','contact'],
   navLabels:{about:'Profil',dashboard:'Dashboard',pipeline:'Pipeline',experience:'Expérience',projects:'Projets',stack:'Stack',certificates:'Certifs',terminal:'Terminal',testimonials:'Avis',blog:'Blog',contact:'Contact'},
-  heroSub1:"Je remplace le reporting manuel par des",heroSub1b:"systèmes IA autonomes.",heroSub2:" Les équipes gagnent 60 à 85 % de temps opérationnel.",heroSub3:"Architecte IA · Automatisation · BI · 5+ ans CPG, SaaS, RSE.",
+  heroSub1:"Expert IA. J'intègre",heroSub1b:"des systèmes agentiques",heroSub2:" dans vos opérations — et je forme vos C-levels à les piloter au quotidien. 60 à 85 % de temps gagné.",heroSub3:"Architecte IA · Automatisation · Formation dirigeants · 5+ ans CPG, SaaS, RSE.",
   xp:"ans d'XP",ctaContact:"Me contacter",ctaCV:"↓ Télécharger CV",
   liveCounter:"Heures de reporting économisées depuis que vous êtes sur cette page",
   metrics:[{n:'85',s:'%',l:'Gain capacité de traitement'},{n:'270',s:'%',l:'Efficacité pipeline boostée'},{n:'30',s:'+',l:'Workflows automatisés'},{n:'6',s:'mois',l:'Dept Analytics 0→1'}],
@@ -228,12 +228,22 @@ const RADAR_DATA={
 };
 
 const STACK=[
-  {name:'Power BI',cat:'BI & Analytics',level:'EXPERT',e:'📊'},{name:'Python',cat:'Data Engineering',level:'ADVANCED',e:'🐍'},
-  {name:'n8n',cat:'Automation',level:'EXPERT',e:'⚡'},{name:'Claude AI',cat:'AI / LLM',level:'EXPERT',e:'🤖'},
-  {name:'GPT-4',cat:'AI / LLM',level:'ADVANCED',e:'🧠'},{name:'React',cat:'Frontend',level:'INTERMEDIATE',e:'⚛️'},
-  {name:'SQL',cat:'Database',level:'EXPERT',e:'🗄️'},{name:'Git',cat:'DevOps',level:'ADVANCED',e:'🔀'},
-  {name:'Excel',cat:'Finance & Ops',level:'EXPERT',e:'📈'},{name:'HubSpot',cat:'CRM & Sales',level:'ADVANCED',e:'🎯'},
-  {name:'Pandas',cat:'Data Engineering',level:'ADVANCED',e:'🐼'},{name:'Notion',cat:'Productivity',level:'ADVANCED',e:'📝'},
+  {name:'Power BI',cat:'BI & Analytics',level:'EXPERT',e:'📊'},
+  {name:'Python',cat:'Data Engineering',level:'ADVANCED',e:'🐍'},
+  {name:'n8n',cat:'Automation',level:'EXPERT',e:'⚡'},
+  {name:'Claude AI',cat:'AI / LLM',level:'EXPERT',e:'🤖'},
+  {name:'Claude Code',cat:'Coding Agent',level:'EXPERT',e:'💻'},
+  {name:'Claude Cowork',cat:'AI Teamwork',level:'ADVANCED',e:'🧩'},
+  {name:'Codex',cat:'Coding Agent',level:'ADVANCED',e:'🧠'},
+  {name:'GPT-4',cat:'AI / LLM',level:'ADVANCED',e:'🧠'},
+  {name:'Obsidian',cat:'Second Brain',level:'EXPERT',e:'🗂️'},
+  {name:'SQL',cat:'Database',level:'EXPERT',e:'🗄️'},
+  {name:'React',cat:'Frontend',level:'INTERMEDIATE',e:'⚛️'},
+  {name:'Git',cat:'DevOps',level:'ADVANCED',e:'🔀'},
+  {name:'Excel',cat:'Finance & Ops',level:'EXPERT',e:'📈'},
+  {name:'HubSpot',cat:'CRM & Sales',level:'ADVANCED',e:'🎯'},
+  {name:'Pandas',cat:'Data Engineering',level:'ADVANCED',e:'🐼'},
+  {name:'Notion',cat:'Productivity',level:'ADVANCED',e:'📝'},
 ];
 
 const PIPELINE_STAGES_DEF={
@@ -2362,7 +2372,20 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
       <div style={{maxWidth:'1500px',margin:'0 auto'}}>
         <div className="section-eyebrow">{t.stackEyebrow}</div>
         <h2 className="section-title">{t.stackTitle} <em>{t.stackTitleEm}</em></h2>
-        <div className="stack-grid reveal">{STACK.map((s,i)=>(<div key={i} className="stack-card"><div className="stack-level">{s.level}</div><span className="stack-emoji">{s.e}</span><div className="stack-name">{s.name}</div><div className="stack-cat">{s.cat}</div></div>))}</div>
+        <div className="stack-ticker-wrap reveal">
+          <div className="stack-ticker">
+            {[...STACK,...STACK].map((s,i)=>(
+              <div key={i} className="stack-card stack-card-compact" aria-hidden={i>=STACK.length?'true':'false'}>
+                <span className="stack-emoji">{s.e}</span>
+                <div className="stack-card-text">
+                  <div className="stack-name">{s.name}</div>
+                  <div className="stack-cat">{s.cat}</div>
+                </div>
+                <div className="stack-level stack-level-pill">{s.level}</div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>}
 
