@@ -2171,8 +2171,13 @@ body[data-theme=light] .htest-avatar{background:rgba(65,90,119,.1) !important;bo
   .nav-logo { font-size: .78rem !important; letter-spacing: 2.5px; }
 }
 
-/* Prevent body scroll when drawer open */
-body:has(.nav-controls.open) { overflow: hidden; }
+/* Prevent body scroll when drawer open (class added via JS — :has() is unreliable on older iOS) */
+body.drawer-open { overflow: hidden; }
+
+/* Gamification floating pills — hide on mobile (labels overflow the viewport edges) */
+@media(max-width:900px){
+  .floating-pill{display:none!important}
+}
 
 /* ─── Tech-only mode: retire the Human↔Tech switcher button everywhere ── */
 .mode-switch-btn { display: none !important; }

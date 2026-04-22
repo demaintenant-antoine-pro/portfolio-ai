@@ -4524,6 +4524,7 @@ function FloatingPills({
     }));
     if (p.tag === 'button') return /*#__PURE__*/React.createElement("button", {
       key: i,
+      className: "floating-pill",
       onClick: () => {
         const el = document.getElementById('experience');
         if (el) el.scrollIntoView({
@@ -4534,6 +4535,7 @@ function FloatingPills({
     }, inner);
     if (p.onClick) return /*#__PURE__*/React.createElement("a", {
       key: i,
+      className: "floating-pill",
       href: p.href,
       onClick: e => {
         e.preventDefault();
@@ -4546,6 +4548,7 @@ function FloatingPills({
     }, inner);
     return /*#__PURE__*/React.createElement("a", {
       key: i,
+      className: "floating-pill",
       href: p.href,
       style: st
     }, inner);
@@ -5741,6 +5744,10 @@ function PortfolioApp({
   const [soundOn, setSoundOn] = useState(false);
   const [showCalendly, setShowCalendly] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  useEffect(() => {
+    document.body.classList.toggle('drawer-open', mobileMenuOpen);
+    return () => document.body.classList.remove('drawer-open');
+  }, [mobileMenuOpen]);
   const [testiModal, setTestiModal] = useState(null);
   const [typed, setTyped] = useState('');
   const [lineIdx, setLineIdx] = useState(0);

@@ -1370,9 +1370,9 @@ function FloatingPills({lang,mode}){
       <span style={{fontFamily:"'Space Mono',monospace",fontSize:p.size===50?'.4rem':'.38rem',color:p.lc,letterSpacing:'2px',textTransform:'uppercase',whiteSpace:'nowrap'}}>{p.label}</span>
       <div style={{width:1,height:p.size===50?18:14,background:grad.replace('135deg','180deg').replace(/,[^,]+\)$/,',transparent)')}}/>
     </>);
-    if(p.tag==='button')return(<button key={i} onClick={()=>{const el=document.getElementById('experience');if(el)el.scrollIntoView({behavior:'smooth'});}} style={st}>{inner}</button>);
-    if(p.onClick)return(<a key={i} href={p.href} onClick={e=>{e.preventDefault();const el=document.getElementById('certificates');if(el)el.scrollIntoView({behavior:'smooth'});}} style={st}>{inner}</a>);
-    return(<a key={i} href={p.href} style={st}>{inner}</a>);
+    if(p.tag==='button')return(<button key={i} className="floating-pill" onClick={()=>{const el=document.getElementById('experience');if(el)el.scrollIntoView({behavior:'smooth'});}} style={st}>{inner}</button>);
+    if(p.onClick)return(<a key={i} className="floating-pill" href={p.href} onClick={e=>{e.preventDefault();const el=document.getElementById('certificates');if(el)el.scrollIntoView({behavior:'smooth'});}} style={st}>{inner}</a>);
+    return(<a key={i} className="floating-pill" href={p.href} style={st}>{inner}</a>);
   })}</>);
 }
 function VisitorBadge({lang}){const t=T[lang];const [c,setC]=useState(2847);useEffect(()=>{const iv=setInterval(()=>setC(x=>x+Math.floor(Math.random()*2)),55000);return()=>clearInterval(iv);},[]);return(<div className="visitor-badge"><div className="vb-dot"/><span style={{color:"var(--text)"}}>{c.toLocaleString()}</span><span>{t.visitors}</span></div>);}
@@ -1913,6 +1913,7 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
   const [soundOn,setSoundOn]=useState(false);
   const [showCalendly,setShowCalendly]=useState(false);
   const [mobileMenuOpen,setMobileMenuOpen]=useState(false);
+  useEffect(()=>{document.body.classList.toggle('drawer-open',mobileMenuOpen);return()=>document.body.classList.remove('drawer-open');},[mobileMenuOpen]);
   const [testiModal,setTestiModal]=useState(null);
   const [typed,setTyped]=useState('');
   const [lineIdx,setLineIdx]=useState(0);
