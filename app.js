@@ -6894,6 +6894,8 @@ function PortfolioApp({
   }, t.blogDesc), /*#__PURE__*/React.createElement(Blog, {
     lang: lang
   }))), /*#__PURE__*/React.createElement("div", {
+    className: "intl-visitor-grid"
+  }, /*#__PURE__*/React.createElement("div", {
     className: "world-map-section"
   }, /*#__PURE__*/React.createElement("div", {
     className: "world-map-inner"
@@ -6927,7 +6929,7 @@ function PortfolioApp({
   }))), /*#__PURE__*/React.createElement(VisitorMap, {
     lang: lang,
     mode: mode
-  }), /*#__PURE__*/React.createElement("section", {
+  })), /*#__PURE__*/React.createElement("section", {
     id: "contact",
     className: "section"
   }, /*#__PURE__*/React.createElement("div", {

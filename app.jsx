@@ -2408,30 +2408,30 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
       </div>
     </section>
 
-    {/* WORLD MAP - Antoine's countries */}
-    <div className="world-map-section">
-      <div className="world-map-inner">
-        <div className="intl-header">
-          <div>
-            <div style={{fontFamily:"'Space Grotesk',sans-serif",fontWeight:600,fontSize:'.65rem',color:'var(--accent2)',letterSpacing:'3px',textTransform:'uppercase',marginBottom:10,display:'flex',alignItems:'center',gap:8}}>
-              🌍 {lang==='fr'?'Présence Internationale':'International Presence'}
+    {/* WORLD MAP (countries) + VISITOR MAP — side by side on desktop, stacked on mobile */}
+    <div className="intl-visitor-grid">
+      <div className="world-map-section">
+        <div className="world-map-inner">
+          <div className="intl-header">
+            <div>
+              <div style={{fontFamily:"'Space Grotesk',sans-serif",fontWeight:600,fontSize:'.65rem',color:'var(--accent2)',letterSpacing:'3px',textTransform:'uppercase',marginBottom:10,display:'flex',alignItems:'center',gap:8}}>
+                🌍 {lang==='fr'?'Présence Internationale':'International Presence'}
+              </div>
+              <h2 className="intl-title">
+                {lang==='fr'?'Opérationnel':'Operational'}<br/>
+                <em>{lang==='fr'?'partout dans le monde.':'anywhere in the world.'}</em>
+              </h2>
             </div>
-            <h2 className="intl-title">
-              {lang==='fr'?'Opérationnel':'Operational'}<br/>
-              <em>{lang==='fr'?'partout dans le monde.':'anywhere in the world.'}</em>
-            </h2>
+            <div className="intl-badge">
+              <div className="intl-badge-num">{countries.length}</div>
+              <div className="intl-badge-label">{lang==='fr'?'pays vécus':'countries lived'}</div>
+            </div>
           </div>
-          <div className="intl-badge">
-            <div className="intl-badge-num">{countries.length}</div>
-            <div className="intl-badge-label">{lang==='fr'?'pays vécus':'countries lived'}</div>
-          </div>
+          <WorldMap countries={countries} setActiveCountry={setActiveCountry} lang={lang}/>
         </div>
-        <WorldMap countries={countries} setActiveCountry={setActiveCountry} lang={lang}/>
       </div>
+      <VisitorMap lang={lang} mode={mode}/>
     </div>
-
-    {/* VISITOR LIVE MAP */}
-    <VisitorMap lang={lang} mode={mode}/>
 
     {/* CH7 — CONTACT */}
     <section id="contact" className="section">
