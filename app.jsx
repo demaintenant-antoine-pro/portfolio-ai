@@ -1922,6 +1922,7 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
   const [activeCountry,setActiveCountry]=useState(null);
   const [soundOn,setSoundOn]=useState(false);
   const [showCalendly,setShowCalendly]=useState(false);
+  const [mobileMenuOpen,setMobileMenuOpen]=useState(false);
   const [testiModal,setTestiModal]=useState(null);
   const [typed,setTyped]=useState('');
   const [lineIdx,setLineIdx]=useState(0);
@@ -2030,23 +2031,32 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
     <nav className="nav">
       <div className="nav-logo" onClick={()=>scrollTo('about')}>{mode==='human'?<span>Antoine<span style={{color:'#415a77'}}>.</span></span>:'ADM.SYS // v5'}</div>
       <div className="nav-links">{t.nav.map(s=>(<button key={s} className="nav-link" onClick={()=>scrollTo(s)}>{t.navLabels[s]}</button>))}</div>
-      <div className="nav-controls">
-        {mode!=='human'&&<button className={`sound-btn${soundOn?' on':''}`} onClick={()=>{const s=SFX.toggle();setSoundOn(s);}} title={soundOn?'Sound OFF':'Sound ON (8-bit)'}>
+      <a className="nav-cta-mobile" href="https://calendly.com/antoinedemaintenant-alumni/30min" target="_blank" rel="noopener noreferrer" aria-label="Book a 30-minute call">📅 30 min</a>
+      <button className="nav-hamburger" aria-label={mobileMenuOpen?'Close menu':'Open menu'} aria-expanded={mobileMenuOpen} onClick={()=>setMobileMenuOpen(v=>!v)}>
+        <span className={`ham-bar ${mobileMenuOpen?'open1':''}`}/>
+        <span className={`ham-bar ${mobileMenuOpen?'open2':''}`}/>
+        <span className={`ham-bar ${mobileMenuOpen?'open3':''}`}/>
+      </button>
+      <div className={`nav-controls ${mobileMenuOpen?'open':''}`}>
+        {mode!=='human'&&<button className={`sound-btn${soundOn?' on':''}`} onClick={()=>{const s=SFX.toggle();setSoundOn(s);}} aria-label={soundOn?'Sound OFF':'Sound ON (8-bit)'}>
           {soundOn?'🔊':'🔇'}
         </button>}
-        <a href="https://calendly.com/antoinedemaintenant-alumni/30min" target="_blank" rel="noopener noreferrer" style={{display:'flex',alignItems:'center',gap:6,padding:'6px 12px',borderRadius:20,background:'rgba(0,240,168,.1)',border:'1px solid rgba(0,240,168,.35)',color:'var(--accent3)',fontFamily:"'Space Mono',monospace",fontSize:'.48rem',letterSpacing:'1px',textDecoration:'none',transition:'all .25s',whiteSpace:'nowrap',flexShrink:0,animation:'ctapulse 3s ease-in-out infinite'}} onMouseEnter={e=>{e.currentTarget.style.background='rgba(0,240,168,.2)';e.currentTarget.style.transform='translateY(-1px)'}} onMouseLeave={e=>{e.currentTarget.style.background='rgba(0,240,168,.1)';e.currentTarget.style.transform='none'}}>
+        <a href="https://calendly.com/antoinedemaintenant-alumni/30min" target="_blank" rel="noopener noreferrer" className="nav-cta-calendly">
           📅 {lang==='fr'?'30 min →':'30 min →'}
         </a>
-        <button className={`recruiter-btn${showRecruiter?' active':''}`} onClick={()=>{setShowRecruiter(true);SFX.click()}}>{t.recruiterBtn} ⚡</button>
-        <button className="mode-switch-btn" onClick={onSwitchMode} style={{display:'flex',alignItems:'center',gap:6,padding:'6px 12px',borderRadius:20,border:'1px solid var(--border-dim)',background:'var(--bg-card)',cursor:'pointer',transition:'all .25s',fontFamily:"'Space Mono',monospace",fontSize:'.52rem',color:'var(--text-dim)',letterSpacing:'1px',whiteSpace:'nowrap'}}>
-          <span style={{width:18,height:18,borderRadius:9,background:mode==='human'?'rgba(0,240,168,.2)':'rgba(191,58,255,.2)',border:`1.5px solid ${mode==='human'?'#00F0A8':'#415a77'}`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:10,flexShrink:0}}>{mode==='human'?'🧠':'⚡'}</span>
+        <button className={`recruiter-btn${showRecruiter?' active':''}`} onClick={()=>{setShowRecruiter(true);setMobileMenuOpen(false);SFX.click()}}>{t.recruiterBtn} ⚡</button>
+        <button className="mode-switch-btn" onClick={()=>{onSwitchMode();setMobileMenuOpen(false)}} aria-label="Switch interface mode">
+          <span className="mode-switch-dot" style={{background:mode==='human'?'rgba(0,240,168,.2)':'rgba(191,58,255,.2)',borderColor:mode==='human'?'#00F0A8':'#415a77'}}>{mode==='human'?'🧠':'⚡'}</span>
           {mode==='human'?(lang==='fr'?'⚙️ Tech':'⚙️ Tech'):'🧭 '+(lang==='fr'?'Métier':'Biz')}
         </button>
-        <div style={{display:'flex',gap:'1px'}}>
-          {[['en','🇬🇧'],['fr','🇫🇷']].map(([l,f])=>(<button key={l} className={`theme-btn${lang===l?' active':''}`} onClick={()=>setLang(l)}>{f} {l.toUpperCase()}</button>))}
+        <div className="nav-themes" role="group" aria-label="Language">
+          {[['en','🇬🇧'],['fr','🇫🇷']].map(([l,f])=>(<button key={l} className={`theme-btn${lang===l?' active':''}`} onClick={()=>{setLang(l);setMobileMenuOpen(false)}}>{f} {l.toUpperCase()}</button>))}
         </div>
-
+        <div className="mobile-menu-sections">
+          {t.nav.map(s=>(<button key={s} className="mobile-menu-link" onClick={()=>{scrollTo(s);setMobileMenuOpen(false)}}>{t.navLabels[s]}</button>))}
+        </div>
       </div>
+      {mobileMenuOpen && <div className="nav-backdrop" onClick={()=>setMobileMenuOpen(false)}/>}
     </nav>
 
     {/* TICKER — marquee on one line */}

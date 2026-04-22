@@ -5777,6 +5777,7 @@ function PortfolioApp({
   const [activeCountry, setActiveCountry] = useState(null);
   const [soundOn, setSoundOn] = useState(false);
   const [showCalendly, setShowCalendly] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [testiModal, setTestiModal] = useState(null);
   const [typed, setTyped] = useState('');
   const [lineIdx, setLineIdx] = useState(0);
@@ -5971,93 +5972,81 @@ function PortfolioApp({
     key: s,
     className: "nav-link",
     onClick: () => scrollTo(s)
-  }, t.navLabels[s]))), /*#__PURE__*/React.createElement("div", {
-    className: "nav-controls"
+  }, t.navLabels[s]))), /*#__PURE__*/React.createElement("a", {
+    className: "nav-cta-mobile",
+    href: "https://calendly.com/antoinedemaintenant-alumni/30min",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    "aria-label": "Book a 30-minute call"
+  }, "\uD83D\uDCC5 30 min"), /*#__PURE__*/React.createElement("button", {
+    className: "nav-hamburger",
+    "aria-label": mobileMenuOpen ? 'Close menu' : 'Open menu',
+    "aria-expanded": mobileMenuOpen,
+    onClick: () => setMobileMenuOpen(v => !v)
+  }, /*#__PURE__*/React.createElement("span", {
+    className: `ham-bar ${mobileMenuOpen ? 'open1' : ''}`
+  }), /*#__PURE__*/React.createElement("span", {
+    className: `ham-bar ${mobileMenuOpen ? 'open2' : ''}`
+  }), /*#__PURE__*/React.createElement("span", {
+    className: `ham-bar ${mobileMenuOpen ? 'open3' : ''}`
+  })), /*#__PURE__*/React.createElement("div", {
+    className: `nav-controls ${mobileMenuOpen ? 'open' : ''}`
   }, mode !== 'human' && /*#__PURE__*/React.createElement("button", {
     className: `sound-btn${soundOn ? ' on' : ''}`,
     onClick: () => {
       const s = SFX.toggle();
       setSoundOn(s);
     },
-    title: soundOn ? 'Sound OFF' : 'Sound ON (8-bit)'
+    "aria-label": soundOn ? 'Sound OFF' : 'Sound ON (8-bit)'
   }, soundOn ? '🔊' : '🔇'), /*#__PURE__*/React.createElement("a", {
     href: "https://calendly.com/antoinedemaintenant-alumni/30min",
     target: "_blank",
     rel: "noopener noreferrer",
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 6,
-      padding: '6px 12px',
-      borderRadius: 20,
-      background: 'rgba(0,240,168,.1)',
-      border: '1px solid rgba(0,240,168,.35)',
-      color: 'var(--accent3)',
-      fontFamily: "'Space Mono',monospace",
-      fontSize: '.48rem',
-      letterSpacing: '1px',
-      textDecoration: 'none',
-      transition: 'all .25s',
-      whiteSpace: 'nowrap',
-      flexShrink: 0,
-      animation: 'ctapulse 3s ease-in-out infinite'
-    },
-    onMouseEnter: e => {
-      e.currentTarget.style.background = 'rgba(0,240,168,.2)';
-      e.currentTarget.style.transform = 'translateY(-1px)';
-    },
-    onMouseLeave: e => {
-      e.currentTarget.style.background = 'rgba(0,240,168,.1)';
-      e.currentTarget.style.transform = 'none';
-    }
+    className: "nav-cta-calendly"
   }, "\uD83D\uDCC5 ", lang === 'fr' ? '30 min →' : '30 min →'), /*#__PURE__*/React.createElement("button", {
     className: `recruiter-btn${showRecruiter ? ' active' : ''}`,
     onClick: () => {
       setShowRecruiter(true);
+      setMobileMenuOpen(false);
       SFX.click();
     }
   }, t.recruiterBtn, " \u26A1"), /*#__PURE__*/React.createElement("button", {
     className: "mode-switch-btn",
-    onClick: onSwitchMode,
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 6,
-      padding: '6px 12px',
-      borderRadius: 20,
-      border: '1px solid var(--border-dim)',
-      background: 'var(--bg-card)',
-      cursor: 'pointer',
-      transition: 'all .25s',
-      fontFamily: "'Space Mono',monospace",
-      fontSize: '.52rem',
-      color: 'var(--text-dim)',
-      letterSpacing: '1px',
-      whiteSpace: 'nowrap'
-    }
+    onClick: () => {
+      onSwitchMode();
+      setMobileMenuOpen(false);
+    },
+    "aria-label": "Switch interface mode"
   }, /*#__PURE__*/React.createElement("span", {
+    className: "mode-switch-dot",
     style: {
-      width: 18,
-      height: 18,
-      borderRadius: 9,
       background: mode === 'human' ? 'rgba(0,240,168,.2)' : 'rgba(191,58,255,.2)',
-      border: `1.5px solid ${mode === 'human' ? '#00F0A8' : '#415a77'}`,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontSize: 10,
-      flexShrink: 0
+      borderColor: mode === 'human' ? '#00F0A8' : '#415a77'
     }
   }, mode === 'human' ? '🧠' : '⚡'), mode === 'human' ? lang === 'fr' ? '⚙️ Tech' : '⚙️ Tech' : '🧭 ' + (lang === 'fr' ? 'Métier' : 'Biz')), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      gap: '1px'
-    }
+    className: "nav-themes",
+    role: "group",
+    "aria-label": "Language"
   }, [['en', '🇬🇧'], ['fr', '🇫🇷']].map(([l, f]) => /*#__PURE__*/React.createElement("button", {
     key: l,
     className: `theme-btn${lang === l ? ' active' : ''}`,
-    onClick: () => setLang(l)
-  }, f, " ", l.toUpperCase()))))), /*#__PURE__*/React.createElement("div", {
+    onClick: () => {
+      setLang(l);
+      setMobileMenuOpen(false);
+    }
+  }, f, " ", l.toUpperCase()))), /*#__PURE__*/React.createElement("div", {
+    className: "mobile-menu-sections"
+  }, t.nav.map(s => /*#__PURE__*/React.createElement("button", {
+    key: s,
+    className: "mobile-menu-link",
+    onClick: () => {
+      scrollTo(s);
+      setMobileMenuOpen(false);
+    }
+  }, t.navLabels[s])))), mobileMenuOpen && /*#__PURE__*/React.createElement("div", {
+    className: "nav-backdrop",
+    onClick: () => setMobileMenuOpen(false)
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'relative',
       zIndex: 5,
