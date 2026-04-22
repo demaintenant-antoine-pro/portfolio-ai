@@ -702,13 +702,23 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:14px;height:14px;b
 .intl-title em{color:var(--accent3);font-style:italic}
 
 .intl-badge{backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:16px;padding:16px 24px;text-align:center;box-shadow:var(--glass-shadow);flex-shrink:0}
-@media(max-width:600px){.intl-badge{align-self:stretch;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:16px;text-align:left}}
+@media(max-width:600px){
+  .intl-badge{
+    align-self:flex-start;
+    display:inline-flex;
+    align-items:baseline;
+    gap:10px;
+    padding:10px 16px;
+    border-radius:999px;
+    text-align:left;
+  }
+}
 
 .intl-badge-num{font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:3rem;color:#415a77;line-height:1;letter-spacing:-2px}
-@media(max-width:600px){.intl-badge-num{font-size:2.2rem}}
+@media(max-width:600px){.intl-badge-num{font-size:1.6rem}}
 
 .intl-badge-label{font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:.65rem;color:var(--text-mute);letter-spacing:2px;text-transform:uppercase;margin-top:4}
-@media(max-width:600px){.intl-badge-label{margin-top:0;font-size:.62rem}}
+@media(max-width:600px){.intl-badge-label{margin-top:0;font-size:.56rem}}
 
 .countries-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 @media(max-width:1100px){.countries-grid{grid-template-columns:repeat(2,1fr);gap:14px}}
@@ -1741,7 +1751,8 @@ body[data-theme=light] .htest-avatar{background:rgba(65,90,119,.1) !important;bo
   .exp-company { font-size: .95rem !important; }
   .exp-location, .exp-date { font-size: .82rem !important; }
   .exp-highlight { font-size: .92rem !important; line-height: 1.5 !important; }
-  .exp-tag { font-size: .72rem !important; padding: 5px 10px !important; }
+  .exp-tag { font-size: .56rem !important; padding: 3px 7px !important; letter-spacing: 1.2px !important; }
+  .exp-tags { gap: 4px !important; margin-top: 14px !important; }
   .exp-nav-item { font-size: .78rem !important; padding: 10px 12px !important; min-height: 44px; }
   .exp-revenue { font-size: .78rem !important; }
 
@@ -1824,7 +1835,10 @@ body[data-theme=light] .htest-avatar{background:rgba(65,90,119,.1) !important;bo
   .boot-line { font-size: .85rem !important; }
 
   /* Section paddings — give room to breathe without overflow */
-  .section { padding: 52px 18px !important; }
+  .section { padding: 36px 18px !important; }
+  .chapter-label { margin-bottom: 6px !important; }
+  /* The huge "03" behind chapter label — shrink on mobile (it creates false vertical space) */
+  section > div > div[style*="Bebas Neue"][style*="5rem"] { font-size: 3rem !important; top: -14px !important; }
   .hero { padding: 88px 18px 48px !important; }
 
   /* Progress bars: only show one (scroll) not both */
@@ -2060,9 +2074,19 @@ body:has(.nav-controls.open) { overflow: hidden; }
     min-height: auto !important;
     padding-top: calc(80px + var(--safe-top)) !important;
   }
-  .hero-ctas { flex-direction: column !important; gap: 10px !important; }
+  .hero-ctas { flex-direction: row !important; gap: 10px !important; flex-wrap: wrap; }
   .hero-ctas .btn-primary, .hero-ctas .btn-secondary {
-    width: 100%; justify-content: center;
+    width: auto;
+    padding: 10px 18px !important;
+    font-size: .52rem !important;
+    letter-spacing: 1.4px !important;
+    justify-content: center;
+  }
+
+  /* Hero "MAINTENANT" outline — thicker + visible stroke on mobile (was 1.5px on faint border color) */
+  .hero-h1 .outline {
+    -webkit-text-stroke: 2px var(--accent2) !important;
+    color: transparent;
   }
   .hero-side-card, .hero-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
   .hero-floating-contact { display: none !important; }
@@ -2135,18 +2159,18 @@ body:has(.nav-controls.open) { overflow: hidden; }
     scroll-snap-type: none !important;
   }
 
-  /* Each node: icon left, label+detail right, full-width */
+  /* Each node: icon left, label+detail right, full-width — compact */
   .p-node {
     display: grid !important;
-    grid-template-columns: 40px 1fr;
+    grid-template-columns: 32px 1fr;
     grid-template-areas:
       "icon label"
       "icon detail";
-    column-gap: 14px !important;
-    row-gap: 2px !important;
+    column-gap: 12px !important;
+    row-gap: 1px !important;
     width: 100% !important;
     min-width: 0 !important;
-    padding: 12px 16px !important;
+    padding: 9px 14px !important;
     text-align: left !important;
     touch-action: manipulation;
     cursor: pointer !important;
@@ -2154,33 +2178,38 @@ body:has(.nav-controls.open) { overflow: hidden; }
   .p-node-icon {
     grid-area: icon;
     align-self: center;
-    font-size: 1.8rem !important;
+    font-size: 1.3rem !important;
     text-align: center;
   }
   .p-node-label {
     grid-area: label;
     align-self: end;
-    font-size: .85rem !important;
+    font-size: .72rem !important;
     text-align: left !important;
     letter-spacing: .5px !important;
+    line-height: 1.2 !important;
   }
   .p-node-detail {
     grid-area: detail;
     align-self: start;
-    font-size: .7rem !important;
+    font-size: .6rem !important;
     text-align: left !important;
+    line-height: 1.2 !important;
   }
   .p-node-tick {
-    top: 10px !important;
-    right: 10px !important;
+    top: 8px !important;
+    right: 8px !important;
+    width: 14px !important;
+    height: 14px !important;
+    font-size: .48rem !important;
   }
 
-  /* Connector becomes a vertical bar between nodes */
+  /* Connector becomes a short vertical bar between nodes */
   .p-connector {
-    width: 3px !important;
-    height: 16px !important;
-    flex: 0 0 16px !important;
-    margin: 0 0 0 34px !important;
+    width: 2px !important;
+    height: 8px !important;
+    flex: 0 0 8px !important;
+    margin: 0 0 0 28px !important;
     background: var(--border-dim) !important;
   }
   .p-connector-fill {
@@ -2239,7 +2268,8 @@ body:has(.nav-controls.open) { overflow: hidden; }
   .projects-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
 
   /* ── Countries / Map ───────────────────────────────────────────── */
-  #visitor-map, #visitor-map-human { height: 260px !important; }
+  .vmap-container { height: 320px !important; }
+  #visitor-map, #visitor-map-human { height: 100% !important; position: absolute !important; inset: 0 !important; }
   .hcon-grid { display: flex !important; flex-direction: column !important; gap: 12px !important; }
   .hcon-item { padding: 18px !important; }
   .hwid-grid { gap: 10px !important; }

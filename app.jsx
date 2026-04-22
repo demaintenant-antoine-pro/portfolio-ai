@@ -5,7 +5,7 @@ const LangCtx=createContext('en');
 const T={en:{
   nav:['about','dashboard','pipeline','experience','projects','stack','certificates','terminal','testimonials','blog','contact'],
   navLabels:{about:'About',dashboard:'Dashboard',pipeline:'Pipeline',experience:'XP',projects:'Projects',stack:'Stack',certificates:'Certs',terminal:'Terminal',testimonials:'Reviews',blog:'Blog',contact:'Contact'},
-  heroSub1:"I architect end-to-end AI transformation",heroSub1b:"integrating your existing tools into autonomous systems",heroSub2:"— autonomous data pipelines, executive-grade decision dashboards, and LLM-powered workflows. Teams I work with consistently reduce manual overhead by 60–85% and shift capacity toward strategic priorities.",heroSub3:"AI Architect · Automation · BI · 5+ yrs CPG, SaaS & CSR.",
+  heroSub1:"I replace manual reporting with",heroSub1b:"autonomous AI systems.",heroSub2:" Teams cut ops time by 60–85%.",heroSub3:"AI Architect · Automation · BI · 5+ yrs CPG, SaaS, CSR.",
   xp:"yrs XP",ctaContact:"Get in Touch",ctaCV:"↓ Download CV",
   liveCounter:"Hours of reporting saved since you loaded this page",
   metrics:[{n:'85',s:'%',l:'Processing Capacity Gained'},{n:'270',s:'%',l:'Pipeline Efficiency Boost'},{n:'30',s:'+',l:'Workflows Automated'},{n:'6',s:'mo',l:'Analytics Dept Built 0→1'}],
@@ -45,7 +45,7 @@ const T={en:{
 },fr:{
   nav:['about','dashboard','pipeline','experience','projects','stack','certificates','terminal','testimonials','blog','contact'],
   navLabels:{about:'Profil',dashboard:'Dashboard',pipeline:'Pipeline',experience:'Expérience',projects:'Projets',stack:'Stack',certificates:'Certifs',terminal:'Terminal',testimonials:'Avis',blog:'Blog',contact:'Contact'},
-  heroSub1:"Je pilote la transformation IA de bout en bout",heroSub1b:"en intégrant vos outils existants en systèmes autonomes",heroSub2:"— pipelines de données autonomes, dashboards décisionnels et workflows LLM. Les équipes avec lesquelles je travaille réduisent systématiquement la charge opérationnelle de 60 à 85 % et recentrent leurs ressources sur les priorités stratégiques.",heroSub3:"Architecte IA · Automatisation · BI · 5+ ans CPG, SaaS & RSE.",
+  heroSub1:"Je remplace le reporting manuel par des",heroSub1b:"systèmes IA autonomes.",heroSub2:" Les équipes gagnent 60 à 85 % de temps opérationnel.",heroSub3:"Architecte IA · Automatisation · BI · 5+ ans CPG, SaaS, RSE.",
   xp:"ans d'XP",ctaContact:"Me contacter",ctaCV:"↓ Télécharger CV",
   liveCounter:"Heures de reporting économisées depuis que vous êtes sur cette page",
   metrics:[{n:'85',s:'%',l:'Gain capacité de traitement'},{n:'270',s:'%',l:'Efficacité pipeline boostée'},{n:'30',s:'+',l:'Workflows automatisés'},{n:'6',s:'mois',l:'Dept Analytics 0→1'}],
@@ -601,7 +601,9 @@ function Dashboard({lang}){
       {label:'2024',data:[142,89,76,54,48],backgroundColor:'rgba(191,58,255,.65)',borderRadius:3},
       {label:'2023',data:[120,72,65,60,42],backgroundColor:'rgba(191,58,255,.2)',borderRadius:3},
     ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:tc,font:{family:'Space Mono',size:8},boxWidth:8}}},scales:{x:{ticks:{color:tc,font:{family:'Space Mono',size:8}},grid:{display:false}},y:{ticks:{color:tc,font:{family:'Space Mono',size:8},callback:v=>`${v}K`},grid:{color:gc}}}}});
-    return()=>{lC.current?.destroy();bC.current?.destroy()};
+    // Safety net: force a resize after paint to catch mobile cases where container width was 0 at init
+    const tResize=setTimeout(()=>{try{lC.current?.resize();bC.current?.resize();}catch(e){}},150);
+    return()=>{clearTimeout(tResize);lC.current?.destroy();bC.current?.destroy()};
   },[lang]);
 
   const [analysts,setAnalysts]=useState(3);
@@ -718,11 +720,11 @@ function Dashboard({lang}){
                     ))}
                   </div>
                 </div>
-                <div style={{height:150}}><canvas ref={lRef}/></div>
+                <div style={{height:180,width:'100%',position:'relative'}}><canvas ref={lRef}/></div>
               </div>
               <div style={card}>
                 <div style={{...label8,color:'#415a77',marginBottom:12}}>{t.dashChart2}</div>
-                <div style={{height:150}}><canvas ref={bRef}/></div>
+                <div style={{height:180,width:'100%',position:'relative'}}><canvas ref={bRef}/></div>
               </div>
             </div>
             {/* Map + News row */}
@@ -2308,19 +2310,11 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
       <Pipeline lang={lang}/>
     </section>
 
-    {/* SKILLS + RADAR — side by side */}
+    {/* COMPETENCY RADAR — replaces old Skills+Radar (skills-grid duplicated the tech stack below) */}
     <section id="skills" className="section">
       <div className="section-eyebrow">{t.skillsEyebrow}</div>
-      <h2 className="section-title">{t.skillsTitle} <span style={{color:'var(--text-dim)'}}>{t.skillsTitleDim}</span></h2>
-      <div className="skills-radar-grid">
-        <div className="skills-grid" style={{marginTop:0}}>
-          {skills.map((s,i)=>(<div key={i} className={`skill-card reveal reveal-delay-${i%3+1}`}><div className="skill-icon">{s.icon}</div><div className="skill-name">{s.name}</div><div className="skill-desc">{s.desc}</div><div className="skill-bar"><div className="skill-fill" style={{width:`${s.pct}%`}}/></div><div className="skill-pct">{s.pct}%</div></div>))}
-        </div>
-        <div className="skills-radar-col">
-          <div className="section-eyebrow" style={{marginBottom:'0'}}>{t.radarTitle}</div>
-          <RadarChart lang={lang}/>
-        </div>
-      </div>
+      <h2 className="section-title">{t.radarTitle}</h2>
+      <RadarChart lang={lang}/>
     </section>
 
     {/* PROJECTS */}
@@ -2391,20 +2385,6 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
       </div>
     </section>
 
-    {/* TERMINAL — way down */}
-    <section id="terminal" className="section">
-      <div style={{maxWidth:'1500px',margin:'0 auto'}}>
-        <div style={{position:'relative',marginBottom:'32px'}}>
-          <div className="chapter-label">Chapter 06 — The Interface</div>
-          <div style={{position:'absolute',top:'-20px',right:'0',fontFamily:"'Bebas Neue',sans-serif",fontSize:'5rem',color:'var(--border-dim)',lineHeight:1}}>06</div>
-        </div>
-        <div className="section-eyebrow">{t.terminalEyebrow}</div>
-        <h2 className="section-title">{t.terminalTitle} <em>{t.terminalTitleEm}</em></h2>
-        <p style={{fontSize:'.84rem',color:'var(--text-sec)',maxWidth:'560px',marginBottom:'32px',lineHeight:'1.8'}}>{t.terminalDesc}</p>
-        <TerminalChatbot lang={lang}/>
-      </div>
-    </section>
-
     {/* WORLD MAP - Antoine's countries */}
     <div className="world-map-section">
       <div className="world-map-inner">
@@ -2455,6 +2435,16 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
               📅 {lang==='fr'?'Réserver un call de 30 min':'Book a 30-min call'} →
             </button>
         </div>
+      </div>
+    </section>
+
+    {/* TERMINAL — very last (after contact, before footer) */}
+    <section id="terminal" className="section">
+      <div style={{maxWidth:'1500px',margin:'0 auto'}}>
+        <div className="section-eyebrow">{t.terminalEyebrow}</div>
+        <h2 className="section-title">{t.terminalTitle} <em>{t.terminalTitleEm}</em></h2>
+        <p style={{fontSize:'.84rem',color:'var(--text-sec)',maxWidth:'560px',marginBottom:'32px',lineHeight:'1.8'}}>{t.terminalDesc}</p>
+        <TerminalChatbot lang={lang}/>
       </div>
     </section>
 

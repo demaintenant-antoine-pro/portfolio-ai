@@ -25,10 +25,10 @@ const T = {
       blog: 'Blog',
       contact: 'Contact'
     },
-    heroSub1: "I architect end-to-end AI transformation",
-    heroSub1b: "integrating your existing tools into autonomous systems",
-    heroSub2: "— autonomous data pipelines, executive-grade decision dashboards, and LLM-powered workflows. Teams I work with consistently reduce manual overhead by 60–85% and shift capacity toward strategic priorities.",
-    heroSub3: "AI Architect · Automation · BI · 5+ yrs CPG, SaaS & CSR.",
+    heroSub1: "I replace manual reporting with",
+    heroSub1b: "autonomous AI systems.",
+    heroSub2: " Teams cut ops time by 60–85%.",
+    heroSub3: "AI Architect · Automation · BI · 5+ yrs CPG, SaaS, CSR.",
     xp: "yrs XP",
     ctaContact: "Get in Touch",
     ctaCV: "↓ Download CV",
@@ -155,10 +155,10 @@ const T = {
       blog: 'Blog',
       contact: 'Contact'
     },
-    heroSub1: "Je pilote la transformation IA de bout en bout",
-    heroSub1b: "en intégrant vos outils existants en systèmes autonomes",
-    heroSub2: "— pipelines de données autonomes, dashboards décisionnels et workflows LLM. Les équipes avec lesquelles je travaille réduisent systématiquement la charge opérationnelle de 60 à 85 % et recentrent leurs ressources sur les priorités stratégiques.",
-    heroSub3: "Architecte IA · Automatisation · BI · 5+ ans CPG, SaaS & RSE.",
+    heroSub1: "Je remplace le reporting manuel par des",
+    heroSub1b: "systèmes IA autonomes.",
+    heroSub2: " Les équipes gagnent 60 à 85 % de temps opérationnel.",
+    heroSub3: "Architecte IA · Automatisation · BI · 5+ ans CPG, SaaS, RSE.",
     xp: "ans d'XP",
     ctaContact: "Me contacter",
     ctaCV: "↓ Télécharger CV",
@@ -2255,7 +2255,15 @@ function Dashboard({
         }
       }
     });
+    // Safety net: force a resize after paint to catch mobile cases where container width was 0 at init
+    const tResize = setTimeout(() => {
+      try {
+        lC.current?.resize();
+        bC.current?.resize();
+      } catch (e) {}
+    }, 150);
     return () => {
+      clearTimeout(tResize);
       lC.current?.destroy();
       bC.current?.destroy();
     };
@@ -2586,7 +2594,9 @@ function Dashboard({
     }
   }, lbl))))), /*#__PURE__*/React.createElement("div", {
     style: {
-      height: 150
+      height: 180,
+      width: '100%',
+      position: 'relative'
     }
   }, /*#__PURE__*/React.createElement("canvas", {
     ref: lRef
@@ -2600,7 +2610,9 @@ function Dashboard({
     }
   }, t.dashChart2), /*#__PURE__*/React.createElement("div", {
     style: {
-      height: 150
+      height: 180,
+      width: '100%',
+      position: 'relative'
     }
   }, /*#__PURE__*/React.createElement("canvas", {
     ref: bRef
@@ -6610,45 +6622,9 @@ function PortfolioApp({
     className: "section-eyebrow"
   }, t.skillsEyebrow), /*#__PURE__*/React.createElement("h2", {
     className: "section-title"
-  }, t.skillsTitle, " ", /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: 'var(--text-dim)'
-    }
-  }, t.skillsTitleDim)), /*#__PURE__*/React.createElement("div", {
-    className: "skills-radar-grid"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "skills-grid",
-    style: {
-      marginTop: 0
-    }
-  }, skills.map((s, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: `skill-card reveal reveal-delay-${i % 3 + 1}`
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "skill-icon"
-  }, s.icon), /*#__PURE__*/React.createElement("div", {
-    className: "skill-name"
-  }, s.name), /*#__PURE__*/React.createElement("div", {
-    className: "skill-desc"
-  }, s.desc), /*#__PURE__*/React.createElement("div", {
-    className: "skill-bar"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "skill-fill",
-    style: {
-      width: `${s.pct}%`
-    }
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "skill-pct"
-  }, s.pct, "%")))), /*#__PURE__*/React.createElement("div", {
-    className: "skills-radar-col"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "section-eyebrow",
-    style: {
-      marginBottom: '0'
-    }
   }, t.radarTitle), /*#__PURE__*/React.createElement(RadarChart, {
     lang: lang
-  })))), /*#__PURE__*/React.createElement("section", {
+  })), /*#__PURE__*/React.createElement("section", {
     id: "projects",
     className: "section",
     style: {
@@ -6892,45 +6868,6 @@ function PortfolioApp({
     }
   }, t.blogDesc), /*#__PURE__*/React.createElement(Blog, {
     lang: lang
-  }))), /*#__PURE__*/React.createElement("section", {
-    id: "terminal",
-    className: "section"
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      maxWidth: '1500px',
-      margin: '0 auto'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'relative',
-      marginBottom: '32px'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "chapter-label"
-  }, "Chapter 06 \u2014 The Interface"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      top: '-20px',
-      right: '0',
-      fontFamily: "'Bebas Neue',sans-serif",
-      fontSize: '5rem',
-      color: 'var(--border-dim)',
-      lineHeight: 1
-    }
-  }, "06")), /*#__PURE__*/React.createElement("div", {
-    className: "section-eyebrow"
-  }, t.terminalEyebrow), /*#__PURE__*/React.createElement("h2", {
-    className: "section-title"
-  }, t.terminalTitle, " ", /*#__PURE__*/React.createElement("em", null, t.terminalTitleEm)), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: '.84rem',
-      color: 'var(--text-sec)',
-      maxWidth: '560px',
-      marginBottom: '32px',
-      lineHeight: '1.8'
-    }
-  }, t.terminalDesc), /*#__PURE__*/React.createElement(TerminalChatbot, {
-    lang: lang
   }))), /*#__PURE__*/React.createElement("div", {
     className: "world-map-section"
   }, /*#__PURE__*/React.createElement("div", {
@@ -7081,7 +7018,29 @@ function PortfolioApp({
       setShowCalendly(true);
       SFX.click();
     }
-  }, "\uD83D\uDCC5 ", lang === 'fr' ? 'Réserver un call de 30 min' : 'Book a 30-min call', " \u2192")))), /*#__PURE__*/React.createElement("div", {
+  }, "\uD83D\uDCC5 ", lang === 'fr' ? 'Réserver un call de 30 min' : 'Book a 30-min call', " \u2192")))), /*#__PURE__*/React.createElement("section", {
+    id: "terminal",
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: '1500px',
+      margin: '0 auto'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-eyebrow"
+  }, t.terminalEyebrow), /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, t.terminalTitle, " ", /*#__PURE__*/React.createElement("em", null, t.terminalTitleEm)), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: '.84rem',
+      color: 'var(--text-sec)',
+      maxWidth: '560px',
+      marginBottom: '32px',
+      lineHeight: '1.8'
+    }
+  }, t.terminalDesc), /*#__PURE__*/React.createElement(TerminalChatbot, {
+    lang: lang
+  }))), /*#__PURE__*/React.createElement("div", {
     style: {
       textAlign: 'center',
       padding: '20px',
