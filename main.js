@@ -153,6 +153,7 @@ document.addEventListener('mouseover',e=>{
     'testi-ticker-wrap': 75,
     'cert-featured-ticker-wrap': 50,
     'cert-secondary-ticker-wrap': 45,
+    'projects-ticker-wrap': 65,
   };
   const SELECTORS = Object.keys(DURATION).map(c => '.' + c);
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;

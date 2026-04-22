@@ -215,6 +215,21 @@ const EXPERIENCES={
   ]
 };
 
+const TAG_GROUPS={
+  en:[
+    {label:'All',matches:null},
+    {label:'AI & Auto',matches:['Agentic AI','n8n','LLMs','NLP','ML','Web Scraping']},
+    {label:'BI & Data',matches:['Power BI','Python','Forecasting','Stock Forecasting','Stock Planning','Data Governance']},
+    {label:'Sales & CRM',matches:['Sales Strategy','CRM','HubSpot','Luxury','CAC40','B2B','Retail']},
+  ],
+  fr:[
+    {label:'Tous',matches:null},
+    {label:'IA & Auto',matches:['IA Agentique','n8n','LLMs','NLP','ML','Web Scraping']},
+    {label:'BI & Data',matches:['Power BI','Python','Prévision','Prévision Stock','Stock Planning','Gouvernance Data']},
+    {label:'Ventes & CRM',matches:['Stratégie Commerciale','CRM','HubSpot','Luxe','CAC40','B2B','Retail']},
+  ]
+};
+
 const SKILLS={
   en:[{icon:"📊",name:"Power BI",desc:"Enterprise dashboards, DAX, governance",pct:95},{icon:"🤖",name:"Agentic AI",desc:"n8n, LLMs, autonomous pipelines",pct:90},{icon:"🐍",name:"Python",desc:"Forecasting, NLP, ML, data eng.",pct:82},{icon:"⚡",name:"Automation",desc:"End-to-end workflow automation",pct:95},{icon:"📈",name:"Forecasting",desc:"SKU-level models, retail analytics",pct:88},{icon:"💰",name:"Revenue Ops",desc:"Financial reporting, ROI optimization",pct:92}],
   fr:[{icon:"📊",name:"Power BI",desc:"Dashboards entreprise, DAX, gouvernance",pct:95},{icon:"🤖",name:"IA Agentique",desc:"n8n, LLMs, pipelines autonomes",pct:90},{icon:"🐍",name:"Python",desc:"Prévision, NLP, ML, data engineering",pct:82},{icon:"⚡",name:"Automatisation",desc:"Workflows de bout en bout",pct:95},{icon:"📈",name:"Prévision",desc:"Modèles SKU-level, analytics retail",pct:88},{icon:"💰",name:"Revenue Ops",desc:"Reporting financier, optimisation ROI",pct:92}]
@@ -863,7 +878,7 @@ function Dashboard({lang}){
           <div className="dash-ai-layout" style={{display:'grid',gap:12}}>
             <div style={card}>
               <div style={{...label8,color:'#415a77',marginBottom:14}}>{lang==='fr'?'MODÈLE PRÉVISION VENTES · IA':'SALES FORECAST MODEL · AI'}</div>
-              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10,marginBottom:14}}>
+              <div className="dash-ai-mini-grid" style={{display:'grid',gap:10,marginBottom:14}}>
                 {[
                   {label:lang==='fr'?'Précision':'Accuracy',v:'95.8%',color:'var(--accent3)'},
                   {label:'MAPE',v:'4.2%',color:'var(--accent4)'},
@@ -1773,6 +1788,21 @@ const CHAPTERS=[
 ];
 
 /* ─── CERT WALL ──────────────────────────────────────────────────────────────── */
+const AnthropicMark=({size=18})=>(
+  <svg className="anthropic-mark" width={size} height={size} viewBox="0 0 24 24" aria-label="Anthropic">
+    <g fill="#D97757">
+      <ellipse cx="12" cy="3.5" rx="1.1" ry="3"/>
+      <ellipse cx="12" cy="20.5" rx="1.1" ry="3"/>
+      <ellipse cx="3.5" cy="12" rx="3" ry="1.1"/>
+      <ellipse cx="20.5" cy="12" rx="3" ry="1.1"/>
+      <ellipse cx="6" cy="6" rx="1.1" ry="3" transform="rotate(-45 6 6)"/>
+      <ellipse cx="18" cy="18" rx="1.1" ry="3" transform="rotate(-45 18 18)"/>
+      <ellipse cx="18" cy="6" rx="3" ry="1.1" transform="rotate(-45 18 6)"/>
+      <ellipse cx="6" cy="18" rx="3" ry="1.1" transform="rotate(-45 6 18)"/>
+    </g>
+  </svg>
+);
+
 function CertWall({lang}){
   const FEATURED=[
     {
@@ -1862,6 +1892,7 @@ function CertWall({lang}){
             <div key={i} className="cert-feat" aria-hidden={i>=FEATURED.length?'true':'false'}
               style={{background:c.bg,border:`1px solid ${c.border}`,boxShadow:`0 20px 60px ${c.glow},inset 0 1px 0 rgba(255,255,255,.04)`}}>
               <div className="cert-feat-num">{String((i%FEATURED.length)+1).padStart(2,'0')}</div>
+              {c.issuer==='Anthropic'&&<div className="cert-feat-logo"><AnthropicMark size={22}/></div>}
               <div className="cert-feat-tier" style={{color:c.accent,background:c.tierBg,border:`1px solid ${c.tierBorder}`}}>
                 {c.tier}
               </div>
@@ -1886,6 +1917,7 @@ function CertWall({lang}){
           {[...SECONDARY,...SECONDARY].map((c,i)=>(
             <div key={i} className="cert-sec" aria-hidden={i>=SECONDARY.length?'true':'false'}>
               <div style={{position:'absolute',top:0,left:0,right:0,height:'2px',background:c.top,opacity:.8}}/>
+              {c.issuer.startsWith('Anthropic')&&<div className="cert-sec-logo"><AnthropicMark size={14}/></div>}
               <div className="cert-sec-title">{c.title}</div>
               <div className="cert-sec-issuer">{c.issuer}</div>
               <a href={c.url} target="_blank" rel="noopener noreferrer" className="cert-sec-link">
@@ -1997,7 +2029,9 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
       el.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(r=>r.classList.add('visible'));
     },600);
   };
-  const allTags=[t.expFilterAll,...new Set(exps.flatMap(e=>e.tags))];
+  const tagGroups=TAG_GROUPS[lang];
+  const allTags=tagGroups.map(g=>g.label);
+  const expMatchesGroup=(e,grpLabel)=>{const g=tagGroups.find(x=>x.label===grpLabel);if(!g||!g.matches)return true;return e.tags.some(t=>g.matches.includes(t));};
   const years=((new Date()-new Date('2022-03-01'))/(1000*60*60*24*365.25));
 
   return(<LangCtx.Provider value={lang}>
@@ -2206,9 +2240,9 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
           <span className="exp-filter-toggle-active">{tagFilter}</span>
           <span className="exp-filter-toggle-chevron">{filtersOpen?'▲':'▼'}</span>
         </button>
-        <div id="exp-filter-bar" className={`exp-filter-bar${filtersOpen?' open':''}`}>{allTags.map(tag=>(<button key={tag} className={`filter-btn${tagFilter===tag?' active':''}`} onClick={()=>{setTagFilter(tag);setFiltersOpen(false);if(tag!==t.expFilterAll){const m=exps.findIndex(e=>e.tags.includes(tag));if(m>=0)setActiveExp(m)}else setActiveExp(0);}}>{tag}</button>))}</div>
+        <div id="exp-filter-bar" className={`exp-filter-bar${filtersOpen?' open':''}`}>{allTags.map(tag=>(<button key={tag} className={`filter-btn${tagFilter===tag?' active':''}`} onClick={()=>{setTagFilter(tag);setFiltersOpen(false);if(tag!==t.expFilterAll){const m=exps.findIndex(e=>expMatchesGroup(e,tag));if(m>=0)setActiveExp(m)}else setActiveExp(0);}}>{tag}</button>))}</div>
         <div className="exp-layout reveal">
-          <div className="exp-nav">{exps.map(e=>{const hidden=tagFilter!==t.expFilterAll&&!e.tags.includes(tagFilter);if(hidden)return null;return(<div key={e.id} className={`exp-nav-item${activeExp===e.id?' active':''}`} onClick={()=>setActiveExp(e.id)}><div className="exp-nav-date">{e.date}</div><div className="exp-nav-role">{e.role}</div><div className="exp-nav-co">{e.company}</div></div>);})}</div>
+          <div className="exp-nav">{exps.map(e=>{const hidden=tagFilter!==t.expFilterAll&&!expMatchesGroup(e,tagFilter);if(hidden)return null;return(<div key={e.id} className={`exp-nav-item${activeExp===e.id?' active':''}`} onClick={()=>setActiveExp(e.id)}><div className="exp-nav-date">{e.date}</div><div className="exp-nav-role">{e.role}</div><div className="exp-nav-co">{e.company}</div></div>);})}</div>
           <div className="exp-detail">
             <div className="exp-detail-role">{exp.role}</div>
             <div className="exp-detail-meta"><span>{exp.company}</span><span>·</span><span>{exp.location}</span><span>·</span><span>{exp.revenue}</span></div>
@@ -2321,14 +2355,16 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
         <div className="section-eyebrow">{t.projectsEyebrow}</div>
         <h2 className="section-title">{t.projectsTitle} <em>{t.projectsTitleEm}</em></h2>
         <p style={{fontSize:'.84rem',color:'var(--text-sec)',maxWidth:'560px',marginBottom:'36px',lineHeight:'1.8'}}>{t.projectsDesc}</p>
-        <div className="projects-grid">
-          {[
+        {(()=>{const PROJ=[
             {icon:'📊',badge:lang==='fr'?'DASHBOARD IA SUR-MESURE':'AI DECISION DASHBOARD',title:lang==='fr'?'Dashboard décisionnel construit sur votre pain point exact':'Decision dashboard built on your exact pain point',desc:lang==='fr'?'KPIs actionnables, alertes seuils critiques, prévisions 13 semaines (MAPE 4,2%), veille concurrentielle 40+ marques. Un outil de décision — pas un template.':'Actionable KPIs, critical threshold alerts, 13-week forecasting (MAPE 4.2%), competitive intelligence on 40+ brands. A decision tool — not a template.',tags:['Power BI','Python','Prophet','SQL'],roi:{label:lang==='fr'?'ROI MESURÉ':'MEASURED ROI',items:[{v:lang==='fr'?'−40h/mois':'−40h/month',d:lang==='fr'?'reporting manuel':'manual reporting'},{v:'4.2%',d:'MAPE forecast'},{v:lang==='fr'?'< 5 min':'< 5 min',d:lang==='fr'?'délai alerte':'alert latency'}]}},
             {icon:'🤖',badge:lang==='fr'?'AUTOMATISATION FINANCIÈRE':'FINANCIAL AUTOMATION',title:lang==='fr'?'Clôture financière en 6 min — sans aucune saisie manuelle':'Financial close in 6 minutes — zero manual input',desc:lang==='fr'?'Export ERP → transformation → commentaires IA → Word/PDF → envoi automatique équipes et DG. Ce qui prenait 2 jours se fait seul à 6h du matin.':'ERP export → transformation → AI commentary → Word/PDF → auto delivery to teams & CEO. What took 2 days now runs alone at 6am.',tags:['N8N','GPT-4','Python','SAP'],roi:{label:lang==='fr'?'GAINS DIRECTS':'DIRECT SAVINGS',items:[{v:'−95%',d:lang==='fr'?'erreurs saisie':'entry errors'},{v:'6 min',d:lang==='fr'?'vs 2 jours avant':'vs 2 days before'},{v:'12+',d:lang==='fr'?'équipes servies':'teams served'}]}},
             {icon:'🔗',badge:lang==='fr'?'PROSPECTION LINKEDIN AUTO':'LINKEDIN AUTO PROSPECTING',title:lang==='fr'?'100 prospects qualifiés par jour — séquence personnalisée par IA':'100 qualified prospects per day — AI-personalized outreach',desc:lang==='fr'?'Ciblage ICP via Sales Navigator, messages personnalisés par IA, séquence 3 touchpoints, sync CRM automatique. Le pipeline se remplit pendant que vous travaillez.':'ICP targeting via Sales Navigator, AI-personalized messages, 3-touchpoint sequence, auto CRM sync. The pipeline fills while you work.',tags:['Sales Navigator','GPT-4','Make.com','CRM'],roi:{label:lang==='fr'?'RÉSULTATS':'RESULTS',items:[{v:'5×',d:lang==='fr'?'taux de réponse':'reply rate'},{v:'100/j',d:lang==='fr'?'prospects auto':'auto prospects'},{v:'−80%',d:lang==='fr'?'temps prospection':'prospecting time'}]}},
             {icon:'📦',badge:lang==='fr'?'SUPPLY CHAIN IA':'AI SUPPLY CHAIN',title:lang==='fr'?'Zéro rupture de stock — prévision et commande automatique':'Zero stockouts — AI forecasting and automatic purchase orders',desc:lang==='fr'?'Prévision niveau SKU 8 semaines, détection risques rupture, génération PO automatique, workflow approbation digitalisé. Surplus et ruptures éliminés simultanément.':'8-week SKU-level forecasting, stockout risk detection, automatic PO generation, digitized approval workflow. Surplus and stockouts eliminated simultaneously.',tags:['Python','Prophet','N8N','ERP'],roi:{label:lang==='fr'?'IMPACT MESURÉ':'MEASURED IMPACT',items:[{v:'−80%',d:lang==='fr'?'ruptures de stock':'stockouts'},{v:'8 sem.',d:lang==='fr'?'horizon prévision':'forecast horizon'},{v:'PO',d:lang==='fr'?'auto en 1 clic':'auto in 1 click'}]}}
-          ].map((p,i)=>(
-            <div key={i} className={`project-card reveal reveal-delay-${i%2+1}`}>
+          ];return(
+        <div className="projects-ticker-wrap reveal">
+          <div className="projects-ticker">
+          {[...PROJ,...PROJ].map((p,i)=>(
+            <div key={i} className="project-card project-card-ticker" aria-hidden={i>=PROJ.length?'true':'false'}>
               <div className="project-header">
                 <span className="project-badge">{p.badge}</span>
                 <span style={{fontSize:'1.5rem',lineHeight:1}}>{p.icon}</span>
@@ -2347,7 +2383,9 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
               <div className="project-tags">{p.tags.map((tg,j)=><span key={j} className="project-tag">{tg}</span>)}</div>
             </div>
           ))}
+          </div>
         </div>
+        );})()}
       </div>
     </section>
 

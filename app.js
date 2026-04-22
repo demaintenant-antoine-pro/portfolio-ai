@@ -663,6 +663,34 @@ const EXPERIENCES = {
     tags: ["Python", "NLP", "ML", "Power BI", "B2B"]
   }]
 };
+const TAG_GROUPS = {
+  en: [{
+    label: 'All',
+    matches: null
+  }, {
+    label: 'AI & Auto',
+    matches: ['Agentic AI', 'n8n', 'LLMs', 'NLP', 'ML', 'Web Scraping']
+  }, {
+    label: 'BI & Data',
+    matches: ['Power BI', 'Python', 'Forecasting', 'Stock Forecasting', 'Stock Planning', 'Data Governance']
+  }, {
+    label: 'Sales & CRM',
+    matches: ['Sales Strategy', 'CRM', 'HubSpot', 'Luxury', 'CAC40', 'B2B', 'Retail']
+  }],
+  fr: [{
+    label: 'Tous',
+    matches: null
+  }, {
+    label: 'IA & Auto',
+    matches: ['IA Agentique', 'n8n', 'LLMs', 'NLP', 'ML', 'Web Scraping']
+  }, {
+    label: 'BI & Data',
+    matches: ['Power BI', 'Python', 'Prévision', 'Prévision Stock', 'Stock Planning', 'Gouvernance Data']
+  }, {
+    label: 'Ventes & CRM',
+    matches: ['Stratégie Commerciale', 'CRM', 'HubSpot', 'Luxe', 'CAC40', 'B2B', 'Retail']
+  }]
+};
 const SKILLS = {
   en: [{
     icon: "📊",
@@ -3019,9 +3047,9 @@ function Dashboard({
       marginBottom: 14
     }
   }, lang === 'fr' ? 'MODÈLE PRÉVISION VENTES · IA' : 'SALES FORECAST MODEL · AI'), /*#__PURE__*/React.createElement("div", {
+    className: "dash-ai-mini-grid",
     style: {
       display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
       gap: 10,
       marginBottom: 14
     }
@@ -5557,6 +5585,61 @@ const CHAPTERS = [{
 }];
 
 /* ─── CERT WALL ──────────────────────────────────────────────────────────────── */
+const AnthropicMark = ({
+  size = 18
+}) => /*#__PURE__*/React.createElement("svg", {
+  className: "anthropic-mark",
+  width: size,
+  height: size,
+  viewBox: "0 0 24 24",
+  "aria-label": "Anthropic"
+}, /*#__PURE__*/React.createElement("g", {
+  fill: "#D97757"
+}, /*#__PURE__*/React.createElement("ellipse", {
+  cx: "12",
+  cy: "3.5",
+  rx: "1.1",
+  ry: "3"
+}), /*#__PURE__*/React.createElement("ellipse", {
+  cx: "12",
+  cy: "20.5",
+  rx: "1.1",
+  ry: "3"
+}), /*#__PURE__*/React.createElement("ellipse", {
+  cx: "3.5",
+  cy: "12",
+  rx: "3",
+  ry: "1.1"
+}), /*#__PURE__*/React.createElement("ellipse", {
+  cx: "20.5",
+  cy: "12",
+  rx: "3",
+  ry: "1.1"
+}), /*#__PURE__*/React.createElement("ellipse", {
+  cx: "6",
+  cy: "6",
+  rx: "1.1",
+  ry: "3",
+  transform: "rotate(-45 6 6)"
+}), /*#__PURE__*/React.createElement("ellipse", {
+  cx: "18",
+  cy: "18",
+  rx: "1.1",
+  ry: "3",
+  transform: "rotate(-45 18 18)"
+}), /*#__PURE__*/React.createElement("ellipse", {
+  cx: "18",
+  cy: "6",
+  rx: "3",
+  ry: "1.1",
+  transform: "rotate(-45 18 6)"
+}), /*#__PURE__*/React.createElement("ellipse", {
+  cx: "6",
+  cy: "18",
+  rx: "3",
+  ry: "1.1",
+  transform: "rotate(-45 6 18)"
+})));
 function CertWall({
   lang
 }) {
@@ -5671,7 +5754,11 @@ function CertWall({
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "cert-feat-num"
-  }, String(i % FEATURED.length + 1).padStart(2, '0')), /*#__PURE__*/React.createElement("div", {
+  }, String(i % FEATURED.length + 1).padStart(2, '0')), c.issuer === 'Anthropic' && /*#__PURE__*/React.createElement("div", {
+    className: "cert-feat-logo"
+  }, /*#__PURE__*/React.createElement(AnthropicMark, {
+    size: 22
+  })), /*#__PURE__*/React.createElement("div", {
     className: "cert-feat-tier",
     style: {
       color: c.accent,
@@ -5716,7 +5803,11 @@ function CertWall({
       background: c.top,
       opacity: .8
     }
-  }), /*#__PURE__*/React.createElement("div", {
+  }), c.issuer.startsWith('Anthropic') && /*#__PURE__*/React.createElement("div", {
+    className: "cert-sec-logo"
+  }, /*#__PURE__*/React.createElement(AnthropicMark, {
+    size: 14
+  })), /*#__PURE__*/React.createElement("div", {
     className: "cert-sec-title"
   }, c.title), /*#__PURE__*/React.createElement("div", {
     className: "cert-sec-issuer"
@@ -5887,7 +5978,13 @@ function PortfolioApp({
       el.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(r => r.classList.add('visible'));
     }, 600);
   };
-  const allTags = [t.expFilterAll, ...new Set(exps.flatMap(e => e.tags))];
+  const tagGroups = TAG_GROUPS[lang];
+  const allTags = tagGroups.map(g => g.label);
+  const expMatchesGroup = (e, grpLabel) => {
+    const g = tagGroups.find(x => x.label === grpLabel);
+    if (!g || !g.matches) return true;
+    return e.tags.some(t => g.matches.includes(t));
+  };
   const years = (new Date() - new Date('2022-03-01')) / (1000 * 60 * 60 * 24 * 365.25);
   return /*#__PURE__*/React.createElement(LangCtx.Provider, {
     value: lang
@@ -6398,7 +6495,7 @@ function PortfolioApp({
       setTagFilter(tag);
       setFiltersOpen(false);
       if (tag !== t.expFilterAll) {
-        const m = exps.findIndex(e => e.tags.includes(tag));
+        const m = exps.findIndex(e => expMatchesGroup(e, tag));
         if (m >= 0) setActiveExp(m);
       } else setActiveExp(0);
     }
@@ -6407,7 +6504,7 @@ function PortfolioApp({
   }, /*#__PURE__*/React.createElement("div", {
     className: "exp-nav"
   }, exps.map(e => {
-    const hidden = tagFilter !== t.expFilterAll && !e.tags.includes(tagFilter);
+    const hidden = tagFilter !== t.expFilterAll && !expMatchesGroup(e, tagFilter);
     if (hidden) return null;
     return /*#__PURE__*/React.createElement("div", {
       key: e.id,
@@ -6675,147 +6772,153 @@ function PortfolioApp({
       marginBottom: '36px',
       lineHeight: '1.8'
     }
-  }, t.projectsDesc), /*#__PURE__*/React.createElement("div", {
-    className: "projects-grid"
-  }, [{
-    icon: '📊',
-    badge: lang === 'fr' ? 'DASHBOARD IA SUR-MESURE' : 'AI DECISION DASHBOARD',
-    title: lang === 'fr' ? 'Dashboard décisionnel construit sur votre pain point exact' : 'Decision dashboard built on your exact pain point',
-    desc: lang === 'fr' ? 'KPIs actionnables, alertes seuils critiques, prévisions 13 semaines (MAPE 4,2%), veille concurrentielle 40+ marques. Un outil de décision — pas un template.' : 'Actionable KPIs, critical threshold alerts, 13-week forecasting (MAPE 4.2%), competitive intelligence on 40+ brands. A decision tool — not a template.',
-    tags: ['Power BI', 'Python', 'Prophet', 'SQL'],
-    roi: {
-      label: lang === 'fr' ? 'ROI MESURÉ' : 'MEASURED ROI',
-      items: [{
-        v: lang === 'fr' ? '−40h/mois' : '−40h/month',
-        d: lang === 'fr' ? 'reporting manuel' : 'manual reporting'
-      }, {
-        v: '4.2%',
-        d: 'MAPE forecast'
-      }, {
-        v: lang === 'fr' ? '< 5 min' : '< 5 min',
-        d: lang === 'fr' ? 'délai alerte' : 'alert latency'
-      }]
-    }
-  }, {
-    icon: '🤖',
-    badge: lang === 'fr' ? 'AUTOMATISATION FINANCIÈRE' : 'FINANCIAL AUTOMATION',
-    title: lang === 'fr' ? 'Clôture financière en 6 min — sans aucune saisie manuelle' : 'Financial close in 6 minutes — zero manual input',
-    desc: lang === 'fr' ? 'Export ERP → transformation → commentaires IA → Word/PDF → envoi automatique équipes et DG. Ce qui prenait 2 jours se fait seul à 6h du matin.' : 'ERP export → transformation → AI commentary → Word/PDF → auto delivery to teams & CEO. What took 2 days now runs alone at 6am.',
-    tags: ['N8N', 'GPT-4', 'Python', 'SAP'],
-    roi: {
-      label: lang === 'fr' ? 'GAINS DIRECTS' : 'DIRECT SAVINGS',
-      items: [{
-        v: '−95%',
-        d: lang === 'fr' ? 'erreurs saisie' : 'entry errors'
-      }, {
-        v: '6 min',
-        d: lang === 'fr' ? 'vs 2 jours avant' : 'vs 2 days before'
-      }, {
-        v: '12+',
-        d: lang === 'fr' ? 'équipes servies' : 'teams served'
-      }]
-    }
-  }, {
-    icon: '🔗',
-    badge: lang === 'fr' ? 'PROSPECTION LINKEDIN AUTO' : 'LINKEDIN AUTO PROSPECTING',
-    title: lang === 'fr' ? '100 prospects qualifiés par jour — séquence personnalisée par IA' : '100 qualified prospects per day — AI-personalized outreach',
-    desc: lang === 'fr' ? 'Ciblage ICP via Sales Navigator, messages personnalisés par IA, séquence 3 touchpoints, sync CRM automatique. Le pipeline se remplit pendant que vous travaillez.' : 'ICP targeting via Sales Navigator, AI-personalized messages, 3-touchpoint sequence, auto CRM sync. The pipeline fills while you work.',
-    tags: ['Sales Navigator', 'GPT-4', 'Make.com', 'CRM'],
-    roi: {
-      label: lang === 'fr' ? 'RÉSULTATS' : 'RESULTS',
-      items: [{
-        v: '5×',
-        d: lang === 'fr' ? 'taux de réponse' : 'reply rate'
-      }, {
-        v: '100/j',
-        d: lang === 'fr' ? 'prospects auto' : 'auto prospects'
-      }, {
-        v: '−80%',
-        d: lang === 'fr' ? 'temps prospection' : 'prospecting time'
-      }]
-    }
-  }, {
-    icon: '📦',
-    badge: lang === 'fr' ? 'SUPPLY CHAIN IA' : 'AI SUPPLY CHAIN',
-    title: lang === 'fr' ? 'Zéro rupture de stock — prévision et commande automatique' : 'Zero stockouts — AI forecasting and automatic purchase orders',
-    desc: lang === 'fr' ? 'Prévision niveau SKU 8 semaines, détection risques rupture, génération PO automatique, workflow approbation digitalisé. Surplus et ruptures éliminés simultanément.' : '8-week SKU-level forecasting, stockout risk detection, automatic PO generation, digitized approval workflow. Surplus and stockouts eliminated simultaneously.',
-    tags: ['Python', 'Prophet', 'N8N', 'ERP'],
-    roi: {
-      label: lang === 'fr' ? 'IMPACT MESURÉ' : 'MEASURED IMPACT',
-      items: [{
-        v: '−80%',
-        d: lang === 'fr' ? 'ruptures de stock' : 'stockouts'
-      }, {
-        v: '8 sem.',
-        d: lang === 'fr' ? 'horizon prévision' : 'forecast horizon'
-      }, {
-        v: 'PO',
-        d: lang === 'fr' ? 'auto en 1 clic' : 'auto in 1 click'
-      }]
-    }
-  }].map((p, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: `project-card reveal reveal-delay-${i % 2 + 1}`
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "project-header"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "project-badge"
-  }, p.badge), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: '1.5rem',
-      lineHeight: 1
-    }
-  }, p.icon)), /*#__PURE__*/React.createElement("div", {
-    className: "project-title"
-  }, p.title), /*#__PURE__*/React.createElement("div", {
-    className: "project-desc"
-  }, p.desc), /*#__PURE__*/React.createElement("div", {
-    style: {
-      background: 'rgba(0,240,168,0.06)',
-      border: '1px solid rgba(0,240,168,0.22)',
-      borderRadius: 8,
-      padding: '10px 14px',
-      marginBottom: 14
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 8,
-      fontWeight: 700,
-      letterSpacing: '1.5px',
-      color: '#00F0A8',
-      fontFamily: "'Space Mono',monospace",
-      marginBottom: 8
-    }
-  }, p.roi.label), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      gap: 14
-    }
-  }, p.roi.items.map((r, j) => /*#__PURE__*/React.createElement("div", {
-    key: j,
-    style: {
-      textAlign: 'center'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 16,
-      fontWeight: 800,
-      color: '#00F0A8',
-      fontFamily: "'Space Grotesk',sans-serif"
-    }
-  }, r.v), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 9,
-      color: 'var(--text-dim)',
-      marginTop: 2,
-      lineHeight: 1.3
-    }
-  }, r.d))))), /*#__PURE__*/React.createElement("div", {
-    className: "project-tags"
-  }, p.tags.map((tg, j) => /*#__PURE__*/React.createElement("span", {
-    key: j,
-    className: "project-tag"
-  }, tg)))))))), mode !== 'human' && /*#__PURE__*/React.createElement("section", {
+  }, t.projectsDesc), (() => {
+    const PROJ = [{
+      icon: '📊',
+      badge: lang === 'fr' ? 'DASHBOARD IA SUR-MESURE' : 'AI DECISION DASHBOARD',
+      title: lang === 'fr' ? 'Dashboard décisionnel construit sur votre pain point exact' : 'Decision dashboard built on your exact pain point',
+      desc: lang === 'fr' ? 'KPIs actionnables, alertes seuils critiques, prévisions 13 semaines (MAPE 4,2%), veille concurrentielle 40+ marques. Un outil de décision — pas un template.' : 'Actionable KPIs, critical threshold alerts, 13-week forecasting (MAPE 4.2%), competitive intelligence on 40+ brands. A decision tool — not a template.',
+      tags: ['Power BI', 'Python', 'Prophet', 'SQL'],
+      roi: {
+        label: lang === 'fr' ? 'ROI MESURÉ' : 'MEASURED ROI',
+        items: [{
+          v: lang === 'fr' ? '−40h/mois' : '−40h/month',
+          d: lang === 'fr' ? 'reporting manuel' : 'manual reporting'
+        }, {
+          v: '4.2%',
+          d: 'MAPE forecast'
+        }, {
+          v: lang === 'fr' ? '< 5 min' : '< 5 min',
+          d: lang === 'fr' ? 'délai alerte' : 'alert latency'
+        }]
+      }
+    }, {
+      icon: '🤖',
+      badge: lang === 'fr' ? 'AUTOMATISATION FINANCIÈRE' : 'FINANCIAL AUTOMATION',
+      title: lang === 'fr' ? 'Clôture financière en 6 min — sans aucune saisie manuelle' : 'Financial close in 6 minutes — zero manual input',
+      desc: lang === 'fr' ? 'Export ERP → transformation → commentaires IA → Word/PDF → envoi automatique équipes et DG. Ce qui prenait 2 jours se fait seul à 6h du matin.' : 'ERP export → transformation → AI commentary → Word/PDF → auto delivery to teams & CEO. What took 2 days now runs alone at 6am.',
+      tags: ['N8N', 'GPT-4', 'Python', 'SAP'],
+      roi: {
+        label: lang === 'fr' ? 'GAINS DIRECTS' : 'DIRECT SAVINGS',
+        items: [{
+          v: '−95%',
+          d: lang === 'fr' ? 'erreurs saisie' : 'entry errors'
+        }, {
+          v: '6 min',
+          d: lang === 'fr' ? 'vs 2 jours avant' : 'vs 2 days before'
+        }, {
+          v: '12+',
+          d: lang === 'fr' ? 'équipes servies' : 'teams served'
+        }]
+      }
+    }, {
+      icon: '🔗',
+      badge: lang === 'fr' ? 'PROSPECTION LINKEDIN AUTO' : 'LINKEDIN AUTO PROSPECTING',
+      title: lang === 'fr' ? '100 prospects qualifiés par jour — séquence personnalisée par IA' : '100 qualified prospects per day — AI-personalized outreach',
+      desc: lang === 'fr' ? 'Ciblage ICP via Sales Navigator, messages personnalisés par IA, séquence 3 touchpoints, sync CRM automatique. Le pipeline se remplit pendant que vous travaillez.' : 'ICP targeting via Sales Navigator, AI-personalized messages, 3-touchpoint sequence, auto CRM sync. The pipeline fills while you work.',
+      tags: ['Sales Navigator', 'GPT-4', 'Make.com', 'CRM'],
+      roi: {
+        label: lang === 'fr' ? 'RÉSULTATS' : 'RESULTS',
+        items: [{
+          v: '5×',
+          d: lang === 'fr' ? 'taux de réponse' : 'reply rate'
+        }, {
+          v: '100/j',
+          d: lang === 'fr' ? 'prospects auto' : 'auto prospects'
+        }, {
+          v: '−80%',
+          d: lang === 'fr' ? 'temps prospection' : 'prospecting time'
+        }]
+      }
+    }, {
+      icon: '📦',
+      badge: lang === 'fr' ? 'SUPPLY CHAIN IA' : 'AI SUPPLY CHAIN',
+      title: lang === 'fr' ? 'Zéro rupture de stock — prévision et commande automatique' : 'Zero stockouts — AI forecasting and automatic purchase orders',
+      desc: lang === 'fr' ? 'Prévision niveau SKU 8 semaines, détection risques rupture, génération PO automatique, workflow approbation digitalisé. Surplus et ruptures éliminés simultanément.' : '8-week SKU-level forecasting, stockout risk detection, automatic PO generation, digitized approval workflow. Surplus and stockouts eliminated simultaneously.',
+      tags: ['Python', 'Prophet', 'N8N', 'ERP'],
+      roi: {
+        label: lang === 'fr' ? 'IMPACT MESURÉ' : 'MEASURED IMPACT',
+        items: [{
+          v: '−80%',
+          d: lang === 'fr' ? 'ruptures de stock' : 'stockouts'
+        }, {
+          v: '8 sem.',
+          d: lang === 'fr' ? 'horizon prévision' : 'forecast horizon'
+        }, {
+          v: 'PO',
+          d: lang === 'fr' ? 'auto en 1 clic' : 'auto in 1 click'
+        }]
+      }
+    }];
+    return /*#__PURE__*/React.createElement("div", {
+      className: "projects-ticker-wrap reveal"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "projects-ticker"
+    }, [...PROJ, ...PROJ].map((p, i) => /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: "project-card project-card-ticker",
+      "aria-hidden": i >= PROJ.length ? 'true' : 'false'
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "project-header"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "project-badge"
+    }, p.badge), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: '1.5rem',
+        lineHeight: 1
+      }
+    }, p.icon)), /*#__PURE__*/React.createElement("div", {
+      className: "project-title"
+    }, p.title), /*#__PURE__*/React.createElement("div", {
+      className: "project-desc"
+    }, p.desc), /*#__PURE__*/React.createElement("div", {
+      style: {
+        background: 'rgba(0,240,168,0.06)',
+        border: '1px solid rgba(0,240,168,0.22)',
+        borderRadius: 8,
+        padding: '10px 14px',
+        marginBottom: 14
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 8,
+        fontWeight: 700,
+        letterSpacing: '1.5px',
+        color: '#00F0A8',
+        fontFamily: "'Space Mono',monospace",
+        marginBottom: 8
+      }
+    }, p.roi.label), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: 14
+      }
+    }, p.roi.items.map((r, j) => /*#__PURE__*/React.createElement("div", {
+      key: j,
+      style: {
+        textAlign: 'center'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 16,
+        fontWeight: 800,
+        color: '#00F0A8',
+        fontFamily: "'Space Grotesk',sans-serif"
+      }
+    }, r.v), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 9,
+        color: 'var(--text-dim)',
+        marginTop: 2,
+        lineHeight: 1.3
+      }
+    }, r.d))))), /*#__PURE__*/React.createElement("div", {
+      className: "project-tags"
+    }, p.tags.map((tg, j) => /*#__PURE__*/React.createElement("span", {
+      key: j,
+      className: "project-tag"
+    }, tg)))))));
+  })())), mode !== 'human' && /*#__PURE__*/React.createElement("section", {
     id: "stack",
     className: "section"
   }, /*#__PURE__*/React.createElement("div", {

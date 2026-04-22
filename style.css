@@ -627,7 +627,8 @@ body.hovering #cur-o{width:44px;height:44px;border-color:var(--accent2);opacity:
 .countries-ticker-wrap,
 .testi-ticker-wrap,
 .cert-featured-ticker-wrap,
-.cert-secondary-ticker-wrap{
+.cert-secondary-ticker-wrap,
+.projects-ticker-wrap{
   position:relative;width:100%;
   overflow:hidden;
   cursor:grab;
@@ -640,13 +641,15 @@ body.hovering #cur-o{width:44px;height:44px;border-color:var(--accent2);opacity:
 .countries-ticker-wrap.grabbing,
 .testi-ticker-wrap.grabbing,
 .cert-featured-ticker-wrap.grabbing,
-.cert-secondary-ticker-wrap.grabbing{cursor:grabbing}
+.cert-secondary-ticker-wrap.grabbing,
+.projects-ticker-wrap.grabbing{cursor:grabbing}
 
 .stack-ticker,
 .countries-ticker,
 .testi-ticker,
 .cert-featured-ticker,
-.cert-secondary-ticker{
+.cert-secondary-ticker,
+.projects-ticker{
   display:flex;width:max-content;
   will-change:transform;
 }
@@ -656,6 +659,9 @@ body.hovering #cur-o{width:44px;height:44px;border-color:var(--accent2);opacity:
 .testi-ticker{gap:16px;padding:6px 0}
 .cert-featured-ticker{gap:16px;padding:6px 0;margin-bottom:22px}
 .cert-secondary-ticker{gap:12px}
+.projects-ticker{gap:18px;padding:6px 0}
+.projects-ticker>.project-card-ticker{flex:0 0 360px;max-width:360px;min-width:360px}
+@media(max-width:600px){.projects-ticker>.project-card-ticker{flex:0 0 290px;max-width:290px;min-width:290px}}
 
 .cert-featured-ticker>.cert-feat{flex:0 0 340px;max-width:340px}
 @media(max-width:600px){.cert-featured-ticker>.cert-feat{flex:0 0 280px;max-width:280px}}
@@ -910,11 +916,30 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:14px;height:14px;b
 .dash-hiring-layout{grid-template-columns:1fr 1fr}
 @media(max-width:800px){.dash-hiring-layout{grid-template-columns:1fr}}
 
+.dash-ai-mini-grid{grid-template-columns:1fr 1fr}
+@media(max-width:500px){.dash-ai-mini-grid{grid-template-columns:1fr;gap:8px!important}}
+
 /* Dashboard padding & chrome — compact mobile */
 @media(max-width:600px){
+  .dashboard-root{border-radius:12px!important}
   .dashboard-root>div:first-child{padding:8px 12px!important;gap:8px!important}
   .dashboard-root>div:first-child>span{font-size:8px!important;letter-spacing:1.5px!important}
   .dashboard-root>div:first-child>div:nth-child(3){font-size:7px!important;padding:3px 8px!important}
+  /* Tabs bar : horizontal padding minimal + scroll fade */
+  .dashboard-root>div:nth-child(2){padding:0 10px!important;gap:0!important;-webkit-mask-image:linear-gradient(90deg,#000 92%,transparent);mask-image:linear-gradient(90deg,#000 92%,transparent)}
+  .dashboard-root>div:nth-child(2) button{padding:8px 10px!important;font-size:7.5px!important;letter-spacing:1px!important}
+  /* Right-side rotating alert pill : hide on mobile (saves 200px) */
+  .dashboard-root>div:nth-child(2)>div:last-child{display:none!important}
+  /* Main area padding */
+  .dashboard-root>div:nth-child(3){padding:10px 10px 14px!important}
+  /* All inner cards : reduce padding so internal grids fit */
+  .dashboard-root>div:nth-child(3) [style*="border-radius:12"],
+  .dashboard-root>div:nth-child(3) [style*="border-radius: 12"]{padding:10px 12px!important}
+  /* Tri-KPI cards : trim big-font numbers so labels don't squish */
+  .dash-tri-kpis [style*="font-size:'2.6rem'"],
+  .dash-tri-kpis div[style*="2.6rem"]{font-size:1.8rem!important}
+  /* Chart wrappers : reduce reserved height a touch */
+  .dash-charts-row [style*="height:180"]{height:160px!important}
 }
 .world-map-header{display:flex;justify-content:space-between;align-items:center;padding:0 40px;margin-bottom:16px}
 .world-map-label{font-family:'Space Mono',monospace;font-size:.48rem;color:var(--accent1);letter-spacing:3px;text-transform:uppercase}
@@ -1137,6 +1162,19 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:14px;height:14px;b
   line-height:1;opacity:.06;user-select:none;pointer-events:none;
   color:#fff;letter-spacing:-3px;
 }
+.cert-feat-logo{
+  position:absolute;top:14px;right:14px;
+  width:26px;height:26px;display:flex;align-items:center;justify-content:center;
+  border-radius:8px;background:rgba(255,255,255,.06);
+  border:1px solid rgba(217,119,87,.3);
+  pointer-events:none;
+}
+.cert-sec-logo{
+  position:absolute;top:10px;right:10px;
+  width:18px;height:18px;display:flex;align-items:center;justify-content:center;
+  opacity:.85;pointer-events:none;
+}
+.anthropic-mark{display:block}
 .cert-feat-tier{
   display:inline-flex;align-items:center;gap:4px;
   font-family:'Space Mono',monospace;font-size:.38rem;
@@ -2256,16 +2294,29 @@ body.drawer-open { overflow: hidden; }
     border-radius: 14px !important;
   }
 
-  /* ── Pipeline — vertical list layout (mobile-first, no more horizontal carousel) ── */
-  .pipeline-wrap { padding: 22px 16px !important; }
+  /* ── Pipeline — compact one-screen mobile layout ── */
+  .pipeline-wrap { padding: 14px 12px !important; }
 
-  /* Category selector: wrap to 2 per row so labels stay readable */
-  .pipeline-cats { gap: 6px !important; }
+  /* Category selector: horizontal scroll (1 row, snap) — frees ~80px vertical */
+  .pipeline-cats {
+    gap: 6px !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-bottom: 12px !important;
+    padding-bottom: 4px;
+    -webkit-mask-image: linear-gradient(90deg, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, #000 92%, transparent);
+  }
+  .pipeline-cats::-webkit-scrollbar { display: none; }
   .pipeline-cats button {
-    flex: 1 1 calc(50% - 6px);
+    flex: 0 0 auto !important;
+    scroll-snap-align: start;
     justify-content: center !important;
-    padding: 10px 8px !important;
-    font-size: 10px !important;
+    padding: 7px 12px !important;
+    font-size: 9.5px !important;
   }
 
   /* Pipeline stages → vertical flow */
@@ -2279,57 +2330,59 @@ body.drawer-open { overflow: hidden; }
     scroll-snap-type: none !important;
   }
 
-  /* Each node: icon left, label+detail right, full-width — compact */
+  /* Each node: icon left, label+detail right, full-width — ultra compact */
   .p-node {
     display: grid !important;
-    grid-template-columns: 32px 1fr;
+    grid-template-columns: 26px 1fr;
     grid-template-areas:
       "icon label"
       "icon detail";
-    column-gap: 12px !important;
-    row-gap: 1px !important;
+    column-gap: 10px !important;
+    row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
-    padding: 9px 14px !important;
+    padding: 6px 12px !important;
     text-align: left !important;
     touch-action: manipulation;
     cursor: pointer !important;
+    border-width: 1px !important;
+    border-radius: 8px !important;
   }
   .p-node-icon {
     grid-area: icon;
     align-self: center;
-    font-size: 1.3rem !important;
+    font-size: 1.05rem !important;
     text-align: center;
   }
   .p-node-label {
     grid-area: label;
     align-self: end;
-    font-size: .72rem !important;
+    font-size: .62rem !important;
     text-align: left !important;
-    letter-spacing: .5px !important;
-    line-height: 1.2 !important;
+    letter-spacing: .4px !important;
+    line-height: 1.15 !important;
   }
   .p-node-detail {
     grid-area: detail;
     align-self: start;
-    font-size: .6rem !important;
+    font-size: .52rem !important;
     text-align: left !important;
-    line-height: 1.2 !important;
+    line-height: 1.15 !important;
   }
   .p-node-tick {
-    top: 8px !important;
-    right: 8px !important;
-    width: 14px !important;
-    height: 14px !important;
-    font-size: .48rem !important;
+    top: 6px !important;
+    right: 6px !important;
+    width: 12px !important;
+    height: 12px !important;
+    font-size: .42rem !important;
   }
 
   /* Connector becomes a short vertical bar between nodes */
   .p-connector {
     width: 2px !important;
-    height: 8px !important;
-    flex: 0 0 8px !important;
-    margin: 0 0 0 28px !important;
+    height: 5px !important;
+    flex: 0 0 5px !important;
+    margin: 0 0 0 25px !important;
     background: var(--border-dim) !important;
   }
   .p-connector-fill {
@@ -2337,21 +2390,43 @@ body.drawer-open { overflow: hidden; }
     height: 100% !important;
     background: linear-gradient(180deg, var(--accent1), var(--accent3)) !important;
   }
+  .pipeline-stages { margin-bottom: 8px !important; }
 
-  /* Stats row: stack to 1 col so "Delivered in 6 min" doesn't overflow */
+  /* Description box : tighter */
+  .pipeline-wrap > div[style*="var(--glass-bg)"][style*="font-size:12"]{
+    padding: 8px 12px !important;
+    font-size: 10.5px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 8px !important;
+  }
+
+  /* Stats row: 3 cols, tight */
   .pipeline-stats {
     display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 6px !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 5px !important;
+    margin-bottom: 8px !important;
   }
-  .pipeline-stats > div { padding: 10px 14px !important; }
+  .pipeline-stats > div { padding: 6px 8px !important; }
+  .pipeline-stats > div > div { font-size: 9px !important; line-height: 1.25 !important; }
+
+  /* Log : shorter when shown */
+  .pipeline-log { max-height: 80px !important; padding: 8px !important; font-size: 10px !important; }
 
   .run-btn {
-    position: sticky;
-    bottom: max(14px, var(--safe-bottom));
-    z-index: 10;
     width: 100%;
+    padding: 12px !important;
+    font-size: 10.5px !important;
+    letter-spacing: 1.4px !important;
   }
+
+  /* Pipeline section (Chapter 04) : compact header so total height fits */
+  #pipeline.section{padding:36px 16px!important}
+  #pipeline > div:first-child{margin-bottom:14px!important}
+  #pipeline > div:first-child > div:last-child{font-size:3rem!important;top:-12px!important}
+  #pipeline .chapter-label{font-size:.5rem!important}
+  #pipeline .section-title{font-size:1.6rem!important;margin-bottom:6px!important;line-height:1.1!important}
+  #pipeline > p{font-size:.7rem!important;margin-bottom:14px!important;line-height:1.5!important}
 
   /* ── Skills + Radar ────────────────────────────────────────────── */
   .skills-grid { display: flex !important; flex-direction: column !important; gap: 12px !important; }
@@ -2520,20 +2595,38 @@ body.drawer-open { overflow: hidden; }
     padding:7px 14px;font-size:10px;
   }
 
-  /* Experience highlights — collapse to 3 bullets on mobile */
-  .exp-bullets li:nth-child(n+4){display:none}
+  /* Experience highlights — collapse to 2 bullets on mobile to fit viewport */
+  .exp-bullets li:nth-child(n+3){display:none}
   .exp-bullets.expanded li{display:list-item}
+  .exp-bullets li{font-size:.7rem!important;line-height:1.45!important;gap:8px!important}
+  .exp-bullets{gap:8px!important}
   .exp-bullets-toggle{
     display:block;width:100%;
-    padding:10px 14px;margin-top:12px;
+    padding:8px 14px;margin-top:10px;
     background:transparent;
     border:1px dashed var(--glass-border);border-radius:10px;
-    color:var(--accent1);font-family:'Space Mono',monospace;font-size:10px;
+    color:var(--accent1);font-family:'Space Mono',monospace;font-size:9px;
     letter-spacing:1.5px;text-transform:uppercase;
     cursor:pointer;transition:all .2s;
     -webkit-tap-highlight-color:transparent;
   }
   .exp-bullets-toggle:active{transform:scale(.98);background:rgba(191,58,255,.08)}
+
+  /* Experience compact — fit in one mobile viewport */
+  .exp-detail{padding:16px 14px!important;border-radius:14px!important}
+  .exp-detail-role{font-size:1.25rem!important;letter-spacing:1px!important;line-height:1.15!important;margin-bottom:4px!important}
+  .exp-detail-meta{font-size:.46rem!important;gap:6px!important;margin-bottom:12px!important;letter-spacing:1.4px!important}
+  .exp-tags{margin-top:10px!important;gap:4px!important}
+  .exp-tags .exp-tag:nth-child(n+5){display:none}
+  .exp-nav-item{min-width:200px!important;padding:10px 12px!important}
+  .exp-nav-date{font-size:.5rem!important;margin-bottom:3px!important}
+  .exp-nav-role{font-size:.78rem!important;line-height:1.15!important}
+  .exp-nav-co{font-size:.55rem!important;margin-top:2px!important}
+  .exp-layout{gap:12px!important}
+  #experience.section{padding:36px 16px!important}
+  #experience .chapter-label{font-size:.5rem!important}
+  #experience .section-title{font-size:1.6rem!important;margin-bottom:12px!important;line-height:1.1!important}
+  #experience .section-eyebrow{margin-bottom:6px!important}
 }
 @keyframes slideDown{
   from{opacity:0;transform:translateY(-6px)}
