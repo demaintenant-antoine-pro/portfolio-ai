@@ -141,6 +141,106 @@ document.addEventListener('mouseover',e=>{
   if(c) c.style.display = 'none';
 }
 
+/* ═══════════ DRAG/SWIPE TICKERS (tech stack, countries, testimonials) ═══════════ */
+/* Auto-scrolls slowly; user can grab/swipe to take control; resumes after 3s idle. */
+(function(){
+  const SELECTORS = ['.stack-ticker-wrap','.countries-ticker-wrap','.testi-ticker-wrap'];
+  // Speed in px/sec per wrap type (slower for testimonials — more to read)
+  const SPEED = {
+    'stack-ticker-wrap': 35,
+    'countries-ticker-wrap': 28,
+    'testi-ticker-wrap': 22,
+  };
+  const RESUME_MS = 2500;
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function wire(wrap){
+    if(!wrap||wrap._wired)return;
+    wrap._wired=true;
+    const key = Object.keys(SPEED).find(k => wrap.classList.contains(k));
+    const speed = SPEED[key] || 30;
+
+    let isDown=false,startX=0,startScroll=0,moved=0;
+    let lastActive=0;
+    let rafId=null,last=0;
+
+    function loopSize(){
+      // Children are duplicated [...arr,...arr], so seamless point is at half of scrollWidth.
+      return wrap.scrollWidth/2;
+    }
+
+    // ─── Auto-scroll loop ───
+    function tick(now){
+      rafId=requestAnimationFrame(tick);
+      if(reducedMotion||isDown||document.hidden)return;
+      if(now-lastActive<RESUME_MS){last=now;return;}
+      const dt=last?Math.min(now-last,50):16;
+      last=now;
+      wrap.scrollLeft+=(speed*dt)/1000;
+      const half=loopSize();
+      if(half>0&&wrap.scrollLeft>=half)wrap.scrollLeft-=half;
+    }
+    rafId=requestAnimationFrame(tick);
+
+    // Pause near page idle or when the wrap is off-screen
+    let inView=true;
+    if('IntersectionObserver' in window){
+      const io=new IntersectionObserver(([e])=>{inView=e.isIntersecting;lastActive=inView?0:Date.now();},{rootMargin:'100px'});
+      io.observe(wrap);
+    }
+
+    // ─── Pointer drag (works for mouse + pen + touch fallback) ───
+    // Use pointer events (unified). On mobile, native touch scroll also works via overflow-x:auto.
+    wrap.addEventListener('pointerdown',e=>{
+      if(e.pointerType==='touch')return; // let native touch handle it
+      isDown=true;moved=0;
+      startX=e.clientX;
+      startScroll=wrap.scrollLeft;
+      wrap.classList.add('grabbing');
+      lastActive=Date.now();
+      try{wrap.setPointerCapture(e.pointerId);}catch(_){}
+    });
+    wrap.addEventListener('pointermove',e=>{
+      if(!isDown)return;
+      const dx=e.clientX-startX;
+      moved=Math.abs(dx);
+      wrap.scrollLeft=startScroll-dx;
+      lastActive=Date.now();
+    });
+    function endDrag(e){
+      if(!isDown)return;
+      isDown=false;
+      wrap.classList.remove('grabbing');
+      lastActive=Date.now();
+      // If a real drag happened (>6px), block the click that would follow
+      if(moved>6){
+        const blocker=ev=>{ev.preventDefault();ev.stopPropagation();wrap.removeEventListener('click',blocker,true);};
+        wrap.addEventListener('click',blocker,true);
+        setTimeout(()=>wrap.removeEventListener('click',blocker,true),50);
+      }
+    }
+    wrap.addEventListener('pointerup',endDrag);
+    wrap.addEventListener('pointercancel',endDrag);
+    wrap.addEventListener('pointerleave',endDrag);
+
+    // Native touch/wheel: mark as user activity to pause auto-scroll briefly
+    wrap.addEventListener('touchstart',()=>{lastActive=Date.now();},{passive:true});
+    wrap.addEventListener('touchmove',()=>{lastActive=Date.now();},{passive:true});
+    wrap.addEventListener('wheel',()=>{lastActive=Date.now();},{passive:true});
+  }
+
+  function bootAll(){ SELECTORS.forEach(sel=>document.querySelectorAll(sel).forEach(wire)); }
+
+  // React mounts the tickers inside #root after initial paint — poll briefly then watch for new ones.
+  bootAll();
+  let tries=0;
+  const poll=setInterval(()=>{bootAll();if(++tries>40)clearInterval(poll);},250); // 10s total
+  // Also observe DOM for re-renders (language switch re-mounts the tree)
+  if('MutationObserver' in window){
+    new MutationObserver(()=>bootAll()).observe(document.body,{childList:true,subtree:true});
+  }
+})();
+
 /* ═══════════ SCROLL PROGRESS ═══════════ */
 window.addEventListener('scroll',()=>{
   const d=document.documentElement;
