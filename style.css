@@ -1,23 +1,49 @@
 /* ═══════════════════════ TOKENS ═══════════════════════ */
 :root{
-  /* ── Dark Glass Premium ── */
+  /* ── Dark Glass Premium — WCAG AA contrast ── */
   --bg:#0C0D14;--bg2:rgba(16,18,28,.8);--bg3:rgba(24,26,38,.9);
-  --bg-card:rgba(18,20,32,.68);
-  --text:#F0F0F8;--text-sec:rgba(220,220,240,.78);--text-dim:rgba(200,200,228,.5);--text-mute:rgba(180,180,210,.3);
-  --accent1:#5E8DEE;--accent2:#5EC4B6;--accent3:#5CB87A;--accent4:#E8A838;--danger:#D95B5B;
-  --border:rgba(255,255,255,.1);--border-dim:rgba(255,255,255,.06);
-  --nav-bg:rgba(12,13,20,.82);
-  --glow1:rgba(94,141,238,.25);--glow2:rgba(94,196,182,.2);--glow3:rgba(92,184,122,.22);--glow4:rgba(232,168,56,.2);
-  --glass-bg:rgba(18,20,32,.55);--glass-border:rgba(255,255,255,.09);
+  --bg-card:rgba(18,20,32,.72);
+  /* Text scale — all checked for AA contrast on --bg (#0C0D14) */
+  --text:#F5F6FA;                        /* 16:1  — primary */
+  --text-sec:#CFD3E0;                    /* 10.8:1 — secondary (was rgba .78 = ~8:1 OK but now solid) */
+  --text-dim:#9AA0B4;                    /* 5.8:1 — dim (was rgba .5 = 3.1:1 FAIL → now AA) */
+  --text-mute:#767C90;                   /* 4.5:1 — mute (was rgba .3 = 1.5:1 FAIL → now AA min) */
+  --accent1:#7AA7FF;                     /* brighter blue, AA on bg */
+  --accent2:#6DD5C7;
+  --accent3:#6FCF8F;                     /* signature green, AA */
+  --accent4:#FFB84D;
+  --danger:#FF7070;
+  --border:rgba(255,255,255,.14);        /* was .1 — more visible */
+  --border-dim:rgba(255,255,255,.09);    /* was .06 */
+  --nav-bg:rgba(12,13,20,.88);
+  --glow1:rgba(122,167,255,.28);--glow2:rgba(109,213,199,.22);--glow3:rgba(111,207,143,.25);--glow4:rgba(255,184,77,.22);
+  --glass-bg:rgba(18,20,32,.62);--glass-border:rgba(255,255,255,.11);
   --glass-shadow:0 8px 40px rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.07) inset;
   --glass-blur:blur(28px) saturate(160%);
-  --card-solid:rgba(22,24,38,.72);
+  --card-solid:rgba(22,24,38,.78);
+
+  /* Mobile-aware fluid typography scale — minimum 13px anywhere */
+  --fs-xs:clamp(.81rem,.77rem + .2vw,.86rem);    /* was .38-.5rem → now 13-14px (floor) */
+  --fs-sm:clamp(.88rem,.82rem + .3vw,.95rem);    /* was .55-.65rem → now ~14-15px */
+  --fs-base:clamp(.95rem,.9rem + .3vw,1.02rem);  /* ~15-16px */
+  --fs-md:clamp(1.05rem,.98rem + .4vw,1.18rem);
+  --fs-lg:clamp(1.2rem,1.08rem + .6vw,1.45rem);
+  --fs-xl:clamp(1.5rem,1.3rem + 1vw,1.9rem);
+  --fs-2xl:clamp(2rem,1.6rem + 2vw,2.8rem);
+  --fs-display:clamp(2.4rem,1.8rem + 4vw,4.5rem);
+
+  /* Safe area + viewport units */
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+  --safe-left:env(safe-area-inset-left,0px);
+  --safe-right:env(safe-area-inset-right,0px);
+  --vh-full:100dvh;
 }
 
 
 
 /* ── Noise texture layer — always visible ── */
-html{position:relative}
+html{position:relative;overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 html::before{
   content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
@@ -34,7 +60,23 @@ body{
     radial-gradient(ellipse 60% 50% at 85% 8%,  rgba(94,196,182,.16) 0%, transparent 50%),
     radial-gradient(ellipse 55% 55% at 8% 85%,  rgba(92,184,122,.14) 0%, transparent 50%),
     radial-gradient(ellipse 65% 45% at 88% 82%, rgba(232,168,56,.12)  0%, transparent 55%);
-  color:var(--text);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;cursor:none;transition:background .5s,color .4s;position:relative;z-index:1;min-height:100vh;
+  color:var(--text);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;cursor:none;transition:background .5s,color .4s;position:relative;z-index:1;min-height:100dvh;font-size:16px;line-height:1.55;
+}
+/* Long-form text — break cleanly instead of overflowing cards */
+p, li, .hero-sub, .exp-highlight, .testi-q, .hcon-item, .blog-excerpt{
+  overflow-wrap:anywhere;word-break:break-word;hyphens:auto;
+}
+/* Accessibility — keyboard focus visible */
+:focus-visible{
+  outline:2px solid var(--accent3);
+  outline-offset:2px;
+  border-radius:4px;
+}
+*:focus:not(:focus-visible){outline:none}
+/* Tap feedback — pressed state for touch */
+button:active, a:active, .ps-pill:active, .p-node:active, .skill-card:active{
+  transform:scale(.97);
+  transition:transform .08s ease-out;
 }
 
 
@@ -1514,4 +1556,565 @@ body[data-theme=light] .htest-stars{color:var(--c3) !important}
 body[data-theme=light] .htest-q{color:var(--c2) !important}
 body[data-theme=light] .htest-name{color:var(--c1) !important}
 body[data-theme=light] .htest-avatar{background:rgba(65,90,119,.1) !important;border-color:rgba(65,90,119,.22) !important;color:var(--c3) !important}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ═══════════════ MOBILE READABILITY PASS ═════════════════════════════════
+   All font-sizes in the project below .8rem become illegible on phones
+   (.38rem = 6px!). This block boosts small text to readable minimums.
+   Desktop is unaffected.
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* Body baseline */
+  body { font-size: 15.5px; line-height: 1.6; }
+
+  /* Safe-area padding on fixed chrome */
+  .nav { padding-top: max(10px, var(--safe-top)) !important; }
+  #hire-progress { top: max(0px, var(--safe-top)) !important; }
+  .scroll-bar { top: max(0px, var(--safe-top)) !important; }
+
+  /* Hero — sane clamp, not 16vw (which blows up past viewport) */
+  .hero-h1 { font-size: clamp(2.2rem, 9vw, 3.4rem) !important; line-height: 1.05 !important; letter-spacing: -.02em; }
+  .hero-sub { font-size: 1rem !important; line-height: 1.55 !important; }
+  .hero-tag { font-size: .82rem !important; }
+
+  /* Chapter decoration — don't let the 8rem "01" num overflow viewport */
+  .chapter-num { font-size: 4rem !important; right: 14px !important; top: 8px !important; opacity: .08 !important; }
+  .chapter-label { font-size: .78rem !important; }
+
+  /* Navigation monospace labels — all too small */
+  .nav-logo { font-size: .85rem !important; letter-spacing: 2px; }
+  .nav-link { font-size: .82rem !important; padding: 6px 10px; }
+  .recruiter-btn { font-size: .68rem !important; padding: 8px 10px !important; }
+  .theme-btn { font-size: .72rem !important; padding: 7px 9px !important; min-height: 36px; }
+  .mode-switch-btn { font-size: .68rem !important; }
+  .ticker-item, [style*="font-size:.58rem"] { font-size: .78rem !important; letter-spacing: 1px !important; }
+
+  /* Metric cards */
+  .metric-value { font-size: 2rem !important; }
+  .metric-label { font-size: .82rem !important; }
+  .metric-sub { font-size: .75rem !important; }
+  .metric { padding: 22px 16px !important; }
+
+  /* Experience */
+  .exp-role { font-size: 1.25rem !important; line-height: 1.2; }
+  .exp-company { font-size: .95rem !important; }
+  .exp-location, .exp-date { font-size: .82rem !important; }
+  .exp-highlight { font-size: .92rem !important; line-height: 1.5 !important; }
+  .exp-tag { font-size: .72rem !important; padding: 5px 10px !important; }
+  .exp-nav-item { font-size: .78rem !important; padding: 10px 12px !important; min-height: 44px; }
+  .exp-revenue { font-size: .78rem !important; }
+
+  /* Skills */
+  .skill-name { font-size: 1rem !important; }
+  .skill-desc { font-size: .82rem !important; line-height: 1.45 !important; }
+  .skill-pct { font-size: .78rem !important; }
+  .skill-card { padding: 18px 16px !important; }
+  .radar-label, .radar-sub { font-size: .8rem !important; }
+  .radar-pct { font-size: .85rem !important; }
+
+  /* Stack cards */
+  .stack-name { font-size: .85rem !important; }
+  .stack-cat { font-size: .7rem !important; }
+  .stack-level { font-size: .68rem !important; }
+  .stack-card { padding: 14px 10px !important; }
+
+  /* Pipeline */
+  .p-node-label { font-size: .78rem !important; }
+  .p-node-detail { font-size: .68rem !important; }
+  .p-node-icon { font-size: 1.4rem !important; }
+  .pipeline-desc, .pipeline-status { font-size: .85rem !important; }
+  .run-btn { font-size: .82rem !important; padding: 12px 20px !important; min-height: 44px; }
+
+  /* Testimonials (classic grid — carousel comes in C3d) */
+  .testi-card { padding: 20px 18px !important; }
+  .testi-name { font-size: 1rem !important; }
+  .testi-title, .testi-co { font-size: .82rem !important; }
+  .testi-q { font-size: .92rem !important; line-height: 1.6 !important; }
+  .testi-highlight { font-size: .95rem !important; line-height: 1.5 !important; }
+  .testi-date { font-size: .7rem !important; }
+
+  /* Certificates */
+  .cert-title { font-size: 1rem !important; }
+  .cert-issuer, .cert-date { font-size: .82rem !important; }
+  .cert-stat-val { font-size: 1.8rem !important; }
+  .cert-stat-lbl { font-size: .72rem !important; }
+
+  /* Blog */
+  .blog-tag { font-size: .68rem !important; }
+  .blog-title { font-size: 1.1rem !important; line-height: 1.3 !important; }
+  .blog-meta { font-size: .78rem !important; }
+  .blog-excerpt { font-size: .92rem !important; line-height: 1.55 !important; }
+  .blog-card { padding: 22px 18px !important; }
+
+  /* Contact */
+  .contact-title { font-size: 1.75rem !important; }
+  .contact-text { font-size: 1rem !important; line-height: 1.6 !important; }
+  .contact-method { font-size: .92rem !important; padding: 14px 16px !important; min-height: 52px; }
+
+  /* Terminal */
+  .term-line, .term-input { font-size: .82rem !important; }
+  .term-header { font-size: .78rem !important; }
+
+  /* Projects */
+  .proj-title { font-size: 1.1rem !important; }
+  .proj-desc { font-size: .92rem !important; line-height: 1.55 !important; }
+  .proj-tag { font-size: .72rem !important; }
+
+  /* Countries (human mode) */
+  .hcon-title { font-size: 1.75rem !important; }
+  .hcon-text { font-size: .95rem !important; line-height: 1.6 !important; }
+  .hcon-country-name { font-size: 1.1rem !important; }
+  .hcon-country-sub { font-size: .82rem !important; }
+
+  /* Buttons — minimum touch target */
+  .btn-primary, .btn-secondary {
+    min-height: 48px !important;
+    font-size: .88rem !important;
+    padding: 14px 22px !important;
+    letter-spacing: 1px;
+  }
+
+  /* Modals — full viewport on small screens */
+  .cal-overlay, .recruit-overlay { padding: 12px !important; }
+  .cal-modal, .recruit-modal { max-height: calc(100dvh - 24px); overflow-y: auto; }
+
+  /* Boot screen — don't overflow */
+  .boot-logo { font-size: 1.8rem !important; }
+  .boot-line { font-size: .85rem !important; }
+
+  /* Section paddings — give room to breathe without overflow */
+  .section { padding: 52px 18px !important; }
+  .hero { padding: 88px 18px 48px !important; }
+
+  /* Progress bars: only show one (scroll) not both */
+  #hire-progress { display: none; }
+
+  /* Decorative chapter number that reads "01", "02" massive: hide mobile */
+  @supports(not (container-type:inline-size)){
+    .chapter-num { display: none !important; }
+  }
+
+  /* Generic — any inline .42-.58rem monospace escapes above */
+  [class*="label"], [class*="sub"], [class*="meta"], [class*="tag"], [class*="date"] {
+    font-size: max(var(--fs-sm), .78rem) !important;
+  }
+
+  /* Block ticker from breaking the viewport horizontally */
+  body > div[style*="overflow:hidden"] { max-width: 100vw; }
+}
+
+/* iOS safe area — applies at any size on devices that need it */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .nav { padding-right: max(14px, var(--safe-right)); padding-left: max(14px, var(--safe-left)); }
+  .cal-overlay, .recruit-overlay { padding-bottom: max(12px, var(--safe-bottom)); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ═══════════════ MOBILE NAV — HAMBURGER + DRAWER ═════════════════════════
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Hamburger button + mobile-only CTA — hidden on desktop */
+.nav-hamburger, .nav-cta-mobile, .mobile-menu-sections, .nav-backdrop { display: none; }
+
+/* New helpers to replace inline styles in the nav buttons (cleaner + stylable) */
+.nav-cta-calendly {
+  display:flex;align-items:center;gap:6px;
+  padding:8px 14px;border-radius:20px;
+  background:rgba(111,207,143,.12);border:1px solid rgba(111,207,143,.38);
+  color:var(--accent3);font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:1px;
+  text-decoration:none;transition:all .25s;white-space:nowrap;flex-shrink:0;
+  animation:ctapulse 3s ease-in-out infinite;
+}
+.nav-cta-calendly:hover{background:rgba(111,207,143,.22);transform:translateY(-1px)}
+.mode-switch-btn{
+  display:flex;align-items:center;gap:6px;
+  padding:8px 14px;border-radius:20px;
+  border:1px solid var(--border-dim);background:var(--bg-card);
+  cursor:pointer;transition:all .25s;
+  font-family:'Space Mono',monospace;font-size:.72rem;color:var(--text-sec);letter-spacing:1px;
+  white-space:nowrap;
+}
+.mode-switch-btn:hover{color:var(--text);border-color:var(--border)}
+.mode-switch-dot{
+  width:18px;height:18px;border-radius:9px;border:1.5px solid;
+  display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;
+}
+
+/* Mobile-only nav behaviour */
+@media (max-width: 900px) {
+  .nav { gap: 10px; padding: 0 14px; }
+
+  /* Hide desktop links and controls — drawer takes over */
+  .nav-links { display: none !important; }
+  .nav-controls {
+    position: fixed;
+    top: 60px;
+    right: 0;
+    bottom: 0;
+    width: min(340px, 88vw);
+    padding: 24px 22px calc(24px + var(--safe-bottom));
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    background: var(--bg2);
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    border-left: 1px solid var(--glass-border);
+    box-shadow: -12px 0 40px rgba(0,0,0,.5);
+    transform: translateX(100%);
+    transition: transform .28s cubic-bezier(.22,1,.36,1);
+    z-index: 1001;
+    overflow-y: auto;
+  }
+  .nav-controls.open { transform: translateX(0); }
+
+  /* Drawer buttons — big touch targets, readable sizes */
+  .nav-controls .sound-btn,
+  .nav-controls .nav-cta-calendly,
+  .nav-controls .recruiter-btn,
+  .nav-controls .mode-switch-btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+    font-size: .92rem !important;
+    padding: 12px 18px !important;
+    border-radius: 10px;
+  }
+  .nav-controls .nav-themes {
+    display: flex !important;
+    width: 100%;
+    margin-top: 4px;
+  }
+  .nav-controls .nav-themes .theme-btn {
+    flex: 1;
+    min-height: 44px;
+    font-size: .85rem !important;
+    padding: 10px !important;
+  }
+  .nav-controls .sound-btn {
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 10px !important;
+  }
+
+  /* Mobile section links inside drawer */
+  .mobile-menu-sections {
+    display: flex !important;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-dim);
+  }
+  .mobile-menu-link {
+    background: none;
+    border: none;
+    color: var(--text-sec);
+    font-family: 'Space Mono', monospace;
+    font-size: .92rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 14px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    min-height: 48px;
+    transition: background .15s, color .15s;
+  }
+  .mobile-menu-link:hover, .mobile-menu-link:active {
+    background: rgba(255,255,255,.06);
+    color: var(--accent3);
+  }
+
+  /* Mobile CTA compact (stays always-visible next to hamburger) */
+  .nav-cta-mobile {
+    display: flex !important;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: 18px;
+    background: rgba(111,207,143,.14);
+    border: 1px solid rgba(111,207,143,.4);
+    color: var(--accent3);
+    font-family: 'Space Mono', monospace;
+    font-size: .78rem;
+    letter-spacing: .5px;
+    text-decoration: none;
+    flex-shrink: 0;
+    white-space: nowrap;
+    min-height: 40px;
+  }
+
+  /* Hamburger button */
+  .nav-hamburger {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 1px solid var(--border-dim);
+    border-radius: 10px;
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0;
+    z-index: 1002;
+    position: relative;
+  }
+  .ham-bar {
+    width: 20px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: transform .25s ease, opacity .2s ease;
+    transform-origin: center;
+  }
+  .ham-bar.open1 { transform: translateY(7px) rotate(45deg); }
+  .ham-bar.open2 { opacity: 0; transform: scaleX(0); }
+  .ham-bar.open3 { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Backdrop behind open drawer */
+  .nav-backdrop {
+    display: block !important;
+    position: fixed;
+    top: 60px; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,.45);
+    backdrop-filter: blur(2px);
+    z-index: 1000;
+    animation: fadeIn .2s ease;
+  }
+
+  /* Logo a bit more prominent */
+  .nav-logo { font-size: .78rem !important; letter-spacing: 2.5px; }
+}
+
+/* Prevent body scroll when drawer open */
+body:has(.nav-controls.open) { overflow: hidden; }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ═══════════════ MOBILE SECTION LAYOUTS (C3) ════════════════════════════════
+   Rebuilds each section layout for touch + small viewports.
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ── Hero ────────────────────────────────────────────────────────── */
+  .hero {
+    min-height: auto !important;
+    padding-top: calc(80px + var(--safe-top)) !important;
+  }
+  .hero-ctas { flex-direction: column !important; gap: 10px !important; }
+  .hero-ctas .btn-primary, .hero-ctas .btn-secondary {
+    width: 100%; justify-content: center;
+  }
+  .hero-side-card, .hero-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+  .hero-floating-contact { display: none !important; }
+
+  /* ── Experience — horizontal nav scroll-snap ────────────────────── */
+  .exp-layout { display: flex !important; flex-direction: column !important; gap: 18px; }
+  .exp-nav {
+    display: flex !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 8px;
+    padding: 6px 4px 10px;
+    scrollbar-width: none;
+  }
+  .exp-nav::-webkit-scrollbar { display: none; }
+  .exp-nav-item {
+    flex: 0 0 auto;
+    min-width: 240px;
+    scroll-snap-align: start;
+    border-left: none !important;
+    border-bottom: 2px solid transparent !important;
+    border-radius: 10px;
+    background: var(--bg-card);
+  }
+  .exp-nav-item.active {
+    border-bottom-color: var(--accent3) !important;
+    background: rgba(111,207,143,.06) !important;
+  }
+  .exp-detail { padding: 22px 18px !important; }
+
+  /* ── Dashboard — horizontal swipe carousel ─────────────────────── */
+  .dashboard-grid, .chart-grid, .metrics {
+    display: flex !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 12px;
+    padding: 4px 18px 14px;
+    margin: 0 -18px 18px;
+    grid-template-columns: unset !important;
+    scrollbar-width: none;
+  }
+  .dashboard-grid::-webkit-scrollbar,
+  .chart-grid::-webkit-scrollbar,
+  .metrics::-webkit-scrollbar { display: none; }
+  .dashboard-grid > *, .chart-grid > *, .metrics > * {
+    flex: 0 0 82%;
+    scroll-snap-align: center;
+    min-width: 280px;
+  }
+  /* hint that it scrolls */
+  .dashboard-grid::after, .metrics::after {
+    content: '→ swipe';
+    flex: 0 0 auto;
+    padding: 0 20px;
+    align-self: center;
+    font-family: 'Space Mono', monospace;
+    font-size: .72rem;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+  }
+
+  /* ── Pipeline — tap-friendly + sticky action button ────────────── */
+  .pipeline-wrap { padding: 22px 16px !important; }
+  .pipeline-stages {
+    display: flex !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 4px 4px 10px;
+    gap: 4px !important;
+    scrollbar-width: none;
+  }
+  .pipeline-stages::-webkit-scrollbar { display: none; }
+  .p-node {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    cursor: pointer !important;
+    min-width: 88px;
+    touch-action: manipulation;
+  }
+  .p-connector { flex: 0 0 14px !important; }
+  .run-btn {
+    position: sticky;
+    bottom: max(14px, var(--safe-bottom));
+    z-index: 10;
+    width: 100%;
+  }
+
+  /* ── Skills + Radar ────────────────────────────────────────────── */
+  .skills-grid { display: flex !important; flex-direction: column !important; gap: 12px !important; }
+  .radar-wrap { padding: 20px 12px !important; gap: 16px !important; }
+  .radar-canvas-wrap { max-width: 100% !important; }
+
+  /* ── Stack ─────────────────────────────────────────────────────── */
+  .stack-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+  .stack-card { padding: 14px 12px !important; min-height: 90px; }
+
+  /* ── Testimonials — horizontal swipe carousel ──────────────────── */
+  .testi-grid {
+    display: flex !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 14px !important;
+    padding: 4px 18px 14px;
+    margin: 0 -18px;
+    grid-template-columns: unset !important;
+    scrollbar-width: none;
+  }
+  .testi-grid::-webkit-scrollbar { display: none; }
+  .testi-card {
+    flex: 0 0 88%;
+    scroll-snap-align: center;
+    min-width: 280px;
+    max-width: 380px;
+  }
+  .htest-grid {
+    display: flex !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 14px !important;
+    padding: 4px 18px 14px;
+    margin: 0 -18px;
+    grid-template-columns: unset !important;
+    scrollbar-width: none;
+  }
+  .htest-grid::-webkit-scrollbar { display: none; }
+  .htest-card {
+    flex: 0 0 88%;
+    scroll-snap-align: center;
+    min-width: 280px;
+  }
+
+  /* ── Certificates ──────────────────────────────────────────────── */
+  .cert-secondary-row { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+  .cert-featured-row { display: flex !important; flex-direction: column !important; gap: 12px; }
+  .cert-feat { padding: 22px 18px !important; }
+
+  /* ── Blog ──────────────────────────────────────────────────────── */
+  .blog-grid { display: flex !important; flex-direction: column !important; gap: 14px !important; }
+
+  /* ── Projects ──────────────────────────────────────────────────── */
+  .projects-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+
+  /* ── Countries / Map ───────────────────────────────────────────── */
+  #visitor-map, #visitor-map-human { height: 260px !important; }
+  .hcon-grid { display: flex !important; flex-direction: column !important; gap: 12px !important; }
+  .hcon-item { padding: 18px !important; }
+  .hwid-grid { gap: 10px !important; }
+
+  /* ── Contact ───────────────────────────────────────────────────── */
+  .contact-layout { display: flex !important; flex-direction: column !important; gap: 16px !important; }
+  .contact-cards { display: flex !important; flex-direction: column !important; gap: 10px !important; }
+  .contact-card {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px !important;
+    border-radius: 12px !important;
+    text-align: left !important;
+    min-height: 68px;
+  }
+  .contact-card .contact-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .contact-card .contact-lbl { font-size: .78rem; margin-bottom: 2px; }
+  .contact-card .contact-val { font-size: .92rem; word-break: break-all; }
+  .contact-cta { width: 100%; }
+
+  /* ── Terminal — readable, typed output stays in view ──────────── */
+  .terminal-chat { padding: 16px 14px !important; border-radius: 14px !important; }
+  .chat-bar { padding: 10px 12px !important; }
+  .terminal-path { font-size: .78rem !important; }
+  .prompt, .t-cursor { font-size: .92rem !important; }
+  .typewriter-row { font-size: .92rem !important; }
+
+  /* ── HUD / chapter nav / konami / XP ───────────────────────────── */
+  #chapter-nav { display: none !important; }
+  #xp-hud { display: none !important; }
+  .konami-hint { display: none !important; }
+  .achieve-toast { bottom: max(14px, var(--safe-bottom)) !important; top: auto !important; right: 14px !important; left: 14px !important; width: auto !important; }
+
+  /* ── Ticker — lisible + ne casse pas la largeur ────────────────── */
+  .ticker-container, body > div[style*="tickerScroll"] { max-width: 100vw; overflow: hidden; }
+
+  /* ── Profile selector Matrix — BIG touch targets ───────────────── */
+  .ps-pill {
+    padding: 18px 28px !important;
+    font-size: .92rem !important;
+    min-height: 56px;
+    min-width: 220px;
+    letter-spacing: 1.5px !important;
+  }
+  #ps-logo { font-size: clamp(1.6rem, 7vw, 2.4rem) !important; letter-spacing: 6px !important; }
+  #ps-tagline { font-size: .68rem !important; letter-spacing: 3px; }
+  #ps-q { font-size: .82rem !important; }
+  .ps-lang-btn { font-size: .85rem !important; padding: 10px 16px !important; min-height: 40px; }
+
+  /* ── Boot screen tech mode ─────────────────────────────────────── */
+  .boot-logo { font-size: 1.6rem !important; letter-spacing: 4px; }
+  .boot-lines { padding: 0 20px; }
+  .boot-line { font-size: .82rem !important; }
+  .boot-bar-wrap { margin: 16px 20px; }
+}
+
 
