@@ -1100,6 +1100,9 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:14px;height:14px;b
 .ps-pill-red{border-color:#7a3f3f;color:#c06060}
 .ps-pill-red .ps-pill-dot{background:#c06060;box-shadow:0 0 8px #c06060}
 .ps-pill-red:hover{border-color:#c06060;color:#e0e1dd;box-shadow:0 8px 32px rgba(192,96,96,.4)}
+.ps-pill-enter{border-color:var(--accent3);color:var(--accent3);padding:18px 36px !important;font-size:.92rem !important}
+.ps-pill-enter .ps-pill-dot{background:var(--accent3);box-shadow:0 0 12px var(--glow3)}
+.ps-pill-enter:hover{background:rgba(111,207,143,.08);box-shadow:0 8px 32px var(--glow3);transform:translateY(-2px) scale(1.03)}
 
 #ps-lang-row{display:flex;align-items:center;gap:8px}
 .ps-lang-btn{font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:2px;padding:6px 16px;border-radius:24px;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.35);cursor:pointer;transition:all .2s}
@@ -1744,7 +1747,14 @@ body[data-theme=light] .htest-avatar{background:rgba(65,90,119,.1) !important;bo
 
 /* Mobile-only nav behaviour */
 @media (max-width: 900px) {
-  .nav { gap: 10px; padding: 0 14px; }
+  .nav {
+    gap: 12px;
+    padding: 0 16px !important;
+    height: 64px !important;
+    justify-content: space-between;
+  }
+  .nav-logo { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  .nav-cta-mobile { display: none !important; } /* declutter — CTA lives in drawer */
 
   /* Hide desktop links and controls — drawer takes over */
   .nav-links { display: none !important; }
@@ -1895,6 +1905,13 @@ body[data-theme=light] .htest-avatar{background:rgba(65,90,119,.1) !important;bo
 /* Prevent body scroll when drawer open */
 body:has(.nav-controls.open) { overflow: hidden; }
 
+/* ─── Tech-only mode: retire the Human↔Tech switcher button everywhere ── */
+.mode-switch-btn { display: none !important; }
+
+/* ─── Single-entry profile selector — lang row still visible, centered ── */
+#ps-pills { justify-content: center; }
+#ps-lang-row { display: flex; justify-content: center; }
+
 
 /* ═══════════════════════════════════════════════════════════════════════════
    ═══════════════ MOBILE SECTION LAYOUTS (C3) ════════════════════════════════
@@ -1941,36 +1958,22 @@ body:has(.nav-controls.open) { overflow: hidden; }
   }
   .exp-detail { padding: 22px 18px !important; }
 
-  /* ── Dashboard — horizontal swipe carousel ─────────────────────── */
+  /* ── Dashboard — vertical stack (carousel was buggy with rich cards) ── */
   .dashboard-grid, .chart-grid, .metrics {
     display: flex !important;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 12px;
-    padding: 4px 18px 14px;
-    margin: 0 -18px 18px;
+    flex-direction: column !important;
     grid-template-columns: unset !important;
-    scrollbar-width: none;
+    gap: 12px !important;
+    padding: 0 !important;
+    margin: 0 0 14px !important;
   }
-  .dashboard-grid::-webkit-scrollbar,
-  .chart-grid::-webkit-scrollbar,
-  .metrics::-webkit-scrollbar { display: none; }
   .dashboard-grid > *, .chart-grid > *, .metrics > * {
-    flex: 0 0 82%;
-    scroll-snap-align: center;
-    min-width: 280px;
+    width: 100%;
+    min-width: 0;
   }
-  /* hint that it scrolls */
-  .dashboard-grid::after, .metrics::after {
-    content: '→ swipe';
-    flex: 0 0 auto;
-    padding: 0 20px;
-    align-self: center;
-    font-family: 'Space Mono', monospace;
-    font-size: .72rem;
-    color: var(--text-dim);
-    letter-spacing: 2px;
+  .kpi-box, .chart-box {
+    padding: 18px 16px !important;
+    border-radius: 14px !important;
   }
 
   /* ── Pipeline — tap-friendly + sticky action button ────────────── */
@@ -2011,41 +2014,16 @@ body:has(.nav-controls.open) { overflow: hidden; }
   }
   .stack-card { padding: 14px 12px !important; min-height: 90px; }
 
-  /* ── Testimonials — horizontal swipe carousel ──────────────────── */
-  .testi-grid {
+  /* ── Testimonials — vertical stack (carousel was buggy with rich cards) ── */
+  .testi-grid, .htest-grid {
     display: flex !important;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
+    flex-direction: column !important;
     gap: 14px !important;
-    padding: 4px 18px 14px;
-    margin: 0 -18px;
     grid-template-columns: unset !important;
-    scrollbar-width: none;
+    padding: 0 !important;
+    margin: 0 !important;
   }
-  .testi-grid::-webkit-scrollbar { display: none; }
-  .testi-card {
-    flex: 0 0 88%;
-    scroll-snap-align: center;
-    min-width: 280px;
-    max-width: 380px;
-  }
-  .htest-grid {
-    display: flex !important;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 14px !important;
-    padding: 4px 18px 14px;
-    margin: 0 -18px;
-    grid-template-columns: unset !important;
-    scrollbar-width: none;
-  }
-  .htest-grid::-webkit-scrollbar { display: none; }
-  .htest-card {
-    flex: 0 0 88%;
-    scroll-snap-align: center;
-    min-width: 280px;
-  }
+  .testi-card, .htest-card { width: 100%; max-width: none; min-width: 0; }
 
   /* ── Certificates ──────────────────────────────────────────────── */
   .cert-secondary-row { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
@@ -2115,6 +2093,41 @@ body:has(.nav-controls.open) { overflow: hidden; }
   .boot-lines { padding: 0 20px; }
   .boot-line { font-size: .82rem !important; }
   .boot-bar-wrap { margin: 16px 20px; }
+
+  /* ── CARDS: kill glassmorphism on mobile (unreliable on iOS Safari
+       with stacking contexts + noise layer + gradients → ghost/striping).
+       Use solid backgrounds with visible borders instead. ─────────── */
+  .skill-card, .blog-card, .testi-card, .stack-card, .contact-card,
+  .project-card, .cert-sec, .cert-feat, .radar-wrap, .exp-detail,
+  .pipeline-wrap, .kpi-box, .chart-box, .hstory, .htest-card, .hroi-wrap,
+  .hcta-box, .hcon-item, .roi-wrap, .modal, .country-modal,
+  .recruiter-modal, .cal-modal {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: var(--card-solid) !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: 0 4px 18px rgba(0,0,0,.35) !important;
+  }
+
+  /* Prevent cards overflowing their parent & breaking layout */
+  .skill-card, .blog-card, .testi-card, .stack-card, .contact-card,
+  .project-card, .cert-sec, .cert-feat, .kpi-box, .chart-box, .exp-detail,
+  .pipeline-wrap {
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  /* Section containers: prevent max-width rules leaking outside viewport */
+  section, .section, .section-full, .section-full-inner {
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+
+  /* Chapter intro wrapper — if any inline maxWidth:1500 overflows, clamp */
+  section > div[style*="max-width"] {
+    max-width: 100% !important;
+  }
 }
 
 

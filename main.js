@@ -3,21 +3,24 @@
 /* ═══════════ PROFILE SELECTOR — Matrix ═══════════ */
 var PS_LANG = 'en';
 var PS_LABELS = {
-  en: { q: '// choose your interface', human: 'For decision-makers', tech: 'For engineers' },
-  fr: { q: '// choisissez votre interface', human: 'Pour les décideurs', tech: 'Pour les ingénieurs' }
+  en: { q: '// ready to explore', enter: 'Enter portfolio →' },
+  fr: { q: '// prêt à explorer',  enter: 'Lancer le portfolio →' }
 };
 
 function psSetLang(l){
   PS_LANG = l;
-  document.getElementById('ps-fr').classList.toggle('active', l==='fr');
-  document.getElementById('ps-en').classList.toggle('active', l==='en');
+  var fr = document.getElementById('ps-fr');
+  var en = document.getElementById('ps-en');
+  if(fr) fr.classList.toggle('active', l==='fr');
+  if(en) en.classList.toggle('active', l==='en');
   psRender();
 }
 function psRender(){
   var lb = PS_LABELS[PS_LANG];
-  document.getElementById('ps-q').textContent = lb.q;
-  document.getElementById('ps-human-lbl').textContent = lb.human;
-  document.getElementById('ps-tech-lbl').textContent = lb.tech;
+  var q = document.getElementById('ps-q');
+  var lbl = document.getElementById('ps-enter-lbl');
+  if(q) q.textContent = lb.q;
+  if(lbl) lbl.textContent = lb.enter;
 }
 
 /* Matrix rain */

@@ -2467,30 +2467,30 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
 
 /* ─── ROOT APP ─────────────────────────────────────────────────────────────── */
 function App(){
-  const [mode,setMode]=useState(()=>window._psMode||null);
+  // Tech mode only (Human mode retired — preserved in JSX but unreachable).
+  const [ready,setReady]=useState(!!window._psMode);
   const [initLang,setInitLang]=useState(()=>window._psLang||'en');
 
   useEffect(()=>{
-    function handler(e){setMode(e.detail.mode);setInitLang(e.detail.lang||'en');}
+    function handler(e){ setInitLang(e.detail.lang||'en'); setReady(true); }
     window.addEventListener('psChosen',handler);
-    const poll=setInterval(()=>{if(window._psMode&&!window._psBootPending){setMode(m=>m||window._psMode);setInitLang(l=>l||window._psLang||'en');clearInterval(poll);}},150);
+    const poll=setInterval(()=>{
+      if(window._psMode && !window._psBootPending){
+        setInitLang(l=>l||window._psLang||'en');
+        setReady(true);
+        clearInterval(poll);
+      }
+    },150);
     return()=>{window.removeEventListener('psChosen',handler);clearInterval(poll);};
   },[]);
 
-  function switchMode(){
-    const next=mode==='human'?'tech':'human';
-    setMode(next);
-    if(next==='human'){
-      document.body.classList.add('human-mode');
-      document.body.setAttribute('data-theme','light');
-    } else {
-      document.body.classList.remove('human-mode');
-      document.body.setAttribute('data-theme','dark');
-    }
-  }
+  useEffect(()=>{
+    document.body.setAttribute('data-theme','dark');
+    document.body.classList.remove('human-mode');
+  },[ready]);
 
-  if(!mode) return null;
-  return <PortfolioApp initLang={initLang} mode={mode} onSwitchMode={switchMode}/>;
+  if(!ready) return null;
+  return <PortfolioApp initLang={initLang} mode="tech" onSwitchMode={()=>{}}/>;
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
