@@ -163,8 +163,11 @@ document.addEventListener('mouseover',e=>{
     const speed = SPEED[key] || 30;
 
     let isDown=false,startX=0,startScroll=0,moved=0;
-    let lastActive=0;
-    let rafId=null,last=0;
+    let touching=false;       // fingers currently down AND dragging horizontally
+    let touchStartX=0,touchStartY=0,touchHoriz=false;
+    let lastActive=0;          // Date.now() of last real user interaction
+    let inView=true;
+    let last=0;
 
     function loopSize(){
       // Children are duplicated [...arr,...arr], so seamless point is at half of scrollWidth.
@@ -173,28 +176,27 @@ document.addEventListener('mouseover',e=>{
 
     // ─── Auto-scroll loop ───
     function tick(now){
-      rafId=requestAnimationFrame(tick);
-      if(reducedMotion||isDown||document.hidden)return;
-      if(now-lastActive<RESUME_MS){last=now;return;}
+      requestAnimationFrame(tick);
+      if(reducedMotion||isDown||touching||document.hidden||!inView)return;
+      if(lastActive&&now-lastActive<RESUME_MS){last=now;return;}
       const dt=last?Math.min(now-last,50):16;
       last=now;
-      wrap.scrollLeft+=(speed*dt)/1000;
+      const prev=wrap.scrollLeft;
+      wrap.scrollLeft=prev+(speed*dt)/1000;
       const half=loopSize();
       if(half>0&&wrap.scrollLeft>=half)wrap.scrollLeft-=half;
     }
-    rafId=requestAnimationFrame(tick);
+    requestAnimationFrame(tick);
 
-    // Pause near page idle or when the wrap is off-screen
-    let inView=true;
+    // Pause when off-screen
     if('IntersectionObserver' in window){
-      const io=new IntersectionObserver(([e])=>{inView=e.isIntersecting;lastActive=inView?0:Date.now();},{rootMargin:'100px'});
+      const io=new IntersectionObserver(([e])=>{inView=e.isIntersecting;},{rootMargin:'200px'});
       io.observe(wrap);
     }
 
-    // ─── Pointer drag (works for mouse + pen + touch fallback) ───
-    // Use pointer events (unified). On mobile, native touch scroll also works via overflow-x:auto.
+    // ─── Mouse drag (desktop) via pointer events (ignore touch here, handled below) ───
     wrap.addEventListener('pointerdown',e=>{
-      if(e.pointerType==='touch')return; // let native touch handle it
+      if(e.pointerType==='touch')return; // touch handled by native overflow scroll + touchstart/end below
       isDown=true;moved=0;
       startX=e.clientX;
       startScroll=wrap.scrollLeft;
@@ -209,12 +211,11 @@ document.addEventListener('mouseover',e=>{
       wrap.scrollLeft=startScroll-dx;
       lastActive=Date.now();
     });
-    function endDrag(e){
+    function endDrag(){
       if(!isDown)return;
       isDown=false;
       wrap.classList.remove('grabbing');
       lastActive=Date.now();
-      // If a real drag happened (>6px), block the click that would follow
       if(moved>6){
         const blocker=ev=>{ev.preventDefault();ev.stopPropagation();wrap.removeEventListener('click',blocker,true);};
         wrap.addEventListener('click',blocker,true);
@@ -225,9 +226,25 @@ document.addEventListener('mouseover',e=>{
     wrap.addEventListener('pointercancel',endDrag);
     wrap.addEventListener('pointerleave',endDrag);
 
-    // Native touch/wheel: mark as user activity to pause auto-scroll briefly
-    wrap.addEventListener('touchstart',()=>{lastActive=Date.now();},{passive:true});
-    wrap.addEventListener('touchmove',()=>{lastActive=Date.now();},{passive:true});
+    // ─── Mobile touch: only pause when the user is actually swiping horizontally on the ticker ───
+    // Vertical scrolls on the page (finger happens to be over the ticker) must not pause auto-scroll.
+    wrap.addEventListener('touchstart',e=>{
+      const t=e.touches[0];
+      touchStartX=t.clientX;touchStartY=t.clientY;touchHoriz=false;
+    },{passive:true});
+    wrap.addEventListener('touchmove',e=>{
+      if(touchHoriz)return; // already classified
+      const t=e.touches[0];
+      const dx=Math.abs(t.clientX-touchStartX);
+      const dy=Math.abs(t.clientY-touchStartY);
+      if(dx>6&&dx>dy){touchHoriz=true;touching=true;lastActive=Date.now();}
+    },{passive:true});
+    const endTouch=()=>{
+      if(touching){lastActive=Date.now();}
+      touching=false;touchHoriz=false;
+    };
+    wrap.addEventListener('touchend',endTouch,{passive:true});
+    wrap.addEventListener('touchcancel',endTouch,{passive:true});
     wrap.addEventListener('wheel',()=>{lastActive=Date.now();},{passive:true});
   }
 
