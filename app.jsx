@@ -1673,48 +1673,60 @@ function CountryModal({country,onClose,lang}){
   return(<div className="country-modal-overlay" onClick={onClose}><div className="country-modal" onClick={e=>e.stopPropagation()}><div className="country-modal-header"><img className="country-modal-flag" src={`https://flagcdn.com/80x60/${country.iso}.png`} alt={country.n}/><div><div className="country-modal-title">{country.emoji} {country.n}</div><div className="country-modal-sub">{country.sub}</div></div></div><div className="country-modal-body"><div className="country-modal-tags">{country.tags.map((tag,i)=><span key={i} className="country-modal-tag">{tag}</span>)}</div><div className="country-modal-text">{country.text}</div><button className="country-modal-close" onClick={onClose}>{t.countryClose}</button></div></div></div>);
 }
 
-/* ─── CALENDLY EMBED — real Calendly widget in a compact framed modal ─── */
+/* ─── CALENDLY MOCK ──────────────────────────────────────────────────────────── */
 function CalendlyModal({lang,onClose}){
-  // Inject Calendly widget script once
-  useEffect(()=>{
-    if(window._calendlyLoaded)return;
-    const s=document.createElement('script');
-    s.src='https://assets.calendly.com/assets/external/widget.js';
-    s.async=true;
-    document.head.appendChild(s);
-    window._calendlyLoaded=true;
-  },[]);
-  // Re-init the widget on each open (Calendly script auto-binds to .calendly-inline-widget)
-  useEffect(()=>{
-    const t=setTimeout(()=>{
-      if(window.Calendly&&window.Calendly.initInlineWidget){
-        const el=document.getElementById('calendly-embed-target');
-        if(el&&!el.dataset.calBooted){
-          window.Calendly.initInlineWidget({url:'https://calendly.com/antoinedemaintenant-alumni/30min?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=121420&text_color=ffffff&primary_color=BF3AFF',parentElement:el});
-          el.dataset.calBooted='1';
-        }
-      }
-    },350);
-    return()=>clearTimeout(t);
-  },[]);
+  const [selDay,setSelDay]=useState(null);const [selTime,setSelTime]=useState(null);const [confirmed,setConfirmed]=useState(false);
+  const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const times=['09:00','10:00','11:00','14:00','15:00','16:00','17:00'];
+  // Build a simple 4-week calendar starting from today
+  const today=new Date();const todayNum=today.getDate();
+  const firstDow=new Date(today.getFullYear(),today.getMonth(),1).getDay();
+  const daysInMonth=new Date(today.getFullYear(),today.getMonth()+1,0).getDate();
+  // available days: not weekend, not past, not today
+  const isAvail=(d)=>{const dow=new Date(today.getFullYear(),today.getMonth(),d).getDay();return d>todayNum&&dow!==0&&dow!==6;};
+  function confirm(){
+    if(!selDay||!selTime)return;
+    setConfirmed(true);
+    window.SFX&&SFX.achieve();
+    window.XP&&XP.earn('contact');
+    // open real calendly in bg
+    window.open('https://calendly.com/antoinedemaintenant-alumni/30min','_blank');
+  }
+  const cells=[];
+  for(let i=0;i<firstDow;i++)cells.push(null);
+  for(let d=1;d<=daysInMonth;d++)cells.push(d);
   return(
     <div className="cal-overlay" onClick={onClose}>
-      <div className="cal-modal cal-modal-compact" onClick={e=>e.stopPropagation()}>
+      <div className="cal-modal" onClick={e=>e.stopPropagation()}>
         <div className="cal-header">
-          <div>
-            <div className="cal-title">📅 {lang==='fr'?'Réserver un appel avec moi':'Book a call with me'}</div>
-            <div className="cal-sub">{lang==='fr'?'30 min · Visio · Gratuit · Sans engagement':'30 min · Video · Free · No strings attached'}</div>
-          </div>
+          <div><div className="cal-title">📅 {lang==='fr'?'Réserver un call':'Book a Call'}</div><div className="cal-sub">{lang==='fr'?'30 min · Visio · Gratuit':'30 min · Video call · Free'}</div></div>
           <button className="cal-close-x" onClick={onClose}>✕</button>
         </div>
-        <div className="cal-embed-frame">
-          <div id="calendly-embed-target" className="calendly-inline-widget"/>
-          <noscript>
-            <a href="https://calendly.com/antoinedemaintenant-alumni/30min" target="_blank" rel="noopener noreferrer">
-              {lang==='fr'?'Ouvrir Calendly →':'Open Calendly →'}
-            </a>
-          </noscript>
-        </div>
+        {!confirmed?(
+          <div className="cal-body">
+            <div style={{fontFamily:"'Space Mono',monospace",fontSize:'.5rem',color:'var(--text-dim)',letterSpacing:'2px',marginBottom:'12px',textTransform:'uppercase'}}>
+              {today.toLocaleString(lang==='fr'?'fr-FR':'en-US',{month:'long',year:'numeric'}).toUpperCase()}
+            </div>
+            <div className="cal-fake">
+              {(lang==='fr'?['Lun','Mar','Mer','Jeu','Ven','Sam','Dim']:days).map(d=>(<div key={d} className="cal-day-header">{d}</div>))}
+              {cells.map((d,i)=>d===null?(<div key={'e'+i} className="cal-day empty"/>):(<div key={d} className={`cal-day${d===todayNum?' past':''}${isAvail(d)?' available':''}${selDay===d?' selected':''}`} onClick={()=>isAvail(d)&&setSelDay(d)}>{d}</div>))}
+            </div>
+            {selDay&&(<>
+              <div style={{fontFamily:"'Space Mono',monospace",fontSize:'.5rem',color:'var(--accent3)',letterSpacing:'2px',marginBottom:'8px',textTransform:'uppercase'}}>{lang==='fr'?`Créneaux le ${selDay}`:`Slots on ${selDay}`}</div>
+              <div className="cal-time-slots">{times.map(t=>(<div key={t} className={`cal-slot${selTime===t?' selected':''}`} onClick={()=>setSelTime(t)}>{t}</div>))}</div>
+            </>)}
+            <button className="cal-confirm" onClick={confirm} disabled={!selDay||!selTime}>
+              {selDay&&selTime?`✓ ${lang==='fr'?'Confirmer':'Confirm'} ${selDay} @ ${selTime}`:lang==='fr'?'Sélectionnez une date et un créneau':'Select a date and time slot'}
+            </button>
+            <div style={{fontFamily:"'Space Mono',monospace",fontSize:'.44rem',color:'var(--text-mute)',textAlign:'center',marginTop:'10px',letterSpacing:'1px'}}>{lang==='fr'?'→ Vous serez redirigé vers Calendly pour confirmation':'→ You\'ll be redirected to Calendly for final confirmation'}</div>
+          </div>
+        ):(
+          <div className="cal-body cal-confirmed">
+            <div className="cal-confirmed-icon">✅</div>
+            <div className="cal-confirmed-title">{lang==='fr'?'Call réservé !':'Call Booked!'}</div>
+            <div className="cal-confirmed-text">{lang==='fr'?`${selDay} @ ${selTime} — Vous recevrez un email de confirmation.`:`${selDay} @ ${selTime} — You'll receive a confirmation email.`}<br/><br/><span style={{color:'#415a77'}}>{lang==='fr'?'Antoine vous contacte sous 2h.':'Antoine will reach out within 2h.'}</span></div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -2432,11 +2444,8 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
           <p dangerouslySetInnerHTML={{__html:t.contactP}}/>
           <div style={{fontFamily:"'Space Mono',monospace",fontSize:'.56rem',color:'#415a77',letterSpacing:'2px',textTransform:'uppercase',display:'flex',alignItems:'center'}}><span className="status-dot"/>{t.contactStatus}</div>
             <button className="book-call-btn" onClick={()=>{setShowCalendly(true);SFX.click();}}>
-              📅 {lang==='fr'?'Réserver 30 min avec moi':'Book 30 min with me'} →
+              📅 {lang==='fr'?'Réserver un call de 30 min':'Book a 30-min call'} →
             </button>
-            <div style={{fontFamily:"'Space Mono',monospace",fontSize:'.5rem',color:'var(--text-mute)',letterSpacing:'1.5px',marginTop:8,textAlign:'center'}}>
-              {lang==='fr'?'(visio gratuite avec Antoine — pas un agenda restau 😉)':'(free video call with me — not a restaurant booking 😉)'}
-            </div>
         </div>
       </div>
     </section>

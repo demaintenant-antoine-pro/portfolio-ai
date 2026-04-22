@@ -5344,61 +5344,119 @@ function CountryModal({
   }, t.countryClose))));
 }
 
-/* ─── CALENDLY EMBED — real Calendly widget in a compact framed modal ─── */
+/* ─── CALENDLY MOCK ──────────────────────────────────────────────────────────── */
 function CalendlyModal({
   lang,
   onClose
 }) {
-  // Inject Calendly widget script once
-  useEffect(() => {
-    if (window._calendlyLoaded) return;
-    const s = document.createElement('script');
-    s.src = 'https://assets.calendly.com/assets/external/widget.js';
-    s.async = true;
-    document.head.appendChild(s);
-    window._calendlyLoaded = true;
-  }, []);
-  // Re-init the widget on each open (Calendly script auto-binds to .calendly-inline-widget)
-  useEffect(() => {
-    const t = setTimeout(() => {
-      if (window.Calendly && window.Calendly.initInlineWidget) {
-        const el = document.getElementById('calendly-embed-target');
-        if (el && !el.dataset.calBooted) {
-          window.Calendly.initInlineWidget({
-            url: 'https://calendly.com/antoinedemaintenant-alumni/30min?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=121420&text_color=ffffff&primary_color=BF3AFF',
-            parentElement: el
-          });
-          el.dataset.calBooted = '1';
-        }
-      }
-    }, 350);
-    return () => clearTimeout(t);
-  }, []);
+  const [selDay, setSelDay] = useState(null);
+  const [selTime, setSelTime] = useState(null);
+  const [confirmed, setConfirmed] = useState(false);
+  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const times = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00'];
+  // Build a simple 4-week calendar starting from today
+  const today = new Date();
+  const todayNum = today.getDate();
+  const firstDow = new Date(today.getFullYear(), today.getMonth(), 1).getDay();
+  const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+  // available days: not weekend, not past, not today
+  const isAvail = d => {
+    const dow = new Date(today.getFullYear(), today.getMonth(), d).getDay();
+    return d > todayNum && dow !== 0 && dow !== 6;
+  };
+  function confirm() {
+    if (!selDay || !selTime) return;
+    setConfirmed(true);
+    window.SFX && SFX.achieve();
+    window.XP && XP.earn('contact');
+    // open real calendly in bg
+    window.open('https://calendly.com/antoinedemaintenant-alumni/30min', '_blank');
+  }
+  const cells = [];
+  for (let i = 0; i < firstDow; i++) cells.push(null);
+  for (let d = 1; d <= daysInMonth; d++) cells.push(d);
   return /*#__PURE__*/React.createElement("div", {
     className: "cal-overlay",
     onClick: onClose
   }, /*#__PURE__*/React.createElement("div", {
-    className: "cal-modal cal-modal-compact",
+    className: "cal-modal",
     onClick: e => e.stopPropagation()
   }, /*#__PURE__*/React.createElement("div", {
     className: "cal-header"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "cal-title"
-  }, "\uD83D\uDCC5 ", lang === 'fr' ? 'Réserver un appel avec moi' : 'Book a call with me'), /*#__PURE__*/React.createElement("div", {
+  }, "\uD83D\uDCC5 ", lang === 'fr' ? 'Réserver un call' : 'Book a Call'), /*#__PURE__*/React.createElement("div", {
     className: "cal-sub"
-  }, lang === 'fr' ? '30 min · Visio · Gratuit · Sans engagement' : '30 min · Video · Free · No strings attached')), /*#__PURE__*/React.createElement("button", {
+  }, lang === 'fr' ? '30 min · Visio · Gratuit' : '30 min · Video call · Free')), /*#__PURE__*/React.createElement("button", {
     className: "cal-close-x",
     onClick: onClose
-  }, "\u2715")), /*#__PURE__*/React.createElement("div", {
-    className: "cal-embed-frame"
+  }, "\u2715")), !confirmed ? /*#__PURE__*/React.createElement("div", {
+    className: "cal-body"
   }, /*#__PURE__*/React.createElement("div", {
-    id: "calendly-embed-target",
-    className: "calendly-inline-widget"
-  }), /*#__PURE__*/React.createElement("noscript", null, /*#__PURE__*/React.createElement("a", {
-    href: "https://calendly.com/antoinedemaintenant-alumni/30min",
-    target: "_blank",
-    rel: "noopener noreferrer"
-  }, lang === 'fr' ? 'Ouvrir Calendly →' : 'Open Calendly →')))));
+    style: {
+      fontFamily: "'Space Mono',monospace",
+      fontSize: '.5rem',
+      color: 'var(--text-dim)',
+      letterSpacing: '2px',
+      marginBottom: '12px',
+      textTransform: 'uppercase'
+    }
+  }, today.toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US', {
+    month: 'long',
+    year: 'numeric'
+  }).toUpperCase()), /*#__PURE__*/React.createElement("div", {
+    className: "cal-fake"
+  }, (lang === 'fr' ? ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'] : days).map(d => /*#__PURE__*/React.createElement("div", {
+    key: d,
+    className: "cal-day-header"
+  }, d)), cells.map((d, i) => d === null ? /*#__PURE__*/React.createElement("div", {
+    key: 'e' + i,
+    className: "cal-day empty"
+  }) : /*#__PURE__*/React.createElement("div", {
+    key: d,
+    className: `cal-day${d === todayNum ? ' past' : ''}${isAvail(d) ? ' available' : ''}${selDay === d ? ' selected' : ''}`,
+    onClick: () => isAvail(d) && setSelDay(d)
+  }, d))), selDay && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: "'Space Mono',monospace",
+      fontSize: '.5rem',
+      color: 'var(--accent3)',
+      letterSpacing: '2px',
+      marginBottom: '8px',
+      textTransform: 'uppercase'
+    }
+  }, lang === 'fr' ? `Créneaux le ${selDay}` : `Slots on ${selDay}`), /*#__PURE__*/React.createElement("div", {
+    className: "cal-time-slots"
+  }, times.map(t => /*#__PURE__*/React.createElement("div", {
+    key: t,
+    className: `cal-slot${selTime === t ? ' selected' : ''}`,
+    onClick: () => setSelTime(t)
+  }, t)))), /*#__PURE__*/React.createElement("button", {
+    className: "cal-confirm",
+    onClick: confirm,
+    disabled: !selDay || !selTime
+  }, selDay && selTime ? `✓ ${lang === 'fr' ? 'Confirmer' : 'Confirm'} ${selDay} @ ${selTime}` : lang === 'fr' ? 'Sélectionnez une date et un créneau' : 'Select a date and time slot'), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: "'Space Mono',monospace",
+      fontSize: '.44rem',
+      color: 'var(--text-mute)',
+      textAlign: 'center',
+      marginTop: '10px',
+      letterSpacing: '1px'
+    }
+  }, lang === 'fr' ? '→ Vous serez redirigé vers Calendly pour confirmation' : '→ You\'ll be redirected to Calendly for final confirmation')) : /*#__PURE__*/React.createElement("div", {
+    className: "cal-body cal-confirmed"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cal-confirmed-icon"
+  }, "\u2705"), /*#__PURE__*/React.createElement("div", {
+    className: "cal-confirmed-title"
+  }, lang === 'fr' ? 'Call réservé !' : 'Call Booked!'), /*#__PURE__*/React.createElement("div", {
+    className: "cal-confirmed-text"
+  }, lang === 'fr' ? `${selDay} @ ${selTime} — Vous recevrez un email de confirmation.` : `${selDay} @ ${selTime} — You'll receive a confirmation email.`, /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: '#415a77'
+    }
+  }, lang === 'fr' ? 'Antoine vous contacte sous 2h.' : 'Antoine will reach out within 2h.')))));
 }
 
 /* ─── WORLD MAP (D3 — visited countries only) ───────────────────────────────── */
@@ -6985,16 +7043,7 @@ function PortfolioApp({
       setShowCalendly(true);
       SFX.click();
     }
-  }, "\uD83D\uDCC5 ", lang === 'fr' ? 'Réserver 30 min avec moi' : 'Book 30 min with me', " \u2192"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Mono',monospace",
-      fontSize: '.5rem',
-      color: 'var(--text-mute)',
-      letterSpacing: '1.5px',
-      marginTop: 8,
-      textAlign: 'center'
-    }
-  }, lang === 'fr' ? '(visio gratuite avec Antoine — pas un agenda restau 😉)' : '(free video call with me — not a restaurant booking 😉)')))), /*#__PURE__*/React.createElement("section", {
+  }, "\uD83D\uDCC5 ", lang === 'fr' ? 'Réserver un call de 30 min' : 'Book a 30-min call', " \u2192")))), /*#__PURE__*/React.createElement("section", {
     id: "terminal",
     className: "section"
   }, /*#__PURE__*/React.createElement("div", {
