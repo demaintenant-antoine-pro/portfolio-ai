@@ -1,26 +1,40 @@
 {
   "name": "portfolio-ai",
-  "version": "1.0.0",
-  "description": "**Live:** [demaintenant-antoine-pro.github.io/portfolio-ai](https://demaintenant-antoine-pro.github.io/portfolio-ai)",
+  "version": "1.1.0",
+  "description": "Interactive portfolio — Antoine de Maintenant · AI Specialist & BI Lead. React SPA with dual-profile experience, interactive demos and visitor analytics.",
   "main": "main.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel app.jsx --out-file app.js --presets @babel/preset-react",
+    "watch": "babel app.jsx --out-file app.js --presets @babel/preset-react --watch",
+    "start": "npx serve .",
+    "test": "echo \"No tests yet\" && exit 0"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/demaintenant-antoine-pro/portfolio-ai.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "portfolio",
+    "react",
+    "ai",
+    "business-intelligence",
+    "power-bi",
+    "agentic-ai",
+    "automation",
+    "n8n",
+    "python",
+    "github-pages"
+  ],
+  "author": "Antoine de Maintenant <antoinedemaintenant@alumni.ie.edu> (https://linkedin.com/in/antoine2maintenant)",
+  "license": "MIT",
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/demaintenant-antoine-pro/portfolio-ai/issues"
   },
-  "homepage": "https://github.com/demaintenant-antoine-pro/portfolio-ai#readme",
+  "homepage": "https://demaintenant-antoine-pro.github.io/portfolio-ai/",
   "devDependencies": {
     "@babel/cli": "^7.28.6",
     "@babel/core": "^7.29.0",

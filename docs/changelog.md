@@ -1,56 +1,39 @@
-# Portfolio AI — Changelog & Suivi des sessions
+# Changelog
 
----
+All notable changes to this portfolio will be documented here.
+The format is loosely based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## Session 2026-04-03 — Restructure multi-fichiers
+## [1.1.0] — 2026-04-21
 
-**Objectif :** Passer de `index.html` monolithique (4 941 lignes) à une architecture multi-fichiers propre.
+### Added
+- Open Graph, Twitter Card and JSON-LD structured data for rich link previews and SEO.
+- Inline SVG favicon and `apple-touch-icon`.
+- `build` / `watch` / `start` npm scripts.
+- `LICENSE` (MIT).
+- `prefers-reduced-motion` support.
+- Mobile: language toggle remains accessible on small screens.
 
-**Réalisé :**
-- Extraction CSS → `style.css` (1 471 lignes)
-- Extraction JSX React → `app.jsx` (2 733 lignes source)
-- Compilation JSX → `app.js` via Babel CLI (suppression Babel in-browser ~700 KB)
-- Extraction JS vanilla → `main.js` (profile selector, visitor tracker)
-- `index.html` réduit de 4 941 → 103 lignes
-- Remplacement React/ReactDOM inline par CDN
-- Gain temps de chargement estimé : ~3-4s → ~1-1.5s
+### Changed
+- `package.json` metadata cleaned up (author, description, keywords, license).
+- Heavy animations (Three.js particle sphere, Matrix rain) are skipped when `prefers-reduced-motion` is set.
+- Testimonial image `guillaume-martin.png` compressed.
 
-**Référence :** `docs/2026-04-03-portfolio-restructure.md`
+### Removed
+- Dead CSS rules referencing `hero-floating-contact`.
 
----
+## [1.0.0] — 2026-04-06
 
-## Session 2026-04-06 — Push GitHub + Audit + Corrections
+### Added
+- Initial public release on GitHub Pages.
+- Dual profile mode (Tech / Human) with persistent language toggle (EN / FR).
+- Interactive sections: experience timeline, pipeline demo, testimonials, blog posts, country map.
+- Val.town visitor analytics worker.
 
-**Objectif :** Mettre le projet sur GitHub proprement, auditer, corriger.
+### Changed
+- Monolithic `index.html` split into `index.html` / `style.css` / `app.jsx` / `app.js` / `main.js`.
+- Babel CLI pre-compiles JSX offline instead of in-browser.
 
-### Git
-- Historique GitHub nettoyé (50+ commits brouillon → 2 commits propres)
-- `README.md` mis à jour (nouvelle architecture multi-fichiers)
-- `.gitignore` ajouté (node_modules, docs, logs)
-- `Documents/portfolio-ai` établi comme dossier de travail officiel
-
-### Contenu
-- Intro hero retravaillée EN + FR (ton plus professionnel, connexion outils, productivité équipes, chiffres)
-
-### Audit & Corrections
-| # | Problème | Correction |
-|---|---|---|
-| 🔴 | Photos témoignages en 404 (`.jpeg` vs `.jpg`) | Corrigé — 4 fichiers |
-| 🔴 | Commande terminal `rates` inexistante | Remplacée par `whoami` |
-| 🔴 | Numérotation chapitres sautait Ch.05 | Corrigé : 01→02→03→04→05→06 |
-| 🟡 | Clés traduction mortes (`badge`, `heroSub4`, `contactPhone`) | Supprimées |
-| 🟡 | Ternaire inutile dans Leaflet (`isHuman?'#415a77':'#415a77'`) | Simplifié |
-
-### Code mort supprimé
-- `ROICalc` — composant + traductions + boutons CTA + entrée CHAPTERS
-- `HumanROI` — composant jamais rendu
-- `ELI5Modal` — modal inaccessible (trigger jamais appelé)
-
----
-
-## Prochaines sessions — À faire
-
-- [ ] Vérifier les liens LinkedIn des témoignages (non testables programmatiquement)
-- [ ] Vérifier que le worker Val.run est actif en production
-- [ ] Contenu : revoir/compléter les expériences et projets
-- [ ] Design : améliorations éventuelles
+### Fixed
+- Testimonial photo paths (`.jpeg` → `.jpg`).
+- Chapter numbering consistency (01 → 06).
+- Dead translation keys removed.

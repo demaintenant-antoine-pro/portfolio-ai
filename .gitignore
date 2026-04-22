@@ -2,3 +2,18 @@ node_modules/
 .DS_Store
 Thumbs.db
 *.log
+
+# Claude Code / Superpowers (local only)
+.superpowers/
+docs/superpowers/
+docs/**/plans/
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+*~
+
+# Build artefacts
+.cache/
+dist/
