@@ -582,6 +582,21 @@ body.hovering #cur-o{width:44px;height:44px;border-color:var(--accent2);opacity:
 @media(max-width:900px){.skills-radar-grid{grid-template-columns:1fr;gap:28px}}
 .skills-radar-col{min-width:0}
 
+/* Stack + Radar side-by-side (desktop) / stacked (mobile) */
+.stack-radar-grid{display:grid;grid-template-columns:minmax(280px,360px) 1fr;gap:36px;align-items:center;margin-top:24px}
+@media(max-width:900px){.stack-radar-grid{grid-template-columns:1fr;gap:22px}}
+.stack-radar-chart{min-width:0;display:flex;justify-content:center}
+.stack-radar-ticker-wrap{min-width:0}
+
+/* Radar compact mode: no legend, chart centered at reasonable size */
+.radar-wrap-compact{
+  display:block!important;grid-template-columns:none!important;
+  padding:14px!important;background:transparent!important;border:0!important;
+  margin:0!important;
+}
+.radar-wrap-compact .radar-chart-wrap{height:300px;max-width:340px;margin:0 auto;width:100%}
+@media(max-width:600px){.radar-wrap-compact .radar-chart-wrap{height:260px;max-width:300px}}
+
 .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .skill-card{background:var(--bg-card);border:1px solid var(--border-dim);padding:20px;transition:all .3s;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);position:relative;overflow:hidden}
 .skill-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent1),var(--accent2));transform:scaleX(0);transform-origin:left;transition:transform .4s}

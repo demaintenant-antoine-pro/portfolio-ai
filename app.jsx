@@ -1208,7 +1208,7 @@ function Pipeline({lang}){
   );
 }
 /* ─── RADAR ─────────────────────────────────────────────────────────────────── */
-function RadarChart({lang}){
+function RadarChart({lang,compact}){
   const t=T[lang];const canvasRef=useRef();const chartRef=useRef();
   const data=RADAR_DATA[lang];
   const COLORS=['#415a77','#FF2D78','#00F0A8','#FFB800','#00C8FF','#FF8C42'];
@@ -1222,9 +1222,9 @@ function RadarChart({lang}){
     return()=>chartRef.current?.destroy();
   },[lang]);
   return(
-    <div className="radar-wrap reveal">
+    <div className={`radar-wrap reveal${compact?' radar-wrap-compact':''}`}>
       <div className="radar-chart-wrap"><canvas ref={canvasRef}/></div>
-      <div className="radar-legend">{data.details.map((d,i)=>(<div key={i} className="radar-legend-item"><div className="radar-legend-dot" style={{background:COLORS[i]}}/><div style={{flex:1}}><div className="radar-legend-label">{d.label}</div><div className="radar-legend-sub">{d.sub}</div></div><div className="radar-legend-pct">{d.pct}%</div></div>))}</div>
+      {!compact&&(<div className="radar-legend">{data.details.map((d,i)=>(<div key={i} className="radar-legend-item"><div className="radar-legend-dot" style={{background:COLORS[i]}}/><div style={{flex:1}}><div className="radar-legend-label">{d.label}</div><div className="radar-legend-sub">{d.sub}</div></div><div className="radar-legend-pct">{d.pct}%</div></div>))}</div>)}
     </div>
   );
 }
@@ -2310,13 +2310,6 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
       <Pipeline lang={lang}/>
     </section>
 
-    {/* COMPETENCY RADAR — replaces old Skills+Radar (skills-grid duplicated the tech stack below) */}
-    <section id="skills" className="section">
-      <div className="section-eyebrow">{t.skillsEyebrow}</div>
-      <h2 className="section-title">{t.radarTitle}</h2>
-      <RadarChart lang={lang}/>
-    </section>
-
     {/* PROJECTS */}
     <section id="projects" className="section" style={{background:'transparent'}}>
       <div style={{maxWidth:'1500px',margin:'0 auto'}}>
@@ -2357,23 +2350,28 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
       </div>
     </section>
 
-    {/* STACK — tech mode only */}
+    {/* STACK + COMPETENCY RADAR — side-by-side desktop, stacked mobile */}
     {mode!=='human'&&<section id="stack" className="section">
       <div style={{maxWidth:'1500px',margin:'0 auto'}}>
         <div className="section-eyebrow">{t.stackEyebrow}</div>
         <h2 className="section-title">{t.stackTitle} <em>{t.stackTitleEm}</em></h2>
-        <div className="stack-ticker-wrap reveal">
-          <div className="stack-ticker">
-            {[...STACK,...STACK].map((s,i)=>(
-              <div key={i} className="stack-card stack-card-compact" aria-hidden={i>=STACK.length?'true':'false'}>
-                <span className="stack-emoji">{s.e}</span>
-                <div className="stack-card-text">
-                  <div className="stack-name">{s.name}</div>
-                  <div className="stack-cat">{s.cat}</div>
+        <div className="stack-radar-grid">
+          <div className="stack-radar-chart">
+            <RadarChart lang={lang} compact={true}/>
+          </div>
+          <div className="stack-radar-ticker-wrap stack-ticker-wrap reveal">
+            <div className="stack-ticker">
+              {[...STACK,...STACK].map((s,i)=>(
+                <div key={i} className="stack-card stack-card-compact" aria-hidden={i>=STACK.length?'true':'false'}>
+                  <span className="stack-emoji">{s.e}</span>
+                  <div className="stack-card-text">
+                    <div className="stack-name">{s.name}</div>
+                    <div className="stack-cat">{s.cat}</div>
+                  </div>
+                  <div className="stack-level stack-level-pill">{s.level}</div>
                 </div>
-                <div className="stack-level stack-level-pill">{s.level}</div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

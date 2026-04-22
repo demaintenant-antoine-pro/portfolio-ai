@@ -4020,7 +4020,8 @@ function Pipeline({
 }
 /* ─── RADAR ─────────────────────────────────────────────────────────────────── */
 function RadarChart({
-  lang
+  lang,
+  compact
 }) {
   const t = T[lang];
   const canvasRef = useRef();
@@ -4096,12 +4097,12 @@ function RadarChart({
     return () => chartRef.current?.destroy();
   }, [lang]);
   return /*#__PURE__*/React.createElement("div", {
-    className: "radar-wrap reveal"
+    className: `radar-wrap reveal${compact ? ' radar-wrap-compact' : ''}`
   }, /*#__PURE__*/React.createElement("div", {
     className: "radar-chart-wrap"
   }, /*#__PURE__*/React.createElement("canvas", {
     ref: canvasRef
-  })), /*#__PURE__*/React.createElement("div", {
+  })), !compact && /*#__PURE__*/React.createElement("div", {
     className: "radar-legend"
   }, data.details.map((d, i) => /*#__PURE__*/React.createElement("div", {
     key: i,
@@ -6628,15 +6629,6 @@ function PortfolioApp({
   }, t.pipeDesc), /*#__PURE__*/React.createElement(Pipeline, {
     lang: lang
   })), /*#__PURE__*/React.createElement("section", {
-    id: "skills",
-    className: "section"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "section-eyebrow"
-  }, t.skillsEyebrow), /*#__PURE__*/React.createElement("h2", {
-    className: "section-title"
-  }, t.radarTitle), /*#__PURE__*/React.createElement(RadarChart, {
-    lang: lang
-  })), /*#__PURE__*/React.createElement("section", {
     id: "projects",
     className: "section",
     style: {
@@ -6829,7 +6821,14 @@ function PortfolioApp({
   }, t.stackEyebrow), /*#__PURE__*/React.createElement("h2", {
     className: "section-title"
   }, t.stackTitle, " ", /*#__PURE__*/React.createElement("em", null, t.stackTitleEm)), /*#__PURE__*/React.createElement("div", {
-    className: "stack-ticker-wrap reveal"
+    className: "stack-radar-grid"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "stack-radar-chart"
+  }, /*#__PURE__*/React.createElement(RadarChart, {
+    lang: lang,
+    compact: true
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "stack-radar-ticker-wrap stack-ticker-wrap reveal"
   }, /*#__PURE__*/React.createElement("div", {
     className: "stack-ticker"
   }, [...STACK, ...STACK].map((s, i) => /*#__PURE__*/React.createElement("div", {
@@ -6846,7 +6845,7 @@ function PortfolioApp({
     className: "stack-cat"
   }, s.cat)), /*#__PURE__*/React.createElement("div", {
     className: "stack-level stack-level-pill"
-  }, s.level))))))), /*#__PURE__*/React.createElement("section", {
+  }, s.level)))))))), /*#__PURE__*/React.createElement("section", {
     id: "certificates",
     className: "section reveal"
   }, /*#__PURE__*/React.createElement("div", {
