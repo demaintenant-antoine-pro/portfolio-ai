@@ -252,7 +252,7 @@ const TESTIMONIALS = [
       en: "March 2026 · Guillaume was Antoine's senior but not his direct manager",
       fr: "Mars 2026 · Guillaume était le supérieur de Antoine mais n'était pas le responsable direct de Antoine",
     },
-    avatarImg: 'images/testimonials/guillaume-martin.png',
+    avatarImg: 'images/testimonials/guillaume-martin.jpg',
     avatar: 'GM',
     color: '#6366F1',
     stars: 5,

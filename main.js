@@ -24,6 +24,11 @@ function psRender(){
 (function(){
   var canvas = document.getElementById('ps-matrix');
   if(!canvas) return;
+  // Skip on reduced-motion preference
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    canvas.style.display = 'none';
+    return;
+  }
   var ctx = canvas.getContext('2d');
   function resize(){ canvas.width=innerWidth; canvas.height=innerHeight; }
   resize(); window.addEventListener('resize', resize);
@@ -129,6 +134,15 @@ document.addEventListener('mouseover',e=>{
 
 /* ═══════════ THREE.JS SPHERE ═══════════ */
 (function(){
+  // Skip on mobile, low-power devices, or when user prefers reduced motion
+  const isSmall = window.matchMedia('(max-width:600px)').matches;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const lowMem = (navigator.deviceMemory && navigator.deviceMemory < 4);
+  if(isSmall || reducedMotion || lowMem){
+    const c = document.getElementById('three-canvas');
+    if(c) c.style.display = 'none';
+    return;
+  }
   const canvas=document.getElementById('three-canvas');
   const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
   renderer.setPixelRatio(Math.min(devicePixelRatio,2));
