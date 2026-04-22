@@ -1855,41 +1855,45 @@ function CertWall({lang}){
         )}
       </div>
 
-      {/* ── FEATURED 3 ── */}
-      <div className="cert-featured-row">
-        {FEATURED.map((c,i)=>(
-          <div key={i} className="cert-feat"
-            style={{background:c.bg,border:`1px solid ${c.border}`,boxShadow:`0 20px 60px ${c.glow},inset 0 1px 0 rgba(255,255,255,.04)`}}>
-            <div className="cert-feat-num">{String(i+1).padStart(2,'0')}</div>
-            <div className="cert-feat-tier" style={{color:c.accent,background:c.tierBg,border:`1px solid ${c.tierBorder}`}}>
-              {c.tier}
+      {/* ── FEATURED — drag/swipe ticker ── */}
+      <div className="cert-featured-ticker-wrap">
+        <div className="cert-featured-ticker">
+          {[...FEATURED,...FEATURED].map((c,i)=>(
+            <div key={i} className="cert-feat" aria-hidden={i>=FEATURED.length?'true':'false'}
+              style={{background:c.bg,border:`1px solid ${c.border}`,boxShadow:`0 20px 60px ${c.glow},inset 0 1px 0 rgba(255,255,255,.04)`}}>
+              <div className="cert-feat-num">{String((i%FEATURED.length)+1).padStart(2,'0')}</div>
+              <div className="cert-feat-tier" style={{color:c.accent,background:c.tierBg,border:`1px solid ${c.tierBorder}`}}>
+                {c.tier}
+              </div>
+              <div className="cert-feat-title">{c.title.split('\n').map((l,j)=><span key={j}>{l}{j===0&&<br/>}</span>)}</div>
+              <div className="cert-feat-issuer">{c.issuer}</div>
+              <div className="cert-feat-footer">
+                <span className="cert-feat-date">📅 {c.date}</span>
+                <a href={c.url} target="_blank" rel="noopener noreferrer"
+                  className="cert-feat-link"
+                  style={{background:c.linkBg,border:`1px solid ${c.linkBorder}`,color:c.accent}}>
+                  ✅ {lang==='fr'?'Vérifier':'Verify'} →
+                </a>
+              </div>
             </div>
-            <div className="cert-feat-title">{c.title.split('\n').map((l,j)=><span key={j}>{l}{j===0&&<br/>}</span>)}</div>
-            <div className="cert-feat-issuer">{c.issuer}</div>
-            <div className="cert-feat-footer">
-              <span className="cert-feat-date">📅 {c.date}</span>
-              <a href={c.url} target="_blank" rel="noopener noreferrer"
-                className="cert-feat-link"
-                style={{background:c.linkBg,border:`1px solid ${c.linkBorder}`,color:c.accent}}>
-                ✅ {lang==='fr'?'Vérifier':'Verify'} →
-              </a>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
-      {/* ── SECONDARY 5 ── */}
-      <div className="cert-secondary-row">
-        {SECONDARY.map((c,i)=>(
-          <div key={i} className="cert-sec">
-            <div style={{position:'absolute',top:0,left:0,right:0,height:'2px',background:c.top,opacity:.8}}/>
-            <div className="cert-sec-title">{c.title}</div>
-            <div className="cert-sec-issuer">{c.issuer}</div>
-            <a href={c.url} target="_blank" rel="noopener noreferrer" className="cert-sec-link">
-              ✅ {lang==='fr'?'Vérifier →':'Verify →'}
-            </a>
-          </div>
-        ))}
+      {/* ── SECONDARY — drag/swipe ticker ── */}
+      <div className="cert-secondary-ticker-wrap">
+        <div className="cert-secondary-ticker">
+          {[...SECONDARY,...SECONDARY].map((c,i)=>(
+            <div key={i} className="cert-sec" aria-hidden={i>=SECONDARY.length?'true':'false'}>
+              <div style={{position:'absolute',top:0,left:0,right:0,height:'2px',background:c.top,opacity:.8}}/>
+              <div className="cert-sec-title">{c.title}</div>
+              <div className="cert-sec-issuer">{c.issuer}</div>
+              <a href={c.url} target="_blank" rel="noopener noreferrer" className="cert-sec-link">
+                ✅ {lang==='fr'?'Vérifier →':'Verify →'}
+              </a>
+            </div>
+          ))}
+        </div>
       </div>
 
     </div>

@@ -610,7 +610,9 @@ body.hovering #cur-o{width:44px;height:44px;border-color:var(--accent2);opacity:
 /* ── Horizontal tickers — auto-scroll + drag/swipe support (JS-driven) ── */
 .stack-ticker-wrap,
 .countries-ticker-wrap,
-.testi-ticker-wrap{
+.testi-ticker-wrap,
+.cert-featured-ticker-wrap,
+.cert-secondary-ticker-wrap{
   position:relative;width:100%;
   overflow-x:auto;overflow-y:hidden;
   -webkit-overflow-scrolling:touch;
@@ -623,17 +625,31 @@ body.hovering #cur-o{width:44px;height:44px;border-color:var(--accent2);opacity:
 }
 .stack-ticker-wrap::-webkit-scrollbar,
 .countries-ticker-wrap::-webkit-scrollbar,
-.testi-ticker-wrap::-webkit-scrollbar{display:none}
+.testi-ticker-wrap::-webkit-scrollbar,
+.cert-featured-ticker-wrap::-webkit-scrollbar,
+.cert-secondary-ticker-wrap::-webkit-scrollbar{display:none}
 .stack-ticker-wrap.grabbing,
 .countries-ticker-wrap.grabbing,
-.testi-ticker-wrap.grabbing{cursor:grabbing}
+.testi-ticker-wrap.grabbing,
+.cert-featured-ticker-wrap.grabbing,
+.cert-secondary-ticker-wrap.grabbing{cursor:grabbing}
 .stack-ticker-wrap.grabbing *,
 .countries-ticker-wrap.grabbing *,
-.testi-ticker-wrap.grabbing *{pointer-events:none}
+.testi-ticker-wrap.grabbing *,
+.cert-featured-ticker-wrap.grabbing *,
+.cert-secondary-ticker-wrap.grabbing *{pointer-events:none}
 
 .stack-ticker{display:flex;gap:14px;width:max-content;will-change:scroll-position}
 .countries-ticker{display:flex;gap:10px;width:max-content;will-change:scroll-position}
 .testi-ticker{display:flex;gap:16px;width:max-content;will-change:scroll-position;padding:6px 0}
+
+.cert-featured-ticker{display:flex;gap:16px;width:max-content;will-change:scroll-position;padding:6px 0;margin-bottom:22px}
+.cert-featured-ticker>.cert-feat{flex:0 0 340px;max-width:340px}
+@media(max-width:600px){.cert-featured-ticker>.cert-feat{flex:0 0 280px;max-width:280px}}
+
+.cert-secondary-ticker{display:flex;gap:12px;width:max-content;will-change:scroll-position}
+.cert-secondary-ticker>.cert-sec{flex:0 0 220px;max-width:220px;min-width:220px}
+@media(max-width:600px){.cert-secondary-ticker>.cert-sec{flex:0 0 200px;max-width:200px;min-width:200px}}
 
 .stack-card{background:var(--bg-card);border:1px solid var(--border-dim);padding:18px 12px;text-align:center;transition:all .3s;border-radius:6px;position:relative;overflow:hidden;cursor:default}
 .stack-card:hover{border-color:var(--accent1);transform:translateY(-5px);box-shadow:0 14px 32px var(--glow1)}

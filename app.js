@@ -5653,10 +5653,13 @@ function CertWall({
   }, item[0]), /*#__PURE__*/React.createElement("span", {
     className: "cert-stat-l"
   }, item[1])))), /*#__PURE__*/React.createElement("div", {
-    className: "cert-featured-row"
-  }, FEATURED.map((c, i) => /*#__PURE__*/React.createElement("div", {
+    className: "cert-featured-ticker-wrap"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cert-featured-ticker"
+  }, [...FEATURED, ...FEATURED].map((c, i) => /*#__PURE__*/React.createElement("div", {
     key: i,
     className: "cert-feat",
+    "aria-hidden": i >= FEATURED.length ? 'true' : 'false',
     style: {
       background: c.bg,
       border: `1px solid ${c.border}`,
@@ -5664,7 +5667,7 @@ function CertWall({
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "cert-feat-num"
-  }, String(i + 1).padStart(2, '0')), /*#__PURE__*/React.createElement("div", {
+  }, String(i % FEATURED.length + 1).padStart(2, '0')), /*#__PURE__*/React.createElement("div", {
     className: "cert-feat-tier",
     style: {
       color: c.accent,
@@ -5691,11 +5694,14 @@ function CertWall({
       border: `1px solid ${c.linkBorder}`,
       color: c.accent
     }
-  }, "\u2705 ", lang === 'fr' ? 'Vérifier' : 'Verify', " \u2192"))))), /*#__PURE__*/React.createElement("div", {
-    className: "cert-secondary-row"
-  }, SECONDARY.map((c, i) => /*#__PURE__*/React.createElement("div", {
+  }, "\u2705 ", lang === 'fr' ? 'Vérifier' : 'Verify', " \u2192")))))), /*#__PURE__*/React.createElement("div", {
+    className: "cert-secondary-ticker-wrap"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cert-secondary-ticker"
+  }, [...SECONDARY, ...SECONDARY].map((c, i) => /*#__PURE__*/React.createElement("div", {
     key: i,
-    className: "cert-sec"
+    className: "cert-sec",
+    "aria-hidden": i >= SECONDARY.length ? 'true' : 'false'
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
@@ -5715,7 +5721,7 @@ function CertWall({
     target: "_blank",
     rel: "noopener noreferrer",
     className: "cert-sec-link"
-  }, "\u2705 ", lang === 'fr' ? 'Vérifier →' : 'Verify →')))));
+  }, "\u2705 ", lang === 'fr' ? 'Vérifier →' : 'Verify →'))))));
 }
 function PortfolioApp({
   initLang,

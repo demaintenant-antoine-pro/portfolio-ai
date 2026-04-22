@@ -144,14 +144,16 @@ document.addEventListener('mouseover',e=>{
 /* ═══════════ DRAG/SWIPE TICKERS (tech stack, countries, testimonials) ═══════════ */
 /* Auto-scrolls slowly; user can grab/swipe to take control; resumes after 3s idle. */
 (function(){
-  const SELECTORS = ['.stack-ticker-wrap','.countries-ticker-wrap','.testi-ticker-wrap'];
+  const SELECTORS = ['.stack-ticker-wrap','.countries-ticker-wrap','.testi-ticker-wrap','.cert-featured-ticker-wrap','.cert-secondary-ticker-wrap'];
   // Speed in px/sec per wrap type (slower for testimonials — more to read)
   const SPEED = {
     'stack-ticker-wrap': 35,
     'countries-ticker-wrap': 28,
     'testi-ticker-wrap': 22,
+    'cert-featured-ticker-wrap': 30,
+    'cert-secondary-ticker-wrap': 34,
   };
-  const RESUME_MS = 2500;
+  const RESUME_MS = 1000;
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function wire(wrap){
