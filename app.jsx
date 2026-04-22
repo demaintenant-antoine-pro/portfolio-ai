@@ -1734,40 +1734,24 @@ function CalendlyModal({lang,onClose}){
 
 /* ─── WORLD MAP (D3 — visited countries only) ───────────────────────────────── */
 function WorldMap({countries,setActiveCountry,lang}){
-  const [hov,setHov]=useState(null);
   return(
     <div style={{width:'100%'}}>
-      <div className="countries-grid">
-        {countries.map((c,i)=>(
-          <button key={i}
-            className="country-card"
-            onClick={()=>setActiveCountry(c)}
-            onMouseEnter={()=>setHov(i)}
-            onMouseLeave={()=>setHov(null)}
-            style={{
-              borderColor:hov===i?'var(--accent1)':'var(--glass-border)',
-              transform:hov===i?'translateY(-4px)':'none',
-              boxShadow:hov===i?'var(--glass-shadow)':'0 2px 12px rgba(0,0,0,.08)',
-            }}>
-            <div className="country-card-header">
-              <img src={`https://flagcdn.com/w40/${c.iso}.png`} alt={c.n} style={{width:40,height:'auto',display:'block',borderRadius:4,flexShrink:0,boxShadow:'0 1px 4px rgba(0,0,0,.3)'}}/>
-              <div style={{flex:1,minWidth:0}}>
+      <div className="countries-ticker-wrap">
+        <div className="countries-ticker">
+          {[...countries,...countries].map((c,i)=>(
+            <button key={i}
+              className="country-card country-card-compact"
+              aria-hidden={i>=countries.length?'true':'false'}
+              onClick={()=>setActiveCountry(c)}>
+              <img src={`https://flagcdn.com/w40/${c.iso}.png`} alt={c.n} style={{width:34,height:'auto',display:'block',borderRadius:3,flexShrink:0,boxShadow:'0 1px 4px rgba(0,0,0,.3)'}}/>
+              <div style={{flex:1,minWidth:0,textAlign:'left'}}>
                 <div className="country-card-name">{c.n}</div>
                 <div className="country-card-sub">{c.sub}</div>
               </div>
               <span className="country-card-chevron" aria-hidden="true">→</span>
-            </div>
-            <div className="country-card-body">
-              <div className="country-card-text">{c.text?.slice(0,120)}{c.text?.length>120?'…':''}</div>
-              <div className="country-card-tags">
-                {c.tags?.slice(0,3).map((tag,j)=>(
-                  <span key={j} className="country-card-tag">{tag}</span>
-                ))}
-              </div>
-              <div className="country-card-readmore">{lang==='fr'?'Voir l\'histoire complète →':'Read full story →'}</div>
-            </div>
-          </button>
-        ))}
+            </button>
+          ))}
+        </div>
       </div>
       <div className="countries-cta">
         <div style={{display:'flex',alignItems:'center',gap:8,minWidth:0,flex:1}}>
@@ -2242,30 +2226,32 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
       <div style={{maxWidth:'1500px',margin:'0 auto'}}>
         <div className="section-eyebrow">{t.testiEyebrow}</div>
         <h2 className="section-title">{t.testiTitle} <em>{t.testiTitleEm}</em></h2>
-        <div className="testi-grid reveal">
-          {TESTIMONIALS.map((item,i)=>(
-            <div key={i} className="testi-card-v2" style={{'--tcard-color':item.color}}>
-              <div className="tcard-header">
-                <div className="tcard-avatar">
-                  <img src={item.avatarImg} alt={item.name}
-                    onError={e=>{e.target.style.display='none';e.target.nextSibling.style.display='flex';}}
-                  />
-                  <span style={{display:'none',color:item.color,fontWeight:700,fontSize:'.65rem'}}>{item.avatar}</span>
+        <div className="testi-ticker-wrap reveal">
+          <div className="testi-ticker">
+            {[...TESTIMONIALS,...TESTIMONIALS].map((item,i)=>(
+              <div key={i} className="testi-card-v2 testi-card-ticker" style={{'--tcard-color':item.color}} aria-hidden={i>=TESTIMONIALS.length?'true':'false'}>
+                <div className="tcard-header">
+                  <div className="tcard-avatar">
+                    <img src={item.avatarImg} alt={item.name}
+                      onError={e=>{e.target.style.display='none';e.target.nextSibling.style.display='flex';}}
+                    />
+                    <span style={{display:'none',color:item.color,fontWeight:700,fontSize:'.65rem'}}>{item.avatar}</span>
+                  </div>
+                  <div className="tcard-meta">
+                    <div className="tcard-name">{item.name}</div>
+                    <div className="tcard-role">{item.title[lang]}</div>
+                    <div className="tcard-company">{item.company}</div>
+                  </div>
+                  <a href={item.linkedin} target="_blank" rel="noopener noreferrer" className="tcard-li">in</a>
                 </div>
-                <div className="tcard-meta">
-                  <div className="tcard-name">{item.name}</div>
-                  <div className="tcard-role">{item.title[lang]}</div>
-                  <div className="tcard-company">{item.company}</div>
-                </div>
-                <a href={item.linkedin} target="_blank" rel="noopener noreferrer" className="tcard-li">in</a>
+                <div className="tcard-stars">{'★'.repeat(item.stars)}</div>
+                <div className="tcard-excerpt">"{item.highlight[lang]}"</div>
+                <button className="tcard-read" onClick={()=>setTestiModal(item)}>
+                  {lang==='fr'?'Lire tout →':'Read full →'}
+                </button>
               </div>
-              <div className="tcard-stars">{'★'.repeat(item.stars)}</div>
-              <div className="tcard-excerpt">"{item.highlight[lang]}"</div>
-              <button className="tcard-read" onClick={()=>setTestiModal(item)}>
-                {lang==='fr'?'Lire tout →':'Read full →'}
-              </button>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
       {testiModal&&(

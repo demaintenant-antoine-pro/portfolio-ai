@@ -5461,41 +5461,35 @@ function WorldMap({
   setActiveCountry,
   lang
 }) {
-  const [hov, setHov] = useState(null);
   return /*#__PURE__*/React.createElement("div", {
     style: {
       width: '100%'
     }
   }, /*#__PURE__*/React.createElement("div", {
-    className: "countries-grid"
-  }, countries.map((c, i) => /*#__PURE__*/React.createElement("button", {
-    key: i,
-    className: "country-card",
-    onClick: () => setActiveCountry(c),
-    onMouseEnter: () => setHov(i),
-    onMouseLeave: () => setHov(null),
-    style: {
-      borderColor: hov === i ? 'var(--accent1)' : 'var(--glass-border)',
-      transform: hov === i ? 'translateY(-4px)' : 'none',
-      boxShadow: hov === i ? 'var(--glass-shadow)' : '0 2px 12px rgba(0,0,0,.08)'
-    }
+    className: "countries-ticker-wrap"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "country-card-header"
+    className: "countries-ticker"
+  }, [...countries, ...countries].map((c, i) => /*#__PURE__*/React.createElement("button", {
+    key: i,
+    className: "country-card country-card-compact",
+    "aria-hidden": i >= countries.length ? 'true' : 'false',
+    onClick: () => setActiveCountry(c)
   }, /*#__PURE__*/React.createElement("img", {
     src: `https://flagcdn.com/w40/${c.iso}.png`,
     alt: c.n,
     style: {
-      width: 40,
+      width: 34,
       height: 'auto',
       display: 'block',
-      borderRadius: 4,
+      borderRadius: 3,
       flexShrink: 0,
       boxShadow: '0 1px 4px rgba(0,0,0,.3)'
     }
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       flex: 1,
-      minWidth: 0
+      minWidth: 0,
+      textAlign: 'left'
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "country-card-name"
@@ -5504,18 +5498,7 @@ function WorldMap({
   }, c.sub)), /*#__PURE__*/React.createElement("span", {
     className: "country-card-chevron",
     "aria-hidden": "true"
-  }, "\u2192")), /*#__PURE__*/React.createElement("div", {
-    className: "country-card-body"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "country-card-text"
-  }, c.text?.slice(0, 120), c.text?.length > 120 ? '…' : ''), /*#__PURE__*/React.createElement("div", {
-    className: "country-card-tags"
-  }, c.tags?.slice(0, 3).map((tag, j) => /*#__PURE__*/React.createElement("span", {
-    key: j,
-    className: "country-card-tag"
-  }, tag))), /*#__PURE__*/React.createElement("div", {
-    className: "country-card-readmore"
-  }, lang === 'fr' ? 'Voir l\'histoire complète →' : 'Read full story →'))))), /*#__PURE__*/React.createElement("div", {
+  }, "\u2192"))))), /*#__PURE__*/React.createElement("div", {
     className: "countries-cta"
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -6458,13 +6441,16 @@ function PortfolioApp({
   }, t.testiEyebrow), /*#__PURE__*/React.createElement("h2", {
     className: "section-title"
   }, t.testiTitle, " ", /*#__PURE__*/React.createElement("em", null, t.testiTitleEm)), /*#__PURE__*/React.createElement("div", {
-    className: "testi-grid reveal"
-  }, TESTIMONIALS.map((item, i) => /*#__PURE__*/React.createElement("div", {
+    className: "testi-ticker-wrap reveal"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "testi-ticker"
+  }, [...TESTIMONIALS, ...TESTIMONIALS].map((item, i) => /*#__PURE__*/React.createElement("div", {
     key: i,
-    className: "testi-card-v2",
+    className: "testi-card-v2 testi-card-ticker",
     style: {
       '--tcard-color': item.color
-    }
+    },
+    "aria-hidden": i >= TESTIMONIALS.length ? 'true' : 'false'
   }, /*#__PURE__*/React.createElement("div", {
     className: "tcard-header"
   }, /*#__PURE__*/React.createElement("div", {
@@ -6503,7 +6489,7 @@ function PortfolioApp({
   }, "\"", item.highlight[lang], "\""), /*#__PURE__*/React.createElement("button", {
     className: "tcard-read",
     onClick: () => setTestiModal(item)
-  }, lang === 'fr' ? 'Lire tout →' : 'Read full →'))))), testiModal && /*#__PURE__*/React.createElement("div", {
+  }, lang === 'fr' ? 'Lire tout →' : 'Read full →')))))), testiModal && /*#__PURE__*/React.createElement("div", {
     className: "testi-modal-bg",
     onClick: () => setTestiModal(null)
   }, /*#__PURE__*/React.createElement("div", {
