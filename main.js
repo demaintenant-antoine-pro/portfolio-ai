@@ -141,120 +141,132 @@ document.addEventListener('mouseover',e=>{
   if(c) c.style.display = 'none';
 }
 
-/* ═══════════ DRAG/SWIPE TICKERS (tech stack, countries, testimonials) ═══════════ */
-/* Auto-scrolls slowly; user can grab/swipe to take control; resumes after 3s idle. */
+/* ═══════════ TICKERS — CSS animation auto-scroll + JS drag/swipe ═══════════ */
+/* Auto-scroll runs via CSS @keyframes (always works). When the user grabs/swipes,
+   we pause the animation and translate the inner ticker via JS. On release we
+   compute an animation-delay so it resumes from the dropped position. */
 (function(){
   const SELECTORS = ['.stack-ticker-wrap','.countries-ticker-wrap','.testi-ticker-wrap','.cert-featured-ticker-wrap','.cert-secondary-ticker-wrap'];
-  // Speed in px/sec per wrap type (slower for testimonials — more to read)
-  const SPEED = {
-    'stack-ticker-wrap': 35,
-    'countries-ticker-wrap': 28,
-    'testi-ticker-wrap': 22,
-    'cert-featured-ticker-wrap': 30,
-    'cert-secondary-ticker-wrap': 34,
-  };
-  const RESUME_MS = 1000;
-  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function getCurrentX(el){
+    const m = window.getComputedStyle(el).transform;
+    if(!m||m==='none')return 0;
+    const match = m.match(/matrix.*\(([^)]+)\)/);
+    if(!match)return 0;
+    const v = match[1].split(',').map(s=>parseFloat(s.trim()));
+    // matrix(a, b, c, d, tx, ty) — 6 values; 3d matrix has 16, tx is index 12
+    return v.length===6 ? v[4] : (v[12]||0);
+  }
 
   function wire(wrap){
     if(!wrap||wrap._wired)return;
     wrap._wired=true;
-    const key = Object.keys(SPEED).find(k => wrap.classList.contains(k));
-    const speed = SPEED[key] || 30;
+    const ticker = wrap.firstElementChild;
+    if(!ticker)return;
 
-    let isDown=false,startX=0,startScroll=0,moved=0;
-    let touching=false;       // fingers currently down AND dragging horizontally
-    let touchStartX=0,touchStartY=0,touchHoriz=false;
-    let lastActive=0;          // Date.now() of last real user interaction
-    let inView=true;
-    let last=0;
+    let dragging=false,startX=0,baseX=0,curX=0,moved=0,downId=null;
+    // Touch direction discrimination
+    let tStartX=0,tStartY=0,tHoriz=false;
 
-    function loopSize(){
-      // Children are duplicated [...arr,...arr], so seamless point is at half of scrollWidth.
-      return wrap.scrollWidth/2;
+    function pause(initialX){
+      curX = initialX;
+      ticker.style.animation = 'none';
+      ticker.style.transform = `translate3d(${curX}px,0,0)`;
+      wrap.classList.add('dragging','grabbing');
+    }
+    function resume(){
+      // Compute animation-delay so the CSS animation continues from curX
+      const halfW = ticker.scrollWidth/2;
+      // Normalize curX into [-halfW, 0]
+      let n = curX % halfW;
+      if(n>0) n -= halfW;
+      // Animation: 0 → -halfW over duration. ratio = -n/halfW ∈ [0,1]
+      const dur = parseFloat(window.getComputedStyle(ticker).animationDuration)||50;
+      const ratio = halfW>0 ? (-n/halfW) : 0;
+      const delay = -ratio * dur;
+      // Force a reflow so the new animation-delay takes effect cleanly
+      ticker.style.transform = '';
+      ticker.style.animation = '';
+      ticker.style.animationDelay = `${delay}s`;
+      wrap.classList.remove('dragging','grabbing');
     }
 
-    // ─── Auto-scroll loop ───
-    function tick(now){
-      requestAnimationFrame(tick);
-      if(reducedMotion||isDown||touching||document.hidden||!inView)return;
-      if(lastActive&&now-lastActive<RESUME_MS){last=now;return;}
-      const dt=last?Math.min(now-last,50):16;
-      last=now;
-      const prev=wrap.scrollLeft;
-      wrap.scrollLeft=prev+(speed*dt)/1000;
-      const half=loopSize();
-      if(half>0&&wrap.scrollLeft>=half)wrap.scrollLeft-=half;
-    }
-    requestAnimationFrame(tick);
-
-    // Pause when off-screen
-    if('IntersectionObserver' in window){
-      const io=new IntersectionObserver(([e])=>{inView=e.isIntersecting;},{rootMargin:'200px'});
-      io.observe(wrap);
-    }
-
-    // ─── Mouse drag (desktop) via pointer events (ignore touch here, handled below) ───
+    // ─── Mouse drag (desktop) ───
     wrap.addEventListener('pointerdown',e=>{
-      if(e.pointerType==='touch')return; // touch handled by native overflow scroll + touchstart/end below
-      isDown=true;moved=0;
-      startX=e.clientX;
-      startScroll=wrap.scrollLeft;
-      wrap.classList.add('grabbing');
-      lastActive=Date.now();
+      if(e.pointerType==='touch')return; // touch handled separately for direction filter
+      dragging=true;moved=0;startX=e.clientX;downId=e.pointerId;
+      baseX = getCurrentX(ticker);
+      pause(baseX);
       try{wrap.setPointerCapture(e.pointerId);}catch(_){}
     });
     wrap.addEventListener('pointermove',e=>{
-      if(!isDown)return;
-      const dx=e.clientX-startX;
-      moved=Math.abs(dx);
-      wrap.scrollLeft=startScroll-dx;
-      lastActive=Date.now();
+      if(!dragging||e.pointerType==='touch')return;
+      const dx = e.clientX-startX;
+      moved = Math.abs(dx);
+      curX = baseX + dx;
+      ticker.style.transform = `translate3d(${curX}px,0,0)`;
     });
-    function endDrag(){
-      if(!isDown)return;
-      isDown=false;
-      wrap.classList.remove('grabbing');
-      lastActive=Date.now();
+    function endMouseDrag(){
+      if(!dragging)return;
+      dragging=false;downId=null;
+      resume();
       if(moved>6){
-        const blocker=ev=>{ev.preventDefault();ev.stopPropagation();wrap.removeEventListener('click',blocker,true);};
-        wrap.addEventListener('click',blocker,true);
-        setTimeout(()=>wrap.removeEventListener('click',blocker,true),50);
+        const blk=ev=>{ev.preventDefault();ev.stopPropagation();wrap.removeEventListener('click',blk,true);};
+        wrap.addEventListener('click',blk,true);
+        setTimeout(()=>wrap.removeEventListener('click',blk,true),50);
       }
     }
-    wrap.addEventListener('pointerup',endDrag);
-    wrap.addEventListener('pointercancel',endDrag);
-    wrap.addEventListener('pointerleave',endDrag);
+    wrap.addEventListener('pointerup',endMouseDrag);
+    wrap.addEventListener('pointercancel',endMouseDrag);
+    wrap.addEventListener('pointerleave',endMouseDrag);
 
-    // ─── Mobile touch: only pause when the user is actually swiping horizontally on the ticker ───
-    // Vertical scrolls on the page (finger happens to be over the ticker) must not pause auto-scroll.
+    // ─── Touch (mobile): only intercept HORIZONTAL swipes, leave vertical to page scroll ───
     wrap.addEventListener('touchstart',e=>{
       const t=e.touches[0];
-      touchStartX=t.clientX;touchStartY=t.clientY;touchHoriz=false;
+      tStartX=t.clientX;tStartY=t.clientY;tHoriz=false;moved=0;
     },{passive:true});
     wrap.addEventListener('touchmove',e=>{
-      if(touchHoriz)return; // already classified
       const t=e.touches[0];
-      const dx=Math.abs(t.clientX-touchStartX);
-      const dy=Math.abs(t.clientY-touchStartY);
-      if(dx>6&&dx>dy){touchHoriz=true;touching=true;lastActive=Date.now();}
+      if(!tHoriz){
+        const dx=Math.abs(t.clientX-tStartX);
+        const dy=Math.abs(t.clientY-tStartY);
+        if(dx>8 && dx>dy){
+          tHoriz=true;
+          baseX = getCurrentX(ticker);
+          startX = tStartX;
+          pause(baseX);
+        } else if(dy>8){
+          return; // vertical scroll — leave alone
+        } else {
+          return;
+        }
+      }
+      // Horizontal drag in progress
+      const dx=t.clientX-startX;
+      moved=Math.abs(dx);
+      curX = baseX + dx;
+      ticker.style.transform = `translate3d(${curX}px,0,0)`;
     },{passive:true});
-    const endTouch=()=>{
-      if(touching){lastActive=Date.now();}
-      touching=false;touchHoriz=false;
-    };
+    function endTouch(){
+      if(!tHoriz)return;
+      tHoriz=false;
+      resume();
+      if(moved>6){
+        const blk=ev=>{ev.preventDefault();ev.stopPropagation();wrap.removeEventListener('click',blk,true);};
+        wrap.addEventListener('click',blk,true);
+        setTimeout(()=>wrap.removeEventListener('click',blk,true),50);
+      }
+    }
     wrap.addEventListener('touchend',endTouch,{passive:true});
     wrap.addEventListener('touchcancel',endTouch,{passive:true});
-    wrap.addEventListener('wheel',()=>{lastActive=Date.now();},{passive:true});
   }
 
   function bootAll(){ SELECTORS.forEach(sel=>document.querySelectorAll(sel).forEach(wire)); }
 
-  // React mounts the tickers inside #root after initial paint — poll briefly then watch for new ones.
+  // React mounts the tickers after initial paint — poll a few times then observe.
   bootAll();
   let tries=0;
-  const poll=setInterval(()=>{bootAll();if(++tries>40)clearInterval(poll);},250); // 10s total
-  // Also observe DOM for re-renders (language switch re-mounts the tree)
+  const poll=setInterval(()=>{bootAll();if(++tries>40)clearInterval(poll);},250);
   if('MutationObserver' in window){
     new MutationObserver(()=>bootAll()).observe(document.body,{childList:true,subtree:true});
   }

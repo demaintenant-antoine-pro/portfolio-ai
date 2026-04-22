@@ -622,49 +622,64 @@ body.hovering #cur-o{width:44px;height:44px;border-color:var(--accent2);opacity:
 /* ═══════════════════ STACK ═══════════════════ */
 .stack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
 
-/* ── Horizontal tickers — auto-scroll + drag/swipe support (JS-driven) ── */
+/* ── Horizontal tickers — pure CSS animation (works on every browser, no sub-pixel rounding bug) ── */
 .stack-ticker-wrap,
 .countries-ticker-wrap,
 .testi-ticker-wrap,
 .cert-featured-ticker-wrap,
 .cert-secondary-ticker-wrap{
   position:relative;width:100%;
-  overflow-x:auto;overflow-y:hidden;
-  -webkit-overflow-scrolling:touch;
-  scrollbar-width:none;
-  touch-action:pan-x;
+  overflow:hidden;
   cursor:grab;
   user-select:none;-webkit-user-select:none;
+  touch-action:pan-y; /* allow vertical page scroll, JS handles horizontal swipe */
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
 }
-.stack-ticker-wrap::-webkit-scrollbar,
-.countries-ticker-wrap::-webkit-scrollbar,
-.testi-ticker-wrap::-webkit-scrollbar,
-.cert-featured-ticker-wrap::-webkit-scrollbar,
-.cert-secondary-ticker-wrap::-webkit-scrollbar{display:none}
 .stack-ticker-wrap.grabbing,
 .countries-ticker-wrap.grabbing,
 .testi-ticker-wrap.grabbing,
 .cert-featured-ticker-wrap.grabbing,
 .cert-secondary-ticker-wrap.grabbing{cursor:grabbing}
-.stack-ticker-wrap.grabbing *,
-.countries-ticker-wrap.grabbing *,
-.testi-ticker-wrap.grabbing *,
-.cert-featured-ticker-wrap.grabbing *,
-.cert-secondary-ticker-wrap.grabbing *{pointer-events:none}
 
-.stack-ticker{display:flex;gap:14px;width:max-content;will-change:scroll-position}
-.countries-ticker{display:flex;gap:10px;width:max-content;will-change:scroll-position}
-.testi-ticker{display:flex;gap:16px;width:max-content;will-change:scroll-position;padding:6px 0}
+.stack-ticker,
+.countries-ticker,
+.testi-ticker,
+.cert-featured-ticker,
+.cert-secondary-ticker{
+  display:flex;width:max-content;
+  will-change:transform;
+}
 
-.cert-featured-ticker{display:flex;gap:16px;width:max-content;will-change:scroll-position;padding:6px 0;margin-bottom:22px}
+.stack-ticker{gap:14px;animation:tickerScroll 55s linear infinite}
+.countries-ticker{gap:10px;animation:tickerScroll 60s linear infinite}
+.testi-ticker{gap:16px;padding:6px 0;animation:tickerScroll 75s linear infinite}
+.cert-featured-ticker{gap:16px;padding:6px 0;margin-bottom:22px;animation:tickerScroll 50s linear infinite}
+.cert-secondary-ticker{gap:12px;animation:tickerScroll 45s linear infinite}
+
 .cert-featured-ticker>.cert-feat{flex:0 0 340px;max-width:340px}
 @media(max-width:600px){.cert-featured-ticker>.cert-feat{flex:0 0 280px;max-width:280px}}
-
-.cert-secondary-ticker{display:flex;gap:12px;width:max-content;will-change:scroll-position}
 .cert-secondary-ticker>.cert-sec{flex:0 0 220px;max-width:220px;min-width:220px}
 @media(max-width:600px){.cert-secondary-ticker>.cert-sec{flex:0 0 200px;max-width:200px;min-width:200px}}
+
+/* Pause class — JS adds it during user drag */
+.stack-ticker-wrap.dragging .stack-ticker,
+.countries-ticker-wrap.dragging .countries-ticker,
+.testi-ticker-wrap.dragging .testi-ticker,
+.cert-featured-ticker-wrap.dragging .cert-featured-ticker,
+.cert-secondary-ticker-wrap.dragging .cert-secondary-ticker{
+  animation-play-state:paused;
+}
+
+@keyframes tickerScroll{
+  from{transform:translate3d(0,0,0)}
+  to{transform:translate3d(-50%,0,0)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .stack-ticker,.countries-ticker,.testi-ticker,
+  .cert-featured-ticker,.cert-secondary-ticker{animation:none}
+}
 
 .stack-card{background:var(--bg-card);border:1px solid var(--border-dim);padding:18px 12px;text-align:center;transition:all .3s;border-radius:6px;position:relative;overflow:hidden;cursor:default}
 .stack-card:hover{border-color:var(--accent1);transform:translateY(-5px);box-shadow:0 14px 32px var(--glow1)}
