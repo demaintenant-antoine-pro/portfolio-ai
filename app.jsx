@@ -618,7 +618,7 @@ function Dashboard({lang}){
   const bigNum={fontFamily:"'Bebas Neue',sans-serif",lineHeight:1};
 
   return(
-    <div style={{background:'var(--bg)',border:'1px solid var(--glass-border)',borderRadius:16,overflow:'hidden',boxShadow:'var(--glass-shadow)'}}>
+    <div className="dashboard-root" style={{background:'var(--bg)',border:'1px solid var(--glass-border)',borderRadius:16,overflow:'hidden',boxShadow:'var(--glass-shadow)'}}>
 
       {/* ── WINDOW CHROME ── */}
       <div style={{background:'var(--bg)',borderBottom:'1px solid var(--glass-border)',padding:'10px 18px',display:'flex',alignItems:'center',gap:14}}>
@@ -682,7 +682,7 @@ function Dashboard({lang}){
       <div style={{padding:'16px 18px 20px',background:'var(--glass-bg)'}}>
 
         {/* KPI STRIP — always visible */}
-        <div style={{display:'grid',gridTemplateColumns:'repeat(6,1fr)',gap:8,marginBottom:14}}>
+        <div className="dash-kpi-strip" style={{display:'grid',gap:8,marginBottom:14}}>
           {t.dashKpis.map(([v,l,d],i)=>{
             const colors=['var(--accent1)','var(--accent3)','var(--accent2)','var(--accent4)','var(--accent3)','var(--accent1)'];
             const col=colors[i%colors.length];
@@ -705,7 +705,7 @@ function Dashboard({lang}){
         {activeTab==='overview'&&(
           <div style={{display:'flex',flexDirection:'column',gap:12}}>
             {/* Charts row */}
-            <div style={{display:'grid',gridTemplateColumns:'1.6fr 1fr',gap:12}}>
+            <div className="dash-charts-row" style={{display:'grid',gap:12}}>
               <div style={card}>
                 <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:12}}>
                   <span style={{...label8,color:'#415a77'}}>{t.dashChart1}</span>
@@ -726,7 +726,7 @@ function Dashboard({lang}){
               </div>
             </div>
             {/* Map + News row */}
-            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+            <div className="dash-map-news" style={{display:'grid',gap:12}}>
               <div style={card}>
                 <div style={{...label8,color:'#415a77',marginBottom:8}}>{lang==='fr'?'CARTE VENTES · FRANCE':'SALES MAP · FRANCE'}</div>
                 <div style={{height:190,overflow:'hidden'}}><FranceMap lang={lang}/></div>
@@ -757,7 +757,7 @@ function Dashboard({lang}){
         {/* ── SALES TAB ── */}
         {activeTab==='sales'&&(
           <div style={{display:'flex',flexDirection:'column',gap:12}}>
-            <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:12}}>
+            <div className="dash-tri-kpis" style={{display:'grid',gap:12}}>
               {[
                 {label:lang==='fr'?'CA YTD':'Revenue YTD',v:'€2.4M',delta:'+18%',color:'#415a77'},
                 {label:lang==='fr'?'Deals closés':'Deals closed',v:'47',delta:lang==='fr'?'+12 ce mois':'+12 this month',color:'var(--accent3)'},
@@ -770,7 +770,7 @@ function Dashboard({lang}){
                 </div>
               ))}
             </div>
-            <div style={{display:'grid',gridTemplateColumns:'1.5fr 1fr',gap:12}}>
+            <div className="dash-pipe-alerts" style={{display:'grid',gap:12}}>
               <div style={card}>
                 <div style={{...label8,color:'#415a77',marginBottom:14}}>{lang==='fr'?'PIPELINE PAR STAGE':'PIPELINE BY STAGE'}</div>
                 {[
@@ -812,7 +812,7 @@ function Dashboard({lang}){
         {/* ── SUPPLY TAB ── */}
         {activeTab==='supply'&&(
           <div style={{display:'flex',flexDirection:'column',gap:12}}>
-            <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:12}}>
+            <div className="dash-tri-kpis" style={{display:'grid',gap:12}}>
               {[
                 {label:lang==='fr'?'Taux de service':'Service level',v:'98.2%',delta:'+1.4pts',color:'var(--accent3)'},
                 {label:lang==='fr'?'Ruptures actives':'Active stockouts',v:'3',delta:lang==='fr'?'−5 vs sem. préc.':'−5 vs prev. week',color:'var(--accent4)'},
@@ -827,7 +827,7 @@ function Dashboard({lang}){
             </div>
             <div style={card}>
               <div style={{...label8,color:'#415a77',marginBottom:14}}>{lang==='fr'?'RISQUES RUPTURE · PRÉVISION IA 8 SEMAINES':'STOCKOUT RISK · AI FORECAST 8 WEEKS'}</div>
-              <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:10}}>
+              <div className="dash-stock-risk" style={{display:'grid',gap:10}}>
                 {STOCK_RISK.map((s,i)=>(
                   <div key={i} style={{background:'var(--glass-bg)',border:`1px solid ${s.color}33`,borderRadius:8,padding:'14px 16px'}}>
                     <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:8}}>
@@ -848,7 +848,7 @@ function Dashboard({lang}){
 
         {/* ── AI TAB ── */}
         {activeTab==='ai'&&(
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+          <div className="dash-ai-layout" style={{display:'grid',gap:12}}>
             <div style={card}>
               <div style={{...label8,color:'#415a77',marginBottom:14}}>{lang==='fr'?'MODÈLE PRÉVISION VENTES · IA':'SALES FORECAST MODEL · AI'}</div>
               <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10,marginBottom:14}}>
@@ -915,7 +915,7 @@ function Dashboard({lang}){
               </div>
             </div>
 
-            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+            <div className="dash-hiring-layout" style={{display:'grid',gap:12}}>
 
               {/* LEFT — sliders */}
               <div style={{display:'flex',flexDirection:'column',gap:9}}>
@@ -1149,7 +1149,7 @@ function Pipeline({lang}){
   return(
     <div className="pipeline-wrap reveal">
       {/* Category selector */}
-      <div style={{display:'flex',gap:8,marginBottom:20,flexWrap:'wrap'}}>
+      <div className="pipeline-cats" style={{display:'flex',gap:8,marginBottom:20,flexWrap:'wrap'}}>
         {CATS.map(c=>(<button key={c.id} onClick={()=>setActive(c.id)} style={{padding:'8px 14px',borderRadius:8,border:`1.5px solid ${active===c.id?c.color:'var(--border-dim)'}`,background:active===c.id?`rgba(${c.color==='#00F0A8'?'0,240,168':c.color==='#415a77'?'191,58,255':c.color==='#FFB800'?'255,184,0':c.color==='#0091FF'?'0,145,255':'255,45,120'},0.12)`:'var(--bg)',color:active===c.id?c.color:'var(--text-dim)',fontSize:11,fontFamily:"'Space Mono',monospace",fontWeight:700,cursor:'pointer',letterSpacing:'0.5px',transition:'all .25s',display:'flex',alignItems:'center',gap:6}}>
           <span>{c.icon}</span><span>{c.label}</span>
         </button>))}
@@ -1177,7 +1177,7 @@ function Pipeline({lang}){
       </div>
 
       {/* Stats */}
-      <div style={{display:'flex',gap:10,marginBottom:14}}>
+      <div className="pipeline-stats" style={{display:'flex',gap:10,marginBottom:14}}>
         {stats.map((s,i)=>(<div key={i} style={{flex:1,background:`rgba(${cat.color==='#00F0A8'?'0,240,168':cat.color==='#415a77'?'191,58,255':cat.color==='#FFB800'?'255,184,0':cat.color==='#0091FF'?'0,145,255':'255,45,120'},0.08)`,border:`1px solid rgba(${cat.color==='#00F0A8'?'0,240,168':cat.color==='#415a77'?'191,58,255':cat.color==='#FFB800'?'255,184,0':cat.color==='#0091FF'?'0,145,255':'255,45,120'},0.25)`,borderRadius:8,padding:'8px 12px',textAlign:'center'}}>
           <div style={{fontSize:11,fontWeight:700,color:cat.color,fontFamily:"'Space Mono',monospace"}}>{s}</div>
         </div>))}
@@ -1411,14 +1411,16 @@ function VisitorMap({lang,mode}){
 
   const displayCount=realCount??FALLBACK;
 
-  // 3. Init Leaflet — tiles adapt to mode (dark/light)
+  // 3. Init Leaflet — dark tiles for cohesion with ADM.SYS theme
   useEffect(()=>{
     if(!mapRef.current||leafletMap.current)return;
-    const tileUrl='https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png';
+    const tileUrl=isHuman
+      ?'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png'
+      :'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png';
     const initMap=(L)=>{
       if(!mapRef.current)return;
       const map=L.map(mapRef.current,{
-        center:[30,15],zoom:3,minZoom:2,maxZoom:6,
+        center:[30,15],zoom:3,minZoom:2,maxZoom:8,
         zoomControl:false,scrollWheelZoom:false,
         attributionControl:false,dragging:true,worldCopyJump:true
       });
@@ -1442,21 +1444,29 @@ function VisitorMap({lang,mode}){
     // Past locations (real historical visitors from worker)
     pastLocations.forEach(v=>{
       if(!v.lat||!v.lon)return;
-      const pastIcon=L.divIcon({className:'',html:`<div style="width:8px;height:8px;border-radius:50%;background:#415a77;opacity:0.7;box-shadow:0 0 8px #415a77;"></div>`,iconSize:[8,8],iconAnchor:[4,4]});
+      const pastIcon=L.divIcon({className:'vmap-past-marker',html:`<div class="vmap-dot-past" style="background:${dotColor};box-shadow:0 0 10px ${dotColor}"></div>`,iconSize:[10,10],iconAnchor:[5,5]});
       const m=L.marker([v.lat,v.lon],{icon:pastIcon,zIndexOffset:0});
       const flag=v.cc?`<img src="https://flagcdn.com/16x12/${v.cc.toLowerCase()}.png" style="margin-right:5px;vertical-align:middle;border-radius:2px"/>`:'';
       m.bindPopup(`<div style="min-width:110px;font-family:sans-serif">${flag}<strong>${v.city||v.country||'?'}</strong><br/><span style="color:#415a77;font-size:10px">${lang==='fr'?'Visiteur passé':'Past visitor'}</span></div>`);
       markersLayer.current.addLayer(m);
     });
 
-    // Current visitor
+    // Current visitor — pulsing glow ring
     if(myGeo){
-      const icon=L.divIcon({className:'',html:`<div style="width:14px;height:14px;border-radius:50%;background:${dotColor};box-shadow:0 0 14px ${dotColor};border:2px solid #fff;"></div>`,iconSize:[14,14],iconAnchor:[7,7]});
+      const icon=L.divIcon({className:'vmap-me-marker',html:`<div class="vmap-dot-me" style="background:${dotColor};box-shadow:0 0 18px ${dotColor},0 0 38px ${dotColor}66"></div><div class="vmap-pulse-ring" style="border-color:${dotColor}"></div>`,iconSize:[18,18],iconAnchor:[9,9]});
       const marker=L.marker([myGeo.lat,myGeo.lon],{icon,zIndexOffset:1000});
       const flag=myGeo.countryCode?`<img src="https://flagcdn.com/16x12/${myGeo.countryCode.toLowerCase()}.png" style="margin-right:5px;vertical-align:middle;border-radius:2px"/>`:''
       marker.bindPopup(`<div style="min-width:130px;font-family:sans-serif">${flag}<strong>${myGeo.city||myGeo.country||'?'}</strong><br/><span style="color:${dotColor};font-size:10px">← ${lang==='fr'?'Vous êtes ici':'You are here'}</span></div>`);
       markersLayer.current.addLayer(marker);
-      leafletMap.current.setView([myGeo.lat,myGeo.lon],4,{animate:true,duration:1.2});
+
+      // Smart zoom — fit all points if past visitors exist, otherwise close zoom on me
+      const allPts=pastLocations.filter(v=>v.lat&&v.lon).map(v=>[v.lat,v.lon]);
+      allPts.push([myGeo.lat,myGeo.lon]);
+      if(allPts.length>=2){
+        leafletMap.current.fitBounds(allPts,{padding:[30,30],maxZoom:5,animate:true,duration:1.2});
+      } else {
+        leafletMap.current.setView([myGeo.lat,myGeo.lon],5,{animate:true,duration:1.2});
+      }
     }
   },[myGeo,pastLocations,isHuman,lang]);
 
@@ -1715,66 +1725,44 @@ function WorldMap({countries,setActiveCountry,lang}){
   const [hov,setHov]=useState(null);
   return(
     <div style={{width:'100%'}}>
-      <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16}}>
+      <div className="countries-grid">
         {countries.map((c,i)=>(
           <button key={i}
+            className="country-card"
             onClick={()=>setActiveCountry(c)}
             onMouseEnter={()=>setHov(i)}
             onMouseLeave={()=>setHov(null)}
             style={{
-              display:'flex',flexDirection:'column',alignItems:'flex-start',gap:0,
-              padding:0,overflow:'hidden',
-              backdropFilter:'var(--glass-blur)',
-              WebkitBackdropFilter:'var(--glass-blur)',
-              background:'var(--card-solid)',
-              border:`1px solid ${hov===i?'var(--accent1)':'var(--glass-border)'}`,
-              borderRadius:18,cursor:'pointer',
-              transition:'all .28s cubic-bezier(.16,1,.3,1)',
-              textAlign:'left',
+              borderColor:hov===i?'var(--accent1)':'var(--glass-border)',
               transform:hov===i?'translateY(-4px)':'none',
               boxShadow:hov===i?'var(--glass-shadow)':'0 2px 12px rgba(0,0,0,.08)',
             }}>
-            <div style={{
-              width:'100%',padding:'16px 18px 12px',
-              background:'rgba(255,255,255,.06)',
-              borderBottom:'1px solid var(--glass-border)',
-              display:'flex',alignItems:'center',gap:12,
-            }}>
+            <div className="country-card-header">
               <img src={`https://flagcdn.com/w40/${c.iso}.png`} alt={c.n} style={{width:40,height:'auto',display:'block',borderRadius:4,flexShrink:0,boxShadow:'0 1px 4px rgba(0,0,0,.3)'}}/>
               <div style={{flex:1,minWidth:0}}>
-                <div style={{fontFamily:"'Space Grotesk',sans-serif",fontWeight:800,fontSize:'1.1rem',color:'var(--text)',letterSpacing:'-.2px',lineHeight:1,marginBottom:4}}>{c.n}</div>
-                <div style={{fontFamily:"'Space Mono',monospace",fontSize:'.4rem',color:'var(--accent2)',letterSpacing:'2px',textTransform:'uppercase'}}>{c.sub}</div>
+                <div className="country-card-name">{c.n}</div>
+                <div className="country-card-sub">{c.sub}</div>
               </div>
+              <span className="country-card-chevron" aria-hidden="true">→</span>
             </div>
-            <div style={{padding:'12px 18px 14px',flex:1,width:'100%'}}>
-              <div style={{fontFamily:"'Space Grotesk',sans-serif",fontSize:'.76rem',color:'var(--text-sec)',lineHeight:1.65,marginBottom:10}}>{c.text?.slice(0,88)}{c.text?.length>88?'…':''}</div>
-              <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
+            <div className="country-card-body">
+              <div className="country-card-text">{c.text?.slice(0,120)}{c.text?.length>120?'…':''}</div>
+              <div className="country-card-tags">
                 {c.tags?.slice(0,3).map((tag,j)=>(
-                  <span key={j} style={{
-                    fontFamily:"'Space Grotesk',sans-serif",fontSize:'.6rem',fontWeight:500,
-                    color:'#415a77',
-                    background:'rgba(255,255,255,.06)',
-                    border:'1px solid var(--glass-border)',
-                    padding:'3px 9px',borderRadius:20,
-                  }}>{tag}</span>
+                  <span key={j} className="country-card-tag">{tag}</span>
                 ))}
               </div>
+              <div className="country-card-readmore">{lang==='fr'?'Voir l\'histoire complète →':'Read full story →'}</div>
             </div>
           </button>
         ))}
       </div>
-      <div style={{
-        marginTop:14,
-        backdropFilter:'var(--glass-blur)',WebkitBackdropFilter:'var(--glass-blur)',
-        background:'var(--card-solid)',border:'1px solid var(--glass-border)',
-        borderRadius:12,padding:'12px 20px',
-        display:'flex',alignItems:'center',justifyContent:'space-between',gap:16,
-      }}>
-        <div style={{display:'flex',alignItems:'center',gap:8}}>
+      <div className="countries-cta">
+        <div style={{display:'flex',alignItems:'center',gap:8,minWidth:0,flex:1}}>
           <div style={{width:7,height:7,borderRadius:'50%',background:'var(--accent3)',animation:'pulse 2s infinite',flexShrink:0}}/>
-          <span style={{fontFamily:"'Space Grotesk',sans-serif",fontWeight:600,fontSize:'.76rem',color:'var(--accent3)'}}>{lang==='fr'?'Disponible partout dans le monde · Remote-first':'Available worldwide · Remote-first'}</span>
+          <span className="countries-cta-label">{lang==='fr'?'Disponible partout · Remote-first':'Available worldwide · Remote-first'}</span>
         </div>
-        <span style={{fontFamily:"'Space Grotesk',sans-serif",fontWeight:800,fontSize:'1.3rem',color:'#415a77',letterSpacing:'-1px'}}>{countries.length} {lang==='fr'?'pays':'countries'}</span>
+        <span className="countries-cta-num">{countries.length} {lang==='fr'?'pays':'countries'}</span>
       </div>
     </div>
   );
@@ -1917,6 +1905,8 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
   const [lang,setLang]=useState(initLang||'en');
   const [activeExp,setActiveExp]=useState(0);
   const [tagFilter,setTagFilter]=useState('All');
+  const [filtersOpen,setFiltersOpen]=useState(false);
+  const [showAllBullets,setShowAllBullets]=useState(false);
   const [showEgg,setShowEgg]=useState(false);
   const [showRecruiter,setShowRecruiter]=useState(false);
   const [activeCountry,setActiveCountry]=useState(null);
@@ -1937,6 +1927,7 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
 
   useEffect(()=>setActiveExp(0),[lang]);
   useEffect(()=>setTagFilter(t.expFilterAll),[lang]);
+  useEffect(()=>setShowAllBullets(false),[activeExp,lang]);
 
   // Typewriter
   useEffect(()=>{
@@ -2208,13 +2199,26 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
         </div>
         <div className="section-eyebrow">{t.expEyebrow}</div>
         <h2 className="section-title">{t.expTitle} <em>{t.expTitleEm}</em></h2>
-        <div className="exp-filter-bar">{allTags.map(tag=>(<button key={tag} className={`filter-btn${tagFilter===tag?' active':''}`} onClick={()=>{setTagFilter(tag);if(tag!==t.expFilterAll){const m=exps.findIndex(e=>e.tags.includes(tag));if(m>=0)setActiveExp(m)}else setActiveExp(0);}}>{tag}</button>))}</div>
+        <button className="exp-filter-toggle" onClick={()=>setFiltersOpen(o=>!o)} aria-expanded={filtersOpen} aria-controls="exp-filter-bar">
+          <span className="exp-filter-toggle-icon">{filtersOpen?'✕':'🔍'}</span>
+          <span className="exp-filter-toggle-label">{lang==='fr'?'Filtrer par techno':'Filter by tech'}</span>
+          <span className="exp-filter-toggle-active">{tagFilter}</span>
+          <span className="exp-filter-toggle-chevron">{filtersOpen?'▲':'▼'}</span>
+        </button>
+        <div id="exp-filter-bar" className={`exp-filter-bar${filtersOpen?' open':''}`}>{allTags.map(tag=>(<button key={tag} className={`filter-btn${tagFilter===tag?' active':''}`} onClick={()=>{setTagFilter(tag);setFiltersOpen(false);if(tag!==t.expFilterAll){const m=exps.findIndex(e=>e.tags.includes(tag));if(m>=0)setActiveExp(m)}else setActiveExp(0);}}>{tag}</button>))}</div>
         <div className="exp-layout reveal">
           <div className="exp-nav">{exps.map(e=>{const hidden=tagFilter!==t.expFilterAll&&!e.tags.includes(tagFilter);if(hidden)return null;return(<div key={e.id} className={`exp-nav-item${activeExp===e.id?' active':''}`} onClick={()=>setActiveExp(e.id)}><div className="exp-nav-date">{e.date}</div><div className="exp-nav-role">{e.role}</div><div className="exp-nav-co">{e.company}</div></div>);})}</div>
           <div className="exp-detail">
             <div className="exp-detail-role">{exp.role}</div>
             <div className="exp-detail-meta"><span>{exp.company}</span><span>·</span><span>{exp.location}</span><span>·</span><span>{exp.revenue}</span></div>
-            <ul className="exp-bullets">{exp.highlights.map((h,i)=><li key={i}>{h}</li>)}</ul>
+            <ul className={`exp-bullets${showAllBullets?' expanded':''}`}>{exp.highlights.map((h,i)=><li key={i}>{h}</li>)}</ul>
+            {exp.highlights.length>3&&(
+              <button className="exp-bullets-toggle" onClick={()=>setShowAllBullets(s=>!s)} aria-expanded={showAllBullets}>
+                {showAllBullets
+                  ?(lang==='fr'?'− Voir moins':'− See less')
+                  :(lang==='fr'?`+ ${exp.highlights.length-3} points supplémentaires`:`+ ${exp.highlights.length-3} more highlights`)}
+              </button>
+            )}
             <div className="exp-tags">{exp.tags.map(tag=><span key={tag} className="exp-tag">{tag}</span>)}</div>
           </div>
         </div>
@@ -2308,11 +2312,11 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
     <section id="skills" className="section">
       <div className="section-eyebrow">{t.skillsEyebrow}</div>
       <h2 className="section-title">{t.skillsTitle} <span style={{color:'var(--text-dim)'}}>{t.skillsTitleDim}</span></h2>
-      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'40px',alignItems:'start',marginTop:'24px'}}>
+      <div className="skills-radar-grid">
         <div className="skills-grid" style={{marginTop:0}}>
           {skills.map((s,i)=>(<div key={i} className={`skill-card reveal reveal-delay-${i%3+1}`}><div className="skill-icon">{s.icon}</div><div className="skill-name">{s.name}</div><div className="skill-desc">{s.desc}</div><div className="skill-bar"><div className="skill-fill" style={{width:`${s.pct}%`}}/></div><div className="skill-pct">{s.pct}%</div></div>))}
         </div>
-        <div>
+        <div className="skills-radar-col">
           <div className="section-eyebrow" style={{marginBottom:'0'}}>{t.radarTitle}</div>
           <RadarChart lang={lang}/>
         </div>
@@ -2402,26 +2406,21 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
     </section>
 
     {/* WORLD MAP - Antoine's countries */}
-    <div className="world-map-section" style={{padding:'80px 0'}}>
-      <div style={{maxWidth:'1500px',margin:'0 auto',padding:'0 80px'}}>
-        <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-end',marginBottom:40}}>
+    <div className="world-map-section">
+      <div className="world-map-inner">
+        <div className="intl-header">
           <div>
             <div style={{fontFamily:"'Space Grotesk',sans-serif",fontWeight:600,fontSize:'.65rem',color:'var(--accent2)',letterSpacing:'3px',textTransform:'uppercase',marginBottom:10,display:'flex',alignItems:'center',gap:8}}>
               🌍 {lang==='fr'?'Présence Internationale':'International Presence'}
             </div>
-            <h2 style={{fontFamily:"'Space Grotesk',sans-serif",fontWeight:800,fontSize:'clamp(2rem,4vw,3.2rem)',color:'var(--text)',letterSpacing:'-1.5px',lineHeight:1.05,marginBottom:0}}>
+            <h2 className="intl-title">
               {lang==='fr'?'Opérationnel':'Operational'}<br/>
-              <em style={{color:'var(--accent3)',fontStyle:'italic'}}>{lang==='fr'?'partout dans le monde.':'anywhere in the world.'}</em>
+              <em>{lang==='fr'?'partout dans le monde.':'anywhere in the world.'}</em>
             </h2>
           </div>
-          <div style={{
-            backdropFilter:'var(--glass-blur)',WebkitBackdropFilter:'var(--glass-blur)',
-            background:'var(--glass-bg)',border:'1px solid var(--glass-border)',
-            borderRadius:16,padding:'16px 24px',textAlign:'center',
-            boxShadow:'var(--glass-shadow)',
-          }}>
-            <div style={{fontFamily:"'Space Grotesk',sans-serif",fontWeight:800,fontSize:'3rem',color:'#415a77',lineHeight:1,letterSpacing:'-2px'}}>{countries.length}</div>
-            <div style={{fontFamily:"'Space Grotesk',sans-serif",fontWeight:500,fontSize:'.65rem',color:'var(--text-mute)',letterSpacing:'2px',textTransform:'uppercase',marginTop:4}}>{lang==='fr'?'pays vécus':'countries lived'}</div>
+          <div className="intl-badge">
+            <div className="intl-badge-num">{countries.length}</div>
+            <div className="intl-badge-label">{lang==='fr'?'pays vécus':'countries lived'}</div>
           </div>
         </div>
         <WorldMap countries={countries} setActiveCountry={setActiveCountry} lang={lang}/>

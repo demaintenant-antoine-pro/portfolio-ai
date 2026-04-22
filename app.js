@@ -2318,6 +2318,7 @@ function Dashboard({
     lineHeight: 1
   };
   return /*#__PURE__*/React.createElement("div", {
+    className: "dashboard-root",
     style: {
       background: 'var(--bg)',
       border: '1px solid var(--glass-border)',
@@ -2480,9 +2481,9 @@ function Dashboard({
       background: 'var(--glass-bg)'
     }
   }, /*#__PURE__*/React.createElement("div", {
+    className: "dash-kpi-strip",
     style: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(6,1fr)',
       gap: 8,
       marginBottom: 14
     }
@@ -2540,9 +2541,9 @@ function Dashboard({
       gap: 12
     }
   }, /*#__PURE__*/React.createElement("div", {
+    className: "dash-charts-row",
     style: {
       display: 'grid',
-      gridTemplateColumns: '1.6fr 1fr',
       gap: 12
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -2604,9 +2605,9 @@ function Dashboard({
   }, /*#__PURE__*/React.createElement("canvas", {
     ref: bRef
   })))), /*#__PURE__*/React.createElement("div", {
+    className: "dash-map-news",
     style: {
       display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
       gap: 12
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -2695,9 +2696,9 @@ function Dashboard({
       gap: 12
     }
   }, /*#__PURE__*/React.createElement("div", {
+    className: "dash-tri-kpis",
     style: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(3,1fr)',
       gap: 12
     }
   }, [{
@@ -2739,9 +2740,9 @@ function Dashboard({
       marginTop: 6
     }
   }, k.delta)))), /*#__PURE__*/React.createElement("div", {
+    className: "dash-pipe-alerts",
     style: {
       display: 'grid',
-      gridTemplateColumns: '1.5fr 1fr',
       gap: 12
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -2862,9 +2863,9 @@ function Dashboard({
       gap: 12
     }
   }, /*#__PURE__*/React.createElement("div", {
+    className: "dash-tri-kpis",
     style: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(3,1fr)',
       gap: 12
     }
   }, [{
@@ -2912,9 +2913,9 @@ function Dashboard({
       marginBottom: 14
     }
   }, lang === 'fr' ? 'RISQUES RUPTURE · PRÉVISION IA 8 SEMAINES' : 'STOCKOUT RISK · AI FORECAST 8 WEEKS'), /*#__PURE__*/React.createElement("div", {
+    className: "dash-stock-risk",
     style: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(3,1fr)',
       gap: 10
     }
   }, STOCK_RISK.map((s, i) => /*#__PURE__*/React.createElement("div", {
@@ -2972,9 +2973,9 @@ function Dashboard({
       fontFamily: "'Space Mono',monospace"
     }
   }, s.action))))))), activeTab === 'ai' && /*#__PURE__*/React.createElement("div", {
+    className: "dash-ai-layout",
     style: {
       display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
       gap: 12
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -3178,9 +3179,9 @@ function Dashboard({
         lineHeight: 1.6
       }
     }, lang === 'fr' ? 'Chaque heure de reporting manuel est de l\'argent brûlé. Ajustez les curseurs — le compteur tourne en direct.' : 'Every hour of manual reporting is money burned. Adjust the sliders — the meter runs live.'))), /*#__PURE__*/React.createElement("div", {
+      className: "dash-hiring-layout",
       style: {
         display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
         gap: 12
       }
     }, /*#__PURE__*/React.createElement("div", {
@@ -3858,6 +3859,7 @@ function Pipeline({
   return /*#__PURE__*/React.createElement("div", {
     className: "pipeline-wrap reveal"
   }, /*#__PURE__*/React.createElement("div", {
+    className: "pipeline-cats",
     style: {
       display: 'flex',
       gap: 8,
@@ -3933,6 +3935,7 @@ function Pipeline({
       lineHeight: 1.7
     }
   }, desc), /*#__PURE__*/React.createElement("div", {
+    className: "pipeline-stats",
     style: {
       display: 'flex',
       gap: 10,
@@ -4594,17 +4597,17 @@ function VisitorMap({
   }, []);
   const displayCount = realCount ?? FALLBACK;
 
-  // 3. Init Leaflet — tiles adapt to mode (dark/light)
+  // 3. Init Leaflet — dark tiles for cohesion with ADM.SYS theme
   useEffect(() => {
     if (!mapRef.current || leafletMap.current) return;
-    const tileUrl = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png';
+    const tileUrl = isHuman ? 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png' : 'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png';
     const initMap = L => {
       if (!mapRef.current) return;
       const map = L.map(mapRef.current, {
         center: [30, 15],
         zoom: 3,
         minZoom: 2,
-        maxZoom: 6,
+        maxZoom: 8,
         zoomControl: false,
         scrollWheelZoom: false,
         attributionControl: false,
@@ -4645,10 +4648,10 @@ function VisitorMap({
     pastLocations.forEach(v => {
       if (!v.lat || !v.lon) return;
       const pastIcon = L.divIcon({
-        className: '',
-        html: `<div style="width:8px;height:8px;border-radius:50%;background:#415a77;opacity:0.7;box-shadow:0 0 8px #415a77;"></div>`,
-        iconSize: [8, 8],
-        iconAnchor: [4, 4]
+        className: 'vmap-past-marker',
+        html: `<div class="vmap-dot-past" style="background:${dotColor};box-shadow:0 0 10px ${dotColor}"></div>`,
+        iconSize: [10, 10],
+        iconAnchor: [5, 5]
       });
       const m = L.marker([v.lat, v.lon], {
         icon: pastIcon,
@@ -4659,13 +4662,13 @@ function VisitorMap({
       markersLayer.current.addLayer(m);
     });
 
-    // Current visitor
+    // Current visitor — pulsing glow ring
     if (myGeo) {
       const icon = L.divIcon({
-        className: '',
-        html: `<div style="width:14px;height:14px;border-radius:50%;background:${dotColor};box-shadow:0 0 14px ${dotColor};border:2px solid #fff;"></div>`,
-        iconSize: [14, 14],
-        iconAnchor: [7, 7]
+        className: 'vmap-me-marker',
+        html: `<div class="vmap-dot-me" style="background:${dotColor};box-shadow:0 0 18px ${dotColor},0 0 38px ${dotColor}66"></div><div class="vmap-pulse-ring" style="border-color:${dotColor}"></div>`,
+        iconSize: [18, 18],
+        iconAnchor: [9, 9]
       });
       const marker = L.marker([myGeo.lat, myGeo.lon], {
         icon,
@@ -4674,10 +4677,23 @@ function VisitorMap({
       const flag = myGeo.countryCode ? `<img src="https://flagcdn.com/16x12/${myGeo.countryCode.toLowerCase()}.png" style="margin-right:5px;vertical-align:middle;border-radius:2px"/>` : '';
       marker.bindPopup(`<div style="min-width:130px;font-family:sans-serif">${flag}<strong>${myGeo.city || myGeo.country || '?'}</strong><br/><span style="color:${dotColor};font-size:10px">← ${lang === 'fr' ? 'Vous êtes ici' : 'You are here'}</span></div>`);
       markersLayer.current.addLayer(marker);
-      leafletMap.current.setView([myGeo.lat, myGeo.lon], 4, {
-        animate: true,
-        duration: 1.2
-      });
+
+      // Smart zoom — fit all points if past visitors exist, otherwise close zoom on me
+      const allPts = pastLocations.filter(v => v.lat && v.lon).map(v => [v.lat, v.lon]);
+      allPts.push([myGeo.lat, myGeo.lon]);
+      if (allPts.length >= 2) {
+        leafletMap.current.fitBounds(allPts, {
+          padding: [30, 30],
+          maxZoom: 5,
+          animate: true,
+          duration: 1.2
+        });
+      } else {
+        leafletMap.current.setView([myGeo.lat, myGeo.lon], 5, {
+          animate: true,
+          duration: 1.2
+        });
+      }
     }
   }, [myGeo, pastLocations, isHuman, lang]);
   const ua = navigator.userAgent;
@@ -5419,44 +5435,20 @@ function WorldMap({
       width: '100%'
     }
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(3,1fr)',
-      gap: 16
-    }
+    className: "countries-grid"
   }, countries.map((c, i) => /*#__PURE__*/React.createElement("button", {
     key: i,
+    className: "country-card",
     onClick: () => setActiveCountry(c),
     onMouseEnter: () => setHov(i),
     onMouseLeave: () => setHov(null),
     style: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-      gap: 0,
-      padding: 0,
-      overflow: 'hidden',
-      backdropFilter: 'var(--glass-blur)',
-      WebkitBackdropFilter: 'var(--glass-blur)',
-      background: 'var(--card-solid)',
-      border: `1px solid ${hov === i ? 'var(--accent1)' : 'var(--glass-border)'}`,
-      borderRadius: 18,
-      cursor: 'pointer',
-      transition: 'all .28s cubic-bezier(.16,1,.3,1)',
-      textAlign: 'left',
+      borderColor: hov === i ? 'var(--accent1)' : 'var(--glass-border)',
       transform: hov === i ? 'translateY(-4px)' : 'none',
       boxShadow: hov === i ? 'var(--glass-shadow)' : '0 2px 12px rgba(0,0,0,.08)'
     }
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: '100%',
-      padding: '16px 18px 12px',
-      background: 'rgba(255,255,255,.06)',
-      borderBottom: '1px solid var(--glass-border)',
-      display: 'flex',
-      alignItems: 'center',
-      gap: 12
-    }
+    className: "country-card-header"
   }, /*#__PURE__*/React.createElement("img", {
     src: `https://flagcdn.com/w40/${c.iso}.png`,
     alt: c.n,
@@ -5474,74 +5466,32 @@ function WorldMap({
       minWidth: 0
     }
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Grotesk',sans-serif",
-      fontWeight: 800,
-      fontSize: '1.1rem',
-      color: 'var(--text)',
-      letterSpacing: '-.2px',
-      lineHeight: 1,
-      marginBottom: 4
-    }
+    className: "country-card-name"
   }, c.n), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Mono',monospace",
-      fontSize: '.4rem',
-      color: 'var(--accent2)',
-      letterSpacing: '2px',
-      textTransform: 'uppercase'
-    }
-  }, c.sub))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      padding: '12px 18px 14px',
-      flex: 1,
-      width: '100%'
-    }
+    className: "country-card-sub"
+  }, c.sub)), /*#__PURE__*/React.createElement("span", {
+    className: "country-card-chevron",
+    "aria-hidden": "true"
+  }, "\u2192")), /*#__PURE__*/React.createElement("div", {
+    className: "country-card-body"
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Grotesk',sans-serif",
-      fontSize: '.76rem',
-      color: 'var(--text-sec)',
-      lineHeight: 1.65,
-      marginBottom: 10
-    }
-  }, c.text?.slice(0, 88), c.text?.length > 88 ? '…' : ''), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      gap: 5,
-      flexWrap: 'wrap'
-    }
+    className: "country-card-text"
+  }, c.text?.slice(0, 120), c.text?.length > 120 ? '…' : ''), /*#__PURE__*/React.createElement("div", {
+    className: "country-card-tags"
   }, c.tags?.slice(0, 3).map((tag, j) => /*#__PURE__*/React.createElement("span", {
     key: j,
-    style: {
-      fontFamily: "'Space Grotesk',sans-serif",
-      fontSize: '.6rem',
-      fontWeight: 500,
-      color: '#415a77',
-      background: 'rgba(255,255,255,.06)',
-      border: '1px solid var(--glass-border)',
-      padding: '3px 9px',
-      borderRadius: 20
-    }
-  }, tag))))))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: 14,
-      backdropFilter: 'var(--glass-blur)',
-      WebkitBackdropFilter: 'var(--glass-blur)',
-      background: 'var(--card-solid)',
-      border: '1px solid var(--glass-border)',
-      borderRadius: 12,
-      padding: '12px 20px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      gap: 16
-    }
+    className: "country-card-tag"
+  }, tag))), /*#__PURE__*/React.createElement("div", {
+    className: "country-card-readmore"
+  }, lang === 'fr' ? 'Voir l\'histoire complète →' : 'Read full story →'))))), /*#__PURE__*/React.createElement("div", {
+    className: "countries-cta"
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       alignItems: 'center',
-      gap: 8
+      gap: 8,
+      minWidth: 0,
+      flex: 1
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -5553,20 +5503,9 @@ function WorldMap({
       flexShrink: 0
     }
   }), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: "'Space Grotesk',sans-serif",
-      fontWeight: 600,
-      fontSize: '.76rem',
-      color: 'var(--accent3)'
-    }
-  }, lang === 'fr' ? 'Disponible partout dans le monde · Remote-first' : 'Available worldwide · Remote-first')), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: "'Space Grotesk',sans-serif",
-      fontWeight: 800,
-      fontSize: '1.3rem',
-      color: '#415a77',
-      letterSpacing: '-1px'
-    }
+    className: "countries-cta-label"
+  }, lang === 'fr' ? 'Disponible partout · Remote-first' : 'Available worldwide · Remote-first')), /*#__PURE__*/React.createElement("span", {
+    className: "countries-cta-num"
   }, countries.length, " ", lang === 'fr' ? 'pays' : 'countries')));
 }
 
@@ -5772,6 +5711,8 @@ function PortfolioApp({
   const [lang, setLang] = useState(initLang || 'en');
   const [activeExp, setActiveExp] = useState(0);
   const [tagFilter, setTagFilter] = useState('All');
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const [showAllBullets, setShowAllBullets] = useState(false);
   const [showEgg, setShowEgg] = useState(false);
   const [showRecruiter, setShowRecruiter] = useState(false);
   const [activeCountry, setActiveCountry] = useState(null);
@@ -5798,6 +5739,7 @@ function PortfolioApp({
   };
   useEffect(() => setActiveExp(0), [lang]);
   useEffect(() => setTagFilter(t.expFilterAll), [lang]);
+  useEffect(() => setShowAllBullets(false), [activeExp, lang]);
 
   // Typewriter
   useEffect(() => {
@@ -6404,13 +6346,28 @@ function PortfolioApp({
     className: "section-eyebrow"
   }, t.expEyebrow), /*#__PURE__*/React.createElement("h2", {
     className: "section-title"
-  }, t.expTitle, " ", /*#__PURE__*/React.createElement("em", null, t.expTitleEm)), /*#__PURE__*/React.createElement("div", {
-    className: "exp-filter-bar"
+  }, t.expTitle, " ", /*#__PURE__*/React.createElement("em", null, t.expTitleEm)), /*#__PURE__*/React.createElement("button", {
+    className: "exp-filter-toggle",
+    onClick: () => setFiltersOpen(o => !o),
+    "aria-expanded": filtersOpen,
+    "aria-controls": "exp-filter-bar"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "exp-filter-toggle-icon"
+  }, filtersOpen ? '✕' : '🔍'), /*#__PURE__*/React.createElement("span", {
+    className: "exp-filter-toggle-label"
+  }, lang === 'fr' ? 'Filtrer par techno' : 'Filter by tech'), /*#__PURE__*/React.createElement("span", {
+    className: "exp-filter-toggle-active"
+  }, tagFilter), /*#__PURE__*/React.createElement("span", {
+    className: "exp-filter-toggle-chevron"
+  }, filtersOpen ? '▲' : '▼')), /*#__PURE__*/React.createElement("div", {
+    id: "exp-filter-bar",
+    className: `exp-filter-bar${filtersOpen ? ' open' : ''}`
   }, allTags.map(tag => /*#__PURE__*/React.createElement("button", {
     key: tag,
     className: `filter-btn${tagFilter === tag ? ' active' : ''}`,
     onClick: () => {
       setTagFilter(tag);
+      setFiltersOpen(false);
       if (tag !== t.expFilterAll) {
         const m = exps.findIndex(e => e.tags.includes(tag));
         if (m >= 0) setActiveExp(m);
@@ -6441,10 +6398,14 @@ function PortfolioApp({
   }, exp.role), /*#__PURE__*/React.createElement("div", {
     className: "exp-detail-meta"
   }, /*#__PURE__*/React.createElement("span", null, exp.company), /*#__PURE__*/React.createElement("span", null, "\xB7"), /*#__PURE__*/React.createElement("span", null, exp.location), /*#__PURE__*/React.createElement("span", null, "\xB7"), /*#__PURE__*/React.createElement("span", null, exp.revenue)), /*#__PURE__*/React.createElement("ul", {
-    className: "exp-bullets"
+    className: `exp-bullets${showAllBullets ? ' expanded' : ''}`
   }, exp.highlights.map((h, i) => /*#__PURE__*/React.createElement("li", {
     key: i
-  }, h))), /*#__PURE__*/React.createElement("div", {
+  }, h))), exp.highlights.length > 3 && /*#__PURE__*/React.createElement("button", {
+    className: "exp-bullets-toggle",
+    onClick: () => setShowAllBullets(s => !s),
+    "aria-expanded": showAllBullets
+  }, showAllBullets ? lang === 'fr' ? '− Voir moins' : '− See less' : lang === 'fr' ? `+ ${exp.highlights.length - 3} points supplémentaires` : `+ ${exp.highlights.length - 3} more highlights`), /*#__PURE__*/React.createElement("div", {
     className: "exp-tags"
   }, exp.tags.map(tag => /*#__PURE__*/React.createElement("span", {
     key: tag,
@@ -6654,13 +6615,7 @@ function PortfolioApp({
       color: 'var(--text-dim)'
     }
   }, t.skillsTitleDim)), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      gap: '40px',
-      alignItems: 'start',
-      marginTop: '24px'
-    }
+    className: "skills-radar-grid"
   }, /*#__PURE__*/React.createElement("div", {
     className: "skills-grid",
     style: {
@@ -6684,7 +6639,9 @@ function PortfolioApp({
     }
   })), /*#__PURE__*/React.createElement("div", {
     className: "skill-pct"
-  }, s.pct, "%")))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+  }, s.pct, "%")))), /*#__PURE__*/React.createElement("div", {
+    className: "skills-radar-col"
+  }, /*#__PURE__*/React.createElement("div", {
     className: "section-eyebrow",
     style: {
       marginBottom: '0'
@@ -6975,23 +6932,11 @@ function PortfolioApp({
   }, t.terminalDesc), /*#__PURE__*/React.createElement(TerminalChatbot, {
     lang: lang
   }))), /*#__PURE__*/React.createElement("div", {
-    className: "world-map-section",
-    style: {
-      padding: '80px 0'
-    }
+    className: "world-map-section"
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      maxWidth: '1500px',
-      margin: '0 auto',
-      padding: '0 80px'
-    }
+    className: "world-map-inner"
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'flex-end',
-      marginBottom: 40
-    }
+    className: "intl-header"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: "'Space Grotesk',sans-serif",
@@ -7006,50 +6951,13 @@ function PortfolioApp({
       gap: 8
     }
   }, "\uD83C\uDF0D ", lang === 'fr' ? 'Présence Internationale' : 'International Presence'), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontFamily: "'Space Grotesk',sans-serif",
-      fontWeight: 800,
-      fontSize: 'clamp(2rem,4vw,3.2rem)',
-      color: 'var(--text)',
-      letterSpacing: '-1.5px',
-      lineHeight: 1.05,
-      marginBottom: 0
-    }
-  }, lang === 'fr' ? 'Opérationnel' : 'Operational', /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("em", {
-    style: {
-      color: 'var(--accent3)',
-      fontStyle: 'italic'
-    }
-  }, lang === 'fr' ? 'partout dans le monde.' : 'anywhere in the world.'))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      backdropFilter: 'var(--glass-blur)',
-      WebkitBackdropFilter: 'var(--glass-blur)',
-      background: 'var(--glass-bg)',
-      border: '1px solid var(--glass-border)',
-      borderRadius: 16,
-      padding: '16px 24px',
-      textAlign: 'center',
-      boxShadow: 'var(--glass-shadow)'
-    }
+    className: "intl-title"
+  }, lang === 'fr' ? 'Opérationnel' : 'Operational', /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("em", null, lang === 'fr' ? 'partout dans le monde.' : 'anywhere in the world.'))), /*#__PURE__*/React.createElement("div", {
+    className: "intl-badge"
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Grotesk',sans-serif",
-      fontWeight: 800,
-      fontSize: '3rem',
-      color: '#415a77',
-      lineHeight: 1,
-      letterSpacing: '-2px'
-    }
+    className: "intl-badge-num"
   }, countries.length), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Grotesk',sans-serif",
-      fontWeight: 500,
-      fontSize: '.65rem',
-      color: 'var(--text-mute)',
-      letterSpacing: '2px',
-      textTransform: 'uppercase',
-      marginTop: 4
-    }
+    className: "intl-badge-label"
   }, lang === 'fr' ? 'pays vécus' : 'countries lived'))), /*#__PURE__*/React.createElement(WorldMap, {
     countries: countries,
     setActiveCountry: setActiveCountry,
