@@ -760,6 +760,18 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:14px;height:14px;b
 .tcard-read:hover{opacity:.65}
 .testi-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px}
 .testi-modal{background:var(--bg-card);border:1px solid var(--tcard-color,var(--accent1));border-radius:20px;padding:32px;max-width:640px;width:100%;position:relative;max-height:80vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.4)}
+/* Bigger meta text inside the modal — the ticker card's .4rem labels become
+   borderline unreadable in the large modal. Override only inside .testi-modal. */
+.testi-modal .tcard-name{font-size:1.15rem!important;margin-bottom:6px}
+.testi-modal .tcard-role{font-size:.62rem;letter-spacing:2px;margin-top:4px}
+.testi-modal .tcard-company{font-size:.64rem;letter-spacing:2px;margin-top:3px;font-weight:700}
+.testi-modal .tcard-date{font-size:.56rem;letter-spacing:1.5px;margin-top:8px;color:var(--text-sec)}
+.testi-modal .tcard-stars{font-size:.9rem;letter-spacing:3px}
+@media(max-width:600px){
+  .testi-modal{padding:24px 20px}
+  .testi-modal .tcard-name{font-size:1.05rem!important}
+  .testi-modal .tcard-role,.testi-modal .tcard-company{font-size:.58rem}
+}
 .testi-modal-close{position:absolute;top:16px;right:16px;background:none;border:none;cursor:pointer;font-size:.9rem;color:var(--text-dim);transition:color .2s;line-height:1}
 .testi-modal-close:hover{color:var(--text)}
 .testi-modal-quote{font-size:.88rem;color:var(--text-sec);line-height:1.95;padding-left:16px;border-left:3px solid var(--tcard-color,var(--accent1));font-style:italic}
@@ -800,6 +812,10 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:14px;height:14px;b
 @media(max-width:600px){.intl-badge-label{margin-top:0;font-size:.56rem}}
 
 /* ── Countries — static grid (all 6 visible, no ticker) ─────────────────── */
+.countries-hint{display:inline-flex;align-items:center;gap:8px;margin-bottom:14px;padding:8px 14px;background:rgba(0,240,168,.08);border:1px solid rgba(0,240,168,.22);border-radius:20px;font-family:'Space Mono',monospace;font-size:.5rem;color:var(--accent3);letter-spacing:1.5px;text-transform:uppercase;animation:pulse 2.5s ease-in-out infinite}
+.countries-hint-icon{font-size:.8rem;animation:bounce 1.8s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+
 .countries-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
 @media(max-width:520px){.countries-grid{grid-template-columns:1fr}}
 
@@ -813,16 +829,22 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:14px;height:14px;b
   transition:all .22s cubic-bezier(.16,1,.3,1);
   text-align:left;width:100%;
   backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);
+  position:relative;
 }
-.country-card-grid:hover{border-color:var(--accent1);transform:translateY(-3px);box-shadow:var(--glass-shadow)}
-.country-card-grid:focus-visible{outline:2px solid var(--accent1);outline-offset:2px}
-.country-grid-flag{width:46px;height:auto;display:block;border-radius:4px;flex-shrink:0;box-shadow:0 1px 6px rgba(0,0,0,.35);margin-top:2px}
+.country-card-grid::before{content:'';position:absolute;inset:0;border-radius:14px;padding:1px;background:linear-gradient(135deg,transparent,rgba(0,240,168,.0),transparent);opacity:0;transition:opacity .25s;pointer-events:none}
+.country-card-grid:hover{border-color:var(--accent3);transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,240,168,.15),0 0 0 1px rgba(0,240,168,.15)}
+.country-card-grid:active{transform:translateY(-2px) scale(.995)}
+.country-card-grid:focus-visible{outline:2px solid var(--accent3);outline-offset:2px}
+.country-grid-flag{width:46px;height:auto;display:block;border-radius:4px;flex-shrink:0;box-shadow:0 1px 6px rgba(0,0,0,.35);margin-top:2px;transition:transform .22s}
+.country-card-grid:hover .country-grid-flag{transform:scale(1.08)}
 .country-grid-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
 .country-grid-top{display:flex;align-items:center;justify-content:space-between;gap:6px}
 .country-grid-top .country-card-name{margin-bottom:0}
 .country-card-grid .country-card-sub{white-space:normal}
 .country-grid-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
-.country-card-grid:hover .country-card-chevron{opacity:1;color:var(--accent1);transform:translateX(3px)}
+.country-grid-more{font-family:'Space Mono',monospace;font-size:.44rem;color:var(--accent3);letter-spacing:1.5px;text-transform:uppercase;margin-top:8px;opacity:.7;transition:opacity .2s}
+.country-card-grid:hover .country-grid-more{opacity:1}
+.country-card-grid:hover .country-card-chevron{opacity:1;color:var(--accent3);transform:translateX(4px)}
 
 /* ── Countries — horizontal ticker (see top of tickers section for base styles) ── */
 .country-card-compact{
@@ -1079,6 +1101,15 @@ input[type=range]::-webkit-slider-thumb{appearance:none;width:14px;height:14px;b
 .vmap-stat-n{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--accent1);line-height:1}
 .vmap-stat-l{font-family:'Space Mono',monospace;font-size:.44rem;color:var(--text-mute);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
 .vmap-container{position:relative;border:1px solid rgba(0,240,168,.22);border-radius:12px;overflow:hidden;background:#0A1218;height:420px;box-shadow:0 0 0 1px rgba(0,240,168,.05) inset,0 8px 32px rgba(0,0,0,.35)}
+/* Voyager tiles are light-grey by default — dim + cool-tint to stay on theme
+   without killing readability. Applies only to tile images, not markers. */
+.vmap-container .leaflet-tile{filter:brightness(.68) saturate(.75) hue-rotate(-8deg)}
+body[data-theme=light] .vmap-container .leaflet-tile{filter:none}
+/* Leaflet zoom control — match ADM.SYS theme */
+.vmap-container .leaflet-control-zoom{border:1px solid rgba(0,240,168,.25)!important;border-radius:8px!important;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.vmap-container .leaflet-control-zoom a{background:rgba(10,18,24,.92)!important;color:var(--accent3)!important;border:none!important;width:30px!important;height:30px!important;line-height:30px!important;font-size:18px!important;font-weight:700;transition:background .2s}
+.vmap-container .leaflet-control-zoom a:hover{background:rgba(0,240,168,.18)!important;color:#fff!important}
+.vmap-container .leaflet-control-zoom-in{border-bottom:1px solid rgba(0,240,168,.15)!important}
 #visitor-map{width:100%;height:100%;position:absolute;inset:0}
 #visitor-map{height:380px;width:100%;background:#010409;border-radius:12px}
 #visitor-map-human{width:100%;height:340px;border-radius:18px;}

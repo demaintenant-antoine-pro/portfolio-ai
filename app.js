@@ -4733,25 +4733,30 @@ function VisitorMap({
   }, []);
   const displayCount = realCount ?? FALLBACK;
 
-  // 3. Init Leaflet — dark tiles WITH labels so you can actually read where
-  // visitors come from. Previously used `dark_nolabels` which hid all
-  // country/city names, making the map look like a broken black canvas.
+  // 3. Init Leaflet — Voyager tiles (clean neutral grey with labels) in both
+  // modes. `dark_all` was still too dim against our black background; Voyager
+  // gives actual readability while a small CSS tint keeps it on-theme.
   useEffect(() => {
     if (!mapRef.current || leafletMap.current) return;
-    const tileUrl = isHuman ? 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png' : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+    const tileUrl = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
     const initMap = L => {
       if (!mapRef.current) return;
       const map = L.map(mapRef.current, {
         center: [30, 15],
         zoom: 3,
         minZoom: 2,
-        maxZoom: 8,
+        maxZoom: 10,
         zoomControl: false,
-        scrollWheelZoom: false,
+        scrollWheelZoom: true,
         attributionControl: false,
         dragging: true,
-        worldCopyJump: true
+        worldCopyJump: true,
+        doubleClickZoom: true,
+        touchZoom: true
       });
+      L.control.zoom({
+        position: 'topright'
+      }).addTo(map);
       L.tileLayer(tileUrl, {
         maxZoom: 19,
         subdomains: 'abcd'
@@ -5597,10 +5602,15 @@ function WorldMap({
       width: '100%'
     }
   }, /*#__PURE__*/React.createElement("div", {
+    className: "countries-hint"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "countries-hint-icon"
+  }, "\uD83D\uDC46"), /*#__PURE__*/React.createElement("span", null, lang === 'fr' ? 'Cliquez sur un pays pour découvrir mon histoire là-bas' : 'Click on any country to discover my story there')), /*#__PURE__*/React.createElement("div", {
     className: "countries-grid"
   }, countries.map((c, i) => /*#__PURE__*/React.createElement("button", {
     key: i,
     className: "country-card-grid",
+    "aria-label": lang === 'fr' ? `Découvrir mon histoire en ${c.n}` : `Discover my story in ${c.n}`,
     onClick: () => setActiveCountry(c)
   }, /*#__PURE__*/React.createElement("img", {
     src: `https://flagcdn.com/w80/${c.iso}.png`,
@@ -5622,7 +5632,9 @@ function WorldMap({
   }, c.tags.slice(0, 3).map((tag, j) => /*#__PURE__*/React.createElement("span", {
     key: j,
     className: "country-card-tag"
-  }, tag))))))), /*#__PURE__*/React.createElement("div", {
+  }, tag))), /*#__PURE__*/React.createElement("div", {
+    className: "country-grid-more"
+  }, lang === 'fr' ? 'Voir plus →' : 'Read more →'))))), /*#__PURE__*/React.createElement("div", {
     className: "countries-cta"
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -6738,10 +6750,7 @@ function PortfolioApp({
   }, testiModal.avatar)), /*#__PURE__*/React.createElement("div", {
     className: "tcard-meta"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "tcard-name",
-    style: {
-      fontSize: '1rem'
-    }
+    className: "tcard-name"
   }, testiModal.name), /*#__PURE__*/React.createElement("div", {
     className: "tcard-role"
   }, testiModal.title[lang]), /*#__PURE__*/React.createElement("div", {

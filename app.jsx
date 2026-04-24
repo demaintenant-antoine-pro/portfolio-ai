@@ -1457,21 +1457,21 @@ function VisitorMap({lang,mode}){
 
   const displayCount=realCount??FALLBACK;
 
-  // 3. Init Leaflet — dark tiles WITH labels so you can actually read where
-  // visitors come from. Previously used `dark_nolabels` which hid all
-  // country/city names, making the map look like a broken black canvas.
+  // 3. Init Leaflet — Voyager tiles (clean neutral grey with labels) in both
+  // modes. `dark_all` was still too dim against our black background; Voyager
+  // gives actual readability while a small CSS tint keeps it on-theme.
   useEffect(()=>{
     if(!mapRef.current||leafletMap.current)return;
-    const tileUrl=isHuman
-      ?'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
-      :'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+    const tileUrl='https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
     const initMap=(L)=>{
       if(!mapRef.current)return;
       const map=L.map(mapRef.current,{
-        center:[30,15],zoom:3,minZoom:2,maxZoom:8,
-        zoomControl:false,scrollWheelZoom:false,
-        attributionControl:false,dragging:true,worldCopyJump:true
+        center:[30,15],zoom:3,minZoom:2,maxZoom:10,
+        zoomControl:false,scrollWheelZoom:true,
+        attributionControl:false,dragging:true,worldCopyJump:true,
+        doubleClickZoom:true,touchZoom:true
       });
+      L.control.zoom({position:'topright'}).addTo(map);
       L.tileLayer(tileUrl,{maxZoom:19,subdomains:'abcd'}).addTo(map);
       markersLayer.current=L.layerGroup().addTo(map);
       leafletMap.current=map;
@@ -1792,10 +1792,15 @@ function CalendlyModal({lang,onClose}){
 function WorldMap({countries,setActiveCountry,lang}){
   return(
     <div style={{width:'100%'}}>
+      <div className="countries-hint">
+        <span className="countries-hint-icon">👆</span>
+        <span>{lang==='fr'?'Cliquez sur un pays pour découvrir mon histoire là-bas':'Click on any country to discover my story there'}</span>
+      </div>
       <div className="countries-grid">
         {countries.map((c,i)=>(
           <button key={i}
             className="country-card-grid"
+            aria-label={lang==='fr'?`Découvrir mon histoire en ${c.n}`:`Discover my story in ${c.n}`}
             onClick={()=>setActiveCountry(c)}>
             <img src={`https://flagcdn.com/w80/${c.iso}.png`} alt={c.n} className="country-grid-flag"/>
             <div className="country-grid-body">
@@ -1809,6 +1814,7 @@ function WorldMap({countries,setActiveCountry,lang}){
                   <span key={j} className="country-card-tag">{tag}</span>
                 ))}
               </div>
+              <div className="country-grid-more">{lang==='fr'?'Voir plus →':'Read more →'}</div>
             </div>
           </button>
         ))}
@@ -2353,7 +2359,7 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
                 <span style={{display:'none',color:testiModal.color,fontWeight:700,fontSize:'.85rem'}}>{testiModal.avatar}</span>
               </div>
               <div className="tcard-meta">
-                <div className="tcard-name" style={{fontSize:'1rem'}}>{testiModal.name}</div>
+                <div className="tcard-name">{testiModal.name}</div>
                 <div className="tcard-role">{testiModal.title[lang]}</div>
                 <div className="tcard-company">{testiModal.company}</div>
                 <div className="tcard-date">{testiModal.date[lang]}</div>
