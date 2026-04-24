@@ -6502,12 +6502,7 @@ function PortfolioApp({
     key: i,
     className: "hero-city-pill"
   }, city))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'flex-start',
-      gap: '40px',
-      flexWrap: 'wrap'
-    }
+    className: "hero-main-row"
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       flex: '0 0 auto',
@@ -6522,7 +6517,29 @@ function PortfolioApp({
     className: "accent"
   }, "DE")), /*#__PURE__*/React.createElement("div", {
     className: "outline"
-  }, "MAINTENANT")))), /*#__PURE__*/React.createElement("p", {
+  }, "MAINTENANT"))), /*#__PURE__*/React.createElement("div", {
+    className: "hero-photo-wrap",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "hero-photo-blob"
+  }), /*#__PURE__*/React.createElement("img", {
+    src: "images/antoine.png",
+    alt: "Antoine de Maintenant",
+    className: "hero-photo",
+    loading: "eager"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "hero-photo-scan"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "hero-photo-tag"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "hero-photo-tag-dot"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "hero-photo-tag-lead"
+  }, "AI Expert"), /*#__PURE__*/React.createElement("span", {
+    className: "hero-photo-tag-sep"
+  }, "\xB7"), /*#__PURE__*/React.createElement("span", {
+    className: "hero-photo-tag-desc"
+  }, lang === 'fr' ? 'Agentic systems + apps sur mesure' : 'Agentic systems + custom apps')))), /*#__PURE__*/React.createElement("p", {
     className: "hero-sub"
   }, t.heroSub1, " ", /*#__PURE__*/React.createElement("span", null, t.heroSub1b), " ", t.heroSub2, /*#__PURE__*/React.createElement("br", null), t.heroSub3), /*#__PURE__*/React.createElement("span", {
     className: "xp-badge-inline"
@@ -6714,7 +6731,7 @@ function PortfolioApp({
   }, "\"", item.highlight[lang], "\""), /*#__PURE__*/React.createElement("button", {
     className: "tcard-read",
     onClick: () => setTestiModal(item)
-  }, lang === 'fr' ? 'Lire tout →' : 'Read full →')))))), testiModal && /*#__PURE__*/React.createElement("div", {
+  }, lang === 'fr' ? 'Lire tout →' : 'Read full →')))))), testiModal && ReactDOM.createPortal(/*#__PURE__*/React.createElement("div", {
     className: "testi-modal-bg",
     onClick: () => setTestiModal(null)
   }, /*#__PURE__*/React.createElement("div", {
@@ -6769,7 +6786,7 @@ function PortfolioApp({
     }
   }, '★'.repeat(testiModal.stars)), /*#__PURE__*/React.createElement("div", {
     className: "testi-modal-quote"
-  }, "\"", testiModal.q[lang], "\"")))), /*#__PURE__*/React.createElement("div", {
+  }, "\"", testiModal.q[lang], "\""))), document.body)), /*#__PURE__*/React.createElement("div", {
     id: "dashboard",
     className: "section-full"
   }, /*#__PURE__*/React.createElement("div", {

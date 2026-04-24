@@ -2251,13 +2251,24 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
               <span key={i} className="hero-city-pill">{city}</span>
             ))}
           </div>
-          <div style={{display:'flex',alignItems:'flex-start',gap:'40px',flexWrap:'wrap'}}>
+          <div className="hero-main-row">
             <div style={{flex:'0 0 auto',position:'relative'}}>
               <h1 className="hero-h1">
                 <div className="glitch-wrap" data-text="ANTOINE">ANTOINE</div>
                 <div><span className="accent">DE</span></div>
                 <div className="outline">MAINTENANT</div>
               </h1>
+            </div>
+            <div className="hero-photo-wrap" aria-hidden="true">
+              <div className="hero-photo-blob"/>
+              <img src="images/antoine.png" alt="Antoine de Maintenant" className="hero-photo" loading="eager"/>
+              <div className="hero-photo-scan"/>
+              <div className="hero-photo-tag">
+                <span className="hero-photo-tag-dot"/>
+                <span className="hero-photo-tag-lead">AI Expert</span>
+                <span className="hero-photo-tag-sep">·</span>
+                <span className="hero-photo-tag-desc">{lang==='fr'?'Agentic systems + apps sur mesure':'Agentic systems + custom apps'}</span>
+              </div>
             </div>
           </div>
           <p className="hero-sub">{t.heroSub1} <span>{t.heroSub1b}</span> {t.heroSub2}<br/>{t.heroSub3}</p>
@@ -2347,7 +2358,7 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
           </div>
         </div>
       </div>
-      {testiModal&&(
+      {testiModal&&ReactDOM.createPortal(
         <div className="testi-modal-bg" onClick={()=>setTestiModal(null)}>
           <div className="testi-modal" onClick={e=>e.stopPropagation()} style={{'--tcard-color':testiModal.color}}>
             <button className="testi-modal-close" onClick={()=>setTestiModal(null)}>✕</button>
@@ -2369,7 +2380,8 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
             <div className="tcard-stars" style={{marginBottom:16}}>{'★'.repeat(testiModal.stars)}</div>
             <div className="testi-modal-quote">"{testiModal.q[lang]}"</div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
 
