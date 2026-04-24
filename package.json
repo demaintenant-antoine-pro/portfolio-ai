@@ -1,7 +1,7 @@
 {
   "name": "portfolio-ai",
   "version": "1.1.0",
-  "description": "Interactive portfolio — Antoine de Maintenant · AI Specialist & BI Lead. React SPA with dual-profile experience, interactive demos and visitor analytics.",
+  "description": "Interactive portfolio — Antoine de Maintenant · AI Expert. React SPA with interactive demos and visitor analytics, showcasing enterprise AI deployment, C-suite enablement and custom AI applications.",
   "main": "main.js",
   "directories": {
     "doc": "docs"
