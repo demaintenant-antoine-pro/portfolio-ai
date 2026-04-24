@@ -11,7 +11,7 @@ const LangCtx = createContext('en');
 /* ─── TRANSLATIONS ────────────────────────────────────────────────────────── */
 const T = {
   en: {
-    nav: ['about', 'dashboard', 'pipeline', 'experience', 'projects', 'stack', 'certificates', 'terminal', 'testimonials', 'blog', 'contact'],
+    nav: ['about', 'experience', 'testimonials', 'dashboard', 'pipeline', 'projects', 'stack', 'certificates', 'blog', 'contact', 'terminal'],
     navLabels: {
       about: 'About',
       dashboard: 'Dashboard',
@@ -141,7 +141,7 @@ const T = {
     }]
   },
   fr: {
-    nav: ['about', 'dashboard', 'pipeline', 'experience', 'projects', 'stack', 'certificates', 'terminal', 'testimonials', 'blog', 'contact'],
+    nav: ['about', 'experience', 'testimonials', 'dashboard', 'pipeline', 'projects', 'stack', 'certificates', 'blog', 'contact', 'terminal'],
     navLabels: {
       about: 'Profil',
       dashboard: 'Dashboard',
@@ -275,7 +275,7 @@ const T = {
 /* ─── HUMAN TEXTS — même structure que T, langage simple sans jargon ──────── */
 const TH = {
   en: {
-    nav: ['about', 'dashboard', 'pipeline', 'experience', 'projects', 'certificates', 'terminal', 'testimonials', 'blog', 'contact'],
+    nav: ['about', 'experience', 'testimonials', 'dashboard', 'pipeline', 'projects', 'certificates', 'blog', 'contact', 'terminal'],
     navLabels: {
       about: 'Home',
       dashboard: 'Proof',
@@ -404,7 +404,7 @@ const TH = {
     }]
   },
   fr: {
-    nav: ['about', 'dashboard', 'pipeline', 'experience', 'projects', 'certificates', 'terminal', 'testimonials', 'blog', 'contact'],
+    nav: ['about', 'experience', 'testimonials', 'dashboard', 'pipeline', 'projects', 'certificates', 'blog', 'contact', 'terminal'],
     navLabels: {
       about: 'Accueil',
       dashboard: 'Preuve',
@@ -5498,39 +5498,32 @@ function WorldMap({
       width: '100%'
     }
   }, /*#__PURE__*/React.createElement("div", {
-    className: "countries-ticker-wrap"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "countries-ticker"
-  }, [...countries, ...countries].map((c, i) => /*#__PURE__*/React.createElement("button", {
+    className: "countries-grid"
+  }, countries.map((c, i) => /*#__PURE__*/React.createElement("button", {
     key: i,
-    className: "country-card country-card-compact",
-    "aria-hidden": i >= countries.length ? 'true' : 'false',
+    className: "country-card-grid",
     onClick: () => setActiveCountry(c)
   }, /*#__PURE__*/React.createElement("img", {
-    src: `https://flagcdn.com/w40/${c.iso}.png`,
+    src: `https://flagcdn.com/w80/${c.iso}.png`,
     alt: c.n,
-    style: {
-      width: 34,
-      height: 'auto',
-      display: 'block',
-      borderRadius: 3,
-      flexShrink: 0,
-      boxShadow: '0 1px 4px rgba(0,0,0,.3)'
-    }
+    className: "country-grid-flag"
   }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1,
-      minWidth: 0,
-      textAlign: 'left'
-    }
+    className: "country-grid-body"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "country-grid-top"
   }, /*#__PURE__*/React.createElement("div", {
     className: "country-card-name"
-  }, c.n), /*#__PURE__*/React.createElement("div", {
-    className: "country-card-sub"
-  }, c.sub)), /*#__PURE__*/React.createElement("span", {
+  }, c.n), /*#__PURE__*/React.createElement("span", {
     className: "country-card-chevron",
     "aria-hidden": "true"
-  }, "\u2192"))))), /*#__PURE__*/React.createElement("div", {
+  }, "\u2192")), /*#__PURE__*/React.createElement("div", {
+    className: "country-card-sub"
+  }, c.sub), /*#__PURE__*/React.createElement("div", {
+    className: "country-grid-tags"
+  }, c.tags.slice(0, 3).map((tag, j) => /*#__PURE__*/React.createElement("span", {
+    key: j,
+    className: "country-card-tag"
+  }, tag))))))), /*#__PURE__*/React.createElement("div", {
     className: "countries-cta"
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -5562,14 +5555,17 @@ const CHAPTERS = [{
   id: 'about',
   label: 'INTRO'
 }, {
-  id: 'dashboard',
+  id: 'experience',
+  label: 'JOURNEY'
+}, {
+  id: 'testimonials',
   label: 'PROOF'
+}, {
+  id: 'dashboard',
+  label: 'DASHBOARD'
 }, {
   id: 'pipeline',
   label: 'DEMO'
-}, {
-  id: 'experience',
-  label: 'XP'
 }, {
   id: 'projects',
   label: 'WORK'
@@ -5577,11 +5573,11 @@ const CHAPTERS = [{
   id: 'certificates',
   label: 'CERTS'
 }, {
-  id: 'terminal',
-  label: 'CHAT'
-}, {
   id: 'contact',
   label: 'HIRE'
+}, {
+  id: 'terminal',
+  label: 'CHAT'
 }];
 
 /* ─── CERT WALL ──────────────────────────────────────────────────────────────── */
@@ -6548,6 +6544,13 @@ function PortfolioApp({
       margin: '0 auto'
     }
   }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'relative',
+      marginBottom: '24px'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "chapter-label"
+  }, "Chapter 02 \u2014 The Proof")), /*#__PURE__*/React.createElement("div", {
     className: "section-eyebrow"
   }, t.testiEyebrow), /*#__PURE__*/React.createElement("h2", {
     className: "section-title"
@@ -6675,7 +6678,7 @@ function PortfolioApp({
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "chapter-label"
-  }, "Chapter 03 \u2014 The Proof"), /*#__PURE__*/React.createElement("div", {
+  }, "Chapter 03 \u2014 The Dashboard"), /*#__PURE__*/React.createElement("div", {
     className: "chapter-num",
     style: {
       position: 'absolute',

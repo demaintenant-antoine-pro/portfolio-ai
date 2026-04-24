@@ -257,18 +257,35 @@ document.addEventListener('mouseover',e=>{
     }
 
     // ─── Mouse drag (desktop) — pointer events for non-touch only ───
+    // Defer startDrag + setPointerCapture until real horizontal movement.
+    // Capturing the pointer on pointerdown redirects the synthesised click
+    // away from nested buttons (e.g. "Read full", country cards, project
+    // links), so simple clicks were being swallowed. Now a click with zero
+    // movement never captures the pointer and propagates normally.
+    let pDown = false, pStartX = 0, pPointerId = null;
     wrap.addEventListener('pointerdown', e => {
       if(e.pointerType === 'touch') return; // touch path below handles direction filter
-      startDrag(e.clientX);
-      try { wrap.setPointerCapture(e.pointerId); } catch(_){}
+      pDown = true;
+      pStartX = e.clientX;
+      pPointerId = e.pointerId;
     });
     wrap.addEventListener('pointermove', e => {
-      if(!dragging || e.pointerType === 'touch') return;
+      if(e.pointerType === 'touch') return;
+      if(pDown && !dragging){
+        if(Math.abs(e.clientX - pStartX) > 6){
+          startDrag(pStartX);
+          try { wrap.setPointerCapture(pPointerId); } catch(_){}
+        } else {
+          return;
+        }
+      }
+      if(!dragging) return;
       moveDrag(e.clientX);
     });
-    wrap.addEventListener('pointerup', endDrag);
-    wrap.addEventListener('pointercancel', endDrag);
-    wrap.addEventListener('pointerleave', endDrag);
+    function mouseUp(){ pDown = false; endDrag(); }
+    wrap.addEventListener('pointerup', mouseUp);
+    wrap.addEventListener('pointercancel', mouseUp);
+    wrap.addEventListener('pointerleave', mouseUp);
 
     // ─── Touch (mobile) — only horizontal swipes, vertical passes through ───
     wrap.addEventListener('touchstart', e => {

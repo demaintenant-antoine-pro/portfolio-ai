@@ -3,7 +3,7 @@ const LangCtx=createContext('en');
 
 /* ─── TRANSLATIONS ────────────────────────────────────────────────────────── */
 const T={en:{
-  nav:['about','dashboard','pipeline','experience','projects','stack','certificates','terminal','testimonials','blog','contact'],
+  nav:['about','experience','testimonials','dashboard','pipeline','projects','stack','certificates','blog','contact','terminal'],
   navLabels:{about:'About',dashboard:'Dashboard',pipeline:'Pipeline',experience:'XP',projects:'Projects',stack:'Stack',certificates:'Certs',terminal:'Terminal',testimonials:'Reviews',blog:'Blog',contact:'Contact'},
   heroSub1:"AI expert. I embed",heroSub1b:"agentic systems",heroSub2:" into your business ops — and coach C-levels to run them daily. 60–85% time saved.",heroSub3:"AI Architect · Automation · Executive Training · 5+ yrs CPG, SaaS, CSR.",
   xp:"yrs XP",ctaContact:"Get in Touch",ctaCV:"↓ Download CV",
@@ -43,7 +43,7 @@ const T={en:{
     {icon:'🤝',label:'HR / Talent Acquisition',sub:'Give me the career summary and soft skills'},
   ],
 },fr:{
-  nav:['about','dashboard','pipeline','experience','projects','stack','certificates','terminal','testimonials','blog','contact'],
+  nav:['about','experience','testimonials','dashboard','pipeline','projects','stack','certificates','blog','contact','terminal'],
   navLabels:{about:'Profil',dashboard:'Dashboard',pipeline:'Pipeline',experience:'Expérience',projects:'Projets',stack:'Stack',certificates:'Certifs',terminal:'Terminal',testimonials:'Avis',blog:'Blog',contact:'Contact'},
   heroSub1:"Expert IA. J'intègre",heroSub1b:"des systèmes agentiques",heroSub2:" dans vos opérations — et je forme vos C-levels à les piloter au quotidien. 60 à 85 % de temps gagné.",heroSub3:"Architecte IA · Automatisation · Formation dirigeants · 5+ ans CPG, SaaS, RSE.",
   xp:"ans d'XP",ctaContact:"Me contacter",ctaCV:"↓ Télécharger CV",
@@ -86,7 +86,7 @@ const T={en:{
 
 /* ─── HUMAN TEXTS — même structure que T, langage simple sans jargon ──────── */
 const TH={en:{
-  nav:['about','dashboard','pipeline','experience','projects','certificates','terminal','testimonials','blog','contact'],
+  nav:['about','experience','testimonials','dashboard','pipeline','projects','certificates','blog','contact','terminal'],
   navLabels:{about:'Home',dashboard:'Proof',pipeline:'Demo',experience:'Journey',projects:'Results',certificates:'Certs',terminal:'Ask me',testimonials:'Reviews',blog:'Blog',contact:'Contact'},
   heroSub1:"I integrate AI into your existing operations",heroSub1b:"connecting your tools, automating your workflows",heroSub2:"— enabling your teams to focus on decisions that drive revenue. Across Finance, Sales, Supply Chain and HR, I turn manual processes into autonomous systems that deliver measurable results.",heroSub3:"AI Transformation · Automation · BI · 5+ years CPG, SaaS & CSR.",
   xp:"yrs experience",ctaContact:"Talk in 30 min",ctaCV:"↓ Download CV",
@@ -126,7 +126,7 @@ const TH={en:{
     {icon:'💡',label:'Entrepreneur / Founder',sub:'What can you do for my startup?'},
   ],
 },fr:{
-  nav:['about','dashboard','pipeline','experience','projects','certificates','terminal','testimonials','blog','contact'],
+  nav:['about','experience','testimonials','dashboard','pipeline','projects','certificates','blog','contact','terminal'],
   navLabels:{about:'Accueil',dashboard:'Preuve',pipeline:'Démo',experience:'Parcours',projects:'Résultats',certificates:'Certifs',terminal:'Posez-moi',testimonials:'Avis',blog:'Blog',contact:'Contact'},
   heroSub1:"J'intègre l'IA dans vos opérations existantes",heroSub1b:"en connectant vos outils et automatisant vos processus",heroSub2:"— pour permettre à vos équipes de se concentrer sur les décisions à valeur ajoutée. Finance, Sales, Supply Chain, RH : je transforme le travail manuel en systèmes autonomes qui délivrent des résultats mesurables.",heroSub3:"Transformation IA · Automatisation · BI · 5+ ans CPG, SaaS & RSE.",
   xp:"ans d'expérience",ctaContact:"Parler en 30 min",ctaCV:"↓ Télécharger CV",
@@ -1751,22 +1751,26 @@ function CalendlyModal({lang,onClose}){
 function WorldMap({countries,setActiveCountry,lang}){
   return(
     <div style={{width:'100%'}}>
-      <div className="countries-ticker-wrap">
-        <div className="countries-ticker">
-          {[...countries,...countries].map((c,i)=>(
-            <button key={i}
-              className="country-card country-card-compact"
-              aria-hidden={i>=countries.length?'true':'false'}
-              onClick={()=>setActiveCountry(c)}>
-              <img src={`https://flagcdn.com/w40/${c.iso}.png`} alt={c.n} style={{width:34,height:'auto',display:'block',borderRadius:3,flexShrink:0,boxShadow:'0 1px 4px rgba(0,0,0,.3)'}}/>
-              <div style={{flex:1,minWidth:0,textAlign:'left'}}>
+      <div className="countries-grid">
+        {countries.map((c,i)=>(
+          <button key={i}
+            className="country-card-grid"
+            onClick={()=>setActiveCountry(c)}>
+            <img src={`https://flagcdn.com/w80/${c.iso}.png`} alt={c.n} className="country-grid-flag"/>
+            <div className="country-grid-body">
+              <div className="country-grid-top">
                 <div className="country-card-name">{c.n}</div>
-                <div className="country-card-sub">{c.sub}</div>
+                <span className="country-card-chevron" aria-hidden="true">→</span>
               </div>
-              <span className="country-card-chevron" aria-hidden="true">→</span>
-            </button>
-          ))}
-        </div>
+              <div className="country-card-sub">{c.sub}</div>
+              <div className="country-grid-tags">
+                {c.tags.slice(0,3).map((tag,j)=>(
+                  <span key={j} className="country-card-tag">{tag}</span>
+                ))}
+              </div>
+            </div>
+          </button>
+        ))}
       </div>
       <div className="countries-cta">
         <div style={{display:'flex',alignItems:'center',gap:8,minWidth:0,flex:1}}>
@@ -1782,9 +1786,9 @@ function WorldMap({countries,setActiveCountry,lang}){
 /* ─── HUMAN APP ──────────────────────────────────────────────────────────────── */
 
 const CHAPTERS=[
-  {id:'about',label:'INTRO'},{id:'dashboard',label:'PROOF'},{id:'pipeline',label:'DEMO'},
-  {id:'experience',label:'XP'},{id:'projects',label:'WORK'},{id:'certificates',label:'CERTS'},
-  {id:'terminal',label:'CHAT'},{id:'contact',label:'HIRE'},
+  {id:'about',label:'INTRO'},{id:'experience',label:'JOURNEY'},{id:'testimonials',label:'PROOF'},
+  {id:'dashboard',label:'DASHBOARD'},{id:'pipeline',label:'DEMO'},{id:'projects',label:'WORK'},
+  {id:'certificates',label:'CERTS'},{id:'contact',label:'HIRE'},{id:'terminal',label:'CHAT'},
 ];
 
 /* ─── CERT WALL ──────────────────────────────────────────────────────────────── */
@@ -2263,6 +2267,9 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
     {/* CH2 — TESTIMONIALS */}
     <section id="testimonials" className="section" style={{background:'transparent'}}>
       <div style={{maxWidth:'1500px',margin:'0 auto'}}>
+        <div style={{position:'relative',marginBottom:'24px'}}>
+          <div className="chapter-label">Chapter 02 — The Proof</div>
+        </div>
         <div className="section-eyebrow">{t.testiEyebrow}</div>
         <h2 className="section-title">{t.testiTitle} <em>{t.testiTitleEm}</em></h2>
         <div className="testi-ticker-wrap reveal">
@@ -2323,7 +2330,7 @@ function PortfolioApp({initLang,mode,onSwitchMode}){
     <div id="dashboard" className="section-full">
       <div className="section-full-inner" style={{paddingTop:'80px',paddingBottom:'80px'}}>
         <div className="chapter-header" style={{padding:'0 0 32px',position:'relative'}}>
-          <div className="chapter-label">Chapter 03 — The Proof</div>
+          <div className="chapter-label">Chapter 03 — The Dashboard</div>
           <div className="chapter-num" style={{position:'absolute',top:'-20px',right:'0',fontSize:'5rem',color:'var(--border-dim)'}}>03</div>
         </div>
         <div className="section-eyebrow">{t.dashEyebrow}</div>
