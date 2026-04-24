@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OG Image — Antoine de Maintenant</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { background:#0a0c16; color:#fff; font-family:'Space Grotesk',sans-serif; }
+
+  /* Exact Open Graph dimensions: 1200 × 630 */
+  .og-card {
+    width:1200px; height:630px;
+    position:relative; overflow:hidden;
+    background:
+      radial-gradient(ellipse 70% 60% at 85% 55%, rgba(94,141,238,.25), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 20% 90%, rgba(191,58,255,.18), transparent 60%),
+      linear-gradient(135deg, #0a0c16 0%, #0C0D14 50%, #131626 100%);
+  }
+
+  /* Grid pattern — hacker texture */
+  .grid {
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(191,58,255,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(191,58,255,.045) 1px, transparent 1px);
+    background-size: 54px 54px;
+    mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+  }
+
+  /* Scanline */
+  .scan {
+    position:absolute; top:0; left:0; right:0; height:2px;
+    background:linear-gradient(90deg, transparent, rgba(0,240,168,.6), transparent);
+    box-shadow:0 0 24px rgba(0,240,168,.4);
+  }
+
+  /* Logo top-left */
+  .logo {
+    position:absolute; top:36px; left:56px;
+    font-family:'Bebas Neue', sans-serif;
+    font-size:1.2rem; letter-spacing:4px;
+    color:#5E8DEE;
+    display:flex; align-items:center; gap:12px;
+  }
+  .logo-dot { width:10px; height:10px; border-radius:50%; background:#00F0A8; box-shadow:0 0 14px #00F0A8; }
+  .logo-sub { color:rgba(255,255,255,.45); font-family:'Space Mono', monospace; font-size:.6rem; letter-spacing:3px; }
+
+  /* Main content */
+  .content {
+    position:absolute;
+    top:130px; left:56px;
+    width:640px;
+    z-index:2;
+  }
+
+  /* Top label */
+  .eyebrow {
+    font-family:'Space Mono', monospace;
+    font-size:.78rem;
+    letter-spacing:5px;
+    text-transform:uppercase;
+    color:#00F0A8;
+    margin-bottom:16px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before {
+    content:'';
+    width:7px; height:7px; border-radius:50%;
+    background:#00F0A8; box-shadow:0 0 10px #00F0A8;
+  }
+
+  /* NAME */
+  .name {
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:2rem;
+    color:rgba(255,255,255,.88);
+    letter-spacing:-.5px;
+    margin-bottom:12px;
+  }
+
+  /* HUGE title */
+  .title {
+    font-family:'Bebas Neue', sans-serif;
+    font-size:7.2rem;
+    line-height:.9;
+    letter-spacing:3px;
+    margin-bottom:22px;
+    background:linear-gradient(135deg, #ffffff 0%, #5E8DEE 50%, #BF3AFF 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    filter:drop-shadow(0 4px 24px rgba(94,141,238,.3));
+  }
+
+  /* Pitch trio */
+  .pitch {
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    margin-bottom:30px;
+  }
+  .pitch-line {
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.15rem;
+    line-height:1.5;
+    color:rgba(255,255,255,.82);
+    font-weight:500;
+    display:flex; align-items:center; gap:14px;
+  }
+  .pitch-bullet {
+    flex-shrink:0;
+    width:8px; height:8px;
+    background:linear-gradient(135deg, #5E8DEE, #BF3AFF);
+    border-radius:2px;
+    transform:rotate(45deg);
+  }
+  .pitch-strong {
+    color:#fff;
+    font-weight:700;
+  }
+
+  /* Bottom strip: stack + URL */
+  .bottom {
+    position:absolute;
+    bottom:36px; left:56px; right:56px;
+    display:flex; align-items:center; justify-content:space-between;
+    z-index:2;
+  }
+  .stack {
+    font-family:'Space Mono', monospace;
+    font-size:.82rem;
+    letter-spacing:2px;
+    color:rgba(255,255,255,.38);
+  }
+  .stack span { color:rgba(94,141,238,.85); }
+  .url {
+    font-family:'Space Mono', monospace;
+    font-size:.82rem;
+    color:rgba(0,240,168,.75);
+    letter-spacing:1px;
+  }
+
+  /* PHOTO zone (right side) */
+  .photo-wrap {
+    position:absolute;
+    right:40px;
+    bottom:0;
+    width:480px;
+    height:580px;
+    z-index:1;
+  }
+  .photo-blob {
+    position:absolute;
+    inset:-5% -10% 0 10%;
+    background: radial-gradient(ellipse 55% 65% at 50% 55%, rgba(94,141,238,.32), rgba(191,58,255,.14) 50%, transparent 75%);
+    filter:blur(22px);
+  }
+  .photo {
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    object-position:bottom;
+    filter:
+      drop-shadow(0 32px 50px rgba(94,141,238,.35))
+      drop-shadow(0 12px 24px rgba(191,58,255,.22));
+  }
+
+  /* Decorative corner brackets — hacker vibe */
+  .bracket {
+    position:absolute;
+    width:28px; height:28px;
+    border-color:rgba(0,240,168,.5);
+  }
+  .bracket.tr { top:28px; right:28px; border-top:2px solid; border-right:2px solid; }
+  .bracket.bl { bottom:28px; left:28px; border-bottom:2px solid; border-left:2px solid; }
+
+  /* Subtle accent line under title area */
+  .accent-line {
+    position:absolute;
+    top:470px; left:56px;
+    width:180px; height:2px;
+    background:linear-gradient(90deg, #00F0A8, transparent);
+    box-shadow:0 0 12px rgba(0,240,168,.6);
+  }
+
+  /* Render hint — only in preview mode */
+  .render-hint {
+    position:fixed; top:8px; left:50%; transform:translateX(-50%);
+    background:rgba(0,240,168,.15); color:#00F0A8;
+    padding:6px 14px; border-radius:20px;
+    font-family:'Space Mono',monospace; font-size:.65rem;
+    letter-spacing:2px; border:1px solid rgba(0,240,168,.4);
+    z-index:999;
+  }
+</style>
+</head>
+<body>
+
+<div class="render-hint">
+  1200 × 630 · DevTools F12 → Capture full size screenshot → save as og-image.png
+</div>
+
+<div class="og-card">
+  <div class="grid"></div>
+  <div class="scan"></div>
+
+  <div class="bracket tr"></div>
+  <div class="bracket bl"></div>
+
+  <div class="logo">
+    <span class="logo-dot"></span>
+    ADM.SYS <span class="logo-sub">// v5</span>
+  </div>
+
+  <div class="content">
+    <div class="eyebrow">Portfolio · AI &amp; Automation</div>
+    <div class="name">Antoine de Maintenant</div>
+    <div class="title">AI<br/>EXPERT</div>
+    <div class="pitch">
+      <div class="pitch-line"><span class="pitch-bullet"></span><span class="pitch-strong">Deploy AI</span>&nbsp;in enterprise operations</div>
+      <div class="pitch-line"><span class="pitch-bullet"></span><span class="pitch-strong">Train C-Levels</span>&nbsp;to run it</div>
+      <div class="pitch-line"><span class="pitch-bullet"></span><span class="pitch-strong">Build custom applications</span></div>
+    </div>
+  </div>
+
+  <div class="accent-line"></div>
+
+  <div class="photo-wrap">
+    <div class="photo-blob"></div>
+    <img src="images/antoine.png" alt="Antoine de Maintenant" class="photo"/>
+  </div>
+
+  <div class="bottom">
+    <div class="stack">
+      <span>Agentic AI</span> · LLMs · Python · Power BI · n8n · 5+ yrs CPG, SaaS, CSR
+    </div>
+    <div class="url">demaintenant-antoine-pro.github.io</div>
+  </div>
+</div>
+
+</body>
+</html>
