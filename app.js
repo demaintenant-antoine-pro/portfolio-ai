@@ -25,10 +25,10 @@ const T = {
       blog: 'Blog',
       contact: 'Contact'
     },
-    heroSub1: "AI expert. I embed",
-    heroSub1b: "agentic systems",
-    heroSub2: " into your business ops — and coach C-levels to run them daily. 60–85% time saved.",
-    heroSub3: "AI Architect · Automation · Executive Training · 5+ yrs CPG, SaaS, CSR.",
+    heroSub1: "AI Expert. I help enterprises",
+    heroSub1b: "deploy AI in their operations, train their C-levels to run it, and build the custom applications",
+    heroSub2: " that automate the work their current stack can't.",
+    heroSub3: "5+ yrs · CPG · SaaS · CSR · Python · Agentic AI · Power BI · LLMs.",
     xp: "yrs XP",
     ctaContact: "Get in Touch",
     ctaCV: "↓ Download CV",
@@ -155,10 +155,10 @@ const T = {
       blog: 'Blog',
       contact: 'Contact'
     },
-    heroSub1: "Expert IA. J'intègre",
-    heroSub1b: "des systèmes agentiques",
-    heroSub2: " dans vos opérations — et je forme vos C-levels à les piloter au quotidien. 60 à 85 % de temps gagné.",
-    heroSub3: "Architecte IA · Automatisation · Formation dirigeants · 5+ ans CPG, SaaS, RSE.",
+    heroSub1: "Expert IA. J'accompagne les entreprises pour",
+    heroSub1b: "déployer l'IA dans leurs opérations, former leurs C-levels à la piloter, et construire les applications sur mesure",
+    heroSub2: " qui automatisent ce que leur stack actuelle ne sait pas faire.",
+    heroSub3: "5+ ans · CPG · SaaS · RSE · Python · IA agentique · Power BI · LLMs.",
     xp: "ans d'XP",
     ctaContact: "Me contacter",
     ctaCV: "↓ Télécharger CV",
@@ -268,268 +268,6 @@ const T = {
       icon: '🤝',
       label: 'RH / Talent Acquisition',
       sub: 'Le résumé de carrière et les soft skills'
-    }]
-  }
-};
-
-/* ─── HUMAN TEXTS — même structure que T, langage simple sans jargon ──────── */
-const TH = {
-  en: {
-    nav: ['about', 'experience', 'testimonials', 'dashboard', 'pipeline', 'projects', 'certificates', 'blog', 'contact', 'terminal'],
-    navLabels: {
-      about: 'Home',
-      dashboard: 'Proof',
-      pipeline: 'Demo',
-      experience: 'Journey',
-      projects: 'Results',
-      certificates: 'Certs',
-      terminal: 'Ask me',
-      testimonials: 'Reviews',
-      blog: 'Blog',
-      contact: 'Contact'
-    },
-    heroSub1: "I integrate AI into your existing operations",
-    heroSub1b: "connecting your tools, automating your workflows",
-    heroSub2: "— enabling your teams to focus on decisions that drive revenue. Across Finance, Sales, Supply Chain and HR, I turn manual processes into autonomous systems that deliver measurable results.",
-    heroSub3: "AI Transformation · Automation · BI · 5+ years CPG, SaaS & CSR.",
-    xp: "yrs experience",
-    ctaContact: "Talk in 30 min",
-    ctaCV: "↓ Download CV",
-    liveCounter: "Hours of manual reporting done worldwide since you opened this page",
-    metrics: [{
-      n: '85',
-      s: '%',
-      l: 'Reporting time saved'
-    }, {
-      n: '30',
-      s: '+',
-      l: 'Tasks automated'
-    }, {
-      n: '6',
-      s: 'mo',
-      l: 'Analytics dept from zero'
-    }, {
-      n: '4.2',
-      s: '%',
-      l: 'AI forecast error'
-    }],
-    dashEyebrow: 'Live Demo',
-    dashTitle: 'Real',
-    dashTitleEm: 'Executive Dashboard',
-    dashDesc: "A live dashboard replica — real revenue tracking, AI forecasting, zero manual work. This is what your team could have.",
-    dashKpis: [['$2.4M', 'YTD Revenue', '↑ +18% vs LY'], ['85%', 'Reporting Saved', '30+ tasks'], ['4.2%', 'Forecast Error', '↓ from 8.1%'], ['10+', 'Dashboards', 'All teams'], ['30+', 'Channels', 'Daily, auto'], ['06:00', 'Auto-Report', '0 manual']],
-    dashChart1: 'Revenue + Forecast · Enterprise Client',
-    dashChart2: 'Revenue by Channel',
-    pipeEyebrow: 'Interactive Demo',
-    pipeTitle: 'Raw data to inbox',
-    pipeTitleEm: 'in 6 minutes.',
-    pipeDesc: "This is what happens inside my systems. Raw data in — clean reports out. Try dragging stages to reorder.",
-    pipeReady: 'Ready. Press RUN.',
-    pipeRun: '▶ RUN',
-    pipeRunning: '⟳ RUNNING...',
-    pipeDragHint: '💡 Drag stages to reorder — then RUN to see what happens',
-    pipeWrongMsgs: ["❌ Forecast before Clean — predicting dirty data won't end well.", "❌ Notify before Dashboard — emailing an empty report?", "❌ Ingestion after Forecast — can't predict data that doesn't exist.", "❌ Clean before Ingestion — cleaning a floor that isn't there.", "❌ Notify before Forecast — bold strategy."],
-    expEyebrow: 'Work History',
-    expTitle: 'Where I built',
-    expTitleEm: 'things that still run.',
-    expFilterAll: 'All',
-    skillsEyebrow: 'What I know',
-    skillsTitle: 'Skills that deliver.',
-    skillsTitleDim: 'Used daily.',
-    radarTitle: 'Overview',
-    projectsEyebrow: 'Real Projects',
-    projectsTitle: 'What I actually',
-    projectsTitleEm: 'built.',
-    projectsDesc: 'Systems running today. Real problems solved, real results measured.',
-    stackEyebrow: 'My Tools',
-    stackTitle: 'What I work with.',
-    stackTitleEm: 'Every day.',
-    terminalEyebrow: 'Ask Me Anything',
-    terminalTitle: 'I answer',
-    terminalTitleEm: 'your questions.',
-    terminalDesc: "Ask anything — timeline, what I can automate, how I work. Try: help, whoami, contact",
-    terminalHint: "Type 'help' to start",
-    testiEyebrow: 'What people say',
-    testiTitle: "Don't take",
-    testiTitleEm: "my word for it.",
-    testiBlur: 'Anonymous · NDA',
-    testiSoon: 'COMING SOON',
-    worldLabel: 'Click a country →',
-    countryClose: 'CLOSE',
-    blogEyebrow: 'Thoughts',
-    blogTitle: 'What I think',
-    blogTitleEm: 'out loud.',
-    blogDesc: "Automation, data and AI — no jargon.",
-    blogRead: 'Read →',
-    blogReadTime: 'min read',
-    blogClose: 'CLOSE',
-    contactEyebrow: 'Contact',
-    contactTitle: "Let's solve",
-    contactTitleEm: "something real.",
-    contactCopyHint: 'CLICK TO COPY',
-    contactCopied: '✓ Copied!',
-    contactLocation: 'Location',
-    contactH3: "I'm selective about my next project.",
-    contactP: "If you have a real problem — manual reports, broken processes, zero visibility — I'm interested.<br/><br/>If you just want prettier charts, I'll point you to Canva.",
-    contactStatus: 'Open to new projects · Worldwide · 2026',
-    visitors: 'visitors',
-    footerKonami: "// Try the Konami code ↑↑↓↓←→←→BA",
-    eggTitle: 'YOU FOUND IT',
-    eggP1: "You explored enough to find this.",
-    eggP2: "That curiosity is exactly what I like.",
-    eggP3: "People who dig deeper ship better work.",
-    eggCode: "// What I saved a client last year:\n// 15h/week × 52 = 780 hours recovered.\n// That's 97 working days. Back.",
-    eggClose: 'CLOSE',
-    scrollTop: '↑',
-    recruiterBtn: 'MY PROFILE ⚡',
-    recruiterTitle: 'PERSONALIZE THIS',
-    recruiterSub: 'Choose your profile for a tailored view',
-    recruiterQ: 'Who are you today?',
-    recruiterProfiles: [{
-      icon: '🏢',
-      label: 'Executive / CEO / CFO',
-      sub: 'I want ROI, business impact, real numbers'
-    }, {
-      icon: '📊',
-      label: 'Operations Manager',
-      sub: 'Show me how you help my team'
-    }, {
-      icon: '🤝',
-      label: 'HR / Talent Acquisition',
-      sub: 'Career story and soft skills'
-    }, {
-      icon: '💡',
-      label: 'Entrepreneur / Founder',
-      sub: 'What can you do for my startup?'
-    }]
-  },
-  fr: {
-    nav: ['about', 'experience', 'testimonials', 'dashboard', 'pipeline', 'projects', 'certificates', 'blog', 'contact', 'terminal'],
-    navLabels: {
-      about: 'Accueil',
-      dashboard: 'Preuve',
-      pipeline: 'Démo',
-      experience: 'Parcours',
-      projects: 'Résultats',
-      certificates: 'Certifs',
-      terminal: 'Posez-moi',
-      testimonials: 'Avis',
-      blog: 'Blog',
-      contact: 'Contact'
-    },
-    heroSub1: "J'intègre l'IA dans vos opérations existantes",
-    heroSub1b: "en connectant vos outils et automatisant vos processus",
-    heroSub2: "— pour permettre à vos équipes de se concentrer sur les décisions à valeur ajoutée. Finance, Sales, Supply Chain, RH : je transforme le travail manuel en systèmes autonomes qui délivrent des résultats mesurables.",
-    heroSub3: "Transformation IA · Automatisation · BI · 5+ ans CPG, SaaS & RSE.",
-    xp: "ans d'expérience",
-    ctaContact: "Parler en 30 min",
-    ctaCV: "↓ Télécharger CV",
-    liveCounter: "Heures de reporting manuel faites dans le monde depuis que vous êtes sur cette page",
-    metrics: [{
-      n: '85',
-      s: '%',
-      l: 'Temps de reporting économisé'
-    }, {
-      n: '30',
-      s: '+',
-      l: 'Tâches automatisées'
-    }, {
-      n: '6',
-      s: 'mois',
-      l: 'Dept analytics de zéro'
-    }, {
-      n: '4,2',
-      s: '%',
-      l: 'Taux erreur prévisions IA'
-    }],
-    dashEyebrow: 'Démo Live',
-    dashTitle: 'Vrai',
-    dashTitleEm: 'Dashboard Exécutif',
-    dashDesc: "Une réplique d'un dashboard réel — suivi revenus, prévisions IA, zéro travail manuel. C'est ce que votre équipe pourrait avoir.",
-    dashKpis: [['2,4M€', 'CA YTD', '↑ +18% vs N-1'], ['85%', 'Reporting économisé', '30+ tâches'], ['4,2%', 'Taux erreur', '↓ depuis 8,1%'], ['10+', 'Dashboards', 'Toutes équipes'], ['30+', 'Canaux', 'Daily, auto'], ['06:00', 'Rapport Auto', '0 manuel']],
-    dashChart1: 'Tendance CA + Prévision · Client Entreprise',
-    dashChart2: 'CA par Canal',
-    pipeEyebrow: 'Démo Interactive',
-    pipeTitle: 'De la donnée brute',
-    pipeTitleEm: 'à votre boîte mail en 6 min.',
-    pipeDesc: "C'est ce qui se passe dans mes systèmes. Données brutes en entrée — rapports propres en sortie. Glissez les étapes pour les réordonner.",
-    pipeReady: 'Prêt. Appuyez sur RUN.',
-    pipeRun: '▶ LANCER',
-    pipeRunning: '⟳ EN COURS...',
-    pipeDragHint: '💡 Glissez les étapes — puis RUN pour voir ce qui se passe',
-    pipeWrongMsgs: ["❌ Prévision avant Nettoyage — prédire des données sales, mauvaise idée.", "❌ Notification avant Dashboard — envoyer un rapport vide ?", "❌ Ingestion après Prévision — prédire des données inexistantes.", "❌ Nettoyage avant Ingestion — nettoyer ce qui n'existe pas encore.", "❌ Notifier avant Prévoir — stratégie audacieuse."],
-    expEyebrow: 'Expériences',
-    expTitle: "Là où j'ai construit",
-    expTitleEm: 'des choses qui tournent encore.',
-    expFilterAll: 'Tous',
-    skillsEyebrow: 'Ce que je sais faire',
-    skillsTitle: 'Compétences qui livrent.',
-    skillsTitleDim: 'Au quotidien.',
-    radarTitle: 'Vue d\'ensemble',
-    projectsEyebrow: 'Projets réels',
-    projectsTitle: "Ce que j'ai vraiment",
-    projectsTitleEm: 'construit.',
-    projectsDesc: 'Des systèmes en production. Des problèmes réels résolus, des résultats mesurés.',
-    stackEyebrow: 'Mes outils',
-    stackTitle: 'Ce avec quoi je travaille.',
-    stackTitleEm: 'Tous les jours.',
-    terminalEyebrow: "Posez-moi n'importe quoi",
-    terminalTitle: 'Je réponds à',
-    terminalTitleEm: 'vos questions.',
-    terminalDesc: "Posez n'importe quelle question — tarifs, délais, ce que je peux automatiser. Essayez : help, tarifs, contact",
-    terminalHint: "Tapez 'help' pour commencer",
-    testiEyebrow: 'Ce que disent les autres',
-    testiTitle: "Ne prenez pas",
-    testiTitleEm: "ma parole.",
-    testiBlur: 'Anonyme · NDA',
-    testiSoon: 'BIENTÔT',
-    worldLabel: 'Cliquez un pays →',
-    countryClose: 'FERMER',
-    blogEyebrow: 'Réflexions',
-    blogTitle: 'Ce que je pense',
-    blogTitleEm: 'tout haut.',
-    blogDesc: "Automatisation, data et IA — sans jargon.",
-    blogRead: 'Lire →',
-    blogReadTime: 'min',
-    blogClose: 'FERMER',
-    contactEyebrow: 'Contact',
-    contactTitle: "Résolvons",
-    contactTitleEm: "quelque chose de réel.",
-    contactCopyHint: 'CLIQUER POUR COPIER',
-    contactCopied: '✓ Copié !',
-    contactLocation: 'Localisation',
-    contactH3: "Je suis sélectif sur mon prochain projet.",
-    contactP: "Si vous avez un problème réel — rapports manuels, processus cassés, zéro visibilité — je suis intéressé.<br/><br/>Si vous voulez juste des graphiques plus jolis, je vous oriente vers Canva.",
-    contactStatus: 'Disponible partout dans le monde · 2026',
-    visitors: 'visiteurs',
-    footerKonami: "// Essayez le code Konami ↑↑↓↓←→←→BA",
-    eggTitle: 'VOUS L\'AVEZ TROUVÉ',
-    eggP1: "Vous avez exploré assez pour trouver ça.",
-    eggP2: "Ce type de curiosité, c'est exactement ce que j'apprécie.",
-    eggP3: "Les gens qui cherchent plus loin livrent mieux.",
-    eggCode: "// Ce que j'ai économisé à un client l'an dernier :\n// 15h/semaine × 52 = 780h récupérées.\n// Soit 97 jours de travail. Rendus.",
-    eggClose: 'FERMER',
-    scrollTop: '↑',
-    recruiterBtn: 'MON PROFIL ⚡',
-    recruiterTitle: 'PERSONNALISEZ',
-    recruiterSub: 'Choisissez votre profil pour une vue adaptée',
-    recruiterQ: 'Qui êtes-vous aujourd\'hui ?',
-    recruiterProfiles: [{
-      icon: '🏢',
-      label: 'Dirigeant / CEO / CFO',
-      sub: 'Je veux le ROI, l\'impact business et les chiffres'
-    }, {
-      icon: '📊',
-      label: 'Manager Opérationnel',
-      sub: 'Montrez-moi comment vous aidez mon équipe'
-    }, {
-      icon: '🤝',
-      label: 'RH / Talent Acquisition',
-      sub: 'Le parcours et les qualités humaines'
-    }, {
-      icon: '💡',
-      label: 'Entrepreneur / Fondateur',
-      sub: 'Que pouvez-vous faire pour ma startup ?'
     }]
   }
 };
@@ -4417,17 +4155,15 @@ function ScrollToTop({
   }, t.scrollTop);
 }
 function FloatingPills({
-  lang,
-  mode
+  lang
 }) {
   // phase: 'float' | 'explode' | 'hidden' | 'return'
   const [phase, setPhase] = useState('float');
   const phaseRef = useRef('float');
-  const isHuman = mode === 'human';
-  const grad = isHuman ? 'linear-gradient(135deg,#415a77,#7C3AED)' : 'linear-gradient(135deg,#BF3AFF,#FF2D78)';
-  const glows = isHuman ? ['rgba(65,90,119,.55)', 'rgba(124,58,237,.45)', 'rgba(65,90,119,.4)'] : ['rgba(191,58,255,.55)', 'rgba(191,58,255,.45)', 'rgba(255,45,120,.4)'];
-  const labelColor = isHuman ? '#7C3AED' : '#415a77';
-  const label3Color = isHuman ? '#7C3AED' : '#FF2D78';
+  const grad = 'linear-gradient(135deg,#BF3AFF,#FF2D78)';
+  const glows = ['rgba(191,58,255,.55)', 'rgba(191,58,255,.45)', 'rgba(255,45,120,.4)'];
+  const labelColor = '#415a77';
+  const label3Color = '#FF2D78';
   useEffect(() => {
     phaseRef.current = phase;
   }, [phase]);
@@ -4675,8 +4411,7 @@ const COUNTRY_CENTROIDS = {
   mt: [35.9, 14.4]
 };
 function VisitorMap({
-  lang,
-  mode
+  lang
 }) {
   const WORKER_URL = "https://dm_antoine--a8211e3c18ee11f18d2742dde27851f2.web.val.run";
   const mapRef = useRef(null);
@@ -4686,7 +4421,6 @@ function VisitorMap({
   const [mapReady, setMapReady] = useState(false);
   const [realCount, setRealCount] = useState(null); // real count from tracking POST response
   const FALLBACK = 2847;
-  const isHuman = mode === 'human';
 
   // 1. Geo-locate current visitor (real IP)
   useEffect(() => {
@@ -4779,14 +4513,14 @@ function VisitorMap({
         leafletMap.current = null;
       }
     };
-  }, [isHuman]);
+  }, []);
 
   // 4. Pin current visitor + past locations on map
   useEffect(() => {
     if (!leafletMap.current || !markersLayer.current || !window.L) return;
     const L = window.L;
     markersLayer.current.clearLayers();
-    const dotColor = isHuman ? '#7C3AED' : '#00F0A8';
+    const dotColor = '#00F0A8';
 
     // Past locations (real historical visitors from worker).
     // Worker sometimes returns {cc,city,country} without lat/lon — fallback
@@ -4865,366 +4599,10 @@ function VisitorMap({
         });
       }
     }
-  }, [myGeo, pastLocations, isHuman, lang]);
+  }, [myGeo, pastLocations, lang]);
   const ua = navigator.userAgent;
   const device = /iPhone|iPad/.test(ua) ? '📱 iPhone' : /Android/.test(ua) ? '📱 Android' : /Mac/.test(ua) ? '🖥️ Mac' : /Windows/.test(ua) ? '🖥️ Windows' : /Linux/.test(ua) ? '🐧 Linux' : '🖥️ Desktop';
   const browserLang = (navigator.language || 'en').split('-')[0].toUpperCase();
-
-  /* ── HUMAN MODE ─────────────────────────────────────────────────── */
-  if (isHuman) {
-    return /*#__PURE__*/React.createElement("div", {
-      style: {
-        background: 'var(--bg)',
-        padding: '80px 0',
-        borderTop: '1px solid var(--border-dim)',
-        borderBottom: '1px solid var(--border-dim)'
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        maxWidth: '1200px',
-        margin: '0 auto',
-        padding: '0 40px'
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        alignItems: 'flex-start',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        gap: 24,
-        marginBottom: 40
-      }
-    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        alignItems: 'center',
-        gap: 10,
-        marginBottom: 14
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        width: 8,
-        height: 8,
-        borderRadius: '50%',
-        background: '#7C3AED',
-        boxShadow: '0 0 12px #7C3AED99',
-        animation: 'pulse 2s infinite',
-        display: 'inline-block'
-      }
-    }), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontFamily: "'Space Mono',monospace",
-        fontSize: '.48rem',
-        color: '#7C3AED',
-        letterSpacing: '4px',
-        textTransform: 'uppercase'
-      }
-    }, lang === 'fr' ? 'EN CE MOMENT MÊME · DONNÉES RÉELLES' : 'RIGHT NOW · REAL DATA')), /*#__PURE__*/React.createElement("h2", {
-      style: {
-        fontFamily: "'Bebas Neue',sans-serif",
-        fontSize: 'clamp(2rem,4vw,3.2rem)',
-        color: 'var(--text)',
-        letterSpacing: '2px',
-        lineHeight: 1.05,
-        margin: 0
-      }
-    }, lang === 'fr' ? /*#__PURE__*/React.createElement(React.Fragment, null, "Vous lisez depuis", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("em", {
-      style: {
-        color: '#7C3AED'
-      }
-    }, myGeo ? `${myGeo.city || myGeo.country || '…'} ${myGeo.countryCode ? `🏴` : '🌍'}` : 'quelque part sur Terre 🌍')) : /*#__PURE__*/React.createElement(React.Fragment, null, "You're reading from", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("em", {
-      style: {
-        color: '#7C3AED'
-      }
-    }, myGeo ? `${myGeo.city || myGeo.country || '…'} 🌍` : 'somewhere on Earth 🌍')))), /*#__PURE__*/React.createElement("div", {
-      style: {
-        textAlign: 'right',
-        paddingTop: 4
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontFamily: "'Bebas Neue',sans-serif",
-        fontSize: '3.8rem',
-        color: '#7C3AED',
-        lineHeight: 1
-      }
-    }, realCount ? realCount.toLocaleString() : /*#__PURE__*/React.createElement(React.Fragment, null, FALLBACK.toLocaleString(), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontFamily: "'Space Mono',monospace",
-        fontSize: '.5rem',
-        color: 'var(--text-mute)',
-        marginLeft: 6,
-        letterSpacing: '1px',
-        verticalAlign: 'middle'
-      }
-    }, "min."))), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontFamily: "'Space Mono',monospace",
-        fontSize: '.46rem',
-        color: 'var(--text-mute)',
-        letterSpacing: '2px',
-        textTransform: 'uppercase'
-      }
-    }, lang === 'fr' ? 'visites depuis le début' : 'visits since launch', !realCount && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: '#7C3AED88',
-        fontSize: '.38rem'
-      }
-    }, "(", lang === 'fr' ? 'worker non exposé' : 'tracking not yet responded', ")"))))), /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'grid',
-        gridTemplateColumns: '1fr 340px',
-        gap: 24,
-        alignItems: 'start'
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        position: 'relative',
-        borderRadius: 18,
-        overflow: 'hidden',
-        border: '1px solid var(--border-dim)',
-        boxShadow: '0 4px 24px rgba(124,58,237,.08)'
-      }
-    }, !mapReady && /*#__PURE__*/React.createElement("div", {
-      style: {
-        position: 'absolute',
-        inset: 0,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 10,
-        fontFamily: "'Space Mono',monospace",
-        fontSize: '.5rem',
-        color: 'var(--text-mute)',
-        letterSpacing: '2px',
-        background: 'var(--bg-card)'
-      }
-    }, "Chargement\u2026"), /*#__PURE__*/React.createElement("div", {
-      ref: mapRef,
-      id: "visitor-map-human",
-      style: {
-        height: 340,
-        width: '100%',
-        borderRadius: 18
-      }
-    }), /*#__PURE__*/React.createElement("div", {
-      style: {
-        position: 'absolute',
-        inset: 0,
-        background: 'linear-gradient(to bottom,transparent 70%,var(--bg))',
-        pointerEvents: 'none',
-        zIndex: 400
-      }
-    }), myGeo && /*#__PURE__*/React.createElement("div", {
-      style: {
-        position: 'absolute',
-        bottom: 16,
-        left: 16,
-        zIndex: 500,
-        background: 'rgba(255,255,255,.92)',
-        border: '1px solid rgba(124,58,237,.2)',
-        borderRadius: 10,
-        padding: '8px 14px',
-        backdropFilter: 'blur(8px)',
-        display: 'flex',
-        alignItems: 'center',
-        gap: 8
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        width: 8,
-        height: 8,
-        borderRadius: '50%',
-        background: '#7C3AED',
-        boxShadow: '0 0 8px #7C3AED',
-        display: 'inline-block',
-        flexShrink: 0
-      }
-    }), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontFamily: "'Space Mono',monospace",
-        fontSize: '.42rem',
-        color: '#7C3AED',
-        letterSpacing: '1px'
-      }
-    }, myGeo.city || myGeo.country, " \xB7 ", lang === 'fr' ? 'vous' : 'you'), myGeo.countryCode && /*#__PURE__*/React.createElement("img", {
-      src: `https://flagcdn.com/16x12/${myGeo.countryCode.toLowerCase()}.png`,
-      style: {
-        height: 11,
-        borderRadius: 2
-      },
-      alt: ""
-    }))), /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 14
-      }
-    }, [{
-      icon: '📍',
-      label: lang === 'fr' ? 'Votre ville' : 'Your city',
-      value: myGeo ? `${myGeo.city || '—'}, ${myGeo.country || ''}` : lang === 'fr' ? 'Localisation…' : 'Locating…',
-      accent: '#7C3AED',
-      live: true
-    }, {
-      icon: '🖥️',
-      label: lang === 'fr' ? 'Votre appareil' : 'Your device',
-      value: device,
-      accent: '#EC4899'
-    }, {
-      icon: '🌐',
-      label: lang === 'fr' ? 'Langue détectée' : 'Browser language',
-      value: browserLang,
-      accent: '#F59E0B'
-    }, {
-      icon: '🔢',
-      label: lang === 'fr' ? 'Vous êtes visiteur n°' : 'You are visitor #',
-      value: `${(displayCount + 1).toLocaleString()}`,
-      accent: '#10B981'
-    }].map((c, i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        background: 'var(--bg-card)',
-        border: `1px solid ${c.accent}20`,
-        borderLeft: `3px solid ${c.accent}`,
-        borderRadius: 12,
-        padding: '16px 18px',
-        display: 'flex',
-        alignItems: 'center',
-        gap: 14,
-        transition: 'transform .18s,box-shadow .18s',
-        cursor: 'default'
-      },
-      onMouseEnter: e => {
-        e.currentTarget.style.transform = 'translateX(4px)';
-        e.currentTarget.style.boxShadow = `0 6px 20px ${c.accent}18`;
-      },
-      onMouseLeave: e => {
-        e.currentTarget.style.transform = 'none';
-        e.currentTarget.style.boxShadow = 'none';
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: '1.3rem',
-        flexShrink: 0
-      }
-    }, c.icon), /*#__PURE__*/React.createElement("div", {
-      style: {
-        flex: 1,
-        minWidth: 0
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontFamily: "'Space Mono',monospace",
-        fontSize: '.4rem',
-        color: 'var(--text-mute)',
-        letterSpacing: '2px',
-        textTransform: 'uppercase',
-        marginBottom: 4,
-        display: 'flex',
-        alignItems: 'center',
-        gap: 6
-      }
-    }, c.label, c.live && /*#__PURE__*/React.createElement("span", {
-      style: {
-        width: 5,
-        height: 5,
-        borderRadius: '50%',
-        background: '#10B981',
-        display: 'inline-block',
-        animation: 'pulse 2s infinite'
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontFamily: "'Space Grotesk',sans-serif",
-        fontSize: '1rem',
-        fontWeight: 700,
-        color: 'var(--text)',
-        lineHeight: 1.2,
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap'
-      }
-    }, c.value)))), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontFamily: "'Space Mono',monospace",
-        fontSize: '.38rem',
-        color: 'var(--text-mute)',
-        letterSpacing: '1px',
-        paddingTop: 4,
-        lineHeight: 1.7
-      }
-    }, "\uD83D\uDCE1 ", lang === 'fr' ? 'Géoloc. anonyme par IP · aucune donnée perso stockée' : 'Anonymous IP geoloc · no personal data stored'))), pastLocations.length > 0 && /*#__PURE__*/React.createElement("div", {
-      style: {
-        marginTop: 32,
-        paddingTop: 24,
-        borderTop: '1px solid var(--border-dim)'
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        alignItems: 'center',
-        gap: 12,
-        marginBottom: 16,
-        flexWrap: 'wrap'
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontFamily: "'Space Mono',monospace",
-        fontSize: '.44rem',
-        color: 'var(--text-mute)',
-        letterSpacing: '3px',
-        textTransform: 'uppercase'
-      }
-    }, lang === 'fr' ? '👥 Villes qui ont lu ce portfolio' : '👥 Cities that read this portfolio'), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontFamily: "'Space Mono',monospace",
-        fontSize: '.38rem',
-        color: 'var(--text-mute)',
-        opacity: .55
-      }
-    }, "\xB7 ", lang === 'fr' ? 'ville seulement · 100% anonyme · pas de données perso' : 'city only · 100% anonymous · no personal data')), /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: 8
-      }
-    }, pastLocations.slice(0, 15).map((v, i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        display: 'flex',
-        alignItems: 'center',
-        gap: 7,
-        padding: '7px 14px',
-        borderRadius: 30,
-        background: 'var(--bg-card)',
-        border: '1px solid var(--border-dim)',
-        fontFamily: "'Space Grotesk',sans-serif",
-        fontSize: '.82rem',
-        color: 'var(--text)',
-        transition: 'transform .15s,box-shadow .15s',
-        cursor: 'default'
-      },
-      onMouseEnter: e => {
-        e.currentTarget.style.transform = 'translateY(-2px)';
-        e.currentTarget.style.boxShadow = '0 4px 16px rgba(124,58,237,.12)';
-      },
-      onMouseLeave: e => {
-        e.currentTarget.style.transform = 'none';
-        e.currentTarget.style.boxShadow = 'none';
-      }
-    }, v.cc && /*#__PURE__*/React.createElement("img", {
-      src: `https://flagcdn.com/16x12/${v.cc.toLowerCase()}.png`,
-      style: {
-        height: 11,
-        borderRadius: 2,
-        flexShrink: 0
-      },
-      alt: ""
-    }), /*#__PURE__*/React.createElement("span", null, v.city || v.country || '—')))))));
-  }
-
-  /* ── TECH MODE ──────────────────────────────────────────────────── */
   return /*#__PURE__*/React.createElement("div", {
     className: "vmap-section"
   }, /*#__PURE__*/React.createElement("div", {
@@ -5926,11 +5304,8 @@ function CertWall({
   }, "\u2705 ", lang === 'fr' ? 'Vérifier →' : 'Verify →'))))));
 }
 function PortfolioApp({
-  initLang,
-  mode,
-  onSwitchMode
+  initLang
 }) {
-  const [theme, setTheme] = useState(() => mode === 'human' ? 'light' : 'dark');
   const [lang, setLang] = useState(initLang || 'en');
   const [activeExp, setActiveExp] = useState(0);
   const [tagFilter, setTagFilter] = useState('All');
@@ -5952,15 +5327,12 @@ function PortfolioApp({
   const [charIdx, setCharIdx] = useState(0);
   const [deleting, setDeleting] = useState(false);
   const [activeChapter, setActiveChapter] = useState(0);
-  const t = (mode === 'human' ? TH : T)[lang];
+  const t = T[lang];
   const exps = EXPERIENCES[lang];
   const exp = exps[activeExp] || exps[0];
   const skills = SKILLS[lang];
   const countries = COUNTRIES[lang];
-  const LINES = mode === 'human' ? {
-    en: ['Time saver.', 'Excel killer.', 'Report automator.', 'Revenue booster.', 'Decision enabler.'],
-    fr: ['Gain de temps.', 'Rapports automatisés.', 'Zéro saisie manuelle.', 'Hausse de revenus.', 'Aide à la décision.']
-  } : {
+  const LINES = {
     en: ['BI Engineer.', 'AI Architect.', 'Revenue Optimizer.', 'Automation Dealer.', 'Data Storyteller.'],
     fr: ['Ingénieur BI.', 'Architecte IA.', 'Optimiseur de Revenus.', 'Dealer d\'Automatisation.', 'Data Storyteller.']
   };
@@ -5991,13 +5363,8 @@ function PortfolioApp({
     return () => clearTimeout(tm);
   }, [charIdx, deleting, lineIdx, lang]);
   useEffect(() => {
-    const t = mode === 'human' ? 'light' : 'dark';
-    setTheme(t);
-    document.body.setAttribute('data-theme', t);
-  }, [mode]);
-  useEffect(() => {
-    document.body.setAttribute('data-theme', theme);
-  }, [theme]);
+    document.body.setAttribute('data-theme', 'dark');
+  }, []);
   useEffect(() => {
     window.konamiCb = () => setShowEgg(true);
     return () => {
@@ -6137,11 +5504,7 @@ function PortfolioApp({
   }, /*#__PURE__*/React.createElement("div", {
     className: "nav-logo",
     onClick: () => scrollTo('about')
-  }, mode === 'human' ? /*#__PURE__*/React.createElement("span", null, "Antoine", /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: '#415a77'
-    }
-  }, ".")) : 'ADM.SYS // v5'), /*#__PURE__*/React.createElement("div", {
+  }, "ADM.SYS // v5"), /*#__PURE__*/React.createElement("div", {
     className: "nav-links"
   }, t.nav.map(s => /*#__PURE__*/React.createElement("button", {
     key: s,
@@ -6166,7 +5529,7 @@ function PortfolioApp({
     className: `ham-bar ${mobileMenuOpen ? 'open3' : ''}`
   })), /*#__PURE__*/React.createElement("div", {
     className: `nav-controls ${mobileMenuOpen ? 'open' : ''}`
-  }, mode !== 'human' && /*#__PURE__*/React.createElement("button", {
+  }, /*#__PURE__*/React.createElement("button", {
     className: `sound-btn${soundOn ? ' on' : ''}`,
     onClick: () => {
       const s = SFX.toggle();
@@ -6185,20 +5548,7 @@ function PortfolioApp({
       setMobileMenuOpen(false);
       SFX.click();
     }
-  }, t.recruiterBtn, " \u26A1"), /*#__PURE__*/React.createElement("button", {
-    className: "mode-switch-btn",
-    onClick: () => {
-      onSwitchMode();
-      setMobileMenuOpen(false);
-    },
-    "aria-label": "Switch interface mode"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "mode-switch-dot",
-    style: {
-      background: mode === 'human' ? 'rgba(0,240,168,.2)' : 'rgba(191,58,255,.2)',
-      borderColor: mode === 'human' ? '#00F0A8' : '#415a77'
-    }
-  }, mode === 'human' ? '🧠' : '⚡'), mode === 'human' ? lang === 'fr' ? '⚙️ Tech' : '⚙️ Tech' : '🧭 ' + (lang === 'fr' ? 'Métier' : 'Biz')), /*#__PURE__*/React.createElement("div", {
+  }, t.recruiterBtn, " \u26A1"), /*#__PURE__*/React.createElement("div", {
     className: "nav-themes",
     role: "group",
     "aria-label": "Language"
@@ -6225,9 +5575,9 @@ function PortfolioApp({
     style: {
       position: 'relative',
       zIndex: 5,
-      background: mode === 'human' ? 'rgba(0,122,255,.04)' : 'rgba(191,58,255,.06)',
-      borderTop: `1px solid ${mode === 'human' ? 'rgba(0,122,255,.1)' : 'rgba(191,58,255,.15)'}`,
-      borderBottom: `1px solid ${mode === 'human' ? 'rgba(0,122,255,.1)' : 'rgba(191,58,255,.15)'}`,
+      background: 'rgba(191,58,255,.06)',
+      borderTop: '1px solid rgba(191,58,255,.15)',
+      borderBottom: '1px solid rgba(191,58,255,.15)',
       padding: '10px 0',
       overflow: 'hidden',
       marginTop: '60px',
@@ -6308,7 +5658,7 @@ function PortfolioApp({
       padding: '0 28px',
       fontFamily: "'Space Mono',monospace",
       fontSize: '.58rem',
-      color: mode === 'human' ? 'rgba(60,60,67,.55)' : 'rgba(200,180,240,.75)',
+      color: 'rgba(200,180,240,.75)',
       letterSpacing: '1.5px',
       textTransform: 'uppercase'
     }
@@ -6318,181 +5668,13 @@ function PortfolioApp({
     }
   }, item.emoji), /*#__PURE__*/React.createElement("span", null, item.txt), /*#__PURE__*/React.createElement("span", {
     style: {
-      color: mode === 'human' ? 'rgba(0,122,255,.3)' : 'rgba(191,58,255,.4)',
+      color: 'rgba(191,58,255,.4)',
       marginLeft: 4
     }
   }, "\u25C6"))))))), /*#__PURE__*/React.createElement("section", {
     id: "about",
-    className: "hero",
-    style: mode === 'human' ? {
-      minHeight: '92vh',
-      paddingTop: 0,
-      paddingBottom: 0,
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      padding: '0 80px',
-      maxWidth: 'none'
-    } : {}
-  }, mode === 'human' ?
-  /*#__PURE__*/
-  /* ── HUMAN MODE: two-column full-width ── */
-  React.createElement("div", {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      gap: '80px',
-      alignItems: 'center',
-      maxWidth: 1400,
-      margin: '0 auto',
-      width: '100%',
-      padding: '80px 0'
-    }
+    className: "hero"
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 0
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "hero-badge-wrap",
-    style: {
-      marginBottom: 32
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "hero-badge-dot"
-  }), /*#__PURE__*/React.createElement("span", {
-    className: "hero-badge-status"
-  }, lang === 'fr' ? 'Disponible' : 'Available'), ['France', 'Dubai', 'Canada', 'Singapore', 'Remote'].map((city, i) => /*#__PURE__*/React.createElement("span", {
-    key: i,
-    className: "hero-city-pill"
-  }, city))), /*#__PURE__*/React.createElement("h1", {
-    className: "hero-h1",
-    style: {
-      marginBottom: 32
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "glitch-wrap",
-    "data-text": "ANTOINE"
-  }, "ANTOINE"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
-    className: "accent"
-  }, "DE")), /*#__PURE__*/React.createElement("div", {
-    className: "outline"
-  }, "MAINTENANT")), /*#__PURE__*/React.createElement("p", {
-    className: "hero-sub",
-    style: {
-      maxWidth: 520,
-      marginBottom: 36
-    }
-  }, t.heroSub1, " ", /*#__PURE__*/React.createElement("span", null, t.heroSub1b), " ", t.heroSub2), /*#__PURE__*/React.createElement("div", {
-    className: "typewriter-row",
-    style: {
-      marginBottom: 32
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "prompt"
-  }, '>'), typed, /*#__PURE__*/React.createElement("span", {
-    className: "t-cursor"
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "hero-ctas",
-    style: {
-      marginBottom: 32
-    }
-  }, /*#__PURE__*/React.createElement("a", {
-    href: "https://raw.githubusercontent.com/demaintenant-antoine-pro/portfolio-ai/main/CV_Antoine.pdf",
-    target: "_blank",
-    rel: "noopener noreferrer",
-    className: "btn-secondary"
-  }, t.ctaCV)), /*#__PURE__*/React.createElement(LiveCounter, {
-    lang: lang
-  })), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 20
-    }
-  }, [{
-    n: '85%',
-    badge: '↑ +270%',
-    badgeColor: '#778da9',
-    title: lang === 'fr' ? 'Reporting économisé' : 'Reporting time saved',
-    sub: lang === 'fr' ? '30+ workflows automatisés · 0 intervention manuelle' : '30+ workflows automated · 0 manual intervention',
-    color: '#415a77'
-  }, {
-    n: '400%',
-    badge: 'ROI Y1',
-    badgeColor: '#778da9',
-    title: lang === 'fr' ? 'Retour sur investissement' : 'Return on investment',
-    sub: lang === 'fr' ? 'Analytics dept 0→1 en 6 mois · MAPE 4.2%' : 'Analytics dept 0→1 in 6 months · MAPE 4.2%',
-    color: 'var(--accent4)'
-  }].map((s, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      backdropFilter: 'var(--glass-blur)',
-      WebkitBackdropFilter: 'var(--glass-blur)',
-      background: 'var(--glass-bg)',
-      border: '1px solid var(--glass-border)',
-      borderRadius: 20,
-      boxShadow: 'var(--glass-shadow)',
-      padding: '28px 32px',
-      display: 'flex',
-      alignItems: 'center',
-      gap: 24
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      flexShrink: 0,
-      minWidth: 72
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Grotesk',sans-serif",
-      fontWeight: 800,
-      fontSize: '1.9rem',
-      color: s.color,
-      lineHeight: 1,
-      letterSpacing: '-2px'
-    }
-  }, s.n), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Grotesk',sans-serif",
-      fontWeight: 600,
-      fontSize: '.62rem',
-      color: s.badgeColor,
-      marginTop: 4,
-      letterSpacing: '.3px'
-    }
-  }, s.badge)), /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: 1,
-      alignSelf: 'stretch',
-      background: 'var(--glass-border)',
-      flexShrink: 0
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Grotesk',sans-serif",
-      fontWeight: 700,
-      fontSize: '.8rem',
-      color: 'var(--text)',
-      lineHeight: 1.3,
-      marginBottom: 6
-    }
-  }, s.title), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'Space Grotesk',sans-serif",
-      fontSize: '.65rem',
-      color: 'var(--text-mute)',
-      lineHeight: 1.5
-    }
-  }, s.sub)))))) :
-  /*#__PURE__*/
-  /* ── TECH MODE: original layout ── */
-  React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "hero-badge-wrap"
   }, /*#__PURE__*/React.createElement("span", {
     className: "hero-badge-dot"
@@ -6561,9 +5743,8 @@ function PortfolioApp({
     className: "btn-secondary"
   }, t.ctaCV)), /*#__PURE__*/React.createElement(LiveCounter, {
     lang: lang
-  }))), /*#__PURE__*/React.createElement(FloatingPills, {
-    lang: lang,
-    mode: mode
+  })), /*#__PURE__*/React.createElement(FloatingPills, {
+    lang: lang
   }), /*#__PURE__*/React.createElement("section", {
     id: "experience",
     className: "section",
@@ -7046,7 +6227,7 @@ function PortfolioApp({
       key: j,
       className: "project-tag"
     }, tg)))))));
-  })())), mode !== 'human' && /*#__PURE__*/React.createElement("section", {
+  })())), /*#__PURE__*/React.createElement("section", {
     id: "stack",
     className: "section"
   }, /*#__PURE__*/React.createElement("div", {
@@ -7156,8 +6337,7 @@ function PortfolioApp({
     setActiveCountry: setActiveCountry,
     lang: lang
   }))), /*#__PURE__*/React.createElement(VisitorMap, {
-    lang: lang,
-    mode: mode
+    lang: lang
   })), /*#__PURE__*/React.createElement("section", {
     id: "contact",
     className: "section"
@@ -7310,7 +6490,6 @@ function PortfolioApp({
 
 /* ─── ROOT APP ─────────────────────────────────────────────────────────────── */
 function App() {
-  // Tech mode only (Human mode retired — preserved in JSX but unreachable).
   const [ready, setReady] = useState(!!window._psMode);
   const [initLang, setInitLang] = useState(() => window._psLang || 'en');
   useEffect(() => {
@@ -7333,13 +6512,10 @@ function App() {
   }, []);
   useEffect(() => {
     document.body.setAttribute('data-theme', 'dark');
-    document.body.classList.remove('human-mode');
   }, [ready]);
   if (!ready) return null;
   return /*#__PURE__*/React.createElement(PortfolioApp, {
-    initLang: initLang,
-    mode: "tech",
-    onSwitchMode: () => {}
+    initLang: initLang
   });
 }
 ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
