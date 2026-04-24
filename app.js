@@ -4602,6 +4602,78 @@ function VisitorBadge({
   }, c.toLocaleString()), /*#__PURE__*/React.createElement("span", null, t.visitors));
 }
 /* ─── VISITOR LIVE MAP ───────────────────────────────────────────────────────── */
+// Approx geographic centroid per ISO-3166 country code. Used as a fallback
+// when the worker returns a visit with country/city text but no lat/lon —
+// without this the map stays empty even though we claim N geolocated visits.
+const COUNTRY_CENTROIDS = {
+  fr: [46.2, 2.2],
+  us: [39.8, -98.6],
+  ca: [56.1, -106.3],
+  gb: [54.0, -2.0],
+  uk: [54.0, -2.0],
+  de: [51.2, 10.4],
+  es: [40.4, -3.7],
+  it: [41.9, 12.6],
+  nl: [52.1, 5.3],
+  be: [50.5, 4.5],
+  ch: [46.8, 8.2],
+  at: [47.5, 14.6],
+  pt: [39.4, -8.2],
+  ie: [53.4, -8.2],
+  se: [60.1, 18.6],
+  no: [60.5, 8.5],
+  dk: [56.3, 9.5],
+  fi: [61.9, 25.7],
+  pl: [51.9, 19.1],
+  cz: [49.8, 15.5],
+  gr: [39.1, 21.8],
+  ro: [45.9, 24.9],
+  hu: [47.2, 19.5],
+  tr: [39.0, 35.2],
+  ua: [48.4, 31.2],
+  ru: [61.5, 105.3],
+  ae: [23.4, 53.8],
+  sa: [23.9, 45.1],
+  il: [31.0, 34.8],
+  lb: [33.9, 35.8],
+  in: [20.6, 78.9],
+  cn: [35.8, 104.2],
+  jp: [36.2, 138.3],
+  kr: [35.9, 127.8],
+  sg: [1.4, 103.8],
+  my: [4.2, 101.9],
+  th: [15.9, 100.9],
+  id: [-0.8, 113.9],
+  ph: [12.9, 121.8],
+  vn: [14.1, 108.3],
+  hk: [22.4, 114.1],
+  tw: [23.7, 121.0],
+  au: [-25.3, 133.8],
+  nz: [-40.9, 174.9],
+  za: [-30.6, 22.9],
+  mx: [23.6, -102.6],
+  br: [-14.2, -51.9],
+  ar: [-38.4, -63.6],
+  cl: [-35.7, -71.5],
+  co: [4.6, -74.3],
+  pe: [-9.2, -75.0],
+  eg: [26.8, 30.8],
+  ng: [9.1, 8.7],
+  ma: [31.8, -7.1],
+  tn: [33.9, 9.5],
+  ke: [-0.0, 37.9],
+  lu: [49.8, 6.1],
+  is: [64.9, -19.0],
+  ee: [58.6, 25.0],
+  lv: [56.9, 24.6],
+  lt: [55.2, 23.9],
+  sk: [48.7, 19.7],
+  si: [46.1, 14.8],
+  hr: [45.1, 15.2],
+  bg: [42.7, 25.5],
+  cy: [35.1, 33.4],
+  mt: [35.9, 14.4]
+};
 function VisitorMap({
   lang,
   mode
@@ -4661,10 +4733,12 @@ function VisitorMap({
   }, []);
   const displayCount = realCount ?? FALLBACK;
 
-  // 3. Init Leaflet — dark tiles for cohesion with ADM.SYS theme
+  // 3. Init Leaflet — dark tiles WITH labels so you can actually read where
+  // visitors come from. Previously used `dark_nolabels` which hid all
+  // country/city names, making the map look like a broken black canvas.
   useEffect(() => {
     if (!mapRef.current || leafletMap.current) return;
-    const tileUrl = isHuman ? 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png' : 'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png';
+    const tileUrl = isHuman ? 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png' : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
     const initMap = L => {
       if (!mapRef.current) return;
       const map = L.map(mapRef.current, {
@@ -4679,7 +4753,8 @@ function VisitorMap({
         worldCopyJump: true
       });
       L.tileLayer(tileUrl, {
-        maxZoom: 19
+        maxZoom: 19,
+        subdomains: 'abcd'
       }).addTo(map);
       markersLayer.current = L.layerGroup().addTo(map);
       leafletMap.current = map;
@@ -4708,16 +4783,30 @@ function VisitorMap({
     markersLayer.current.clearLayers();
     const dotColor = isHuman ? '#7C3AED' : '#00F0A8';
 
-    // Past locations (real historical visitors from worker)
-    pastLocations.forEach(v => {
-      if (!v.lat || !v.lon) return;
+    // Past locations (real historical visitors from worker).
+    // Worker sometimes returns {cc,city,country} without lat/lon — fallback
+    // to the country centroid + small jitter so the map shows actual activity
+    // instead of staying empty while claiming "20 geolocated visits".
+    pastLocations.forEach((v, idx) => {
+      let lat = v.lat,
+        lon = v.lon;
+      if ((lat == null || lon == null) && v.cc) {
+        const c = COUNTRY_CENTROIDS[v.cc.toLowerCase()];
+        if (c) {
+          // Deterministic jitter by index so dots don't stack on identical country
+          const j = idx * 0.37 % 1;
+          lat = c[0] + (j - 0.5) * 2.4;
+          lon = c[1] + (idx * 0.71 % 1 - 0.5) * 4.0;
+        }
+      }
+      if (lat == null || lon == null) return;
       const pastIcon = L.divIcon({
         className: 'vmap-past-marker',
-        html: `<div class="vmap-dot-past" style="background:${dotColor};box-shadow:0 0 10px ${dotColor}"></div>`,
-        iconSize: [10, 10],
-        iconAnchor: [5, 5]
+        html: `<div class="vmap-dot-past" style="background:${dotColor};box-shadow:0 0 14px ${dotColor},0 0 4px ${dotColor}"></div>`,
+        iconSize: [12, 12],
+        iconAnchor: [6, 6]
       });
-      const m = L.marker([v.lat, v.lon], {
+      const m = L.marker([lat, lon], {
         icon: pastIcon,
         zIndexOffset: 0
       });
@@ -4742,18 +4831,30 @@ function VisitorMap({
       marker.bindPopup(`<div style="min-width:130px;font-family:sans-serif">${flag}<strong>${myGeo.city || myGeo.country || '?'}</strong><br/><span style="color:${dotColor};font-size:10px">← ${lang === 'fr' ? 'Vous êtes ici' : 'You are here'}</span></div>`);
       markersLayer.current.addLayer(marker);
 
-      // Smart zoom — fit all points if past visitors exist, otherwise close zoom on me
-      const allPts = pastLocations.filter(v => v.lat && v.lon).map(v => [v.lat, v.lon]);
+      // Smart zoom — fit ALL resolved points (including centroid fallbacks)
+      const allPts = [];
+      pastLocations.forEach((v, idx) => {
+        let lat = v.lat,
+          lon = v.lon;
+        if ((lat == null || lon == null) && v.cc) {
+          const c = COUNTRY_CENTROIDS[v.cc.toLowerCase()];
+          if (c) {
+            lat = c[0];
+            lon = c[1];
+          }
+        }
+        if (lat != null && lon != null) allPts.push([lat, lon]);
+      });
       allPts.push([myGeo.lat, myGeo.lon]);
       if (allPts.length >= 2) {
         leafletMap.current.fitBounds(allPts, {
-          padding: [30, 30],
-          maxZoom: 5,
+          padding: [40, 40],
+          maxZoom: 4,
           animate: true,
           duration: 1.2
         });
       } else {
-        leafletMap.current.setView([myGeo.lat, myGeo.lon], 5, {
+        leafletMap.current.setView([myGeo.lat, myGeo.lon], 4, {
           animate: true,
           duration: 1.2
         });
@@ -5234,8 +5335,6 @@ function VisitorMap({
   }, "// LOADING MAP..."), /*#__PURE__*/React.createElement("div", {
     ref: mapRef,
     id: "visitor-map"
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "vmap-overlay"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
